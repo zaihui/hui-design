@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`huiIcon Snap renders HuiIcon -- color 1`] = `"<div style=\\"color:rgba(30, 30, 30);font-size:0.5974rem;\\" class=\\"hui-icons hui-icon_100_search\\"></div>"`;
+
+exports[`huiIcon Snap renders HuiIcon -- customStyle 1`] = `"<div style=\\"color:rgba(30, 30, 30);font-size:0.5974rem;display:inline-block;\\" class=\\"hui-icons hui-icon_100_search\\"></div>"`;
+
+exports[`huiIcon Snap renders HuiIcon -- size 1`] = `"<div style=\\"color:rgba(30, 30, 30);font-size:0.8534rem;\\" class=\\"hui-icons hui-icon_100_search\\"></div>"`;
+
+exports[`huiIcon Snap renders HuiIcon 1`] = `"<div style=\\"color:inherit;font-size:0.5974rem;\\" class=\\"hui-icons hui-icon_100_search\\"></div>"`;

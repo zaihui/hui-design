@@ -1,0 +1,29 @@
+@import "../../styles/colors.scss";
+@import "../../styles/variables.scss";
+
+.hui-swiper-indicator {
+  position: relative;
+
+  .hui-swiper-indicator-wrapper {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    display: flex;
+    transform: translateX(-50%);
+
+    .hui-swiper-indicator-item {
+      width: px(6);
+      height: px(6);
+      background: $hui-swiper-indicator-item-background-color;
+      border-radius: 50%;
+
+      &:not(:first-child) {
+        margin-left: px(6);
+      }
+
+      &.active {
+        background: $hui-swiper-indicator-item-background-color-active;
+      }
+    }
+  }
+}

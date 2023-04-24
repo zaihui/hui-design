@@ -1,0 +1,50 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.hui-radio {
+  display: inline-flex;
+  align-items: center;
+
+  .hui-radio-icon {
+    box-sizing: border-box;
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border: $hui-radio-icon-border;
+    border-radius: 50%;
+
+    .inner {
+      box-sizing: border-box;
+      visibility: hidden;
+      background-color: $hui-theme-color-primary;
+      border-radius: 50%;
+    }
+
+    &.checked {
+      &.disabled {
+        background-color: unset;
+      }
+
+      .inner {
+        visibility: visible;
+      }
+    }
+  }
+
+  .hui-radio-content {
+    padding-left: $hui-radio-content-padding-left;
+    font-size: $hui-font-body-m;
+  }
+
+  &.disabled {
+    .hui-radio-icon {
+      background-color: $hui-radio-icon-disabled-bg-color;
+      opacity: .35;
+    }
+
+    .hui-radio-content {
+      opacity: .35;
+    }
+  }
+}

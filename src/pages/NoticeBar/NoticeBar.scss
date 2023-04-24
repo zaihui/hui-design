@@ -1,0 +1,18 @@
+@import '@/styles/index.scss';
+
+.notice-bar-page {
+  > .content {
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+
+    .group-section {
+      > .title {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`huiIcon Snap renders HuiToast -- custom 1`] = `"<div class=\\"hui-toast-box\\"><div class=\\"toast\\"><div class=\\"icon\\"><div style=\\"color:inherit;font-size:1.536rem;\\" class=\\"hui-icons hui-icon-001-close\\"></div></div><span class=\\"taro-text text\\">custom</span></div></div>"`;
+
+exports[`huiIcon Snap renders HuiToast -- fail 1`] = `"<div class=\\"hui-toast-box\\"><div class=\\"toast\\"><div class=\\"icon\\"><div style=\\"color:inherit;font-size:1.536rem;\\" class=\\"hui-icons hui-icon-001-close\\"></div></div><span class=\\"taro-text text\\">fail</span></div></div>"`;
+
+exports[`huiIcon Snap renders HuiToast -- success 1`] = `"<div class=\\"hui-toast-box\\"><div class=\\"toast\\"><div class=\\"icon\\"><div style=\\"color:inherit;font-size:1.536rem;\\" class=\\"hui-icons hui-icon-003-right\\"></div></div><span class=\\"taro-text text\\">success</span></div></div>"`;
+
+exports[`huiIcon Snap renders HuiToast -- text 1`] = `"<div class=\\"hui-toast-box\\"><div class=\\"toast\\">undefined<span class=\\"taro-text text\\">Hello</span></div></div>"`;

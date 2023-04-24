@@ -1,0 +1,57 @@
+@import '@/styles/index.scss';
+
+.loader-detail {
+  padding-bottom: 24px;
+  padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
+
+  .module-loader-demo {
+    .top {
+      height: 261px;
+      margin-bottom: 12px;
+      background-color: $hui-color-grey-8;
+    }
+
+    .middle {
+      height: 178px;
+      margin-bottom: 12px;
+      background-color: $hui-color-grey-8;
+    }
+
+    .bottom {
+      height: 178px;
+      background-color: $hui-color-grey-8;
+    }
+  }
+
+  .bottom-loader-demo {
+    .bl-section {
+      box-sizing: border-box;
+      padding: 16px;
+      margin-bottom: 12px;
+      background-color: $hui-color-grey-8;
+
+      .inner {
+        $bg-color: rgba($hui-theme-color-primary, .1);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        font-size: $hui-font-body-m;
+        color: $hui-font-color-base-75;
+        background-color: $bg-color;
+        border-radius: 12px;
+      }
+    }
+
+    .top {
+      height: 50vh;
+    }
+
+    .bottom,
+    .middle {
+      height: 30vh;
+    }
+  }
+}

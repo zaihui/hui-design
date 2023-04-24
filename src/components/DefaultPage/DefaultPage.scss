@@ -1,0 +1,45 @@
+@import "../../styles/colors.scss";
+@import "../../styles/variables.scss";
+
+.hui-default-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: $hui-page-background-color;
+
+  &-padding {
+    height: 26vh;
+  }
+
+  &-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: px(90);
+    height: px(90);
+
+    &-pic {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  &-description,
+  &-info {
+    max-width: px(200);
+    margin-top: px(36);
+    font-size: $hui-font-body-s;
+    color: $hui-font-color-base-50;
+    text-align: center;
+  }
+
+  &-info {
+    margin-top: unset;
+  }
+
+  &-btn {
+    margin-top: px(36);
+  }
+}

@@ -1,0 +1,18 @@
+/**
+* 文档左右留白太多会导致表格左右滚动不方便查看
+* vuepress提供了hack主题的方法：https://vuepress.vuejs.org/zh/config/#index-styl
+* 按照issues上给出的方法hack了一下：https://github.com/vuejs/vuepress/issues/1867
+* 如果直接100%的话完全充满不太好看，所以-10rem留了个小白边
+*/
+div.theme-default-content:not(.custom) {
+  max-width: calc(100% - 10rem);
+}
+
+/**
+* 如果文档页有手机预览组件，那么就调整一下内容部分的宽度，并设定最小高度避免footer和手机预览冲突
+*/
+div.theme-default-content.with-demo-phone {
+  max-width: calc(100% - 35rem);
+  margin-left: 2rem;
+  min-height: 80vh;
+}

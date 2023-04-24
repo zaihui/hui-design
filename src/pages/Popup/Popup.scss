@@ -1,0 +1,13 @@
+@import '@/styles/demo-mixins.scss';
+
+.popup-page {
+  > .content {
+    @include content-padding;
+
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+@import "../../styles/colors.scss";
+@import "../../styles/variables.scss";
+
+.hui-editor-display {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100vw;
+  padding: px(20) px(16) calc(env(safe-area-inset-bottom) + #{px(16)});
+
+  .hui-editor-display-title {
+    margin-bottom: px(16);
+    font-size: px(16);
+    font-weight: $hui-font-weight-medium;
+    $title-color: #333;
+
+    color: $title-color;
+  }
+
+  .hui-editor-display-image-container {
+    width: 100%;
+  }
+
+  .hui-editor-display-extra-content {
+    font-size: $hui-font-body-m;
+    font-weight: $hui-font-weight-regular;
+    color: $hui-color-grey-2;
+  }
+
+  .hui-editor-display-header-content {
+    margin-bottom: px(16);
+  }
+
+  .hui-editor-display-footer-content {
+    margin-top: px(16);
+  }
+}

@@ -1,0 +1,52 @@
+@import "../../styles/colors.scss";
+@import "../../styles/variables.scss";
+
+.hui-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $hui-tag-default-color;
+
+  .tag-text {
+    @include no-wrap();
+  }
+
+  .medium-text {
+    max-width: px(120);
+  }
+
+  .large-text {
+    max-width: px(140);
+  }
+
+  &.medium {
+    height: $hui-tag-height-m;
+    padding: 0 $hui-tag-padding-m;
+    font-size: $hui-tag-font-size-m;
+    border-radius: px(10);
+  }
+
+  &.large {
+    height: $hui-tag-height-l;
+    padding: 0 $hui-tag-padding-l;
+    font-size: $hui-tag-font-size-l;
+    border-radius: px(13);
+  }
+
+  &.solid {
+    background: $hui-theme-color-primary;
+    border: px(1) solid $hui-theme-color-primary;
+  }
+
+  &.hollow {
+    color: $hui-theme-color-primary;
+    background: transparent;
+    border: px(1) solid $hui-tag-hollow-border-color;
+  }
+
+  &.semitransparent {
+    color: $hui-theme-color-primary;
+    background: $hui-tag-semitransparent-background-color;
+    border: px(1) solid transparent;
+  }
+}
