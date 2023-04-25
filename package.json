@@ -17,10 +17,10 @@
     "setup": "yarn install --frozen-lockfile",
     "depup": "yarn upgrade-interactive --latest",
     "lint:style": "stylelint 'src/**/*.scss' --syntax scss",
-    "lint:style-fix": "npm run lint:style -- --fix",
-    "lint:es": "eslint --ext .js,.ts,.tsx ./",
-    "lint:es-fix": "npm run lint:es -- --fix",
-    "lint": "npm run type-check && npm run lint:es && npm run lint:style",
+    "lint:style:fix": "npm run lint:style -- --fix",
+    "lint:format": "eslint --ext .js,.ts,.tsx ./",
+    "lint:format:fix": "npm run lint:format -- --fix",
+    "lint": "npm run type-check && npm run lint:format && npm run lint:style",
     "type-check": "tsc --noEmit",
     "test": "jest",
     "test:ci": "jest --coverage",
@@ -38,29 +38,21 @@
     "docs:build:prod": "cross-env BUILD_ENV=prod npm run docs:build",
     "icon:sync": "node scripts/syncIcon.mjs",
     "commit": "npx git-cz",
-    "release": "standard-version --commit-all"
+    "release": "standard-version --commit-all",
+    "prepare": "husky install",
+    "create-hook": "husky add .husky/commit-msg \"npx --no -- commitlint --edit ${1}\" && husky add .husky/pre-commit \"npx lint-staged\""
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "https://github.com/zaihui/hui-design.git"
   },
+  "homepage": "https://github.com/zaihui/hui-design",
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
     "dayjs": "^1.10.6"
   },
   "devDependencies": {
-    "mobx": "^6.7.0",
-    "mobx-react": "^7.6.0",
-    "@tarojs/react": "^3.5.8",
-    "@tarojs/runtime": "^3.5.8",
-    "@tarojs/taro": "^3.5.8",
-    "@tarojs/taro-h5": "^3.5.8",
-    "@tarojs/components": "^3.5.8",
-    "@tarojs/mini-runner": "^3.5.8",
-    "@tarojs/plugin-framework-react": "^3.5.8",
-    "@tarojs/plugin-platform-weapp": "^3.5.8",
-    "@tarojs/cli": "^3.5.8",
-    "@tarojs/webpack-runner": "^3.5.8",
     "@babel/core": "^7.10.2",
     "@babel/plugin-proposal-class-properties": "^7.10.1",
     "@babel/plugin-proposal-decorators": "^7.10.1",
@@ -71,6 +63,16 @@
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
+    "@tarojs/cli": "^3.5.8",
+    "@tarojs/components": "^3.5.8",
+    "@tarojs/mini-runner": "^3.5.8",
+    "@tarojs/plugin-framework-react": "^3.5.8",
+    "@tarojs/plugin-platform-weapp": "^3.5.8",
+    "@tarojs/react": "^3.5.8",
+    "@tarojs/runtime": "^3.5.8",
+    "@tarojs/taro": "^3.5.8",
+    "@tarojs/taro-h5": "^3.5.8",
+    "@tarojs/webpack-runner": "^3.5.8",
     "@types/jest": "^26.0.0",
     "@types/node": "^14.0.13",
     "@types/react": "^18.0.25",
@@ -107,9 +109,12 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-taro": "^3.3.20",
     "eslint-plugin-vue": "^6.2.2",
-    "husky": "^4.3.0",
+    "husky": "^8.0.1",
     "jest": "^26.0.1",
+    "lint-staged": "^13.2.1",
     "mini-css-extract-plugin": "^2.7.2",
+    "mobx": "^6.7.0",
+    "mobx-react": "^7.6.0",
     "nerv-devtools": "^1.5.7",
     "nerv-server": "^1.5.7",
     "nerv-test-utils": "^1.5.7",
@@ -138,10 +143,12 @@
     "react": ">=18.2.0",
     "react-dom": ">=18.2.0"
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
+  "lint-staged": {
+    "**/*.scss": "npm run lint:style",
+    "src/**/*.{js,ts,tsx,json}": [
+      "npm run lint:format",
+      "bash -c 'npm run type-check'"
+    ]
   },
   "standard-version": {
     "scripts": {
