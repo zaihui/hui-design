@@ -25,7 +25,13 @@ export interface HuiCheckboxProps extends ViewProps {
   children?: React.ReactNode
 }
 
-const HuiCheckbox: React.ForwardRefRenderFunction<any, HuiCheckboxProps> = (props, ref) => {
+export interface HuiCheckboxRef {
+  toggle: () => void
+}
+const HuiCheckbox: React.ForwardRefRenderFunction<
+  HuiCheckboxRef,
+  HuiCheckboxProps
+> = (props, ref) => {
   const {
     value,
     size = DEFAULT_ICON_SIZE,

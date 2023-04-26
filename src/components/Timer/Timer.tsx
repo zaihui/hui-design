@@ -62,8 +62,8 @@ const HuiTimer: React.FC<HuiTimerProps> = props => {
     minutes: '00',
     seconds: '00',
   })
-  const countDownMillseconds = Math.max(0, time)
-  const endTime = dayjs().add(countDownMillseconds, 'ms')
+  const countDownMilliseconds = Math.max(0, time)
+  const endTime = dayjs().add(countDownMilliseconds, 'ms')
   const currentTime = dayjs()
   const formatSeparator = getTimerFormatSeparator(format)
 

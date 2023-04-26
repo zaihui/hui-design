@@ -17,12 +17,14 @@ interface Login {
   }
 }
 
-export const setToken = (token: string): void => console.log(token)
-// restClient.setConfig({
-//   headers: {
-//     Authorization: `Bearer ${token}`,
-//   },
-// })
+export const setToken = (token: string) => {
+  let headers = {}
+  headers = {
+    Authorization: `Bearer ${token}`,
+  }
+
+  return headers
+}
 
 export default {
   login: (wxCode: string) =>

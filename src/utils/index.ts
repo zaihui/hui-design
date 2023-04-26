@@ -1,5 +1,6 @@
 import Taro, { NodesRef } from '@tarojs/taro'
 import dayjs from 'dayjs'
+import 'dayjs/plugin/duration'
 import { DESIGN_WIDTH } from './constant'
 
 export const pxTransform = (size: number): string => Taro.pxTransform(size, DESIGN_WIDTH)
@@ -77,7 +78,7 @@ export const formatValue = (
  * @param format 格式
  */
 export const parseDurationToTime = (d: number, format: string): string => {
-  const duration = (dayjs as any).duration(d)
+  const duration = dayjs.duration(d)
   if (format.indexOf('DD') !== -1) {
     let days = String(Math.floor(duration.asDays()))
     if (days.length < 2) {

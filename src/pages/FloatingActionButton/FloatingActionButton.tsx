@@ -4,14 +4,14 @@ import { View } from '@tarojs/components'
 import HuiButton from '@/components/Button'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
-import HuiFAB from '@/components/FloatingActionButton'
+import HuiFAB, { HuiFloatingActionButtonPosition } from '@/components/FloatingActionButton'
 
 import './FloatingActionButton.scss'
 
 const FloatingActionButton: React.FC = () => {
   const [text, setText] = useState('')
   const [color, setColor] = useState('')
-  const [position, setPosition] = useState<any>(null)
+  const [position, setPosition] = useState<HuiFloatingActionButtonPosition>()
   return (
     <View className='floating-action-button'>
       <PageHeader
@@ -34,7 +34,7 @@ const FloatingActionButton: React.FC = () => {
               onClick={() => {
                 setText('')
                 setColor('')
-                setPosition(null)
+                setPosition(undefined)
               }}
             >
               基础样式
@@ -47,7 +47,7 @@ const FloatingActionButton: React.FC = () => {
               onClick={() => {
                 setColor('')
                 setText('发帖')
-                setPosition(null)
+                setPosition(undefined)
               }}
             >
               扩展样式
@@ -62,7 +62,7 @@ const FloatingActionButton: React.FC = () => {
               onClick={() => {
                 setText('')
                 setColor('#00C968')
-                setPosition(null)
+                setPosition(undefined)
               }}
             >
               自定义颜色

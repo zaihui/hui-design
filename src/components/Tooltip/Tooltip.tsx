@@ -50,6 +50,19 @@ export default class Tooltip extends React.Component<HuiTooltipProps> {
     placement: 'top',
   }
 
+  componentWillReceiveProps(nextProps: HuiTooltipProps): void {
+    const { visible } = nextProps
+    const { closable } = this.props
+    if (visible === this.props.visible) return
+    if (!visible) {
+      this.close()
+      return
+    }
+    if (closable) return
+
+    this.restartTimer()
+  }
+
   timer: NodeJS.Timeout | null = null
 
   close(): void {
@@ -81,19 +94,6 @@ export default class Tooltip extends React.Component<HuiTooltipProps> {
     const { duration } = this.props
     this.clearTimer()
     this.makeTimer(duration || 0)
-  }
-
-  componentWillReceiveProps(nextProps: HuiTooltipProps): void {
-    const { visible } = nextProps
-    const { closable } = this.props
-    if (visible === this.props.visible) return
-    if (!visible) {
-      this.close()
-      return
-    }
-    if (closable) return
-
-    this.restartTimer()
   }
 
   render(): JSX.Element {

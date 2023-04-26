@@ -13,6 +13,7 @@ import './Grid.scss'
 const HuiGridItem = HuiGrid.Item
 
 const GridDemoPage: React.FC = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useRef<any>()
   const [height, setHeight] = useState(0)
 
