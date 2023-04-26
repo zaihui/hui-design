@@ -1,0 +1,76 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.hui-list-item {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0 px(16);
+  background-color: $hui-theme-color-background;
+
+  .hui-list-item-inner-wrapper {
+    $border-width: px(1);
+
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: px(16) 0;
+    border-bottom: $border-width solid transparent;
+
+    &.with-border {
+      border-bottom: $border-width solid $hui-border-color;
+    }
+
+    .hui-list-item-avatar {
+      display: flex;
+      flex-grow: 0;
+      flex-shrink: 0;
+      align-items: center;
+      width: px(32);
+      height: px(32);
+      margin-right: px(8);
+    }
+
+    .hui-list-item-content {
+      box-sizing: border-box;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      justify-content: center;
+      min-width: px(100);
+      margin-right: px(9);
+
+      .hui-list-item-title {
+        max-width: px(256);
+        overflow: hidden;
+        font-size: $hui-font-body-m;
+        color: $hui-font-color-base;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .hui-list-item-description {
+        max-width: px(256);
+        font-size: $hui-font-caption-m;
+        color: $hui-list-item-description-font-color;
+
+        @include line-clamp(2);
+      }
+    }
+
+    .hui-list-item-tips {
+      max-width: 67%;
+      font-size: $hui-font-body-s;
+      color: $hui-list-item-tips-font-color;
+
+      @include line-clamp(1);
+    }
+
+    .hui-list-item-icon {
+      display: flex;
+      flex-basis: px(24);
+      align-items: center;
+      justify-content: center;
+      margin-left: px(4);
+    }
+  }
+}

@@ -1,0 +1,11 @@
+/node_modules
+/dist
+/lib
+yarn-error.log
+.DS_Store
+.temp
+.rn_temp/
+.vscode/
+/public
+
+project.private.config.json

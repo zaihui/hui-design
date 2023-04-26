@@ -1,0 +1,105 @@
+/* stylelint-disable csstree/validator */
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+
+.hui-dialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $hui-z-index-m;
+  display: none;
+
+  &.visible {
+    display: flex;
+  }
+
+  .hui-dialog-mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $hui-z-index-s;
+    touch-action: none;
+    background-color: $hui-mask-color;
+  }
+
+  .hui-dialog-wrapper {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    z-index: $hui-z-index-l;
+    transform: translate(-50%, -50%);
+
+    .hui-dialog-container {
+      display: flex;
+      flex-direction: column;
+      width: 80vw;
+      max-height: 74vh;
+      padding-bottom: px(40);
+      color: $hui-font-color-base;
+      background-color: $hui-theme-color-background;
+      border-radius: 4px;
+
+      .header {
+        position: relative;
+        box-sizing: border-box;
+        flex-shrink: 0;
+        height: px(40);
+        padding: px(4) px(24);
+
+        .close-btn-top {
+          position: absolute;
+          right: px(19);
+          bottom: px(4);
+          width: px(24);
+          height: px(24);
+          color: $hui-font-color-base-50;
+          text-align: right;
+        }
+      }
+
+      .hm-image {
+        display: block;
+        width: 100%;
+        height: px(140);
+        margin-bottom: px(24);
+        border-top-left-radius: px(4);
+        border-top-right-radius: px(4);
+      }
+
+      .icon-area {
+        margin: 0 px(24) px(24) px(24);
+        text-align: center;
+      }
+
+      .title-area {
+        margin: 0 px(24) px(20) px(24);
+        font-size: $hui-font-heading-m;
+        font-weight: $hui-font-weight-medium;
+        text-align: center;
+      }
+
+      .content-area {
+        margin: 0 px(24) px(36) px(24);
+        overflow: auto;
+        font-size: $hui-font-body-s;
+        font-weight: $hui-font-weight-regular;
+        text-align: center;
+      }
+
+      .footer-area {
+        margin: 0 px(24) 0 px(24);
+      }
+    }
+
+    .close-btn-bottom {
+      width: px(28);
+      height: px(28);
+      margin: px(16) auto 0;
+      border-radius: 50%;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+@import '@/styles/index.scss';
+
+.divider-page {
+  > .content {
+    padding: 0 16px 100px 16px;
+  }
+
+  .section {
+    .title {
+      padding-bottom: 16px;
+    }
+  }
+
+  .item {
+    margin-bottom: 32px;
+
+    .item-title {
+      margin-bottom: 16px;
+      font-size: $hui-font-caption-m;
+      color: $hui-font-color-base-35;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.hui-text-area {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: $hui-text-area-box-min-h;
+  padding: $hui-text-area-p-t $hui-text-area-p-l;
+  background: $hui-theme-color-background;
+
+  .text-area {
+    width: 100%;
+    height: 100%;
+    font-size: $hui-font-body-m;
+    font-weight: $hui-font-weight-medium;
+    color: $hui-font-color-base;
+    // h5下会有边框线
+    resize: none;
+    border: none;
+    outline: none;
+  }
+
+  .placeholder {
+    color: $hui-font-color-base-25;
+  }
+
+  .indicator {
+    flex-shrink: 0;
+    width: 100%;
+    padding-top: $hui-text-area-i;
+    font-size: $hui-font-body-s;
+    color: $hui-font-color-base-25;
+    text-align: right;
+
+    .current-number {
+      color: $hui-font-color-base;
+
+      &.zero {
+        color: inherit;
+      }
+
+      &.overage {
+        color: $hui-theme-color-primary;
+      }
+    }
+  }
+
+  &.disabled {
+    background: $hui-disabled-background-color;
+
+    .text-area {
+      color: $hui-font-color-input-disabled;
+    }
+
+    .placeholder {
+      color: $hui-font-color-input-disabled;
+    }
+
+    .indicator {
+      display: none;
+      color: $hui-font-color-input-disabled;
+
+      .current-number {
+        color: $hui-font-color-input-disabled;
+
+        &.overage {
+          color: $hui-font-color-input-disabled;
+        }
+      }
+    }
+  }
+}

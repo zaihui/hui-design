@@ -1,0 +1,107 @@
+@import '@/styles/index.scss';
+
+.index-page {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 32px 16px;
+  background-color: $hui-page-background-color;
+
+  .header {
+    padding-bottom: 36px;
+    padding-left: 16px;
+
+    .title {
+      margin-bottom: 12px;
+      font-size: 24px;
+      font-weight: $hui-font-weight-bold;
+    }
+
+    .desc {
+      font-size: $hui-font-caption-m;
+      color: $hui-font-color-base-50;
+    }
+  }
+
+  .nav-card {
+    padding: 16px 16px 0 16px;
+    margin-bottom: 16px;
+    background-color: $hui-color-grey-8;
+    border-radius: 8px;
+
+    $icon-container-width: 52px;
+
+    .main-content {
+      display: flex;
+      align-items: center;
+      padding: 0 0 16px 0;
+
+      .left {
+        box-sizing: border-box;
+        flex-shrink: 0;
+        width: $icon-container-width;
+        padding-left: 4px;
+      }
+
+      .right {
+        flex: 1;
+
+        .title {
+          margin-bottom: 2px;
+          font-size: $hui-font-heading-s;
+          font-weight: $hui-font-weight-medium;
+          color: $hui-font-color-base;
+        }
+
+        .desc {
+          font-size: $hui-font-caption-m;
+          font-weight: $hui-font-weight-regular;
+          color: $hui-font-color-base-35;
+        }
+      }
+    }
+
+    .sub-items {
+      max-height: 0;
+      overflow: hidden;
+      transition: all .5s ease-in-out;
+
+      &.visible {
+        /** 通过改变max-height来触发transition，这里设置的值超过可能的最大高度就行 */
+        max-height: 200vh;
+      }
+
+      .sub-items-content {
+        border-top: 1px solid $hui-border-color;
+
+        .sub-item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 0;
+          margin-left: $icon-container-width;
+
+          &:not(:last-child) {
+            border-bottom: 1px solid $hui-border-color;
+          }
+
+          > .sub-title {
+            font-size: $hui-font-body-m;
+            font-weight: $hui-font-weight-medium;
+          }
+        }
+      }
+    }
+  }
+
+  .team-page-entry {
+    display: flex;
+    flex-grow: 1;
+    align-items: flex-end;
+    justify-content: center;
+    font-size: $hui-font-body-s;
+    color: $hui-color-grey-4;
+    text-align: center;
+  }
+}

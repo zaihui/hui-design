@@ -1,0 +1,137 @@
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
+
+.hui-input {
+  height: 100%;
+
+  .input-item-placeholder {
+    color: $hui-font-color-base-25;
+  }
+
+  .input-wrapper {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    min-height: $input-min-height;
+    padding: $input-space-v $hui-page-space-m $input-space-v;
+    color: $hui-font-color-base;
+    background: $input-background-color;
+
+    .label {
+      flex-shrink: 0;
+      width: $input-label-width;
+      padding-right: $input-label-space;
+      font-size: $hui-font-body-m;
+      font-weight: $hui-font-weight-regular;
+      color: $hui-font-color-base-50;
+    }
+
+    .input-content {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      font-size: $hui-font-body-s;
+
+      .input {
+        width: 100%;
+        font-size: $hui-font-body-s;
+        font-weight: $hui-font-weight-medium;
+      }
+
+      .display-area {
+        @include line-clamp(1);
+
+        font-size: $hui-font-body-s;
+        font-weight: $hui-font-weight-medium;
+      }
+
+      .none-value {
+        color: $hui-font-color-base-25;
+      }
+
+      .unit {
+        padding-left: $input-unit-pad;
+        color: $hui-font-color-base-50;
+      }
+    }
+
+    .input-array {
+      display: flex;
+      flex-shrink: 0;
+      align-items: center;
+      width: $input-label-array-width;
+      padding-left: $input-label-array-width;
+
+      .array {
+        width: 0;
+        height: 0;
+        border-color: $input-triangle-color;
+        border-style: solid;
+        border-width: $input-label-array-width-half 0 $input-label-array-width-half $input-label-array-width;
+      }
+    }
+  }
+
+  .divider-line {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 $hui-page-space-m;
+    background: $hui-theme-color-background;
+
+    .line {
+      width: 100%;
+      border-bottom: 1px solid $hui-font-color-base-05;
+    }
+
+    &.with-error {
+      .line {
+        border-bottom: 1px solid $hui-theme-color-primary;
+      }
+    }
+  }
+
+  .error-wrapper {
+    display: flex;
+    padding: 0 $input-label-space;
+    font-size: $hui-font-body-s;
+    line-height: 1;
+    color: $hui-theme-color-primary;
+    word-break: break-all;
+
+    .error-msg-wrapper {
+      padding: $input-label-error-top $input-space-v $input-label-error-bottom $input-error-msg-left-space;
+    }
+  }
+
+  &.disabled {
+    .input-item-placeholder {
+      color: $hui-font-color-input-disabled;
+    }
+
+    .divider-line {
+      background: $hui-disabled-background-color;
+    }
+
+    .input-wrapper {
+      background: $hui-disabled-background-color;
+
+      .unit {
+        color: $hui-font-color-input-disabled;
+      }
+
+      .label {
+        color: $hui-font-color-input-disabled;
+      }
+
+      .input-content {
+        .display-area {
+          color: $hui-font-color-input-disabled;
+        }
+
+        .none-value {
+          color: $hui-font-color-input-disabled;
+        }
+      }
+    }
+  }
+}

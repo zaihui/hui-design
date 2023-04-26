@@ -1,0 +1,52 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+$prefix: hui-search;
+
+.#{$prefix} {
+  display: flex;
+  width: 100%;
+  height: px(32);
+
+  &-content {
+    display: flex;
+    flex: 1;
+    border-radius: px(16);
+  }
+
+  &-input-box {
+    flex: 1;
+    height: 100%;
+    padding-right: px(16);
+    padding-left: px(16);
+
+    &.small-gap {
+      padding-right: px(8);
+    }
+
+    &.search-icon {
+      padding-left: px(8);
+    }
+  }
+
+  &-search-icon {
+    flex-shrink: 0;
+    height: 100%;
+    line-height: px(32);
+
+    &.search {
+      padding-left: px(16);
+    }
+
+    &.clear {
+      padding-right: px(14);
+    }
+  }
+
+  &-search-text {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding-left: px(10);
+  }
+}

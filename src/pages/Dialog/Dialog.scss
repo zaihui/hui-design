@@ -1,0 +1,22 @@
+@import '@/styles/index.scss';
+@import '@/styles/demo-mixins.scss';
+
+$desc-font-color: #8e8e8e;
+
+.dialog-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .btn {
+    &:first-child {
+      margin-bottom: 16px;
+    }
+  }
+}

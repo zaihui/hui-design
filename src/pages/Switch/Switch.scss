@@ -1,0 +1,19 @@
+@import '@/styles/demo-mixins.scss';
+@import '@/styles/index.scss';
+
+.switch-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .switch-sample {
+    display: inline-block;
+    width: 80px;
+
+    > .title {
+      margin-bottom: 16px;
+      font-size: $hui-font-caption-m;
+      color: $hui-font-color-base-35;
+    }
+  }
+}

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`demoWidget Snap render DemoWidget with prop2 1`] = `"<div class=\\"demo-widget\\">this is DemoWidget<div class=\\"\\">prop1 is foo</div><view>prop2 is 233</view></div>"`;
+
+exports[`demoWidget Snap render DemoWidget without prop2 1`] = `"<div class=\\"demo-widget\\">this is DemoWidget<div class=\\"\\">prop1 is foo</div><view>prop2 is 0</view></div>"`;
