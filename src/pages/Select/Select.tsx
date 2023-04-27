@@ -18,11 +18,11 @@ const DemoPage: React.FC = () => {
   const [V4, setV4] = useState(false)
   const [V5, setV5] = useState(false)
 
-  const [data1, setData1] = useState<any[]>([])
-  const [data2, setData2] = useState<any[]>(['开发工程师', '测试工程师'])
-  const [data3, setData3] = useState<any[]>([])
-  const [data4, setData4] = useState<any[]>([])
-  const [data5, setData5] = useState<any[]>([])
+  const [data1, setData1] = useState<(string | number)[]>([])
+  const [data2, setData2] = useState<(string | number)[]>(['开发工程师', '测试工程师'])
+  const [data3, setData3] = useState<(string | number)[]>([])
+  const [data4, setData4] = useState<(string | number)[]>([])
+  const [data5, setData5] = useState<(string | number)[]>([])
 
   const [loading5, setLoading5] = useState(false)
 

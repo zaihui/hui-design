@@ -2,9 +2,10 @@ import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
 import React, { useState, createRef } from 'react'
 
+import Checkbox, { HuiCheckboxRef } from '../../Checkbox'
+
 import Radio from '../../Radio'
 import List from '../../List'
-import Checkbox from '../../Checkbox'
 
 const RadioGroup = Radio.Group
 const ListItem = List.Item
@@ -39,7 +40,7 @@ const Menu: React.FC<HuiMenuProps> = props => {
     onChange(v)
   }
 
-  const [refList, setRefList] = useState<React.RefObject<any>[]>([])
+  const [refList, setRefList] = useState<React.RefObject<HuiCheckboxRef>[]>([])
   React.useEffect(() => {
     setRefList(refs => (
       Array(options.length).fill(0).map((_, i) => refs[i] || createRef())
@@ -50,13 +51,14 @@ const Menu: React.FC<HuiMenuProps> = props => {
     <View className='hui-select-menu'>
       {multiSelect ? (
         <CheckboxGroup
-          value={value as any}
+          value={value as string[]}
           onChange={checkedList =>
             handleChange(Array.from(new Set(checkedList)))
           }
         >
           {options.map((item, index) => (
             <ListItem
+              key={item.value}
               title={item.label}
               icon={(
                 <Checkbox

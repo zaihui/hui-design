@@ -5,6 +5,7 @@ import Taro from '@tarojs/taro'
 import { CommonEvent } from '@tarojs/components/types/common'
 import HuiDivider from '../Divider'
 
+export interface HuiPickerColumn<T> { [key: string]: T }
 export interface HuiPickerProps {
   className?: string
   style?: React.CSSProperties
@@ -21,7 +22,7 @@ export interface HuiPickerProps {
    *      ]
    * 需要传入的用于渲染的数据列表，每一项需要有text属性用来展示文案用
   */
-  columns: { text: string; [key: string]: any }[][]
+  columns: HuiPickerColumn<string>[][]
   /** 相应column的默认选中项索引 */
   current?: number[]
   /**

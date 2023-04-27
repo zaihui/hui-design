@@ -45,8 +45,8 @@ export interface HuiButtonProps {
   onGetPhoneNumber?: (
     e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>
   ) => void
-  onChooseAvatar?: (
-    e: BaseEventOrig<any>
+  onChooseAvatar?: <T>(
+    e: BaseEventOrig<T>
   ) => void
   onContact?: (e: BaseEventOrig<ButtonProps.onContactEventDetail>) => void
   onOpenSetting?: (

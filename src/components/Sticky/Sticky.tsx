@@ -17,7 +17,7 @@ const HuiSticky: React.FC<HuiStickyProps> = props => {
   const { offsetTop = 0, children, className = '', style } = props
 
   const contentRef = useRef()
-  const containerRef = useRef<any>()
+  const containerRef = useRef<{ uid: string }>()
   const contentClientRect = useBoundingClientRect(contentRef)
   const [contentFixed, setContentFixed] = useState(false)
 

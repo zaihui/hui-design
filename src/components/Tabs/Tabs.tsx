@@ -63,8 +63,9 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
     ...rest
   } = props
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const tabsRef = useRef<any>()
-  const tabsInfos = useRef<any>({})
+  const tabsInfos = useRef<Taro.NodesRef.BoundingClientRectCallbackResult[]>([])
   const tabsWidth = useRef<number>(0)
   const [tabs, setTabs] = useState<ITab[]>([])
 

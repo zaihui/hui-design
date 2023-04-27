@@ -3,18 +3,18 @@ import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
 import HuiButton from '@/components/Button'
-import HuiPicker from '@/components/Picker'
+import HuiPicker, { HuiPickerColumn } from '@/components/Picker'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 
 import './Picker.scss'
 
-const open1Columns: any = [[]]
+const open1Columns: HuiPickerColumn<string>[][] = [[]]
 Array(10).fill(0).forEach((_, i) => {
   open1Columns[0].push({ text: `选项${i}` })
 })
 
-const open2Columns: any = [[], []]
+const open2Columns: HuiPickerColumn<string>[][] = [[], []]
 Array(24).fill(0).forEach((_, i) => {
   if (i < 24) {
     open2Columns[0].push({ text: `${i}时`.padStart(3, '0') })
@@ -26,7 +26,7 @@ Array(60).fill(0).forEach((_, i) => {
   }
 })
 
-const open3Columns: any = [[], [], []]
+const open3Columns: HuiPickerColumn<string>[][] = [[], [], []]
 const date = new Date()
 for (let i = 1990; i <= date.getFullYear(); i++) {
   open3Columns[0].push({ text: `${i}年` })

@@ -1,5 +1,5 @@
 import FloatingActionButton from './FloatingActionButton'
-import type { HuiFloatingActionButtonProps } from './FloatingActionButton'
+import type { HuiFloatingActionButtonProps, HuiFloatingActionButtonPosition } from './FloatingActionButton'
 
-export type { HuiFloatingActionButtonProps }
+export type { HuiFloatingActionButtonProps, HuiFloatingActionButtonPosition }
 export default FloatingActionButton

@@ -1,8 +1,8 @@
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
 
-export const useBoundingClientRect: (
-  ref: React.MutableRefObject<any>,
+export const useBoundingClientRect: <T extends Element | null | undefined>(
+  ref: React.MutableRefObject<T>,
 ) =>
   | Taro.NodesRef.BoundingClientRectCallbackResult
   | null
@@ -18,7 +18,7 @@ export const useBoundingClientRect: (
           const query = Taro.createSelectorQuery()
           if (!ref.current.className) {
             throw new Error(
-              '[useBoundingClientRect] 传入的Taor.TaroElement对象需要有className',
+              '[useBoundingClientRect] 传入的Taro.TaroElement对象需要有className',
             )
           }
         // eslint-disable-next-line no-unused-expressions
@@ -28,7 +28,7 @@ export const useBoundingClientRect: (
         query.exec()
         }
       })
-    }, [])
+    }, [ref])
 
     return info
   }

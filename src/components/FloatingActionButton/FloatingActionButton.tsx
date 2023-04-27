@@ -4,6 +4,13 @@ import { pxTransform } from '@tarojs/taro'
 import HuiIcon from '../Icon/Icon'
 import { HIconType } from '../Icon/type'
 
+export type HuiFloatingActionButtonPosition = {
+  top?: number
+  left?: number
+} | {
+  bottom?: number
+  right?: number
+}
 export interface HuiFloatingActionButtonProps {
   /** 按钮图标(左侧) */
   prefixIcon?: HIconType
@@ -13,13 +20,7 @@ export interface HuiFloatingActionButtonProps {
   color?: string
   style?: React.CSSProperties
   /** 按钮位置，定义坐标轴方向距离，上左/下右 */
-  position?: {
-    top?: number
-    left?: number
-  } | {
-    bottom?: number
-    right?: number
-  }
+  position?: HuiFloatingActionButtonPosition
   children?: React.ReactNode
 }
 
