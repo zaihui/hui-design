@@ -1,0 +1,36 @@
+@import '@/styles/variables.scss';
+@import '@/styles/demo-mixins.scss';
+
+.nav-bar-page {
+  > .content {
+    @include content-padding;
+
+    padding-right: 0;
+    padding-left: 0;
+
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+
+    .fake-button {
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      width: 96px;
+      height: 32px;
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid $hui-border-color;
+      border-radius: 17px;
+
+      .fake-square {
+        width: 18px;
+        height: 18px;
+        margin-right: 4px;
+        background-color: $hui-color-grey-6;
+      }
+    }
+  }
+}

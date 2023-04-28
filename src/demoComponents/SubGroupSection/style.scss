@@ -1,0 +1,14 @@
+@import '@/styles/index.scss';
+
+.sub-group-section {
+  &:not(:last-child) {
+    margin-bottom: 32px;
+  }
+
+  > .sgs-title {
+    padding: 0 16px;
+    margin-bottom: 16px;
+    font-size: $hui-font-caption-m;
+    color: $hui-font-color-base-50;
+  }
+}

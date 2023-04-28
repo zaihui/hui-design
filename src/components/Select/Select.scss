@@ -1,0 +1,25 @@
+@import "../../styles/variables.scss";
+@import "../../styles/colors.scss";
+
+.hui-select {
+  background: $hui-theme-color-background;
+
+  .hui-select-body {
+    display: flex;
+    max-height: 60vh;
+
+    .hui-select-side-menu {
+      flex-shrink: 0;
+    }
+
+    .hui-select-menu {
+      flex: 1;
+    }
+  }
+
+  .hui-select-footer {
+    padding: px(16);
+    padding-bottom: calc(env(safe-area-inset-bottom) + #{px(16)});
+    border-top: px(1) solid $hui-border-color-light;
+  }
+}

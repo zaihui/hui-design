@@ -1,0 +1,61 @@
+@import '../../styles/variables.scss';
+
+.demo-hui-nav-bar {
+  position: relative;
+  box-sizing: border-box;
+
+  .hui-nav-bar-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: px(6) 0;
+    color: $hui-font-color-base;
+
+    .hui-nav-bar-custom-button {
+      position: absolute;
+      left: px(10);
+      max-width: px(87);
+    }
+
+    .hui-nav-bar-capsule {
+      position: absolute;
+      left: px(16);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: px(32);
+      border-radius: px(17);
+
+      .hui-nav-bar-divider {
+        width: px(1);
+        height: px(19);
+        margin: 0 px(8);
+        background-color: $hui-border-color;
+      }
+
+      &.with-border {
+        left: px(10);
+        height: px(30);
+        padding: 0 px(16);
+        border: px(1) solid $hui-border-color;
+      }
+    }
+
+    .hui-nav-bar-title {
+      max-width: px(160);
+      overflow: hidden;
+      font-size: $hui-nav-bar-title-size;
+      font-weight: $hui-font-weight-medium;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .fake-right-capsule {
+    position: absolute;
+    right: px(10);
+    display: flex;
+    align-items: center;
+  }
+}

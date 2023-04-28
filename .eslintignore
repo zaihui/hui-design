@@ -1,0 +1,11 @@
+node_modules/
+lib
+dist
+public
+
+# eslint不会lint .开头的文件和文件夹
+# 参考：https://github.com/eslint/eslint/issues/8429
+# 强制让eslint的光芒触及每一个角落
+!**/.eslintrc.js
+!/.stylelint.config.js
+!/docs/.vuepress/

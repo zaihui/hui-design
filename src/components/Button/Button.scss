@@ -1,0 +1,164 @@
+/* stylelint-disable csstree/validator */
+@import "../../styles/colors.scss";
+@import "../../styles/variables.scss";
+
+@mixin loading-size($size) {
+  width: px($size);
+  height: px($size);
+}
+
+.hui-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: $hui-font-weight-medium;
+  color: $hui-button-default-color;
+  text-align: center;
+  white-space: nowrap;
+
+  .content-wrapper {
+    overflow: hidden;
+
+    .button-text {
+      overflow: hidden;
+      line-height: 1.2;
+      text-overflow: ellipsis;
+    }
+
+    &.hidden {
+      visibility: hidden;
+    }
+  }
+
+  .loading-area {
+    @include loading-size(14);
+
+    position: absolute;
+    border: px(2) solid;
+    border-right-color: transparent;
+    border-radius: 50%;
+    animation: loader-rotate 1s linear infinite;
+  }
+
+  &.primary {
+    background: $hui-theme-color-primary;
+    border: px(1) solid $hui-theme-color-primary;
+
+    &.disabled {
+      color: $hui-button-default-color;
+      background: $hui-theme-color-primary;
+      border: px(1) solid $hui-theme-color-primary;
+      opacity: .3;
+    }
+  }
+
+  &.secondary {
+    color: $hui-theme-color-primary;
+    background: transparent;
+    border: px(1) solid $hui-theme-color-primary;
+
+    &.disabled {
+      color: $hui-theme-color-primary;
+      background: transparent;
+      border: px(1) solid $hui-theme-color-primary;
+      opacity: .3;
+    }
+  }
+
+  &.text {
+    width: unset !important;
+    height: unset !important;
+    padding: $hui-button-type-text-padding !important;
+    color: $hui-theme-color-primary;
+    background: transparent !important;
+
+    &.disabled {
+      width: unset !important;
+      height: unset !important;
+      padding: $hui-button-type-text-padding !important;
+      color: $hui-theme-color-primary;
+      background: transparent !important;
+      opacity: .3;
+    }
+
+    .loading-area {
+      position: unset;
+      margin-right: px(3);
+
+      @include loading-size(12);
+    }
+
+    .content-wrapper {
+      &.hidden {
+        visibility: visible;
+      }
+    }
+  }
+
+  &.small {
+    height: $hui-button-height-s;
+    padding: 0 $hui-button-padding-s;
+    font-size: $hui-button-font-size-s;
+
+    .loading-area {
+      scale: (.6);
+    }
+  }
+
+  &.medium {
+    height: $hui-button-height-m;
+    padding: 0 $hui-button-padding-m;
+    font-size: $hui-button-font-size-m;
+
+    .loading-area {
+      scale: (.8);
+    }
+  }
+
+  &.large {
+    height: $hui-button-height-l;
+    padding: 0 $hui-button-padding-l;
+    font-size: $hui-button-font-size-l;
+
+    .extra {
+      margin-top: px(1);
+      font-size: $hui-button-font-size-extra;
+      line-height: 1;
+    }
+  }
+
+  &.radius-default {
+    border-radius: $hui-button-border-radius-default;
+  }
+
+  &.radius-square {
+    border-radius: $hui-button-border-radius-square;
+  }
+
+  &.radius-no-radius {
+    border-radius: unset;
+  }
+
+  &.hover {
+    opacity: .8;
+  }
+
+  &::after {
+    content: unset;
+  }
+
+  &.inline {
+    display: inline-flex;
+  }
+}
+
+@keyframes loader-rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

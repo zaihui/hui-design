@@ -1,0 +1,14 @@
+@import '@/styles/index.scss';
+@import '@/styles/demo-mixins.scss';
+
+.share-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}

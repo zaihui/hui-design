@@ -1,0 +1,43 @@
+@import '@/styles/index.scss';
+@import '@/styles/demo-mixins.scss';
+
+.font-page {
+  .content {
+    @include content-padding;
+  }
+
+  .card-list {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 36px;
+  }
+
+  .font-card {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100px;
+    height: 100px;
+    padding: 12px 16px 8px 16px;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 1px 4px 6px 0 #f4f4f4;
+
+    .fc-text {
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .fc-weight-text {
+      font-size: 12px;
+      color: $hui-font-color-base-75;
+      text-align: center;
+      white-space: nowrap;
+    }
+  }
+
+  .font-item {
+    margin-bottom: 24px;
+  }
+}

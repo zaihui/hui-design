@@ -1,0 +1,20 @@
+@import '@/styles/index.scss';
+@import '@/styles/demo-mixins.scss';
+
+.checkbox-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .checkbox-sample {
+    display: inline-block;
+    min-width: 60px;
+    margin-right: 16px;
+
+    > .title {
+      margin-bottom: 16px;
+      font-size: $hui-font-caption-m;
+      color: $hui-font-color-base-35;
+    }
+  }
+}
