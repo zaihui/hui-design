@@ -159,4 +159,5 @@ export default {
   EditorDisplayDetail: new PageItemNormal('EditorDisplayDetail'),
   Mask: new PageItemNormal('Mask'),
   FloatingActionButton: new PageItemNormal('FloatingActionButton'),
+  Card: new PageItemNormal('Card'),
 }
