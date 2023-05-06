@@ -116,6 +116,8 @@ const NAV_LIST: {
       { title: '计时器Timer', url: router.Timer.url },
       { title: '页脚Footer', url: router.Footer.url },
       { title: '骨架屏Skeleton', url: router.Skeleton.url },
+      { title: '标题栏', url: router.Title.url },
+      { title: '卡片Card', url: router.Card.url },
     ],
   },
   {

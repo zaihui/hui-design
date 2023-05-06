@@ -55,6 +55,8 @@ export default {
     'pages/EditorDisplayDetail/EditorDisplayDetail',
     'pages/Mask/Mask',
     'pages/FloatingActionButton/FloatingActionButton',
+    'pages/Title/Title',
+    'pages/Card/Card',
   ],
   window: {
     backgroundTextStyle: 'light',
