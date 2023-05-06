@@ -160,4 +160,5 @@ export default {
   Mask: new PageItemNormal('Mask'),
   FloatingActionButton: new PageItemNormal('FloatingActionButton'),
   Title: new PageItemNormal('Title'),
+  HightLightText: new PageItemNormal('HightLightText'),
 }

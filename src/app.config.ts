@@ -55,6 +55,7 @@ export default {
     'pages/Mask/Mask',
     'pages/FloatingActionButton/FloatingActionButton',
     'pages/Title/Title',
+    'pages/HightLightText/HightLightText',
   ],
   window: {
     backgroundTextStyle: 'light',
