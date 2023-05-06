@@ -74,7 +74,7 @@ const NAV_LIST: {
     icon: '182-basiscirde',
     items: [
       { title: '颜色Color', url: router.Color.url },
-      { title: '文字Font', url: router.Font.url },
+      { title: 'Typography 文字', url: router.Text.url },
       { title: '图标Icon', url: router.Icon.url },
       { title: '按钮Button', url: router.Button.url },
       { title: '页面层级Layer', url: router.Layer.url },

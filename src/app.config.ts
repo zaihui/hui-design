@@ -28,7 +28,7 @@ export default {
     'pages/Select/Select',
 
     'pages/Color/Color',
-    'pages/Font/Font',
+    'pages/Text/Text',
     'pages/Layer/Layer',
     'pages/Button/Button',
     'pages/Divider/Divider',

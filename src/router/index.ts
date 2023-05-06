@@ -143,7 +143,7 @@ export default {
   //  ('SubPackagePage', COMMON_PACKAGE_NAME),
 
   Color: new PageItemNormal('Color'),
-  Font: new PageItemNormal('Font'),
+  Text: new PageItemNormal('Text'),
   Layer: new PageItemNormal('Layer'),
   DefaultPageDetail: new PageItemNormal('DefaultPageDetail'),
   LoaderDetail: new PageItemNormal('LoaderDetail'),
