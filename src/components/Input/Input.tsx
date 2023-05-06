@@ -10,7 +10,7 @@ export interface HuiInputProps extends ViewProps {
   /** 字段名字 */
   label?: React.ReactNode
   /** 输入框类型 */
-  type?: 'number' | 'text' | 'idcard' | 'digit'
+  type?: 'number' | 'text' | 'idcard' | 'digit' | 'safe-password'
   /** 占位提示文案 */
   placeholder?: string
   /** 右侧箭头 */
