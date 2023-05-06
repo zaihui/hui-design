@@ -1,0 +1,66 @@
+@import "@/styles/index.scss";
+@import "@/styles/demo-mixins.scss";
+
+.card-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .detail {
+    font-size: px(13);
+    color: $hui-card-detail-color;
+  }
+
+  .card-content {
+    .content-tip {
+      @include line-clamp(1);
+
+      line-height: 17px;
+
+      :not(:last-child) {
+        margin-bottom: 2px;
+      }
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    .button {
+      padding: 8px 20px;
+      font-size: px(14);
+      border-radius: 4px;
+    }
+
+    .white-button {
+      margin-right: 8px;
+      color: $hui-card-title-color;
+      border: 1px solid $hui-card-button-border-color;
+    }
+
+    .primary-button {
+      color: $hui-color-grey-8;
+      background: $hui-card-primary-button-color;
+    }
+  }
+
+  .to-be-check {
+    padding: 4px 8px;
+    font-size: px(12);
+    color: $hui-card-check-color;
+    background: $hui-card-check-background-color;
+    border-radius: 2px;
+  }
+
+  .default-logo {
+    width: 100%;
+    height: 100%;
+    background: $hui-card-logo-background-color;
+  }
+
+  .assist-text {
+    font-size: px(12);
+    color: $hui-card-assist-color;
+  }
+}
