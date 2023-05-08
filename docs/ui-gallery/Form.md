@@ -20,7 +20,7 @@ const Demo: React.FC = () => {
     <View>
       <HuiForm form={form}>
         <HuiFormItem label='选项1'>
-          <HuiInput />
+          <HuiInput divider={false} />
         </HuiFormItem>
       </HuiForm>
     </View>

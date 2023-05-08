@@ -70,7 +70,7 @@ const InputPage: React.FC = () => {
               value => value,
             ]} label='账号' name='account'
             >
-              <HuiInput onInput={e => form.setFieldValue('account', e.detail.value)}></HuiInput>
+              <HuiInput divider={false} onInput={e => form.setFieldValue('account', e.detail.value)}></HuiInput>
             </HuiFormItem>
             <HuiFormItem label='密码' name='password'
               rule={[
@@ -82,7 +82,7 @@ const InputPage: React.FC = () => {
               ]}
               tipsText='密码必须为6-10个字符之间'
             >
-              <HuiInput onInput={e => form.setFieldValue('password', e.detail.value)} type='safe-password'></HuiInput>
+              <HuiInput divider={false} onInput={e => form.setFieldValue('password', e.detail.value)} type='safe-password'></HuiInput>
             </HuiFormItem>
 
             <HuiFormItem label='性别' name='gender'>
