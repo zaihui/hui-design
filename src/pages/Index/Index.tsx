@@ -129,6 +129,7 @@ const NAV_LIST: {
     items: [
       { title: '标签式分段控制器Tab', url: router.Tabs.url },
       { title: '宫格导航Grid', url: router.Grid.url },
+      { title: '步骤条Steppers', url: router.Steppers.url },
     ],
   },
   {
