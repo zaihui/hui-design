@@ -64,15 +64,13 @@ $hui-toast-font-size: px(14) !default;
 /** input */
 $input-space-v: px(14) !default;
 $input-min-height: px(20);
-$input-label-width: px(70);
+$input-label-width: px(140);
 $input-label-space: px(16);
 $input-error-msg-left-space: px(86);
 $input-label-array-width: px(8);
 $input-label-array-width-half: px(4);
-$input-label-error-top: $input-label-array-width;
-$input-label-error-bottom: $input-label-space;
 $input-triangle-color: transparent transparent transparent $hui-font-color-base-50;
-$input-unit-pad: px(16);
+$input-unit-pad: px(8);
 $input-background-color: #fff !default;
 
 /** button */
