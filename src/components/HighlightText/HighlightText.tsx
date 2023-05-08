@@ -35,7 +35,7 @@ const HighlightText: React.FC<HighlightTextProps> = ({
     [keyword, keywordStyle],
   )
 
-  const HighlightTextNode = useMemo(() => {
+  const highlightTextNode = useMemo(() => {
     function HightLightStyleToKeyword(reactNode) {
       return Children.map(reactNode, item => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
@@ -56,7 +56,7 @@ const HighlightText: React.FC<HighlightTextProps> = ({
     return HightLightStyleToKeyword(children)
   }, [children, highLightText])
 
-  return <View className={`${className ?? ''}`}>{HighlightTextNode}</View>
+  return <View className={`${className ?? ''}`}>{highlightTextNode}</View>
 }
 
 export default HighlightText
