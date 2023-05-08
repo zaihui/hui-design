@@ -234,6 +234,21 @@ $hui-card-check-background-color: #fff7e8;
 $hui-card-logo-background-color: #d8d8d8;
 $hui-card-assist-color: #999;
 
+/** Filter **/
+$hui-menu-scroll-fixed-top: px(0) !default;
+$hui-menu-scroll-fixed-z-index: $hui-z-index-m !default;
+$hui-filter-menu-bar-padding-y: px(15) !default;
+$hui-filter-menu-bar-padding-x: px(16) !default;
+$hui-filter-menu-text-color: #444 !default;
+$hui-filter-menu-active-text-color: #1569ee !default;
+$hui-filter-menu-text-font-size: px(14) !default;
+$hui-filter-menu-item-text-padding-x: px(4) !default;
+$hui-filter-menu-bg-color: #fff !default;
+$hui-filter-menu-item-wrap-bg-color: #fff !default;
+$hui-filter-menu-item-content-max-height: px(410) !default;
+$hui-filter-menu-item-content-padding-y: px(12) !default;
+$hui-filter-menu-item-content-padding-x: px(24) !default;
+
 /** Steppers */
 $hui-steppers-step-desc-color:#999;
 $hui-steppers-step-active-color:#1569ee;

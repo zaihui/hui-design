@@ -1,0 +1,67 @@
+@import "../../../styles/variables";
+
+.hui-filter-menu {
+  position: relative;
+
+  &.fixed {
+    position: fixed;
+    top: $hui-menu-scroll-fixed-top;
+    z-index: $hui-menu-scroll-fixed-z-index;
+  }
+
+  .hui-filter-menu-bar {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    padding: $hui-filter-menu-bar-padding-y $hui-filter-menu-bar-padding-x;
+    overflow-x: auto;
+    background-color: $hui-filter-menu-bg-color;
+    gap: 16px;
+
+    &.active {
+      z-index: $hui-z-index-m;
+    }
+
+    .hui-filter-menu-item {
+      box-sizing: border-box;
+      display: flex;
+      flex-basis: calc(100% / 3);
+      flex-grow: 1;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-width: calc(100% / 3 - 16px);
+      color: $hui-filter-menu-text-color;
+
+      &.active {
+        color: $hui-filter-menu-active-text-color;
+      }
+
+      &:only-child {
+        flex-basis: 100%;
+      }
+
+      &:nth-child(2):last-child,
+      &:nth-child(1):first-child:nth-last-child(2) {
+        flex-basis: 50%;
+      }
+
+      .hui-filter-menu-item-text {
+        padding: 0 $hui-filter-menu-item-text-padding-x;
+        font-size: $hui-filter-menu-text-font-size;
+        font-weight: $hui-font-weight-regular;
+
+        @include no-wrap();
+      }
+
+      .hui-filter-menu-item-icon {
+        transition: all .2s linear;
+
+        @nest &.active & {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+}
