@@ -3,7 +3,7 @@
 import { CSSProperties, ReactNode } from 'react'
 
 export const TextareaHeight = 'auto'
-export const formItemPrefix = 'h-form-item'
+export const formItemPrefix = 'hui-form-item'
 export const ErrorCss = `${formItemPrefix}-error`
 export const DisableCss = 'h-input-content-disable'
 export const NormalCss = `${formItemPrefix}-normal`

@@ -1,26 +1,74 @@
-/**
- * formStore 控制表单数据
- * 校验放到filed组件内部去做
- * 表单组件为受控，需要value - onChange
- */
+import { Form } from '@tarojs/components'
+import React, { ReactNode, useImperativeHandle } from 'react'
+import classNames from 'classnames'
 
-import InstanceForm from './index'
-import type { HuiFormProps } from './index'
-import Item from './FormItem'
-
+import Context, { FieldContext } from './constants'
 import useForm from './hooks/useForm'
 
-import type { HuiFormItemProps } from './constants/formItem'
+const defaultFunc = () => ({})
 
-type InstanceFormType = typeof InstanceForm
-
-interface FormInterface extends InstanceFormType {
-  Item: typeof Item
+export interface HuiFormProps {
+  /** 外层的class */
+  className?: string
+  children?: ReactNode
+  /** 校验成功 */
+  onFinish?: (values: object) => void
+  /** 校验失败 */
+  onFinishFailed?: (values: object) => void
+  /** 值变化 */
+  onValuesChange?: (values: object, allValues: object) => void
+  /** 重置 */
+  onReset?: () => void
+  form: FieldContext
 }
-(InstanceForm as FormInterface).Item = Item
 
-const Instance = InstanceForm as FormInterface
+const HuiForm = (props: HuiFormProps, ref) => {
+  const {
+    onFinish = defaultFunc,
+    onValuesChange = defaultFunc,
+    onFinishFailed = defaultFunc,
+    onReset = defaultFunc,
+    children,
+    form,
+    className,
+  } = props
 
-export { useForm, HuiFormProps, HuiFormItemProps }
+  const formInstance = useForm(form)[0] as FieldContext
+  const { setCallbacks, submit, reset } = formInstance
 
-export default Instance
+  const { Provider } = Context
+
+  const handleSubmit = event => {
+    event.preventDefault()
+    event.stopPropagation()
+    submit()
+  }
+
+  const handleReset = event => {
+    event.preventDefault()
+    event.stopPropagation()
+    reset()
+  }
+
+  setCallbacks({
+    onFinish,
+    onFinishFailed,
+    onValuesChange,
+    onReset,
+  })
+
+  useImperativeHandle(ref, () => formInstance, [])
+
+  return (
+    <Form className={classNames('hui-form', className)} onSubmit={handleSubmit} onReset={handleReset}>
+      <Provider value={formInstance}>{children}</Provider>
+    </Form>
+  )
+}
+
+/**
+ * form表单容器组件
+ */
+const HForm: React.FC<HuiFormProps> = React.forwardRef(HuiForm)
+
+export default HForm

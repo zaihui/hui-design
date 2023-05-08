@@ -1,4 +1,4 @@
-export const fieldPrefix = 'h-form-item'
+export const fieldPrefix = 'hui-form-item'
 export const normalCss = `${fieldPrefix}-normal`
 export const errorCss = `${fieldPrefix}-error`
 export const disableCss = `${fieldPrefix}-disable`

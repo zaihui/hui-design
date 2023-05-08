@@ -2,7 +2,7 @@
   "miniprogramRoot": "dist/",
   "projectname": "HUI-DESIGN",
   "description": "再惠小程序组件库示例小程序",
-  "appid": "wx41708a4ab12050ab",
+  "appid": "wx155993959e0411c5",
   "setting": {
     "urlCheck": false,
     "es6": false,
@@ -37,8 +37,19 @@
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
-    "minifyWXSS": true
+    "minifyWXSS": true,
+    "condition": false
   },
   "compileType": "miniprogram",
-  "condition": {}
+  "condition": {},
+  "libVersion": "2.31.1",
+  "srcMiniprogramRoot": "dist/",
+  "packOptions": {
+    "ignore": [],
+    "include": []
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
+  }
 }

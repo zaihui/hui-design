@@ -1,10 +1,14 @@
 @import '../../../styles/variables.scss';
 @import '../../../styles/colors.scss';
 
-.h-form-item {
-  padding: 14px 16px;
-  color: $hui-form-text-primary;
+.hui-form-item {
   background: $hui-color-grey-8;
+
+  &-wrapper {
+    padding: 14px 0;
+    margin: 0 16px;
+    color: $hui-form-text-primary;
+  }
 
   .hui-input .input-wrapper {
     padding: 0;
@@ -45,7 +49,7 @@
     display: flex;
     justify-content: space-between;
 
-    .h-form-item {
+    .hui-form-item {
       &-text {
         flex-grow: 0;
         flex-shrink: 0;
@@ -67,7 +71,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
 
-    .h-form-item {
+    .hui-form-item {
       &-text {
         flex-grow: 0;
         flex-shrink: 0;
@@ -108,7 +112,7 @@
   }
 
   &-normal {
-    border-bottom: 1px solid $hui-toast-background-color;
+    border-bottom: 1px solid $hui-border-color-light;
   }
 
   &-error {

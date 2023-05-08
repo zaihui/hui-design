@@ -11,14 +11,23 @@ export interface registerWatchType {
 }
 
 export interface FieldContext {
+  /** 获取单个表单数据 */
   getFieldValue: (name: string | string[]) => any
+  /** 获取所有表单数据 */
   getFieldsValue: () => any
+  /** 设置所有表单数据 */
   setFieldsValue: (sotre: any) => any
+  /** 设置单个表单数据 */
   setFieldValue: (name: string | string[], value: any) => any
+  /** 验证表单 */
   validatorFields: () => any
+  /** 注册监听 */
   registerWatch: (filed: registerWatchType) => any
+  /** 设置回调函数 */
   setCallbacks: (callbacks: any) => any
+  /** 提交表单 */
   submit: () => Promise<void>
+  /** 重制表单 */
   reset: () => Promise<void>
 }
 

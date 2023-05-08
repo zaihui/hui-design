@@ -28,6 +28,9 @@ import { toArray } from '../util'
 
 import './index.scss'
 
+/**
+ * form表单基础组件
+ */
 const Item: React.FC<HuiFormItemProps> = props => {
   const context = useContext<FieldContext>(Context)
   const { registerWatch, getFieldValue, setFieldValue } = context
@@ -173,58 +176,60 @@ const Item: React.FC<HuiFormItemProps> = props => {
 
   if (!visible) return null
   return (
-    <View
-      className={classNames(formItemPrefix, className, {
-        [ruleCss]: renderType === 'other',
-      })}
-      style={{
-        ...style,
-      }}
-    >
+    <View className={classNames(formItemPrefix)}>
       <View
-        className={classNames({
-          [`${formItemPrefix}-row`]: align === AlignType.ROW,
-          [`${formItemPrefix}-column`]: align === AlignType.COLUMN,
+        className={classNames(`${formItemPrefix}-wrapper`, className, {
+          [ruleCss]: renderType === 'other',
         })}
+        style={{
+          ...style,
+        }}
       >
-        {label && (
-          <View
-            className={`${formItemPrefix}-text`}
-            style={{
-              ...labelStyle,
-            }}
-          >
-            <View className={`${formItemPrefix}-text-label`}>
-              {label}
-              {requireIcon}
-              {labelIcon}
-            </View>
-          </View>
-        )}
-        <View className={`${formItemPrefix}-content`}>
-          <Provider
-            value={{
-              setRenderType,
-            }}
-          >
-            {copyChildren}
-          </Provider>
-        </View>
-        {/* 水平布局额外区域内容 */}
-        <View className={`${formItemPrefix}-extra`}>
-          <View>{extra}</View>
-          {showArrow && (
-            <View>
-              <HuiIcon
-                className={`${formItemPrefix}-arrow`}
-                name='012-right'
-              />
+        <View
+          className={classNames({
+            [`${formItemPrefix}-row`]: align === AlignType.ROW,
+            [`${formItemPrefix}-column`]: align === AlignType.COLUMN,
+          })}
+        >
+          {label && (
+            <View
+              className={`${formItemPrefix}-text`}
+              style={{
+                ...labelStyle,
+              }}
+            >
+              <View className={`${formItemPrefix}-text-label`}>
+                {label}
+                {requireIcon}
+                {labelIcon}
+              </View>
             </View>
           )}
+          <View className={`${formItemPrefix}-content`}>
+            <Provider
+              value={{
+                setRenderType,
+              }}
+            >
+              {copyChildren}
+            </Provider>
+          </View>
+          {/* 水平布局额外区域内容 */}
+          <View className={`${formItemPrefix}-extra`}>
+            <View>{extra}</View>
+            {showArrow && (
+              <View>
+                <HuiIcon
+                  className={`${formItemPrefix}-arrow`}
+                  name='012-right'
+                />
+              </View>
+            )}
+          </View>
         </View>
-      </View>
 
-      {ruleErrorView ?? tipsView}
+        {ruleErrorView ?? tipsView}
+      </View>
     </View>
   )
 }

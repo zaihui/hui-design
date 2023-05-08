@@ -5,7 +5,7 @@ import { View } from '@tarojs/components'
 import HuiInput from '@/components/Input'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
-import HuiForm, { useForm } from '@/components/Form/Form'
+import HuiForm, { useForm } from '@/components/Form/index'
 import HuiButton from '@/components/Button/Button'
 import HuiPicker, { HuiPickerColumn } from '@/components/Picker'
 import HuiTextArea from '@/components/TextArea'
@@ -18,7 +18,7 @@ const open1Columns: HuiPickerColumn<string>[][] = [[
 ]]
 
 const InputPage: React.FC = () => {
-  const [form1, setForm1] = useState({
+  const [localData, setLocalData] = useState({
     account: '',
     password: '',
     gender: '男',
@@ -36,11 +36,11 @@ const InputPage: React.FC = () => {
   }
 
   useEffect(() => {
-    form.setFieldsValue(form1)
+    form.setFieldsValue(localData)
   }, [])
 
   const handleChange = useCallback((_cur, formData) => {
-    setForm1({ ...formData })
+    setLocalData({ ...formData })
   }, [])
 
   const handleFinish = useCallback(data => {
@@ -54,7 +54,7 @@ const InputPage: React.FC = () => {
 
   const HuiFormItem = HuiForm.Item
   return (
-    <View className='input-page'>
+    <View className='form-demo-page'>
       <PageHeader
         image='https://r.kezaihui.com/client/2021-05-29/hui-design-input-21053001.png'
         title='表单 Form'
