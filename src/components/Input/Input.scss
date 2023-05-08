@@ -6,7 +6,7 @@
 
   .input-item-placeholder {
     font-weight: normal;
-    color: $hui-font-color-base-25;
+    color: $hui-font-color-base-35;
   }
 
   .input-container {
@@ -41,22 +41,21 @@
       display: flex;
       flex-shrink: 0;
       align-items: center;
-      max-width: $input-label-width;
       padding-right: $input-label-space;
       font-size: $hui-font-body-m;
       font-weight: $hui-font-weight-regular;
-      color: $hui-font-color-base-50;
+      color: $hui-color-grey-9;
 
       &-icon {
         margin-left: 4px;
         color: $hui-font-color-base-35;
       }
 
-      &-optional {
+      &-required {
         margin-left: 4px;
         font-family: PingFangSC-Regular, sans-serif;
         font-size: $hui-font-caption-m;
-        font-weight: normal;
+        font-weight: $hui-font-weight-regular;
         line-height: 20px;
         color: $hui-font-color-base-75;
         letter-spacing: 0;
@@ -72,7 +71,7 @@
       .input {
         width: 100%;
         font-size: $hui-font-body-s;
-        font-weight: $hui-font-weight-medium;
+        font-weight: $hui-font-weight-regular;
 
         &.right-align {
           text-align: right;
@@ -84,7 +83,7 @@
 
         width: 100%;
         font-size: $hui-font-body-s;
-        font-weight: $hui-font-weight-medium;
+        font-weight: $hui-font-weight-regular;
 
         &.right-align {
           text-align: right;
@@ -92,12 +91,12 @@
       }
 
       .none-value {
-        color: $hui-font-color-base-25;
+        color: $hui-font-color-base-35;
       }
 
       .unit {
         padding-left: $input-unit-pad;
-        color: $hui-font-color-base-50;
+        color: $hui-color-grey-9;
       }
     }
 
@@ -134,7 +133,7 @@
 
   &.disabled {
     .input-item-placeholder {
-      color: $hui-font-color-input-disabled;
+      color: $hui-font-color-base-25;
     }
 
     .input-container {
@@ -150,11 +149,11 @@
 
       .input-content {
         .display-area {
-          color: $hui-font-color-input-disabled;
+          color: $hui-font-color-base-25;
         }
 
         .none-value {
-          color: $hui-font-color-input-disabled;
+          color: $hui-font-color-base-25;
         }
       }
     }
