@@ -16,6 +16,7 @@ export default {
     'pages/Sticky/Sticky',
     'pages/Tag/Tag',
     'pages/List/List',
+    'pages/ContentList/ContentList',
     'pages/Grid/Grid',
     'pages/Stepper/Stepper',
     'pages/SwiperIndicator/SwiperIndicator',

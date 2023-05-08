@@ -124,6 +124,7 @@ export default {
   Sticky: new PageItemNormal('Sticky'),
   Tag: new PageItemNormal('Tag'),
   List: new PageItemNormal('List'),
+  ContentList: new PageItemNormal('ContentList'),
   Grid: new PageItemNormal('Grid'),
   Stepper: new PageItemNormal('Stepper'),
   Tooltip: new PageItemNormal('Tooltip'),
