@@ -15,7 +15,7 @@ const useAnimationCss = (
       type: 'medium',
     })
     setTimeout(() => setClassName(''), duration)
-  }, [state])
+  }, [state, css, duration])
   return [implement, className]
 }
 
