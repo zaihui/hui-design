@@ -55,6 +55,7 @@ export default {
     'pages/Mask/Mask',
     'pages/FloatingActionButton/FloatingActionButton',
     'pages/Title/Title',
+    'pages/HighlightText/HighlightText',
     'pages/Card/Card',
   ],
   window: {
