@@ -118,6 +118,7 @@ const ComponentList: React.FC = () => {
         {/* 导航类 */}
         {category === Category.Navigation && (
           <>
+            <ListItem onClick={() => { router.Filter.navigateTo() }}>Filter</ListItem>
             <ListItem onClick={() => { router.Tabs.navigateTo() }}>分段控制器 Tabs</ListItem>
             <ListItem onClick={() => { router.Grid.navigateTo() }}>宫格导航 Grid</ListItem>
           </>

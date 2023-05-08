@@ -1,0 +1,14 @@
+@import '@/styles/index.scss';
+@import '@/styles/demo-mixins.scss';
+
+.filter-page {
+  > .content {
+    @include content-padding;
+
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

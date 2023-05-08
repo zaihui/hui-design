@@ -1,0 +1,24 @@
+@import "../../../styles/variables";
+
+.hui-filter-menu-item-wrap {
+  position: absolute;
+  z-index: $hui-z-index-l;
+  width: 100%;
+  background-color: $hui-filter-menu-item-wrap-bg-color;
+
+  .hui-filter-menu-item-content {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: $hui-filter-menu-item-content-max-height;
+    overflow-y: auto;
+
+    &.is-options {
+      padding: $hui-filter-menu-item-content-padding-y $hui-filter-menu-item-content-padding-x;
+    }
+
+    .hui-filter-menu-item-option {
+      font-size: $hui-filter-menu-text-font-size;
+      color: $hui-filter-menu-text-color;
+    }
+  }
+}
