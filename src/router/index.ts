@@ -110,6 +110,7 @@ export default {
   ToastPage: new PageItemNormal('ToastPage'),
   Dialog: new PageItemNormal('Dialog'),
   Input: new PageItemNormal('Input'),
+  Form: new PageItemNormal('Form'),
   Button: new PageItemNormal('Button'),
   TextArea: new PageItemNormal('TextArea'),
   Divider: new PageItemNormal('Divider'),

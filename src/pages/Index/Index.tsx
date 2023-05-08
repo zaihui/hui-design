@@ -96,6 +96,7 @@ const NAV_LIST: {
       { title: '步进器Stepper', url: router.Stepper.url },
       { title: '搜索Search', url: router.Search.url },
       { title: '选择器Select', url: router.Select.url },
+      { title: '表单Form', url: router.Form.url },
     ],
   },
   {

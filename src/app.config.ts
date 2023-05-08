@@ -8,6 +8,7 @@ export default {
     'pages/Demo/Demo',
     'pages/Icon/Icon',
     'pages/Input/Input',
+    'pages/Form/Form',
     'pages/TextArea/TextArea',
     'pages/Switch/Switch',
     'pages/Checkbox/Checkbox',

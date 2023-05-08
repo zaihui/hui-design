@@ -15,7 +15,7 @@ export interface HuiInputProps extends ViewProps {
   labelIcon?: HIconType
   required?: boolean
   /** 输入框类型 */
-  type?: 'number' | 'text' | 'idcard' | 'digit'
+  type?: 'number' | 'text' | 'idcard' | 'digit' | 'safe-password'
   align?: 'left' | 'right'
   /** 占位提示文案 */
   placeholder?: string
