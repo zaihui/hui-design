@@ -13,7 +13,7 @@ export interface HuiInputProps extends ViewProps {
   label?: React.ReactNode
   /** 字段名字的辅助icon */
   labelIcon?: HIconType
-  optional?: boolean
+  required?: boolean
   /** 输入框类型 */
   type?: 'number' | 'text' | 'idcard' | 'digit'
   align?: 'left' | 'right'
@@ -72,13 +72,13 @@ const HuiInput: React.FC<HuiInputProps> = props => {
     style,
     onClick,
     align = 'left',
-    optional = false,
+    required = true,
     labelIcon,
   } = props
 
   const labelDom = label ? (<View className='label'>
     <View>{ label }</View>
-    {optional && <View className='label-optional'>(选填)</View>}
+    {!required && <View className='label-required'>(选填)</View>}
     {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
   </View>) : null
 
