@@ -1,16 +1,22 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import React from 'react'
+import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
 import { CommonEventFunction, ITouchEvent } from '@tarojs/components/types/common'
 import { ViewProps } from '@tarojs/components/types/View'
 import { InputProps } from '@tarojs/components/types/Input'
 import HuiIcon from '../Icon'
+import { HIconType } from '../Icon/type'
 
 export interface HuiInputProps extends ViewProps {
   /** 字段名字 */
   label?: React.ReactNode
+  /** 字段名字的辅助icon */
+  labelIcon?: HIconType
+  required?: boolean
   /** 输入框类型 */
   type?: 'number' | 'text' | 'idcard' | 'digit' | 'safe-password'
+  align?: 'left' | 'right'
   /** 占位提示文案 */
   placeholder?: string
   /** 右侧箭头 */
@@ -54,7 +60,7 @@ export interface HuiInputProps extends ViewProps {
 const HuiInput: React.FC<HuiInputProps> = props => {
   const {
     errorMsg,
-    divider,
+    divider = true,
     onlyClick,
     value,
     type,
@@ -65,16 +71,23 @@ const HuiInput: React.FC<HuiInputProps> = props => {
     className = '',
     style,
     onClick,
+    align = 'left',
+    required = true,
+    labelIcon,
   } = props
 
-  const labelDom = label ? <View className='label'>{ label }</View> : null
+  const labelDom = label ? (<View className='label'>
+    <View>{ label }</View>
+    {!required && <View className='label-required'>(选填)</View>}
+    {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
+  </View>) : null
 
   // 输入框和只用来展示的div
   const inputDom = onlyClick || disabled ? <View
-    className={`display-area ${value ? '' : 'none-value'}`}
+    className={cx('display-area', { 'none-value': !value }, { 'right-align': label && align === 'right' })}
   >{ value || placeholder }</View> : <Input
     value={value}
-    className='input'
+    className={cx('input', { 'right-align': label && align === 'right' })}
     type={type}
     placeholder={placeholder}
     placeholderClass='input-item-placeholder'
@@ -101,7 +114,7 @@ const HuiInput: React.FC<HuiInputProps> = props => {
   // 分割线是否展示 & 分割线颜色
   const divideLineDom = errorMsg || divider ? (
     <View
-      className={`divider-line ${errorMsg ? 'with-error' : ''}`}
+      className='divider-line'
     ><View className='line' /></View>
   ) : null
 
@@ -116,24 +129,26 @@ const HuiInput: React.FC<HuiInputProps> = props => {
       className={`hui-input ${className} ${disabled ? 'disabled' : ''}`}
     >
       <View
-        className='input-wrapper'
+        className='input-container'
         style={props.style}
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         onClick={onlyClick && !disabled && onClick ? onClick : () => {}}
       >
-        {labelDom}
-        <View className='input-content'>
-          {inputDom}
-          {
-            props.unit ? (
-              <View className='unit'>{props.unit}</View>
-            ) : null
-          }
+        <View className='input-wrapper'>
+          {labelDom}
+          <View className='input-content'>
+            {inputDom}
+            {
+              props.unit ? (
+                <View className='unit'>{props.unit}</View>
+              ) : null
+            }
+          </View>
+          {inputArrayDom}
         </View>
-        {inputArrayDom}
+        {errorMsgDom}
       </View>
       {divideLineDom}
-      {errorMsgDom}
     </View>
   )
 }

@@ -6,14 +6,15 @@
 // https://lanhuapp.com//web/#/item/project/board?pid=215a153b-7194-4887-a56d-7ef061a3f95a&image_id=cee4c417-8962-4a15-88d1-6a4f05ef717b&from=nav
 
 /** 基本颜色 **/
-$hui-color-grey-1: #1e1e1e;
-$hui-color-grey-2: #575757;
-$hui-color-grey-3: #8e8e8e;
-$hui-color-grey-4: #b1b1b1;
-$hui-color-grey-5: #c7c7c7;
-$hui-color-grey-6: #ededed;
+$hui-color-grey-1: #111;
+$hui-color-grey-2: #666;
+$hui-color-grey-3: #999;
+$hui-color-grey-4: #bbb;
+$hui-color-grey-5: #ddd;
+$hui-color-grey-6: #eee;
 $hui-color-grey-7: #f8f8f8;
 $hui-color-grey-8: #fff;
+$hui-color-grey-9: #444;
 $hui-color-orange-1: #ff6c00;
 $hui-color-green-1: #00c968;
 $hui-color-amber-1: #ffcb2c;
@@ -36,18 +37,19 @@ $hui-font-color-base-35: $hui-color-grey-4 !default; // 主要用于不可点击
 $hui-font-color-base-25: $hui-color-grey-5 !default;  // 主要用于描述性文字等
 $hui-font-color-base-05: rgba(#1e1e1e, .05) !default; // 分割线颜色
 $hui-font-color-white: $hui-color-grey-8 !default; // 用于轻提示灰背景文字
-$hui-font-color-input-disabled: $hui-color-grey-4 !default;  // 主要用于可点击按钮、标题文字、重要文字等
+$hui-font-color-input-disabled: $hui-color-grey-4 !default;
 $hui-font-color-stepper-disabled: #c0c1c6 !default; // 步进器颜色
 
 /** 分割线颜色 **/
-$hui-border-color: #f4f4f4 !default; // 用于1px分割线颜色
+$hui-border-color: #f5f5f5 !default;
 $hui-border-color-light: #f8f8f8 !default; // 用于8px分割线颜色
 
 /** 背景色 **/
 $hui-page-background-color: #f8f8f8 !default; // 空页面背景色
 $hui-toast-background-color:rgba(0, 0, 0, .7) !default; // 轻提示背景色
+$hui-list-background-color: #f9f9f9 !default; // 列表禁用背景色
 
 /** 遮罩层颜色 **/
 $hui-mask-color: rgba(#1e1e1e, .75) !default;
 $hui-mask-color-transparent:  rgba(#1e1e1e, 0) !default; // 全透明遮罩层颜色
-$hui-disabled-background-color: #f8f8f8 !default; // 输入框禁用色
+$hui-disabled-background-color: #f9f9f9 !default; // 输入框禁用色

@@ -74,12 +74,13 @@ const NAV_LIST: {
     icon: '182-basiscirde',
     items: [
       { title: '颜色Color', url: router.Color.url },
-      { title: '文字Font', url: router.Font.url },
+      { title: 'Typography 文字', url: router.Text.url },
       { title: '图标Icon', url: router.Icon.url },
       { title: '按钮Button', url: router.Button.url },
       { title: '页面层级Layer', url: router.Layer.url },
       { title: '弹出层Popup', url: router.Popup.url },
       { title: '悬浮按钮FAB', url: router.FloatingActionButton.url },
+      { title: '高亮文本', url: router.HightLightText.url },
     ],
   },
   {
@@ -107,6 +108,7 @@ const NAV_LIST: {
       { title: '空状态Default Page', url: router.DefaultPage.url },
       { title: '标签Tag', url: router.Tag.url },
       { title: '列表List', url: router.List.url },
+      { title: '内容列表', url: router.ContentList.url },
       { title: '徽标Badge', url: router.Badge.url },
       { title: '通知Notice Bar', url: router.NoticeBar.url },
       { title: '头像Avatar', url: router.Avatar.url },

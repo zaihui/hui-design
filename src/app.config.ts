@@ -17,6 +17,7 @@ export default {
     'pages/Sticky/Sticky',
     'pages/Tag/Tag',
     'pages/List/List',
+    'pages/ContentList/ContentList',
     'pages/Grid/Grid',
     'pages/Stepper/Stepper',
     'pages/SwiperIndicator/SwiperIndicator',
@@ -29,7 +30,7 @@ export default {
     'pages/Select/Select',
 
     'pages/Color/Color',
-    'pages/Font/Font',
+    'pages/Text/Text',
     'pages/Layer/Layer',
     'pages/Button/Button',
     'pages/Divider/Divider',
@@ -56,6 +57,7 @@ export default {
     'pages/Mask/Mask',
     'pages/FloatingActionButton/FloatingActionButton',
     'pages/Title/Title',
+    'pages/HighlightText/HighlightText',
     'pages/Card/Card',
   ],
   window: {
