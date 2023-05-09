@@ -1,8 +1,10 @@
-import React, { CSSProperties, ReactNode, useMemo } from 'react'
+import React, { CSSProperties, ReactNode, useMemo, useState } from 'react'
 import { View } from '@tarojs/components'
 import cx from 'classnames'
 import Menu, { MenuProps } from './Menu/Menu'
 import { MenuItemProps } from './MenuItem/MenuItem'
+import FiltersContent, { FiltersContentProps } from './FiltersContent'
+import HuiButton from '../Button/Button'
 
 interface MenuConfig extends MenuProps {
   menuItems: MenuItemProps[]
@@ -13,6 +15,7 @@ export interface HuiFilterProps {
   style?: CSSProperties
   children?: ReactNode
   menuConfig?: MenuConfig
+  filtersContentConfig: Omit<FiltersContentProps, 'visible'>
   // TODO
   rightFilter?: boolean
   // TODO
@@ -23,6 +26,7 @@ const defaultProps = {
   className: '',
   style: {},
   type: 'menu',
+  filterType: 'single',
 }
 
 const HuiFilter: React.FC<HuiFilterProps> = props => {
@@ -33,8 +37,15 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
     // rightFilterOptions,
     menuConfig,
     children,
+    filtersContentConfig,
     ...rest
   } = { ...defaultProps, ...props }
+  const {
+    filterItems = [{ label: '', name: '', value: '', children: '' }],
+    ...restFiltersConfig
+  } = filtersContentConfig
+
+  const [visible, setVisible] = useState<boolean>(false)
 
   const { isMenu, menuProps, menuItems } = useMemo(() => {
     const { menuItems: menuItemProps, ...restProps } = menuConfig || {}
@@ -57,6 +68,12 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
         <View>{children}</View>
       )}
       {/*   TODO */}
+      <HuiButton onClick={() => setVisible(!visible)}>测试一下</HuiButton>
+      <FiltersContent
+        visible={visible}
+        filterItems={filterItems}
+        {...restFiltersConfig}
+      />
     </View>
   )
 }
