@@ -9,6 +9,7 @@ export interface HuiPopupProps extends ViewProps {
   wapperClassName?: string
   // 兼容单词拼写错误
   wrapperClassName?: string
+  contentClassName?: string
   // 修复历史遗漏问题，让Popup组件支持className的处理
   className?: string
   /** 是否展示 */
@@ -26,6 +27,7 @@ const Popup: React.FC<HuiPopupProps> = props => {
   const {
     wapperClassName = '',
     wrapperClassName = '',
+    contentClassName = '',
     className = '',
     style,
     visible,
@@ -57,7 +59,7 @@ const Popup: React.FC<HuiPopupProps> = props => {
     >
       <View className='popup-mask' onTouchMove={handleTouchMove} onClick={handleClose} />
       <View
-        className={`popup-content ${position}`}
+        className={`popup-content ${position} ${contentClassName}`}
         onTouchMove={handleTouchMove}
         {...rest}
       >
