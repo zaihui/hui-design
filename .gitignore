@@ -7,5 +7,6 @@ yarn-error.log
 .rn_temp/
 .vscode/
 /public
+.idea
 
 project.private.config.json

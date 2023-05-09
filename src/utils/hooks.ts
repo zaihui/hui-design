@@ -21,8 +21,9 @@ export const useBoundingClientRect: <T extends Element | null | undefined>(
               '[useBoundingClientRect] 传入的Taro.TaroElement对象需要有className',
             )
           }
+          const className = ref.current?.className?.replace(/ /g, '.')
         // eslint-disable-next-line no-unused-expressions
-        query.select(`.${ref.current?.className}`)?.boundingClientRect(rect => {
+        query.select(`.${className}`)?.boundingClientRect(rect => {
           setInfo(rect)
         })
         query.exec()

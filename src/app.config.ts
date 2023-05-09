@@ -54,6 +54,7 @@ export default {
     'pages/EditorDisplay/EditorDisplay',
     'pages/EditorDisplayDetail/EditorDisplayDetail',
     'pages/Mask/Mask',
+    'pages/Filter/Filter',
     'pages/FloatingActionButton/FloatingActionButton',
     'pages/Title/Title',
     'pages/HighlightText/HighlightText',

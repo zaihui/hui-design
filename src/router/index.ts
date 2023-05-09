@@ -163,4 +163,5 @@ export default {
   Title: new PageItemNormal('Title'),
   HightLightText: new PageItemNormal('HighlightText'),
   Card: new PageItemNormal('Card'),
+  Filter: new PageItemNormal('Filter'),
 }
