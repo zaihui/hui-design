@@ -1,8 +1,9 @@
-import React, { CSSProperties, ReactNode, useEffect, useImperativeHandle, useMemo } from 'react'
+import React, { CSSProperties, ReactNode, useImperativeHandle, useMemo } from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
+import { ITouchEvent } from '@tarojs/components/types/common'
 import { useBoundingClientRect } from '../../../utils/hooks'
-import { HuiButtonProps } from '../../Button'
+import HuiButton, { HuiButtonProps } from '../../Button'
 
 import Mask from '../../Mask'
 import './MenuItem.scss'
@@ -23,12 +24,16 @@ export interface MenuItemProps {
   value?: string | number
   // option改变的回调
   onChange?: (option: MenuItemOption) => void
-  // 下拉框底部内容
-  footer?: ReactNode
+  // 下拉框底部筛选
+  footer?: boolean
   // 确认按钮文字
   okText?: ReactNode
   // 清空筛选项文字
   clearText?: ReactNode
+  /** 点击确定回调 */
+  onOk?: (e: ITouchEvent) => void
+  /** 点击重置回调 */
+  onClear?: (e: ITouchEvent) => void
   // 确认按钮的props
   okButtonProps?: HuiButtonProps
   // 清空筛选项按钮的props
@@ -54,6 +59,9 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     style,
     parent,
     children,
+    footer,
+    okText,
+    clearText,
   } = props as any
 
   const info = useBoundingClientRect(parent.menuRef)
@@ -70,11 +78,6 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     ref,
     () => ({ hideMenu }),
   )
-
-  // 控制body是否可以滚动
-  useEffect(() => {
-
-  }, [parent.show])
 
   const getDisplay = () => {
     if (parent.show) return {}
@@ -95,6 +98,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     hideMenu()
     updateTitle(item.text)
     onChange && onChange(item)
+    parent.menuOnChange && parent.menuOnChange(item)
   }
 
   const renderOptions = () => {
@@ -120,6 +124,14 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     return children
   }
 
+  const handleClear = (e: ITouchEvent) => {
+    props.onClear && props.onClear(e)
+  }
+
+  const handleOk = (e: ITouchEvent) => {
+    props.onOk && props.onOk(e)
+  }
+
   return (
     <>
       <Mask visible={parent.show} onClose={hideMenu} style={position} />
@@ -135,9 +147,13 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
         >
           {!options ? renderChildren() : renderOptions()}
         </View>
-        <View className='hui-filter-menu-item-footer'>
-
+        {
+          footer && <View className='hui-filter-menu-item-footer'>
+          {/* TODO */}
+          <HuiButton radiusType='square' style={{ width: '100%' }} onClick={handleClear}>{clearText || '清空筛选项'}</HuiButton>
+          <HuiButton radiusType='square' style={{ width: '100%' }} onClick={handleOk}>{okText || '筛选'}</HuiButton>
         </View>
+        }
       </View>
     </>
   )

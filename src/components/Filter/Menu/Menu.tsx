@@ -1,6 +1,5 @@
 import React, { CSSProperties, ReactNode, useState, useRef } from 'react'
 import { View } from '@tarojs/components'
-
 import cx from 'classnames'
 import MenuItem, { MenuItemOption } from '../MenuItem/MenuItem'
 import HuiIcon from '../../Icon'
@@ -10,10 +9,10 @@ export interface MenuProps {
   className?: string
   style?: CSSProperties
   children?: ReactNode
-  // 滚动时是否固定在顶部
+  /** 滚动时是否固定在顶部 */
   fixed?: boolean
-  // TODO 透传到menu组件 当筛选项变化的时候调用
-  onChange?: (option: MenuItemOption) => void
+  /** 透传到menu组件 当筛选项变化的时候调用 */
+  menuOnChange?: (option: MenuItemOption) => void
 }
 
 const defaultProps = {
@@ -28,7 +27,7 @@ const generateUniqueId = () => {
 }
 
 const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
-  const { fixed, className, children, ...rest } = props
+  const { fixed, menuOnChange, className, children, ...rest } = props
   const menuRef = useRef()
   const [activatedList, setActivatedList] = useState<boolean[]>([])
   const [menuItemTitle, setMenuItemTitle] = useState<string[]>([])
@@ -75,7 +74,7 @@ const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
       >
         <View className='hui-filter-menu-item-text'>{getTitle()}</View>
         <View className='hui-filter-menu-item-icon'>
-          <HuiIcon name='010-choose' style={{ width: 14, height: 14 }} />
+          <HuiIcon name='010-choose' size={14} />
         </View>
       </View>
     }
@@ -91,6 +90,7 @@ const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
           menuRef,
           hideMenuItem,
           updateMenuItemTitle,
+          menuOnChange,
         },
       } as any)
     }

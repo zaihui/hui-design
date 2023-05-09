@@ -39,6 +39,9 @@ const MenuPage: React.FC = () => {
               </View>,
             }, {
               options,
+              onChange: item => {
+                console.log(item)
+              },
               value: options[0].value,
             }],
           }

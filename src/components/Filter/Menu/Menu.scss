@@ -58,7 +58,7 @@
       .hui-filter-menu-item-icon {
         transition: all .2s linear;
 
-        @nest &.active & {
+        &.active & {
           transform: rotate(180deg);
         }
       }
