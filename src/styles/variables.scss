@@ -249,6 +249,15 @@ $hui-filter-menu-item-content-max-height: px(410) !default;
 $hui-filter-menu-item-content-padding-y: px(12) !default;
 $hui-filter-menu-item-content-padding-x: px(24) !default;
 
+/** FiltersContent **/
+$filters-content-popup-top-content-max-height: px(410) !default;
+$filters-content-popup-default-padding: px(24) px(16) !default;
+$filters-content-popup-left-right-width: px(300) !default;
+$filters-content-button-container-height: px(64) !default;
+$filters-content-button-container-padding: px(10) px(16) !default;
+$filters-content-button-full-width: px(163) !default;
+$filters-content-button-side-width: px(126) !default;
+
 /** Steppers */
 $hui-steppers-step-desc-color:#999;
 $hui-steppers-step-active-color:#1569ee;
