@@ -59,6 +59,7 @@ export default {
     'pages/Title/Title',
     'pages/HighlightText/HighlightText',
     'pages/Card/Card',
+    'pages/Steppers/Steppers',
   ],
   window: {
     backgroundTextStyle: 'light',

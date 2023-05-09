@@ -1,0 +1,16 @@
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
+
+.page-steppers {
+  padding-bottom: 20px;
+
+  &-tip {
+    padding: 0 0 16px 16px;
+    margin-top: 10px;
+    color: $hui-color-grey-1;
+  }
+
+  &-button {
+    padding: 10px;
+  }
+}
