@@ -127,10 +127,8 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
   }
 
   const onOk = name => {
-    if (onConfirm) {
-      onConfirm(type === 'single' ? filters[name] : filters)
-      if (onClose) onClose()
-    }
+      onConfirm&&onConfirm(type === 'single' ? filters[name] : filters)
+      onClose()
   }
 
   const actionButtonProps: ActionFooterProps = {
