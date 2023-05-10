@@ -142,7 +142,6 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
   }
 
   return (
-    <>
       <HuiPopup
         visible={visible}
         position={position}
@@ -175,7 +174,6 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
         </View>
         {type === 'multiple' && <ActionFooter {...actionButtonProps} filters={filters} />}
       </HuiPopup>
-    </>
   )
 }
 
