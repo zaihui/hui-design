@@ -57,6 +57,8 @@ export type HIconType =
   | '183-formcirde'
   | '185-showcirde'
   | '186-tabcirde'
+  | 'h010-right'
+  | 'h011-downward'
   | 'h017-plus'
   | 'h188-workcirde'
   | 'h203-takingpicturesfill'

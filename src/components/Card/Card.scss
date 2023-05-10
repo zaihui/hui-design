@@ -37,7 +37,7 @@
           flex-shrink: 0;
           width: 70%;
           margin-right: 12px;
-          font-size: px(14);
+          font-size: $hui-font-body-m;
           font-weight: $hui-font-weight-medium;
           color: $hui-card-title-color;
         }
@@ -53,12 +53,20 @@
         margin-top: 4px;
       }
     }
+
+    &-right-top-aligned {
+      justify-content: flex-start;
+    }
   }
 
   &-body {
     margin-top: 12px;
-    font-size: px(12);
+    font-size: $hui-font-caption-m;
     color: $hui-card-body-color;
+  }
+
+  &-body-only-title {
+    margin-top: 8px;
   }
 
   &-footer {

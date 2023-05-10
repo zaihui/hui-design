@@ -56,7 +56,11 @@ const HuiCard: React.FC<HuiCardProps> = props => {
             {logo}
           </View>
         )}
-        <View className='hui-card-header-right'>
+        <View
+          className={cx('hui-card-header-right', {
+            'hui-card-header-right-top-aligned': logo && title && subtitle,
+          })}
+        >
           <View className='hui-card-header-right-top'>
             <View className='hui-card-title'>{title}</View>
             {assistTip && (
@@ -75,7 +79,13 @@ const HuiCard: React.FC<HuiCardProps> = props => {
         </View>
       </View>
       {!isHorizontal && content && (
-        <View className='hui-card-body'>{content}</View>
+        <View
+          className={cx('hui-card-body', {
+            'hui-card-body-only-title': title && !subtitle && !logo,
+          })}
+        >
+          {content}
+        </View>
       )}
       {actions && <View className='hui-card-footer'>{actions}</View>}
     </View>
