@@ -9,7 +9,7 @@ export interface ActionFooterProps {
   /** 清空筛选项文字 */
   clearText?: ReactNode
   /** 点击确定回调 */
-  onConfirm?: (e: ITouchEvent) => void
+  onConfirm?: (val: Record<string, any>) => void
   /** 点击重置回调 */
   onClear?: (e: ITouchEvent) => void
   /** 确认按钮的props */
@@ -18,39 +18,49 @@ export interface ActionFooterProps {
   clearButtonProps?: HuiButtonProps
   /** 点击confirm后隐藏菜单 */
   hideMenu: () => void
+  /** 筛选结果 */
+  filters?: Record<string, any>
 }
 
 const ActionFooter: FC<ActionFooterProps> = props => {
-  const { confirmButtonProps, clearButtonProps, confirmText, clearText } = props
+  const {
+    confirmButtonProps,
+    clearButtonProps,
+    confirmText,
+    clearText,
+    filters = {},
+  } = props
 
   const handleClear = (e: ITouchEvent) => {
     props.onClear && props.onClear(e)
   }
 
-  const handleOk = (e: ITouchEvent) => {
-    props.onConfirm && props.onConfirm(e)
+  const handleOk = () => {
+    props.onConfirm && props.onConfirm(filters)
     props.hideMenu()
   }
 
-  return <View className='hui-filter-action-footer'>
-  <HuiButton
-    className='hui-filter-action-footer-clear'
-    type='secondary'
-    radiusType='square'
-    onClick={handleClear}
-    {...clearButtonProps}
-  >
-    {clearText || '清空筛选项'}
-  </HuiButton>
-  <HuiButton
-    className='hui-filter-action-footer-confirm'
-    radiusType='square'
-    onClick={handleOk}
-    {...confirmButtonProps}
-  >
-    {confirmText || '筛选'}
-  </HuiButton>
-</View>
+  return (
+    <View className='hui-filter-action-footer'>
+      <HuiButton
+        className='hui-filter-action-footer-clear'
+        type='secondary'
+        radiusType='square'
+        onClick={handleClear}
+        {...clearButtonProps}
+      >
+        {clearText || '清空筛选项'}
+      </HuiButton>
+      <HuiButton
+        className='hui-filter-action-footer-confirm'
+        radiusType='square'
+        onClick={handleOk}
+        {...confirmButtonProps}
+      >
+        {confirmText || '筛选'}
+      </HuiButton>
+    </View>
+  )
 }
 
 export default ActionFooter

@@ -1,11 +1,15 @@
-import { action, observable } from 'mobx'
 
 class MultipleFilters {
-  @observable filters = {};
+  filters: Record<string, any>
 
-  @observable type = 'single';
+  type: string
 
-  @action.bound
+  constructor() {
+    this.filters = {}
+
+    this.type = 'single'
+  }
+
   updateFilters = (val: Record<string, any>): void => {
     this.filters = {
       ...this.filters,
@@ -13,7 +17,6 @@ class MultipleFilters {
     }
   };
 
-  @action.bound
   updateType = (type: string): void => {
     this.type = type
   };

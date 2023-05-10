@@ -5,6 +5,7 @@ import HuiButton from '@/components/Button'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 import HuiStepper from '@/components/Stepper'
+import HuiSwitch from '@/components/Switch'
 
 import './Filter.scss'
 
@@ -17,6 +18,7 @@ const MenuPage: React.FC = () => {
   const [valState, setValState] = useState({
     val1: 0,
   })
+  const [checked, setChecked] = useState<boolean>(false)
 
   const mockFiltersConfig = [
     {
@@ -24,18 +26,23 @@ const MenuPage: React.FC = () => {
       label: '步进器',
       name: 'stepper',
       value: valState.val1,
-      children: (
-        <HuiStepper
-          type='number'
-          value={valState.val1}
-          onChange={val => {
-            setValState({
-              ...valState,
-              val1: val,
-            })
-          }}
-        />
-      ),
+      children: <HuiStepper
+        type='number'
+        value={valState.val1}
+        onChange={val => {
+          setValState({
+            ...valState,
+            val1: val,
+          })
+        }}
+      />,
+    },
+    {
+      key: 'switch',
+      label: '开关',
+      name: 'switch',
+      value: checked,
+      children: <HuiSwitch checked={checked} onChange={e => setChecked(e)} />,
     },
   ]
 
@@ -57,6 +64,7 @@ const MenuPage: React.FC = () => {
             filtersContentConfig={{
               type: 'multiple',
               filterItems: mockFiltersConfig,
+              onConfirm: val => console.log('multiple val', val),
             }}
           />
         </GroupSection>
@@ -85,6 +93,7 @@ const MenuPage: React.FC = () => {
             }}
             filtersContentConfig={{
               filterItems: mockFiltersConfig,
+              onConfirm: val => console.log('single val', val),
             }}
           />
         </GroupSection>
@@ -111,10 +120,6 @@ const MenuPage: React.FC = () => {
                 },
               ],
             }}
-            filtersContentConfig={{
-              position: 'top',
-              filterItems: mockFiltersConfig,
-            }}
           />
         </GroupSection>
         <GroupSection title='左侧内容区自定义 + fixed'>
@@ -124,7 +129,7 @@ const MenuPage: React.FC = () => {
               position: 'top',
               filterItems: mockFiltersConfig,
             }}
-          >search</HuiFilter>
+          >search </HuiFilter>
         </GroupSection>
       </View>
       <View style={{ height: 3000 }}></View>

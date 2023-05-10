@@ -1,4 +1,10 @@
-import React, { CSSProperties, ReactNode, useMemo, useRef, useState } from 'react'
+import React, {
+  CSSProperties,
+  ReactNode,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import { View } from '@tarojs/components'
 import { usePageScroll } from '@tarojs/taro'
 import cx from 'classnames'
@@ -22,7 +28,7 @@ export interface HuiFilterProps {
   /** 滚动时是否固定在顶部 */
   fixed?: boolean
   menuConfig?: MenuConfig
-  filtersContentConfig: Omit<FiltersContentProps, 'visible'>
+  filtersContentConfig?: Omit<FiltersContentProps, 'visible'>
 }
 
 const defaultProps = {
@@ -37,7 +43,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
     className,
     menuConfig,
     children,
-    filtersContentConfig,
+    filtersContentConfig = {} as any,
     fixed = false,
     ...rest
   } = { ...defaultProps, ...props }
@@ -48,8 +54,8 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
   const filterRef = useRef()
   const menuRef = useRef<any>()
 
-  const contextValue = useMemo(() => (
-    {
+  const contextValue = useMemo(
+    () => ({
       activated,
       isFixed,
       scrollTop,
@@ -58,8 +64,9 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
         menuRef.current && menuRef.current.hide()
       },
       setActivated,
-    }
-  ), [isFixed, scrollTop, menuRef, activated, setActivated])
+    }),
+    [isFixed, scrollTop, menuRef, activated, setActivated],
+  )
 
   const info = useBoundingClientRect(filterRef)
 
@@ -81,15 +88,18 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
     }
   }, [menuConfig])
 
-  const filterProps = useMemo(() => ({
-    ...(filtersContentConfig || {}),
-    parent: {
-      filterRef,
-      isFixed: fixed,
-    },
-    visible,
-    onClose: () => setVisible(false),
-  }), [filtersContentConfig, fixed, visible])
+  const filterProps = useMemo(
+    () => ({
+      ...(filtersContentConfig || {}),
+      parent: {
+        filterRef,
+        isFixed: fixed,
+      },
+      visible,
+      onClose: () => setVisible(false),
+    }),
+    [filtersContentConfig, fixed, visible],
+  )
 
   const handleFilter = () => {
     contextValue.hideMenu()
@@ -97,10 +107,21 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
   }
 
   return (
-    <View {...rest} ref={filterRef} className={cx('hui-filter', className, generateUniqueId(), { fixed: isFixed, activated })}>
+    <View
+      {...rest}
+      ref={filterRef}
+      className={cx('hui-filter', className, generateUniqueId(), {
+        fixed: isFixed,
+        activated,
+      })}
+    >
       <FilterContext.Provider value={contextValue}>
         {isMenu ? (
-          <Menu {...menuProps} className='hui-filter-left-content' ref={menuRef}>
+          <Menu
+            {...menuProps}
+            className='hui-filter-left-content'
+            ref={menuRef}
+          >
             {menuItems?.map((item, index) => (
               <Menu.Item {...item} key={index} />
             ))}
@@ -108,17 +129,19 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
         ) : (
           <View className='hui-filter-left-content custom'>{children}</View>
         )}
-        {
-          filtersContentConfig && <View className='hui-filter-right-content'>
-            <View className='hui-filter-right-content-icon' onClick={handleFilter}>
+        {filtersContentConfig && (
+          <View className='hui-filter-right-content'>
+            <View
+              className='hui-filter-right-content-icon'
+              onClick={handleFilter}
+            >
               <HuiIcon name='h011-downward' size={14} />
               <View>筛选</View>
             </View>
             <FiltersContent {...filterProps} />
           </View>
-        }
-      </FilterContext.Provider >
-
+        )}
+      </FilterContext.Provider>
     </View>
   )
 }

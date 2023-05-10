@@ -1,5 +1,3 @@
-import Taro from '@tarojs/taro'
-import { observer } from 'mobx-react'
 import { View, Text } from '@tarojs/components'
 import React, { useEffect, useState, useMemo, useContext } from 'react'
 import cx from 'classnames'
@@ -7,12 +5,15 @@ import HuiPopup, { HuiPopupProps } from '../../Popup'
 import { useBoundingClientRect } from '../../../utils/hooks'
 import HuiIcon from '../../Icon'
 import filterStore from './store'
+
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
 import './FiltersContent.scss'
 import FilterContext from '../context'
 
-export interface FiltersContentProps extends HuiPopupProps, Omit<ActionFooterProps, 'hideMenu'> {
+export interface FiltersContentProps
+  extends HuiPopupProps,
+    Omit<ActionFooterProps, 'hideMenu'> {
   /** 筛选内容 */
   contentClassName?: string
   contentStyle?: React.CSSProperties
@@ -52,7 +53,8 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     parent,
     ...rest
   } = props as any
-  const { filters, updateFilters } = filterStore
+  const { filters } = filterStore
+
   const context = useContext(FilterContext)
 
   const info = useBoundingClientRect(parent.filterRef)
@@ -73,21 +75,17 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     )
 
     useEffect(() => {
-      if (!visible) return
       if (React.isValidElement(copyChildren)) {
         if (copyChildren.props.onChange) {
-          updateFilters && updateFilters({ [name]: value })
-
-          Taro.nextTick(() => {
-            if (
-              type === 'single'
+          if (
+            type === 'single'
               && filters[name] !== null
               && filters[name] !== undefined
-              && value !== filters[name]
-            ) {
-              onOk(name)
-            }
-          })
+              && filters[name] !== value
+          ) {
+            onOk({ [name]: value })
+          }
+          filterStore.updateFilters({ [name]: value })
         }
       }
     }, [value, visible])
@@ -126,9 +124,11 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     )
   }
 
-  const onOk = name => {
-      onConfirm&&onConfirm(type === 'single' ? filters[name] : filters)
-      onClose()
+  const onOk = singleFilter => {
+    if (onConfirm) {
+      onConfirm(type === 'single' ? singleFilter : filters)
+      if (onClose) onClose()
+    }
   }
 
   const actionButtonProps: ActionFooterProps = {
@@ -173,10 +173,10 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
               </FilterItem>
             ))}
         </View>
-        {type === 'multiple' && <ActionFooter {...actionButtonProps} /> }
+        {type === 'multiple' && <ActionFooter {...actionButtonProps} filters={filters} />}
       </HuiPopup>
     </>
   )
 }
 
-export default observer(FiltersContent)
+export default FiltersContent
