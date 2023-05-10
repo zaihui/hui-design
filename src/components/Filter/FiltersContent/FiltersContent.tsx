@@ -4,7 +4,6 @@ import cx from 'classnames'
 import HuiPopup, { HuiPopupProps } from '../../Popup'
 import { useBoundingClientRect } from '../../../utils/hooks'
 import HuiIcon from '../../Icon'
-import filterStore from './store'
 
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
@@ -117,7 +116,6 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
         maskStyle={positionStyle}
         onClose={() => {
           if (onClose) {
-            filterStore.updateFilters({})
             onClose()
           }
         }}
