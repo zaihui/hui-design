@@ -1,12 +1,14 @@
 @import "../../styles/variables";
 
 .hui-filter {
-  // TODO 待处理
   position: relative;
-  // z-index: $hui-z-index-m;
   display: flex;
   align-items: center;
   background-color: $hui-filter-bg-color;
+
+  &.activated {
+    z-index: $hui-z-index-m;
+  }
 
   &.fixed {
     position: fixed;

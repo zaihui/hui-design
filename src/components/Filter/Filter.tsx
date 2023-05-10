@@ -23,7 +23,6 @@ export interface HuiFilterProps {
   fixed?: boolean
   menuConfig?: MenuConfig
   filtersContentConfig: Omit<FiltersContentProps, 'visible'>
-
 }
 
 const defaultProps = {
@@ -45,19 +44,22 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
   const [isFixed, setIsFixed] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
   const [visible, setVisible] = useState<boolean>(false)
+  const [activated, setActivated] = useState(false)
   const filterRef = useRef()
   const menuRef = useRef<any>()
 
   const contextValue = useMemo(() => (
     {
+      activated,
       isFixed,
       scrollTop,
       hideFilter: () => setVisible(false),
       hideMenu: () => {
         menuRef.current && menuRef.current.hide()
       },
+      setActivated,
     }
-  ), [isFixed, scrollTop, menuRef])
+  ), [isFixed, scrollTop, menuRef, activated, setActivated])
 
   const info = useBoundingClientRect(filterRef)
 
@@ -95,7 +97,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
   }
 
   return (
-    <View {...rest} ref={filterRef} className={cx('hui-filter', className, generateUniqueId(), { fixed: isFixed })}>
+    <View {...rest} ref={filterRef} className={cx('hui-filter', className, generateUniqueId(), { fixed: isFixed, activated })}>
       <FilterContext.Provider value={contextValue}>
         {isMenu ? (
           <Menu {...menuProps} className='hui-filter-left-content' ref={menuRef}>

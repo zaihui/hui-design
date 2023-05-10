@@ -1,4 +1,4 @@
-import React, { CSSProperties, ReactNode, useState, useRef, useImperativeHandle, forwardRef, useContext } from 'react'
+import React, { CSSProperties, ReactNode, useState, useRef, useImperativeHandle, forwardRef, useContext, useEffect } from 'react'
 import { View } from '@tarojs/components'
 import cx from 'classnames'
 import MenuItem, { MenuItemOption } from '../MenuItem/MenuItem'
@@ -31,6 +31,11 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
   const [menuItemTitle, setMenuItemTitle] = useState<string[]>([])
 
   const context = useContext(FilterContext)
+
+  useEffect(() => {
+    const flag = activatedList.filter(Boolean).length > 0
+    context.setActivated(flag)
+  }, [activatedList, context])
 
   const toggleMenuItem = (index: number) => {
     const temp = [...activatedList]
