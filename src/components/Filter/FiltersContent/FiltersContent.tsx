@@ -1,5 +1,5 @@
 import { View, Text } from '@tarojs/components'
-import React, { useEffect, useState, useMemo, useContext } from 'react'
+import React, { useState, useMemo, useContext } from 'react'
 import cx from 'classnames'
 import HuiPopup, { HuiPopupProps } from '../../Popup'
 import { useBoundingClientRect } from '../../../utils/hooks'
@@ -31,8 +31,6 @@ export interface FiltersContentProps
 export interface FilterItemProps {
   label: string
   name: string
-  /** 筛选项的值 */
-  value?: any
   children?: React.ReactNode
 }
 
@@ -44,16 +42,13 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     contentStyle,
     position = 'right',
     popupContentClassName,
-    type = 'single',
     filterVisible = true,
     filterItems = [{ label: '', name: '', value: '', children: '' }],
-    onConfirm,
     onClose,
     visible,
     parent,
     ...rest
   } = props as any
-  const { filters } = filterStore
 
   const context = useContext(FilterContext)
 
@@ -69,30 +64,9 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
   }, [info, position, context.isFixed, context.scrollTop])
 
   const FilterItem: React.FC<FilterItemProps> = itemProps => {
-    const { label = '筛选条件名称', name = '', value, children } = itemProps
+    const { label = '筛选条件名称', children } = itemProps
     const [childrenVisible, setChildrenVisible] = useState<boolean>(
       filterVisible || false,
-    )
-
-    useEffect(() => {
-      if (React.isValidElement(copyChildren)) {
-        if (copyChildren.props.onChange) {
-          if (
-            type === 'single'
-              && filters[name] !== null
-              && filters[name] !== undefined
-              && filters[name] !== value
-          ) {
-            onOk({ [name]: value })
-          }
-          filterStore.updateFilters({ [name]: value })
-        }
-      }
-    }, [value, visible])
-
-    const copyChildren = useMemo(
-      () => children && React.cloneElement(children as any),
-      [children],
     )
 
     return (
@@ -118,17 +92,10 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
             [`${prefix}-item-content-active`]: childrenVisible,
           })}
         >
-          {copyChildren}
+          {children}
         </View>
       </View>
     )
-  }
-
-  const onOk = singleFilter => {
-    if (onConfirm) {
-      onConfirm(type === 'single' ? singleFilter : filters)
-      if (onClose) onClose()
-    }
   }
 
   const actionButtonProps: ActionFooterProps = {
@@ -166,13 +133,12 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
                 key={index}
                 label={item.label}
                 name={item.name}
-                value={item.value}
               >
                 {item.children}
               </FilterItem>
             ))}
         </View>
-        {type === 'multiple' && <ActionFooter {...actionButtonProps} filters={filters} />}
+         <ActionFooter {...actionButtonProps} />
       </HuiPopup>
   )
 }

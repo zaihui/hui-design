@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { View } from '@tarojs/components'
 import HuiFilter from '@/components/Filter'
 import HuiButton from '@/components/Button'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
-import HuiStepper from '@/components/Stepper'
 import HuiSwitch from '@/components/Switch'
+import HuiStepper from '@/components/Stepper'
 
 import './Filter.scss'
 
@@ -20,12 +20,11 @@ const MenuPage: React.FC = () => {
   })
   const [checked, setChecked] = useState<boolean>(false)
 
-  const mockFiltersConfig = [
+  const mockFiltersConfig = useMemo(() => [
     {
       key: 'stepper',
       label: '步进器',
       name: 'stepper',
-      value: valState.val1,
       children: <HuiStepper
         type='number'
         value={valState.val1}
@@ -41,10 +40,9 @@ const MenuPage: React.FC = () => {
       key: 'switch',
       label: '开关',
       name: 'switch',
-      value: checked,
-      children: <HuiSwitch checked={checked} onChange={e => setChecked(e)} />,
+      children: <HuiSwitch checked={checked} onChange={e => { setChecked(e) }} />,
     },
-  ]
+  ], [checked, valState])
 
   return (
     <View className='filter-page'>
@@ -126,10 +124,10 @@ const MenuPage: React.FC = () => {
           <HuiFilter
             fixed
             filtersContentConfig={{
-              position: 'top',
+              position: 'right',
               filterItems: mockFiltersConfig,
             }}
-          >search </HuiFilter>
+          >search</HuiFilter>
         </GroupSection>
       </View>
       <View style={{ height: 3000 }}></View>

@@ -18,8 +18,6 @@ export interface ActionFooterProps {
   clearButtonProps?: HuiButtonProps
   /** 点击confirm后隐藏菜单 */
   hideMenu: () => void
-  /** 筛选结果 */
-  filters?: Record<string, any>
 }
 
 const ActionFooter: FC<ActionFooterProps> = props => {
@@ -28,15 +26,14 @@ const ActionFooter: FC<ActionFooterProps> = props => {
     clearButtonProps,
     confirmText,
     clearText,
-    filters = {},
   } = props
 
   const handleClear = (e: ITouchEvent) => {
     props.onClear && props.onClear(e)
   }
 
-  const handleOk = () => {
-    props.onConfirm && props.onConfirm(filters)
+  const handleOk = (e: ITouchEvent) => {
+    props.onConfirm && props.onConfirm(e)
     props.hideMenu()
   }
 
