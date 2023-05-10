@@ -12,8 +12,8 @@ const detail = (
   <View className='detail'>
     详情
     <HuiIcon
-      name='012-right'
-      size={10}
+      name='h010-right'
+      size={12}
       style={{ marginLeft: pxTransform(2) }}
     />
   </View>
