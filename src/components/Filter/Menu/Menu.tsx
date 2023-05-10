@@ -1,18 +1,22 @@
-import React, { CSSProperties, ReactNode, useState, useRef } from 'react'
+import React, { CSSProperties, ReactNode, useState, useRef, useImperativeHandle, forwardRef, useContext } from 'react'
 import { View } from '@tarojs/components'
 import cx from 'classnames'
 import MenuItem, { MenuItemOption } from '../MenuItem/MenuItem'
 import HuiIcon from '../../Icon'
+import { generateUniqueId } from '../utils'
+import FilterContext from '../context'
 import './Menu.scss'
 
 export interface MenuProps {
   className?: string
   style?: CSSProperties
   children?: ReactNode
-  /** 滚动时是否固定在顶部 */
-  fixed?: boolean
   /** 透传到menu组件 当筛选项变化的时候调用 */
   menuOnChange?: (option: MenuItemOption) => void
+}
+
+export interface MenuRef {
+  hide: () => void
 }
 
 const defaultProps = {
@@ -20,17 +24,13 @@ const defaultProps = {
   style: {},
 }
 
-const generateUniqueId = () => {
-  const timestamp = new Date().getTime().toString(36)
-  const randomString = Math.random().toString(36).substr(2, 5)
-  return `${timestamp}-${randomString}`
-}
-
-const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
-  const { fixed, menuOnChange, className, children, ...rest } = props
+const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
+  const { menuOnChange, className, children, ...rest } = props
   const menuRef = useRef()
   const [activatedList, setActivatedList] = useState<boolean[]>([])
   const [menuItemTitle, setMenuItemTitle] = useState<string[]>([])
+
+  const context = useContext(FilterContext)
 
   const toggleMenuItem = (index: number) => {
     const temp = [...activatedList]
@@ -39,6 +39,7 @@ const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
       temp[i] = i === index ? temp[i] : false
     }
     setActivatedList(temp)
+    context?.hideFilter()
   }
 
   const hideMenuItem = (index: number) => {
@@ -46,6 +47,12 @@ const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
     temp[index] = false
     setActivatedList(temp)
   }
+
+  useImperativeHandle(ref, () => ({
+    hide: () => {
+      setActivatedList([])
+    },
+  }))
 
   const updateMenuItemTitle = (index: number, text: string) => {
     const temp = [...menuItemTitle]
@@ -74,7 +81,7 @@ const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
       >
         <View className='hui-filter-menu-item-text'>{getTitle()}</View>
         <View className='hui-filter-menu-item-icon'>
-          <HuiIcon name='010-choose' size={14} />
+          <HuiIcon name='h011-downward' size={14} />
         </View>
       </View>
     }
@@ -98,21 +105,25 @@ const Menu: React.FC<MenuProps> & { Item: typeof MenuItem } = props => {
   })
 
   return <View {...rest}
-    className={cx('hui-filter-menu', className, generateUniqueId(), { fixed })}
+    className={cx('hui-filter-menu', className, generateUniqueId())}
     ref={menuRef}
   >
-    <View className={cx('hui-filter-menu-bar', {
-      active: activatedList.includes(true),
-    })}
-    >
+    <View className='hui-filter-menu-bar'>
       {renderMenuTitle()}
     </View>
     {renderMenuItem()}
   </View>
+})
+
+InternalMenu.defaultProps = defaultProps
+
+type CompoundedComponent = React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<MenuRef>>
+  & {
+  Item: typeof MenuItem
 }
 
-Menu.defaultProps = defaultProps
-Menu.displayName = 'Menu'
+const Menu = InternalMenu as CompoundedComponent
+
 Menu.Item = MenuItem
 
 export default Menu

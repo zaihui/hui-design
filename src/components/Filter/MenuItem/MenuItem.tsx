@@ -1,11 +1,11 @@
-import React, { CSSProperties, ReactNode, useImperativeHandle, useMemo } from 'react'
+import React, { CSSProperties, ReactNode, useContext, useImperativeHandle, useMemo } from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
 import { ITouchEvent } from '@tarojs/components/types/common'
 import { useBoundingClientRect } from '../../../utils/hooks'
 import HuiButton, { HuiButtonProps } from '../../Button'
-
-import Mask from '../../Mask'
+import Popup from '../../Popup'
+import FilterContext from '../context'
 import './MenuItem.scss'
 
 export interface MenuItemOption {
@@ -14,33 +14,33 @@ export interface MenuItemOption {
 }
 
 export interface MenuItemProps {
-  // 菜单标题
+  /** 菜单标题 */
   title?: string
-  // 下拉列表选项
+  /** 下拉列表选项 */
   options?: MenuItemOption[]
-  // 一行展示多少列
+  /** 一行展示多少列 */
   columns?: number
-  // 选中的值
+  /** 选中的值 */
   value?: string | number
-  // option改变的回调
+  /** option改变的回调 */
   onChange?: (option: MenuItemOption) => void
-  // 下拉框底部筛选
+  /** 下拉框底部筛选 */
   footer?: boolean
-  // 确认按钮文字
+  /** 确认按钮文字 */
   okText?: ReactNode
-  // 清空筛选项文字
+  /** 清空筛选项文字 */
   clearText?: ReactNode
   /** 点击确定回调 */
   onOk?: (e: ITouchEvent) => void
   /** 点击重置回调 */
   onClear?: (e: ITouchEvent) => void
-  // 确认按钮的props
+  /** 确认按钮的props */
   okButtonProps?: HuiButtonProps
-  // 清空筛选项按钮的props
+  /** 清空筛选项按钮的props */
   clearButtonProps?: HuiButtonProps
   className?: string
   style?: CSSProperties
-  children?: ReactNode | ((props: {hideMenu: () => void}) => ReactNode)
+  children?: ReactNode | ((props: { hideMenu: () => void }) => ReactNode)
 }
 
 const defaultProps = {
@@ -63,26 +63,23 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     okText,
     clearText,
   } = props as any
+  const context = useContext(FilterContext)
 
   const info = useBoundingClientRect(parent.menuRef)
   const position = useMemo(() => {
     if (info) {
+      const top = context.isFixed ? 0 : info.top - context.scrollTop
       return {
-        top: info.top + info.height,
+        top: info.height + top,
       }
     }
     return {}
-  }, [info])
+  }, [context.isFixed, context.scrollTop, info])
 
   useImperativeHandle(
     ref,
     () => ({ hideMenu }),
   )
-
-  const getDisplay = () => {
-    if (parent.show) return {}
-    return { display: 'none' }
-  }
 
   const hideMenu = () => {
     parent.hideMenuItem(parent.index)
@@ -130,31 +127,53 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
 
   const handleOk = (e: ITouchEvent) => {
     props.onOk && props.onOk(e)
+    hideMenu()
   }
 
   return (
     <>
-      <Mask visible={parent.show} onClose={hideMenu} style={position} />
-      <View className={cx('hui-filter-menu-item-wrap', className)} style={{
-        ...style,
-        ...getDisplay(),
-      }}
+      <Popup visible={parent.show}
+        position='top'
+        maskStyle={position}
+        contentStyle={position}
+        onClose={hideMenu}
       >
-        <View className={cx('hui-filter-menu-item-content', {
-          // options 的时候默认加了padding
-          'is-options': options,
-        })}
+        <View className={cx('hui-filter-menu-item-wrap', className)} style={{
+          ...style,
+        }}
         >
-          {!options ? renderChildren() : renderOptions()}
+          <View className={cx('hui-filter-menu-item-content', {
+            // options 的时候默认加了padding
+            'is-options': options,
+          })}
+          >
+            {!options ? renderChildren() : renderOptions()}
+          </View>
+          {
+            footer && <View className='hui-filter-menu-item-footer'>
+              <HuiButton
+                className='filters-button'
+                type='secondary'
+                radiusType='square'
+                color='#111111'
+                style={{ width: '100%', borderColor: '#DDDDDD' }}
+                onClick={handleClear}
+              >
+                {clearText || '清空筛选项'}
+              </HuiButton>
+              <HuiButton
+                className='filters-button'
+                radiusType='square'
+                color='#1569EE'
+                style={{ width: '100%' }}
+                onClick={handleOk}
+              >
+                {okText || '筛选'}
+              </HuiButton>
+            </View>
+          }
         </View>
-        {
-          footer && <View className='hui-filter-menu-item-footer'>
-          {/* TODO */}
-          <HuiButton radiusType='square' style={{ width: '100%' }} onClick={handleClear}>{clearText || '清空筛选项'}</HuiButton>
-          <HuiButton radiusType='square' style={{ width: '100%' }} onClick={handleOk}>{okText || '筛选'}</HuiButton>
-        </View>
-        }
-      </View>
+      </Popup>
     </>
   )
 })

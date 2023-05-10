@@ -3,12 +3,6 @@
 .hui-filter-menu {
   position: relative;
 
-  &.fixed {
-    position: fixed;
-    top: $hui-menu-scroll-fixed-top;
-    z-index: $hui-menu-scroll-fixed-z-index;
-  }
-
   .hui-filter-menu-bar {
     position: relative;
     display: flex;
@@ -18,10 +12,6 @@
     overflow-x: auto;
     background-color: $hui-filter-menu-bg-color;
     gap: 16px;
-
-    &.active {
-      z-index: $hui-z-index-m;
-    }
 
     .hui-filter-menu-item {
       box-sizing: border-box;
@@ -34,8 +24,16 @@
       min-width: calc(100% / 3 - 16px);
       color: $hui-filter-menu-text-color;
 
+      .hui-filter-menu-item-icon {
+        transition: all .2s linear;
+      }
+
       &.active {
         color: $hui-filter-menu-active-text-color;
+
+        .hui-filter-menu-item-icon {
+          transform: rotate(180deg);
+        }
       }
 
       &:only-child {
@@ -53,14 +51,6 @@
         font-weight: $hui-font-weight-regular;
 
         @include no-wrap();
-      }
-
-      .hui-filter-menu-item-icon {
-        transition: all .2s linear;
-
-        &.active & {
-          transform: rotate(180deg);
-        }
       }
     }
   }

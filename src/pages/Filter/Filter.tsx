@@ -66,6 +66,7 @@ const MenuPage: React.FC = () => {
               menuItems: [
                 {
                   title: '自定义title',
+                  footer: true,
                   children: ({ hideMenu }) => (
                     <View>
                       <HuiButton onClick={() => hideMenu()}>ok</HuiButton>
@@ -86,7 +87,46 @@ const MenuPage: React.FC = () => {
             }}
           />
         </GroupSection>
+        <GroupSection title='下拉框自定义1'>
+          <HuiFilter
+            menuConfig={{
+              className: 'hui-menu-xxx',
+              menuItems: [
+                {
+                  title: '自定义title',
+                  footer: true,
+                  children: ({ hideMenu }) => (
+                    <View>
+                      <HuiButton onClick={() => hideMenu()}>ok</HuiButton>
+                    </View>
+                  ),
+                },
+                {
+                  options,
+                  onChange: item => {
+                    console.log(item)
+                  },
+                  value: options[0].value,
+                },
+              ],
+            }}
+            filtersContentConfig={{
+              position: 'top',
+              filterItems: mockFiltersConfig,
+            }}
+          />
+        </GroupSection>
+        <GroupSection title='左侧内容区自定义 + fixed'>
+          <HuiFilter
+            fixed
+            filtersContentConfig={{
+              position: 'top',
+              filterItems: mockFiltersConfig,
+            }}
+          >search</HuiFilter>
+        </GroupSection>
       </View>
+      <View style={{ height: 3000 }}></View>
     </View>
   )
 }

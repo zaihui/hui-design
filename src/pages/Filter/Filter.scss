@@ -2,7 +2,9 @@
 
 .filter-page {
   > .content {
-    @include content-padding;
+    .title {
+      padding: 10px 20px;
+    }
 
     .row {
       &:not(:last-child) {

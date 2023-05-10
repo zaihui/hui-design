@@ -1,0 +1,39 @@
+@import "../../styles/variables";
+
+.hui-filter {
+  // TODO 待处理
+  position: relative;
+  // z-index: $hui-z-index-m;
+  display: flex;
+  align-items: center;
+  background-color: $hui-filter-bg-color;
+
+  &.fixed {
+    position: fixed;
+    top: $hui-menu-scroll-fixed-top;
+    z-index: $hui-menu-scroll-fixed-z-index;
+    width: 100%;
+  }
+
+  .hui-filter-left-content {
+    flex: 1;
+
+    &.custom {
+      padding: 8px 0 8px 16px;
+    }
+  }
+
+  .hui-filter-right-content {
+    flex: 0 0 75px;
+    padding: $hui-filter-menu-bar-padding-y $hui-filter-menu-bar-padding-x;
+
+    &-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: $hui-filter-menu-text-font-size;
+      color: $hui-color-grey-2;
+      gap: 2px;
+    }
+  }
+}

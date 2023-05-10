@@ -19,6 +19,8 @@ export interface HuiPopupProps extends ViewProps {
   /** 是否点击遮罩层时触发onClose回调，默认开启 */
   maskClosable?: boolean
   style?: React.CSSProperties
+  maskStyle?: React.CSSProperties
+  contentStyle?: React.CSSProperties
   /** 关闭回调 */
   onClose?: () => void
 }
@@ -30,6 +32,8 @@ const Popup: React.FC<HuiPopupProps> = props => {
     contentClassName = '',
     className = '',
     style,
+    maskStyle,
+    contentStyle,
     visible,
     position = 'center',
     maskClosable = true,
@@ -57,9 +61,10 @@ const Popup: React.FC<HuiPopupProps> = props => {
         { 'no-animation': position === 'center' },
       )}
     >
-      <View className='popup-mask' onTouchMove={handleTouchMove} onClick={handleClose} />
+      <View className='popup-mask' style={maskStyle} onTouchMove={handleTouchMove} onClick={handleClose} />
       <View
         className={`popup-content ${position} ${contentClassName}`}
+        style={contentStyle}
         onTouchMove={handleTouchMove}
         {...rest}
       >

@@ -1,14 +1,16 @@
 import Taro from '@tarojs/taro'
 import { observer } from 'mobx-react'
 import { View, Text } from '@tarojs/components'
-import React, { useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState, useMemo, useContext } from 'react'
 import cx from 'classnames'
 import HuiPopup, { HuiPopupProps } from '../../Popup'
+import { useBoundingClientRect } from '../../../utils/hooks'
 import HuiButton from '../../Button'
 import HuiIcon from '../../Icon'
 import filterStore from './store'
 
 import './FiltersContent.scss'
+import FilterContext from '../context'
 
 export interface FiltersContentProps extends HuiPopupProps {
   /** 筛选内容 */
@@ -50,9 +52,22 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     onConfirm,
     onClose,
     visible,
+    parent,
     ...rest
-  } = props
+  } = props as any
   const { filters, updateFilters } = filterStore
+  const context = useContext(FilterContext)
+
+  const info = useBoundingClientRect(parent.filterRef)
+  const positionStyle = useMemo(() => {
+    if (info && position === 'top') {
+      const top = context.isFixed ? 0 : info.top - context.scrollTop
+      return {
+        top: info.height + top,
+      }
+    }
+    return {}
+  }, [info, position, context.isFixed, context.scrollTop])
 
   const FilterItem: React.FC<FilterItemProps> = itemProps => {
     const { label = '筛选条件名称', name = '', value, children } = itemProps
@@ -152,11 +167,13 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
   )
 
   return (
-    <View>
+    <>
       <HuiPopup
         visible={visible}
         position={position}
         contentClassName={`fitlers-default-popup-content ${popupContentClassName}`}
+        contentStyle={positionStyle}
+        maskStyle={positionStyle}
         onClose={() => {
           if (onClose) {
             filterStore.updateFilters({})
@@ -170,8 +187,9 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
           style={contentStyle}
         >
           {filterItems.length
-            && filterItems.map(item => (
+            && filterItems.map((item, index) => (
               <FilterItem
+                key={index}
                 label={item.label}
                 name={item.name}
                 value={item.value}
@@ -182,7 +200,7 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
         </View>
         {type === 'multiple' && ActionFooter}
       </HuiPopup>
-    </View>
+    </>
   )
 }
 
