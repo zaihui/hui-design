@@ -1,19 +1,18 @@
 import React, { CSSProperties, ReactNode, useContext, useImperativeHandle, useMemo } from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
-import { ITouchEvent } from '@tarojs/components/types/common'
 import { useBoundingClientRect } from '../../../utils/hooks'
-import HuiButton, { HuiButtonProps } from '../../Button'
 import Popup from '../../Popup'
 import FilterContext from '../context'
 import './MenuItem.scss'
+import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
 export interface MenuItemOption {
   value: string | number
   text: string
 }
 
-export interface MenuItemProps {
+export interface MenuItemProps extends Omit<ActionFooterProps, 'hideMenu'> {
   /** 菜单标题 */
   title?: string
   /** 下拉列表选项 */
@@ -26,18 +25,6 @@ export interface MenuItemProps {
   onChange?: (option: MenuItemOption) => void
   /** 下拉框底部筛选 */
   footer?: boolean
-  /** 确认按钮文字 */
-  okText?: ReactNode
-  /** 清空筛选项文字 */
-  clearText?: ReactNode
-  /** 点击确定回调 */
-  onOk?: (e: ITouchEvent) => void
-  /** 点击重置回调 */
-  onClear?: (e: ITouchEvent) => void
-  /** 确认按钮的props */
-  okButtonProps?: HuiButtonProps
-  /** 清空筛选项按钮的props */
-  clearButtonProps?: HuiButtonProps
   className?: string
   style?: CSSProperties
   children?: ReactNode | ((props: { hideMenu: () => void }) => ReactNode)
@@ -60,8 +47,6 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     parent,
     children,
     footer,
-    okText,
-    clearText,
   } = props as any
   const context = useContext(FilterContext)
 
@@ -121,13 +106,14 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     return children
   }
 
-  const handleClear = (e: ITouchEvent) => {
-    props.onClear && props.onClear(e)
-  }
-
-  const handleOk = (e: ITouchEvent) => {
-    props.onOk && props.onOk(e)
-    hideMenu()
+  const actionFooterProps: ActionFooterProps = {
+    confirmButtonProps: props.confirmButtonProps,
+    clearButtonProps: props.clearButtonProps,
+    confirmText: props.confirmText,
+    clearText: props.clearText,
+    onConfirm: props.onConfirm,
+    onClear: props.onClear,
+    hideMenu,
   }
 
   return (
@@ -150,27 +136,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
             {!options ? renderChildren() : renderOptions()}
           </View>
           {
-            footer && <View className='hui-filter-menu-item-footer'>
-              <HuiButton
-                className='filters-button'
-                type='secondary'
-                radiusType='square'
-                color='#111111'
-                style={{ width: '100%', borderColor: '#DDDDDD' }}
-                onClick={handleClear}
-              >
-                {clearText || '清空筛选项'}
-              </HuiButton>
-              <HuiButton
-                className='filters-button'
-                radiusType='square'
-                color='#1569EE'
-                style={{ width: '100%' }}
-                onClick={handleOk}
-              >
-                {okText || '筛选'}
-              </HuiButton>
-            </View>
+            footer && <ActionFooter {...actionFooterProps} />
           }
         </View>
       </Popup>

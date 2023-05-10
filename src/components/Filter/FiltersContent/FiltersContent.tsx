@@ -5,14 +5,14 @@ import React, { useEffect, useState, useMemo, useContext } from 'react'
 import cx from 'classnames'
 import HuiPopup, { HuiPopupProps } from '../../Popup'
 import { useBoundingClientRect } from '../../../utils/hooks'
-import HuiButton from '../../Button'
 import HuiIcon from '../../Icon'
 import filterStore from './store'
+import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
 import './FiltersContent.scss'
 import FilterContext from '../context'
 
-export interface FiltersContentProps extends HuiPopupProps {
+export interface FiltersContentProps extends HuiPopupProps, Omit<ActionFooterProps, 'hideMenu'> {
   /** 筛选内容 */
   contentClassName?: string
   contentStyle?: React.CSSProperties
@@ -23,8 +23,6 @@ export interface FiltersContentProps extends HuiPopupProps {
   filterVisible?: boolean
   filterItems: FilterItemProps[]
   onChange?: (val?: any) => void
-  /** 筛选 */
-  onConfirm?: (val?: any) => void
   /** 点击遮罩层和筛选必用 */
   onClose?: () => void
 }
@@ -34,7 +32,6 @@ export interface FilterItemProps {
   name: string
   /** 筛选项的值 */
   value?: any
-  onConfirm?: () => void
   children?: React.ReactNode
 }
 
@@ -45,7 +42,7 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     contentClassName = '',
     contentStyle,
     position = 'right',
-    popupContentClassName = 'fitlers-default-popup-content',
+    popupContentClassName,
     type = 'single',
     filterVisible = true,
     filterItems = [{ label: '', name: '', value: '', children: '' }],
@@ -136,42 +133,22 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     }
   }
 
-  const ActionFooter = useMemo(
-    () => (
-      <View className={`action-container ${position}`}>
-        <HuiButton
-          className='filters-button'
-          type='secondary'
-          radiusType='square'
-          color='#111111'
-          style={{
-            borderColor: '#DDDDDD',
-          }}
-          onClick={() => {
-            filterStore.updateFilters({})
-          }}
-        >
-          清空筛选项
-        </HuiButton>
-        <HuiButton
-          radiusType='square'
-          color='#1569EE'
-          className='filters-button'
-          onClick={() => onOk('')}
-        >
-          筛选
-        </HuiButton>
-      </View>
-    ),
-    [filters, position],
-  )
+  const actionButtonProps: ActionFooterProps = {
+    confirmButtonProps: props.confirmButtonProps,
+    clearButtonProps: props.clearButtonProps,
+    confirmText: props.confirmText,
+    clearText: props.clearText,
+    onConfirm: props.onConfirm,
+    onClear: props.onClear,
+    hideMenu: onClose,
+  }
 
   return (
     <>
       <HuiPopup
         visible={visible}
         position={position}
-        contentClassName={`fitlers-default-popup-content ${popupContentClassName}`}
+        contentClassName={`filters-default-popup-content ${popupContentClassName}`}
         contentStyle={positionStyle}
         maskStyle={positionStyle}
         onClose={() => {
@@ -198,7 +175,7 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
               </FilterItem>
             ))}
         </View>
-        {type === 'multiple' && ActionFooter}
+        {type === 'multiple' && <ActionFooter {...actionButtonProps} /> }
       </HuiPopup>
     </>
   )

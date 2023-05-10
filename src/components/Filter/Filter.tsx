@@ -34,11 +34,8 @@ const defaultProps = {
 }
 
 const HuiFilter: React.FC<HuiFilterProps> = props => {
-  // TODO
   const {
     className,
-    // rightFilter,
-    // rightFilterOptions,
     menuConfig,
     children,
     filtersContentConfig,

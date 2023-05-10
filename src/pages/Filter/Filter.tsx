@@ -55,6 +55,7 @@ const MenuPage: React.FC = () => {
               ],
             }}
             filtersContentConfig={{
+              type: 'multiple',
               filterItems: mockFiltersConfig,
             }}
           />
