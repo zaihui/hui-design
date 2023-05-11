@@ -4,7 +4,6 @@ import { View } from '@tarojs/components'
 import { useBoundingClientRect } from '../../../utils/hooks'
 import Popup from '../../Popup'
 import FilterContext from '../context'
-import './MenuItem.scss'
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
 export interface MenuItemOption {

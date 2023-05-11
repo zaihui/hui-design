@@ -7,7 +7,6 @@ import HuiIcon from '../../Icon'
 
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
-import './FiltersContent.scss'
 import FilterContext from '../context'
 
 export interface FiltersContentProps

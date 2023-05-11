@@ -5,7 +5,6 @@ import MenuItem, { MenuItemOption } from '../MenuItem/MenuItem'
 import HuiIcon from '../../Icon'
 import { generateUniqueId } from '../utils'
 import FilterContext from '../context'
-import './Menu.scss'
 
 export interface MenuProps {
   className?: string

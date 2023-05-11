@@ -15,7 +15,6 @@ import { useBoundingClientRect } from '../../utils/hooks'
 import { generateUniqueId } from './utils'
 import HuiIcon from '../Icon'
 import FilterContext from './context'
-import './index.scss'
 
 interface MenuConfig extends MenuProps {
   menuItems: MenuItemProps[]

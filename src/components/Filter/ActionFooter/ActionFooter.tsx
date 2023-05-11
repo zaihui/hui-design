@@ -1,7 +1,6 @@
 import React, { FC, ReactNode } from 'react'
 import { ITouchEvent, View } from '@tarojs/components'
 import HuiButton, { HuiButtonProps } from '../../Button/Button'
-import './ActionFooter.scss'
 
 export interface ActionFooterProps {
   /** 确认按钮文字 */
@@ -29,11 +28,15 @@ const ActionFooter: FC<ActionFooterProps> = props => {
   } = props
 
   const handleClear = (e: ITouchEvent) => {
-    props.onClear && props.onClear(e)
+    if (props.onClear) {
+      props.onClear(e)
+    }
   }
 
   const handleOk = (e: ITouchEvent) => {
-    props.onConfirm && props.onConfirm(e)
+    if (props.onConfirm) {
+      props.onConfirm(e)
+    }
     props.hideMenu()
   }
 
