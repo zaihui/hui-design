@@ -50,22 +50,19 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
   const [isFixed, setIsFixed] = useState(false)
   const [scrollTop, setScrollTop] = useState(0)
   const [visible, setVisible] = useState<boolean>(false)
-  const [activated, setActivated] = useState(false)
   const filterRef = useRef()
   const menuRef = useRef<any>()
 
   const contextValue = useMemo(
     () => ({
-      activated,
       isFixed,
       scrollTop,
       hideFilter: () => setVisible(false),
       hideMenu: () => {
         menuRef.current && menuRef.current.hide()
       },
-      setActivated,
     }),
-    [isFixed, scrollTop, menuRef, activated, setActivated],
+    [isFixed, scrollTop, menuRef],
   )
 
   const info = useBoundingClientRect(filterRef)
@@ -112,7 +109,6 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
       ref={filterRef}
       className={cx('hui-filter', className, generateUniqueId(), {
         fixed: isFixed,
-        activated,
       })}
     >
       <FilterContext.Provider value={contextValue}>
@@ -135,7 +131,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
               className='hui-filter-right-content-icon'
               onClick={handleFilter}
             >
-              <HuiIcon name='h011-downward' size={14} />
+              <HuiIcon name='h109-filter' size={14} />
               <View>筛选</View>
             </View>
             <FiltersContent {...filterProps} />

@@ -1,10 +1,6 @@
 import React from 'react'
 
 interface FilterContext {
-  /** activated 页面遮罩层是否显示 */
-  activated: boolean
-  /** 修改 activated  */
-  setActivated: React.Dispatch<React.SetStateAction<boolean>>
   /** 页面滚动的top  */
   scrollTop: number
   /** 是否固定 */

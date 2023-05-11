@@ -6,10 +6,6 @@
   align-items: center;
   background-color: $hui-filter-bg-color;
 
-  &.activated {
-    z-index: $hui-z-index-m;
-  }
-
   &.fixed {
     position: fixed;
     top: $hui-menu-scroll-fixed-top;
