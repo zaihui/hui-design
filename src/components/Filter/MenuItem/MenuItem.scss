@@ -1,9 +1,9 @@
 @import "../../../styles/variables";
 
-.hui-filter-menu-item-wrap {
-  position: absolute;
-  width: 100%;
-  background-color: $hui-filter-menu-item-wrap-bg-color;
+.hui-filter-menu-item-wrapper {
+  .popup-content.top {
+    transform: none;
+  }
 
   .hui-filter-menu-item-content {
     display: flex;

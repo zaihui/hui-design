@@ -122,8 +122,9 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
         maskStyle={position}
         contentStyle={position}
         onClose={hideMenu}
+        className='no-animation hui-filter-menu-item-wrapper'
       >
-        <View className={cx('hui-filter-menu-item-wrap', className)} style={{
+        <View className={cx(className)} style={{
           ...style,
         }}
         >

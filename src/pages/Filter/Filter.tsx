@@ -118,6 +118,9 @@ const MenuPage: React.FC = () => {
                 },
               ],
             }}
+            filtersContentConfig={{
+              position: 'top',
+            }}
           />
         </GroupSection>
         <GroupSection title='左侧内容区自定义 + fixed'>
