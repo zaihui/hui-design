@@ -38,11 +38,6 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
       temp[i] = i === index ? temp[i] : false
     }
     setActivatedList(temp)
-    if (temp.filter(Boolean).length) {
-      document.body.classList.add('hui-filter-overflow-hidden')
-    } else {
-      document.body.classList.remove('hui-filter-overflow-hidden')
-    }
     context?.hideFilter()
   }
 
