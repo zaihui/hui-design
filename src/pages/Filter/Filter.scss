@@ -1,0 +1,15 @@
+@import '@/styles/demo-mixins.scss';
+
+.filter-page {
+  > .content {
+    .title {
+      padding: 10px 20px;
+    }
+
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

@@ -127,6 +127,7 @@ const NAV_LIST: {
     desc: '包含Tab等',
     icon: '186-tabcirde',
     items: [
+      { title: 'Filter', url: router.Filter.url },
       { title: '标签式分段控制器Tab', url: router.Tabs.url },
       { title: '宫格导航Grid', url: router.Grid.url },
       { title: '步骤条Steppers', url: router.Steppers.url },

@@ -9,6 +9,7 @@ export interface HuiPopupProps extends ViewProps {
   wapperClassName?: string
   // 兼容单词拼写错误
   wrapperClassName?: string
+  contentClassName?: string
   // 修复历史遗漏问题，让Popup组件支持className的处理
   className?: string
   /** 是否展示 */
@@ -18,6 +19,8 @@ export interface HuiPopupProps extends ViewProps {
   /** 是否点击遮罩层时触发onClose回调，默认开启 */
   maskClosable?: boolean
   style?: React.CSSProperties
+  maskStyle?: React.CSSProperties
+  contentStyle?: React.CSSProperties
   /** 关闭回调 */
   onClose?: () => void
 }
@@ -26,8 +29,11 @@ const Popup: React.FC<HuiPopupProps> = props => {
   const {
     wapperClassName = '',
     wrapperClassName = '',
+    contentClassName = '',
     className = '',
     style,
+    maskStyle,
+    contentStyle,
     visible,
     position = 'center',
     maskClosable = true,
@@ -55,9 +61,10 @@ const Popup: React.FC<HuiPopupProps> = props => {
         { 'no-animation': position === 'center' },
       )}
     >
-      <View className='popup-mask' onTouchMove={handleTouchMove} onClick={handleClose} />
+      <View className='popup-mask' style={maskStyle} onTouchMove={handleTouchMove} onClick={handleClose} />
       <View
-        className={`popup-content ${position}`}
+        className={`popup-content ${position} ${contentClassName}`}
+        style={contentStyle}
         onTouchMove={handleTouchMove}
         {...rest}
       >

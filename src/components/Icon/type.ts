@@ -60,5 +60,6 @@ export type HIconType =
   | 'h010-right'
   | 'h011-downward'
   | 'h017-plus'
+  | 'h109-filter'
   | 'h188-workcirde'
   | 'h203-takingpicturesfill'

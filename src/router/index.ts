@@ -165,4 +165,5 @@ export default {
   HightLightText: new PageItemNormal('HighlightText'),
   Card: new PageItemNormal('Card'),
   Steppers: new PageItemNormal('Steppers'),
+  Filter: new PageItemNormal('Filter'),
 }
