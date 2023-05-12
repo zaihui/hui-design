@@ -6,6 +6,12 @@
       padding: 10px 20px;
     }
 
+    .gap {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
     .row {
       &:not(:last-child) {
         margin-bottom: 20px;
