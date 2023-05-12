@@ -37,3 +37,17 @@
     }
   }
 }
+
+// 下拉列表动画
+.hui-filter-animation {
+  .popup-content.top {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+
+  &.popup-container-active {
+    .popup-content.top {
+      transform: scaleY(1);
+    }
+  }
+}

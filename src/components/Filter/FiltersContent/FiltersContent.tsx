@@ -108,7 +108,7 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
 
   return (
       <HuiPopup
-        className={cx('filters-default-popup-wrapper', { 'no-animation': position === 'top' })}
+        className={cx('hui-filter-animation', { 'no-animation': position === 'top' && !visible })}
         visible={visible}
         position={position}
         contentClassName={cx('filters-default-popup-content', { popupContentClassName })}
