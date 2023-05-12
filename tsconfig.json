@@ -24,19 +24,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "skipLibCheck": true,
-    "typeRoots": ["node_modules/@types", "global.d.ts"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
+    "typeRoots": ["node_modules/@types", "global.d.ts"]
   },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./test/**/*.ts",
-    "./test/**/*.tsx",
-    "./typings/*.ts",
-    "./global.d.ts"
-  ],
-  "exclude": ["node_modules", "dist"],
   "compileOnSave": false
 }

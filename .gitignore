@@ -1,7 +1,6 @@
-/node_modules
-/dist
-/es
-/lib
+node_modules
+dist
+lib
 yarn-error.log
 .DS_Store
 .temp

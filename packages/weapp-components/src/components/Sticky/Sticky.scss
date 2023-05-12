@@ -1,0 +1,12 @@
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/variables.scss';
+
+.hui-sticky-container {
+  &.fixed {
+    .hui-sticky-content {
+      position: fixed;
+      z-index: 1;
+      width: 100vw;
+    }
+  }
+}

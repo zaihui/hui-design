@@ -1,0 +1,64 @@
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/variables.scss';
+
+$hui-skeleton-avatar-horizontal-content-default-width: 71%;
+
+.hui-skeleton {
+  box-sizing: border-box;
+  display: flex;
+  padding: px(20);
+  background-color: $hui-color-grey-8;
+
+  .hui-skeleton-avatar,
+  .hui-skeleton-title,
+  .hui-skeleton-paragraph {
+    background-color: $hui-color-grey-7;
+  }
+
+  .hui-skeleton-avatar {
+    margin-right: px(16);
+
+    &.square {
+      border-radius: px(4);
+    }
+
+    &.circle {
+      border-radius: 50%;
+    }
+  }
+
+  .hui-skeleton-content {
+    .hui-skeleton-title {
+      height: px(20);
+      margin-bottom: px(24);
+    }
+
+    .hui-skeleton-paragraph {
+      height: px(20);
+
+      &:not(:last-child) {
+        margin-bottom: px(12);
+      }
+    }
+  }
+
+  &.vertical {
+    flex-direction: column;
+
+    .hui-skeleton-avatar {
+      margin-bottom: px(24);
+    }
+  }
+
+  &.horizontal {
+    flex-direction: row;
+
+    .hui-skeleton-content {
+      flex: 1 1 100%;
+
+      &.has-avatar {
+        flex-basis: $hui-skeleton-avatar-horizontal-content-default-width;
+      }
+    }
+  }
+}

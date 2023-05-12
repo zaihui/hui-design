@@ -1,0 +1,16 @@
+@import '@shared/styles/index.scss';
+
+.input-page {
+  > .content {
+    .group-section {
+      > .title {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .disabled-input-status-group {
+    background-color: $hui-disabled-background-color;
+  }
+}

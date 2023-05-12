@@ -1,0 +1,7 @@
+@import '@shared/styles/demo-mixins.scss';
+
+.footer-demo-page {
+  > .content {
+    @include content-padding;
+  }
+}

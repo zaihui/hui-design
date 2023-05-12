@@ -1,0 +1,62 @@
+@import '@zaihui/hui-design/src/styles/index.scss';
+
+page {
+  display: block;
+  background-color: $hui-page-background-color;
+}
+
+.sample-nav {
+  padding: 10px 0;
+  font-size: $hui-font-heading-m;
+  font-weight: $hui-font-weight-medium;
+  color: $hui-font-color-base-75;
+  text-align: center;
+  background: $hui-theme-color-background;
+}
+
+.sample-title {
+  padding: 32px 0 16px;
+  font-size: $hui-font-body-m;
+  font-weight: $hui-font-weight-regular;
+  color: $hui-font-color-base-50;
+}
+
+.sample-divider {
+  height: 8px;
+}
+
+.sample-higher-divider {
+  height: 16px;
+}
+
+.sample-page {
+  padding: 0 $hui-page-space-m;
+}
+
+.sample-gap {
+  display: inline-block;
+  width: 8px;
+}
+
+.sample-wider-gap {
+  display: inline-block;
+  width: 40px;
+}
+
+.page-container {
+  padding: 40px 20px;
+}
+
+.demo-group {
+  padding: 16px 0;
+  margin-bottom: 10px;
+
+  .title {
+    padding: 16px 0;
+  }
+
+  .content {
+    padding: 24px 0;
+    background-color: $hui-theme-color-background;
+  }
+}

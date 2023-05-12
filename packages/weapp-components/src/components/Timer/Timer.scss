@@ -1,0 +1,69 @@
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/variables.scss';
+
+@mixin h-row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hui-timer {
+  display: flex;
+
+  &-item {
+    display: flex;
+
+    &-box {
+      @include h-row-center;
+
+      &-time {
+        @include h-row-center;
+
+        font-size: $hui-font-body-m;
+        font-weight: $hui-font-weight-medium;
+        color: $hui-color-red-1;
+      }
+    }
+
+    &-separator {
+      @include h-row-center;
+
+      font-size: $hui-font-body-m;
+      color: $hui-color-red-1;
+    }
+  }
+}
+
+.card-timer {
+  .hui-timer-item {
+    display: flex;
+
+    &-box {
+      @include h-row-center;
+
+      padding: px(4);
+      background: $hui-color-grey-8;
+      border-radius: px(2);
+      box-shadow: $hui-timer-card-box-shadow;
+
+      &-time {
+        @include h-row-center;
+
+        min-width: px(16);
+        height: px(18);
+        font-size: $hui-font-body-s;
+        font-weight: $hui-font-weight-medium;
+        color: $hui-color-red-1;
+      }
+    }
+
+    &-separator {
+      @include h-row-center;
+
+      height: px(24);
+      margin: 0 px(4);
+      font-size: $hui-font-body-s;
+      color: $hui-color-grey-8;
+    }
+  }
+}

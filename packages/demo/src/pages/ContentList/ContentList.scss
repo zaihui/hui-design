@@ -1,0 +1,12 @@
+@import '@shared/styles/variables.scss';
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/demo-mixins.scss';
+
+.content-list-page {
+  .group-section {
+    > .title {
+      padding-right: 16px;
+      padding-left: 16px;
+    }
+  }
+}

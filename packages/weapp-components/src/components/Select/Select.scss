@@ -1,0 +1,12 @@
+@import '@shared/styles/variables.scss';
+@import '@shared/styles/colors.scss';
+
+.hui-select {
+  background: $hui-theme-color-background;
+}
+
+.hui-select-footer {
+  padding: px(16);
+  padding-bottom: calc(env(safe-area-inset-bottom) + #{px(16)});
+  border-top: px(1) solid $hui-border-color-light;
+}

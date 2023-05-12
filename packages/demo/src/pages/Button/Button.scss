@@ -1,0 +1,39 @@
+@import '@shared/styles/demo-mixins.scss';
+@import '@shared/styles/index.scss';
+
+.button-page {
+  .button-item {
+    display: flex;
+    flex-direction: column;
+
+    .title {
+      margin-bottom: 16px;
+      font-size: $hui-font-caption-m;
+      color: $hui-font-color-base-35;
+    }
+
+    .btn-container {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+
+      .hui-button {
+        margin: 0;
+      }
+    }
+  }
+
+  > .content {
+    @include content-padding;
+
+    .button-list-container {
+      display: flex;
+      flex-wrap: wrap;
+
+      .button-item {
+        flex-basis: 33%;
+        margin-bottom: 32px;
+      }
+    }
+  }
+}

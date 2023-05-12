@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "esModuleInterop": true,
+    "declaration": true,
+    "declarationDir": "lib/types",
+    "jsx": "react",
+    "module": "es6",
+  },
+  "include": [
+    "./src/index.ts",
+    "./global.d.ts"
+  ]
+}

@@ -1,0 +1,112 @@
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/variables.scss';
+
+$hui-action-sheet-duration: 300ms;
+$hui-action-sheet-font-color: #1e1e1e;
+$hui-action-sheet-footer-color: #8e8e8e;
+$timing-func: cubic-bezier(0.36, 0.66, 0.04, 1);
+$prefix: hui-action-sheet;
+$hui-action-sheet-font-size: px(16);
+
+.#{$prefix} {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $hui-z-index-s;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: visibility $hui-action-sheet-duration $timing-func;
+
+  &-mask {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: $hui-mask-color;
+    opacity: 0;
+    transition: opacity $hui-action-sheet-duration ease-in;
+  }
+
+  &-container {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: px(18) px(18) 0 0;
+    // stylelint-disable-next-line
+    padding-bottom: constant(safe-area-inset-bottom);
+    // stylelint-disable-next-line
+    padding-bottom: env(safe-area-inset-bottom);
+    text-align: center;
+    background-color: $hui-theme-color-background;
+    transition: transform $hui-action-sheet-duration $timing-func;
+    transform: translate3d(0, 100%, 0);
+  }
+
+  &-content {
+    min-height: px(18);
+  }
+
+  &-header {
+    padding: px(20) px(16);
+    font-size: $hui-action-sheet-font-size;
+    font-weight: $hui-font-weight-medium;
+    color: $hui-font-color-base;
+    text-align: center;
+    border-bottom: px(1) solid $hui-font-color-base-05;
+  }
+
+  &-footer {
+    padding: px(10) 0;
+    font-size: $hui-action-sheet-font-size;
+    font-weight: $hui-font-weight-regular;
+    color: $hui-action-sheet-footer-color;
+    border-top: px(4) solid $hui-border-color-light;
+
+    &:active {
+      background-color: $hui-border-color;
+    }
+  }
+
+  &-body {
+    padding: 0 px(16);
+    text-align: center;
+  }
+
+  &-item {
+    height: px(44);
+    font-size: $hui-action-sheet-font-size;
+    font-weight: $hui-font-weight-regular;
+    line-height: px(44);
+    color: $hui-action-sheet-font-color;
+    border-top: px(1) solid $hui-font-color-base-05;
+
+    &:first-child {
+      border-top: none;
+    }
+
+    &.#{$prefix}-item-disabled {
+      color: $hui-font-color-input-disabled;
+    }
+
+    &.#{$prefix}-item-has-active {
+      &:active {
+        background-color: $hui-page-background-color;
+      }
+    }
+  }
+
+  &-active {
+    visibility: visible;
+
+    .#{$prefix}-mask {
+      opacity: 1;
+    }
+
+    .#{$prefix}-container {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+}

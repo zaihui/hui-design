@@ -1,0 +1,12 @@
+@import '@shared/styles/variables.scss';
+@import '@shared/styles/colors.scss';
+
+.collapse-panel-page {
+  > .content {
+    padding: 0 16px 50px 16px;
+
+    .group-section {
+      padding-bottom: 50px;
+    }
+  }
+}

@@ -1,0 +1,18 @@
+@import '@shared/styles/index.scss';
+@import '@shared/styles/demo-mixins.scss';
+
+.tooltip-page {
+  > .content {
+    @include content-padding;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  .hui-button {
+    margin: 0;
+  }
+}

@@ -1,0 +1,25 @@
+@import '@shared/styles/index.scss';
+@import '@shared/styles/demo-mixins.scss';
+
+.title-page {
+  .group-section {
+    & > .title {
+      padding: 0 16px 16px;
+    }
+
+    padding: unset;
+
+    .content {
+      background: $hui-border-color;
+    }
+
+    &:nth-child(2) {
+      padding-top: 70px;
+    }
+  }
+
+  .hui-demo-title {
+    margin-bottom: 16px;
+    background-color: $hui-color-grey-8;
+  }
+}

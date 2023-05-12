@@ -1,0 +1,28 @@
+@import '@shared/styles/variables.scss';
+@import '@shared/styles/colors.scss';
+
+.hui-modal {
+  position: relative;
+
+  .hui-modal-header {
+    padding: px(16) 0;
+
+    .hui-modal-title {
+      width: px(300);
+      margin: auto;
+      font-size: $hui-modal-title-font-size;
+      font-weight: $hui-font-weight-medium;
+      color: $hui-font-color-base;
+      text-align: center;
+
+      @include no-wrap();
+    }
+
+    .hui-modal-close-icon {
+      position: absolute;
+      top: px(19);
+      right: px(18);
+      color: $hui-font-color-base-50;
+    }
+  }
+}

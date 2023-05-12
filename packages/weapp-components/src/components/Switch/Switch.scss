@@ -1,0 +1,55 @@
+@import '@shared/styles/index.scss';
+
+$hui-switch-dot-btn-box-shadow: 0 px(2) px(2) 0 rgba(0, 0, 0, 0.3),
+  0 px(4) 8px 0 rgba(0, 0, 0, 0.1);
+$hui-switch-dot-btn-checked-box-shadow: 0 px(1) px(2) 0 rgba(0, 0, 0, 0.3),
+  0 px(4) px(8) 0 rgba(0, 0, 0, 0.1);
+$hui-switch-dot-transform: #{$hui-switch-width} - #{$hui-switch-dot-width} - #{$hui-switch-border-width};
+$hui-switch-dot-btn-checked-transform: translateX(
+  calc($hui-switch-dot-transform * 2)
+);
+
+.hui-switch {
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  width: $hui-switch-width;
+  height: $hui-switch-height;
+  background-color: $hui-theme-color-background;
+  border: $hui-switch-border;
+  border-radius: $hui-switch-border-radius;
+
+  &.checked {
+    background-color: $hui-switch-default-background-color;
+    border-color: $hui-switch-default-background-color;
+
+    &.disabled {
+      background-color: $hui-switch-default-disabled-background-color;
+      border-color: $hui-switch-default-disabled-background-color;
+    }
+  }
+
+  &.disabled {
+    background-color: $hui-disabled-background-color;
+  }
+
+  .hui-switch-dot-btn {
+    position: absolute;
+    box-sizing: border-box;
+    width: $hui-switch-dot-width;
+    height: $hui-switch-dot-height;
+    background-color: $hui-theme-color-background;
+    border: $hui-switch-border;
+    border-radius: 50%;
+    box-shadow: $hui-switch-dot-box-shadow;
+    box-shadow: $hui-switch-dot-btn-box-shadow;
+    transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35),
+      -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
+
+    &.checked {
+      box-shadow: $hui-switch-dot-btn-checked-box-shadow;
+      transform: $hui-switch-dot-btn-checked-transform;
+    }
+  }
+}

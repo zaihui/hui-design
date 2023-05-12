@@ -1,0 +1,75 @@
+/* stylelint-disable csstree/validator */
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/variables.scss';
+
+.hui-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
+  background: $hui-color-grey-8;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.03);
+
+  &-header {
+    display: flex;
+
+    .hui-card-logo {
+      flex-grow: 0;
+      flex-shrink: 0;
+      margin-right: 12px;
+      overflow: hidden;
+    }
+
+    &-right {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 2;
+      justify-content: center;
+
+      &-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .hui-card-title {
+          @include line-clamp(2);
+
+          flex-shrink: 0;
+          width: 70%;
+          margin-right: 12px;
+          font-size: $hui-font-body-m;
+          font-weight: $hui-font-weight-medium;
+          color: $hui-card-title-color;
+        }
+
+        .hui-card-assist-tip {
+          @include line-clamp(1);
+        }
+      }
+
+      .hui-card-subtitle {
+        @include line-clamp(2);
+
+        margin-top: 4px;
+      }
+    }
+
+    &-right-top-aligned {
+      justify-content: flex-start;
+    }
+  }
+
+  &-body {
+    margin-top: 12px;
+    font-size: $hui-font-caption-m;
+    color: $hui-card-body-color;
+  }
+
+  &-body-only-title {
+    margin-top: 8px;
+  }
+
+  &-footer {
+    margin-top: 24px;
+  }
+}
