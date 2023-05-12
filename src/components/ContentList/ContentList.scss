@@ -1,16 +1,25 @@
 @import '../../styles/colors.scss';
 @import '../../styles/variables.scss';
 
+$imgSize: px(80); // 图片大小
+$horizontalImgCount: 3; // 左右布局每行图片数量
+$verticalImgCount: 4; // 上下布局每行图片数量
+
+/** 计算图片间距 */
+@function calc-img-gap($count) {
+  @return calc((100% - $imgSize * $count) / $count / 2);
+}
+
 .hui-content-list {
   padding: px(16);
+  font-size: $hui-font-body-m;
+  font-weight: $hui-font-weight-regular;
+  background: $hui-filter-bg-color;
   border-radius: px(4);
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .06);
 
   &-item-horizontal {
     display: flex;
     margin-bottom: px(8);
-    font-size: $hui-font-body-m;
-    font-weight: $hui-font-weight-regular;
 
     .item-label {
       width: px(84);
@@ -19,6 +28,7 @@
     }
 
     .item-value {
+      display: flex;
       width: px(274);
     }
 
@@ -33,7 +43,7 @@
     }
 
     .hui-image {
-      margin: 0 px(3) px(4) 0;
+      margin: 0 calc-img-gap($horizontalImgCount) px(7);
     }
   }
 
@@ -50,37 +60,41 @@
   .img-content-horizontal,
   .img-content-vertical {
     display: flex;
+    flex-grow: 1;
     flex-wrap: wrap;
 
     .hui-image,
     .list-item-img {
-      width: px(80);
-      height: px(80);
+      width: $imgSize;
+      height: $imgSize;
       border-radius: px(4);
     }
   }
 
   .img-content-horizontal {
     .hui-image {
-      margin: 0 px(3) px(3) 0;
+      margin: 0 calc-img-gap($horizontalImgCount) px(7);
 
       .placeholder {
         background: $hui-image-placeholder-bg;
       }
     }
 
-    :nth-child(3n + 3) {
-      margin-right: 0;
+    :nth-child(3n + 1) {
+      margin-left: 0;
     }
   }
 
   .img-content-vertical {
+    display: flex;
+    width: 100%;
+
     .hui-image {
-      margin: 0 px(7) px(7) 0;
+      margin: 0 calc-img-gap($verticalImgCount) px(7);
     }
 
-    :nth-child(4n + 4) {
-      margin-right: 0;
+    :nth-child(4n + 1) {
+      margin-left: 0;
     }
   }
 

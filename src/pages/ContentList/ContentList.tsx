@@ -6,6 +6,8 @@ import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 import SubGroupSection from '@/demoComponents/SubGroupSection'
 
+import './ContentList.scss'
+
 const { Item } = ContentList
 
 const ContentListPage: React.FC = () => {
