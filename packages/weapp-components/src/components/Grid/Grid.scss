@@ -1,0 +1,67 @@
+@import "@shared/styles/colors.scss";
+@import "@shared/styles/variables.scss";
+
+.hui-grid {
+  display: flex;
+  flex-wrap: wrap;
+  background: $hui-grid-bg-color;
+
+  .hui-grid-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: px(12) 0;
+
+    .grid-image {
+      width: px(64);
+      height: px(44);
+    }
+
+    .grid-text {
+      width: px(55);
+      margin-top: px(4);
+      font-size: $hui-grid-text-font-size;
+      font-weight: $hui-font-weight-medium;
+      color: $hui-font-color-base-50;
+      text-align: center;
+
+      @include no-wrap();
+    }
+  }
+
+  &.layout-evenly {
+    .hui-grid-item {
+      flex: 1;
+    }
+  }
+
+  &.layout-column-5 {
+    .hui-grid-item {
+      width: 20%;
+    }
+  }
+
+  &.layout-column-4 {
+    .hui-grid-item {
+      width: 25%;
+    }
+  }
+
+  &.layout-column-3 {
+    .hui-grid-item {
+      width: 33.3%;
+    }
+  }
+
+  &.layout-column-2 {
+    .hui-grid-item {
+      width: 50%;
+    }
+  }
+
+  &.layout-column-1 {
+    .hui-grid-item {
+      width: 100%;
+    }
+  }
+}

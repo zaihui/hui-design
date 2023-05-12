@@ -2,7 +2,7 @@ const path = require('path')
 const webpack = require('webpack')
 
 const sidebarCreator = require('./sidebarCreator')
-const { homepage } = require('../../package.json')
+const { homepage } = require('../package.json')
 
 const projectRootResolve = dir => path.join(__dirname, '../../', dir)
 

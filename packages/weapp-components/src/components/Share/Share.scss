@@ -1,0 +1,166 @@
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/variables.scss';
+
+.hui-share {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: $hui-color-grey-7;
+
+  &-header {
+    min-height: px(64);
+
+    .hui-icons {
+      position: absolute;
+      top: px(24);
+      right: px(24);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  .loading-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: px(260);
+    height: px(360);
+
+    .loading-image {
+      width: px(42);
+      height: px(42);
+    }
+
+    .loading-tip {
+      margin-top: 8px;
+      font-size: $hui-font-body-s;
+      color: $hui-color-grey-5;
+    }
+  }
+
+  &-content {
+    width: px(260);
+    height: px(360);
+    overflow: hidden;
+    background: $hui-color-grey-8;
+    border-radius: px(6);
+
+    .hui-image {
+      background: $hui-color-grey-8;
+      box-shadow: $hui-share-content-box-shadow;
+
+      .hui-share-img {
+        width: 100%;
+        height: 100%;
+
+        .hui-share-img {
+          .hui-icons {
+            font-size: px(64);
+          }
+        }
+      }
+    }
+  }
+
+  &-multiple-content {
+    width: 100%;
+    height: px(360);
+  }
+
+  &-btn-group {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: px(20) 0 px(32);
+    margin-top: px(30);
+    background-color: $hui-color-grey-8;
+
+    .hui-button {
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      width: px(52);
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      line-height: unset;
+      white-space: nowrap;
+      background: unset;
+
+      &::after {
+        content: unset;
+      }
+
+      .title {
+        margin: px(8) 0 px(4);
+        font-size: $hui-font-caption-m;
+        font-weight: $hui-font-weight-medium;
+        line-height: px(12);
+        color: $hui-color-grey-1;
+      }
+
+      .tips {
+        font-size: $hui-font-caption-m;
+        line-height: px(12);
+        color: $hui-share-tip-color;
+      }
+    }
+  }
+}
+
+.share-swiper {
+  box-sizing: border-box;
+  height: px(362);
+
+  .swiper-item {
+    width: unset !important;
+    height: unset !important;
+
+    .item {
+      box-sizing: border-box;
+      width: px(260);
+      height: px(360);
+      margin-left: px(25);
+
+      &.current {
+        position: relative;
+        width: px(260);
+        height: px(360);
+        overflow: hidden;
+        border: px(1) solid $hui-color-red-1;
+        border-radius: px(6);
+
+        .icon {
+          position: absolute;
+          top: px(4);
+          right: px(3);
+          z-index: 1;
+          height: px(16);
+          line-height: px(16);
+        }
+
+        .triangle {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 0;
+          height: 0;
+          border: px(20) solid transparent;
+          border-top-color: $hui-color-red-1;
+          border-right-color: $hui-color-red-1;
+        }
+      }
+
+      .post-image {
+        width: 100%;
+        height: 100%;
+        box-shadow: $hui-share-content-box-shadow;
+      }
+    }
+  }
+}

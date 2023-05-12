@@ -1,0 +1,39 @@
+{
+  "name": "@zaihui/hui-design",
+  "version": "0.0.1",
+  "description": "小程序组件库",
+  "templateInfo": {
+    "name": "mobx",
+    "typescript": true,
+    "css": "sass"
+  },
+  "files": [
+    "lib/*"
+  ],
+  "types": "lib/types/index.d.ts",
+  "main": "lib/index.js",
+  "module": "lib/index.js",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "test": "jest",
+    "test:ci": "jest --coverage",
+    "build:ci": "rimraf ./lib && tsc -p ./tsconfig.build.json && copyfiles -u 1 ./src/{styles,components,widgets,static}/**/*.{scss,png} lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zaihui/hui-design.git"
+  },
+  "homepage": "https://github.com/zaihui/hui-design",
+  "license": "ISC",
+  "dependencies": {
+    "@shared/utils": "workspace:latest",
+    "@shared/styles": "workspace:latest"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.21"
+  },
+  "peerDependencies": {
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0"
+  }
+}

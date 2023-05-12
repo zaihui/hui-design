@@ -5,9 +5,7 @@
     "moduleResolution": "Node",
     "alwaysStrict": true,
     "declaration": true,
-    "outDir": "lib",
-    "baseUrl": "./",
-    "rootDir": "./",
+    "noEmit": true,
     "allowJs": true,
     "removeComments": false,
     "strict": true,
@@ -25,18 +23,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "typeRoots": ["node_modules/@types", "global.d.ts"],
-    "paths": {
-      "@/*": ["./src/*"]
-    }
   },
-  "include": [
-    "./src/**/*.ts",
-    "./src/**/*.tsx",
-    "./test/**/*.ts",
-    "./test/**/*.tsx",
-    "./typings/*.ts",
-    "./global.d.ts"
-  ],
-  "exclude": ["node_modules", "dist"],
   "compileOnSave": false
 }

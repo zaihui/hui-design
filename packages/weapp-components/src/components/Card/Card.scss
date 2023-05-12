@@ -1,0 +1,67 @@
+/* stylelint-disable csstree/validator */
+@import "@shared/styles/colors.scss";
+@import "@shared/styles/variables.scss";
+
+.hui-card {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 16px;
+  background: $hui-color-grey-8;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .03);
+
+  &-header {
+    display: flex;
+
+    .hui-card-logo {
+      flex-grow: 0;
+      flex-shrink: 0;
+      margin-right: 12px;
+      overflow: hidden;
+    }
+
+    &-right {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 2;
+      justify-content: center;
+
+      &-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .hui-card-title {
+          @include line-clamp(2);
+
+          flex-shrink: 0;
+          width: 70%;
+          margin-right: 12px;
+          font-size: px(14);
+          font-weight: $hui-font-weight-medium;
+          color: $hui-card-title-color;
+        }
+
+        .hui-card-assist-tip {
+          @include line-clamp(1);
+        }
+      }
+
+      .hui-card-subtitle {
+        @include line-clamp(2);
+
+        margin-top: 4px;
+      }
+    }
+  }
+
+  &-body {
+    margin-top: 12px;
+    font-size: px(12);
+    color: $hui-card-body-color;
+  }
+
+  &-footer {
+    margin-top: 24px;
+  }
+}

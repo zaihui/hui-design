@@ -1,0 +1,32 @@
+@import '@shared/styles/index.scss';
+@import '@shared/styles/demo-mixins.scss';
+
+.team-page {
+  > .page-header {
+    padding-left: 32px;
+  }
+
+  > .team-content {
+    @include content-padding;
+  }
+
+  .team-member {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 72px;
+    padding: 16px;
+    border-bottom: 1px solid $hui-border-color;
+
+    > .name {
+      font-size: $hui-font-body-m;
+      color: $hui-font-color-base;
+    }
+
+    > .desc {
+      font-size: $hui-font-caption-m;
+      color: $hui-color-grey-4;
+    }
+  }
+}

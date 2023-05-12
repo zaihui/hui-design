@@ -1,0 +1,63 @@
+@import '@shared/styles/colors.scss';
+@import '@shared/styles/variables.scss';
+
+.hui-stepper {
+  display: inline-flex;
+  align-items: center;
+  height: $stepper-height;
+
+  .hui-stepper-btn {
+    display: flex;
+    width: px(32);
+    color: $hui-theme-color-primary;
+
+    &.minus {
+      justify-content: flex-end;
+    }
+
+    &.plus {
+      justify-content: flex-start;
+    }
+
+    .btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: $stepper-btn-w;
+      height: $stepper-btn-w;
+      border-radius: 50%;
+      transition: all .2s;
+
+      &.active {
+        transform: scale(1.2);
+        transform-origin: center center;
+      }
+    }
+  }
+
+  .hui-stepper-disabled {
+    color: $hui-font-color-stepper-disabled;
+  }
+
+  .hui-stepper-input {
+    width: px(28);
+    height: 100%;
+    margin: 0 px(6);
+    font-size: px(14);
+    font-weight: $hui-font-weight-medium;
+    color: $hui-font-color-base;
+    text-align: center;
+    border: none;
+  }
+
+  &.hide {
+    .minus {
+      opacity: 0;
+    }
+
+    .hui-stepper-input {
+      opacity: 0;
+    }
+  }
+}

@@ -1,7 +1,0 @@
-@import '@/styles/demo-mixins.scss';
-
-.skeleton-demo {
-  > .content {
-    @include content-padding;
-  }
-}

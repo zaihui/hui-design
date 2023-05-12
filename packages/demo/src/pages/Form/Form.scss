@@ -1,0 +1,7 @@
+@import '@shared/styles/demo-mixins.scss';
+
+.form-demo-page {
+  .content {
+    @include content-padding;
+  }
+}

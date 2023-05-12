@@ -1,0 +1,17 @@
+@import '@shared/styles/index.scss';
+
+.hui-mask {
+  opacity: 0;
+}
+
+.hui-mask-visible {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $hui-z-index-s;
+  background-color: $hui-mask-color;
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}

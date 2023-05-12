@@ -2,13 +2,6 @@ const isInVsCode = process.env.NODE_ENV === undefined
 
 module.exports = {
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    useJSXTextNode: true,
-    project: './tsconfig.json',
-  },
   extends: [
     'airbnb-base',
     '@zaihui/base',
@@ -18,12 +11,17 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:import/typescript',
   ],
-  plugins: [
-    '@zaihui/eslint-plugin-react',
-  ],
+  plugins: ['@zaihui/eslint-plugin-react'],
   env: {
     node: false,
     browser: false,
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: ['packages/**/tsconfig.json'],
+      },
+    },
   },
   globals: {
     // 小程序本质不是运行在浏览器下，所以不能启用browser的env
@@ -50,12 +48,14 @@ module.exports = {
     'no-debugger': isInVsCode ? 'warn' : 'error',
     'no-console': isInVsCode ? 'warn' : 'error',
     // 禁止一行以上的连续空行
+    'react/no-find-dom-node': 'off',
     'no-multiple-empty-lines': [
       'error',
       {
         max: 1,
       },
     ],
+    'import/no-unresolved': 'off',
     // 关闭对象花括号换行一致性规则
     'object-curly-newline': 'off',
     // 关闭禁止在else前有return规则
@@ -99,7 +99,8 @@ module.exports = {
       },
     ],
     '@typescript-eslint/member-delimiter-style': [
-      'error', {
+      'error',
+      {
         multiline: {
           delimiter: 'none',
           requireLast: false,
@@ -111,9 +112,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-empty-function': [
-      'warn',
-    ],
+    '@typescript-eslint/no-empty-function': ['warn'],
     '@typescript-eslint/type-annotation-spacing': [
       'error',
       {
@@ -131,10 +130,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        '**/*.js',
-        '**/.*.js',
-      ],
+      files: ['**/*.js', '**/.*.js'],
       parser: 'esprima',
       env: {
         node: true,
@@ -143,12 +139,11 @@ module.exports = {
         'import/no-commonjs': 'off',
         '@typescript-eslint/no-var-requires': 'off',
         'no-console': 'off',
+        'import/no-unresolved': 'off',
       },
     },
     {
-      files: [
-        '**/*.tsx',
-      ],
+      files: ['**/*.tsx'],
       rules: {
         /**
          * taro的枚举条件渲染写法中对象的属性一定要用引号包裹，否则运行时会报错
@@ -160,11 +155,7 @@ module.exports = {
       },
     },
     {
-      files: [
-        'test/**/*.ts',
-        'test/**/*.tsx',
-        'test/**/*.js',
-      ],
+      files: ['test/**/*.ts', 'test/**/*.tsx', 'test/**/*.js'],
       env: {
         jest: true,
       },
@@ -180,9 +171,7 @@ module.exports = {
        * 开启了这里的extends会报Unexpected top-level property "overrides[2].extends".
        * 怀疑是vscode下eslint插件的报错，待研究
        */
-      extends: [
-        'plugin:jest/all',
-      ],
+      extends: ['plugin:jest/all'],
       rules: {
         'jest/prefer-inline-snapshots': 'off',
         'jest/prefer-called-with': 'off',
@@ -193,10 +182,7 @@ module.exports = {
      * 针对vuepress下的lint规则
      */
     {
-      files: [
-        'docs/.vuepress/**/*.js',
-        'docs/.vuepress/**/*.vue',
-      ],
+      files: ['docs/.vuepress/**/*.js', 'docs/.vuepress/**/*.vue'],
       extends: [
         'airbnb-base',
         '@zaihui/base',
@@ -217,9 +203,7 @@ module.exports = {
      * 允许src/pages下使用@作为alias以方便demo编写
      */
     {
-      files: [
-        'src/pages/**/*.*',
-      ],
+      files: ['src/pages/**/*.*'],
       settings: {
         'import/resolver': {
           typescript: {

@@ -1,0 +1,48 @@
+@import '@shared/styles/index.scss';
+@import '@shared/styles/demo-mixins.scss';
+
+.tabs-page {
+  > .content {
+    .group-section {
+      > .title {
+        padding: 0 16px;
+        margin-bottom: 16px;
+      }
+    }
+
+    .sticky-tab-content {
+      $item-1-bg-color: rgba($hui-color-grey-1, .1);
+      $item-2-bg-color: rgba(#ed3737, .1);
+      $item-3-bg-color: rgba(#ff6c00, .1);
+      $item-4-bg-color: rgba(#ffc82c, .1);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 373px;
+      margin: 24px 16px;
+      color: $hui-font-color-base-35;
+      border-radius: 12px;
+
+      &.item-1 {
+        background-color: $item-1-bg-color;
+      }
+
+      &.item-2 {
+        background-color: $item-2-bg-color;
+      }
+
+      &.item-3 {
+        background-color: $item-3-bg-color;
+      }
+
+      &.item-4 {
+        background-color: $item-4-bg-color;
+      }
+    }
+
+    .empty-content {
+      height: 100vh;
+    }
+  }
+}

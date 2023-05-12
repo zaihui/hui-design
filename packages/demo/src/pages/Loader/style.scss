@@ -1,0 +1,14 @@
+@import '@shared/styles/index.scss';
+@import '@shared/styles/demo-mixins.scss';
+
+.loader-page {
+  > .content {
+    @include content-padding;
+
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

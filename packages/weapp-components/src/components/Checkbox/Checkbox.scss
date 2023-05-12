@@ -1,0 +1,35 @@
+@import '@shared/styles/index.scss';
+
+.hui-checkbox {
+  display: inline-flex;
+
+  .hui-checkbox-icon {
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    &.unchecked {
+      border: $hui-checkbox-icon-border;
+    }
+  }
+
+  .hui-checkbox-content {
+    display: flex;
+    align-items: center;
+    padding-left: $hui-checkbox-icon-content-padding-left;
+    font-size: $hui-font-body-m;
+  }
+
+  &.disabled {
+    opacity: .35;
+
+    .hui-checkbox-icon {
+      &.unchecked {
+        background-color: $hui-checkbox-icon-disabled-uncheck-bg-color;
+      }
+    }
+  }
+}
