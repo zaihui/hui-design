@@ -1,12 +1,6 @@
 @import "@/styles/variables.scss";
 @import "@/styles/colors.scss";
 
-.filters-default-popup-wrapper {
-  .popup-content.top {
-    transform: none;
-  }
-}
-
 .filters-default-popup-content {
   width: $filters-content-popup-left-right-width;
   padding: $filters-content-popup-default-padding;
