@@ -20,7 +20,7 @@ export interface FiltersContentProps
   type?: 'single' | 'multiple'
   /** 筛选项是否展开 */
   filterVisible?: boolean
-  filterItems: FilterItemProps[]
+  filterItems?: FilterItemProps[]
   onChange?: (val?: any) => void
   /** 点击遮罩层和筛选必用 */
   onClose?: () => void
@@ -108,9 +108,10 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
 
   return (
       <HuiPopup
+        className={cx('filters-default-popup-wrapper', { 'no-animation': position === 'top' })}
         visible={visible}
         position={position}
-        contentClassName={`filters-default-popup-content ${popupContentClassName}`}
+        contentClassName={cx('filters-default-popup-content', { popupContentClassName })}
         contentStyle={positionStyle}
         maskStyle={positionStyle}
         onClose={() => {

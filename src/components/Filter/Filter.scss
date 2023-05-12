@@ -4,6 +4,8 @@
   position: relative;
   display: flex;
   align-items: center;
+  height: 50px;
+  overflow: hidden;
   background-color: $hui-filter-bg-color;
 
   &.fixed {
