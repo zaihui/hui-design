@@ -14,7 +14,7 @@ export enum TextLevel {
   Six = 'six',
   Seven = 'seven',
   Eight = 'eight',
-  Nine = 'nine',
+  Nine = 'nine'
 }
 
 export const TextFont = {

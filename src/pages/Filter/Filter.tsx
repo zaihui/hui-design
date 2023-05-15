@@ -7,9 +7,29 @@ import GroupSection from '@/demoComponents/GroupSection'
 import HuiSwitch from '@/components/Switch'
 import HuiStepper from '@/components/Stepper'
 import HuiInput from '@/components/Input'
+import HuiTag from '@/components/Tag'
 
 import './Filter.scss'
 
+const tags = new Array(10).fill('标签')
+const mockTags = tags.map((t, index) => `${t}${index + 1}`)
+
+const TagsGroup = props => {
+  const { items = [], onChange, value } = props
+  return (
+    <View className='tags-group'>
+      {items.length
+        && items.map((t, index) => (
+          <HuiTag
+            onClick={() => onChange(index)}
+            type={value === index ? 'solid' : 'hollow'}
+          >
+            {t}
+          </HuiTag>
+        ))}
+    </View>
+  )
+}
 const MenuPage: React.FC = () => {
   const options = [
     { value: '1', text: '再惠' },
@@ -25,29 +45,103 @@ const MenuPage: React.FC = () => {
   })
   const [checked, setChecked] = useState<boolean>(false)
 
-  const mockFiltersConfig = useMemo(() => [
-    {
-      key: 'stepper',
-      label: '步进器',
-      name: 'stepper',
-      children: <HuiStepper
-        type='number'
-        value={valState.val1}
-        onChange={val => {
-          setValState({
-            ...valState,
-            val1: val,
-          })
-        }}
-      />,
-    },
-    {
-      key: 'switch',
-      label: '开关',
-      name: 'switch',
-      children: <HuiSwitch checked={checked} onChange={e => { setChecked(e) }} />,
-    },
-  ], [checked, valState])
+  const [checkedTag, setCheckedTag] = useState<number | undefined>()
+
+  const mockFiltersConfig = useMemo(
+    () => [
+      {
+        key: 'stepper',
+        label: '步进器',
+        name: 'stepper',
+        children: (
+          <HuiStepper
+            type='number'
+            value={valState.val1}
+            onChange={val => {
+              setValState({
+                ...valState,
+                val1: val,
+              })
+            }}
+          />
+        ),
+      },
+      {
+        key: 'switch',
+        label: '开关',
+        name: 'switch',
+        children: (
+          <HuiSwitch
+            checked={checked}
+            onChange={e => {
+              setChecked(e)
+            }}
+          />
+        ),
+      },
+      {
+        key: 'tagsGroup',
+        label: '标签组',
+        name: 'tags',
+        children: (
+          <TagsGroup
+            value={checkedTag}
+            items={mockTags}
+            onChange={val => setCheckedTag(val)}
+          />
+        ),
+      },
+      {
+        key: 'stepper',
+        label: '步进器',
+        name: 'stepper',
+        children: (
+          <HuiStepper
+            type='number'
+            value={valState.val1}
+            onChange={val => {
+              setValState({
+                ...valState,
+                val1: val,
+              })
+            }}
+          />
+        ),
+      },
+      {
+        key: 'switch',
+        label: '开关',
+        name: 'switch',
+        children: (
+          <HuiSwitch
+            checked={checked}
+            onChange={e => {
+              setChecked(e)
+            }}
+          />
+        ),
+      },
+      {
+        key: 'tagsGroup',
+        label: '标签组',
+        name: 'tags',
+        children: (
+          <TagsGroup
+            value={checkedTag}
+            items={mockTags}
+            onChange={val => setCheckedTag(val)}
+          />
+        ),
+      },
+    ],
+    [checked, valState, checkedTag],
+  )
+
+  const allClear = () => {
+    setChecked(false)
+    setValState({ val1: 0 })
+    setCheckedTag(undefined)
+  }
 
   return (
     <View className='filter-page'>
@@ -100,8 +194,10 @@ const MenuPage: React.FC = () => {
                 ],
               }}
               filtersContentConfig={{
+                position: 'top',
                 filterItems: mockFiltersConfig,
                 onConfirm: val => console.log('single val', val),
+                onClear: () => allClear(),
               }}
             />
             <HuiFilter
@@ -129,6 +225,7 @@ const MenuPage: React.FC = () => {
               filtersContentConfig={{
                 filterItems: mockFiltersConfig,
                 onConfirm: val => console.log('single val', val),
+                onClear: () => allClear(),
               }}
             />
             <HuiFilter
@@ -136,6 +233,7 @@ const MenuPage: React.FC = () => {
               filtersContentConfig={{
                 position: 'right',
                 filterItems: mockFiltersConfig,
+                onClear: () => allClear(),
               }}
             >
               <HuiInput placeholder='请输入搜索关键字' />
@@ -151,8 +249,8 @@ const MenuPage: React.FC = () => {
                 ],
               }}
               filtersContentConfig={{
-                position: 'right',
                 filterItems: mockFiltersConfig,
+                onClear: () => allClear(),
               }}
             />
           </View>
