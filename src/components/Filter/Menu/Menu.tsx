@@ -73,14 +73,22 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
         return selected?.[0]?.text
       }
 
+      const clipText = (text: string) => {
+        if (text.length > 6) {
+          return `${text.substring(0, 6)}...`
+        } else {
+          return text
+        }
+      }
+
       return <View className={cx('hui-filter-menu-item', {
         active: activatedList[index],
       })}
         onClick={() => toggleMenuItem(index)}
       >
-        <View className='hui-filter-menu-item-text'>{getTitle()}</View>
+        <View className='hui-filter-menu-item-text'>{clipText(getTitle())}</View>
         <View className='hui-filter-menu-item-icon'>
-          <HuiIcon name='h011-downward' size={14} />
+          <HuiIcon name='h110-upwards' size={14} />
         </View>
       </View>
     }
@@ -118,8 +126,8 @@ InternalMenu.defaultProps = defaultProps
 
 type CompoundedComponent = React.ForwardRefExoticComponent<MenuProps & React.RefAttributes<MenuRef>>
   & {
-  Item: typeof MenuItem
-}
+    Item: typeof MenuItem
+  }
 
 const Menu = InternalMenu as CompoundedComponent
 

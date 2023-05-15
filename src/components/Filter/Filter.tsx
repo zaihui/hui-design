@@ -42,7 +42,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
     className,
     menuConfig,
     children,
-    filtersContentConfig = {} as any,
+    filtersContentConfig,
     fixed = false,
     ...rest
   } = { ...defaultProps, ...props }

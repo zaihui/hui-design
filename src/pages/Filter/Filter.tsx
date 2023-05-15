@@ -6,12 +6,17 @@ import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 import HuiSwitch from '@/components/Switch'
 import HuiStepper from '@/components/Stepper'
+import HuiInput from '@/components/Input'
 
 import './Filter.scss'
 
 const MenuPage: React.FC = () => {
   const options = [
     { value: '1', text: '再惠' },
+    { value: '2', text: '麒麟' },
+  ]
+  const options1 = [
+    { value: '1', text: '筛选条件很长挨打挨打的啊' },
     { value: '2', text: '麒麟' },
   ]
 
@@ -48,89 +53,109 @@ const MenuPage: React.FC = () => {
     <View className='filter-page'>
       <PageHeader title='Filter组件' desc='筛选器' />
       <View className='content'>
-        <GroupSection title='单维度筛选（支持传入options配置或children）'>
-          <HuiFilter
-            menuConfig={{
-              className: 'hui-menu-xxx',
-              menuItems: [
-                {
-                  value: '1',
-                  options,
-                },
-              ],
-            }}
-            filtersContentConfig={{
-              type: 'multiple',
-              filterItems: mockFiltersConfig,
-              onConfirm: val => console.log('multiple val', val),
-            }}
-          />
+        <GroupSection title='单维度筛选'>
+          <View className='gap'>
+            <HuiFilter
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [{ value: '1', options }],
+              }}
+            />
+            <HuiFilter
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  { value: '1', options },
+                  { value: '2', options },
+                ],
+              }}
+            />
+            <HuiFilter
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  { value: '1', options },
+                  { value: '2', options },
+                  { value: '2', options },
+                ],
+              }}
+            />
+          </View>
         </GroupSection>
-        <GroupSection title='下拉框自定义'>
-          <HuiFilter
-            menuConfig={{
-              className: 'hui-menu-xxx',
-              menuItems: [
-                {
-                  title: '自定义title',
-                  footer: true,
-                  children: ({ hideMenu }) => (
-                    <View>
-                      <HuiButton onClick={() => hideMenu()}>ok</HuiButton>
-                    </View>
-                  ),
-                },
-                {
-                  options,
-                  onChange: item => {
-                    console.log(item)
+        <GroupSection title='多维度收纳筛选'>
+          <View className='gap'>
+            <HuiFilter
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  {
+                    title: '自定义title',
+                    footer: true,
+                    children: ({ hideMenu }) => (
+                      <View>
+                        <HuiButton onClick={() => hideMenu()}>ok</HuiButton>
+                      </View>
+                    ),
                   },
-                  value: options[0].value,
-                },
-              ],
-            }}
-            filtersContentConfig={{
-              filterItems: mockFiltersConfig,
-              onConfirm: val => console.log('single val', val),
-            }}
-          />
-        </GroupSection>
-        <GroupSection title='下拉框自定义1'>
-          <HuiFilter
-            menuConfig={{
-              className: 'hui-menu-xxx',
-              menuItems: [
-                {
-                  title: '自定义title',
-                  footer: true,
-                  children: ({ hideMenu }) => (
-                    <View>
-                      <HuiButton onClick={() => hideMenu()}>ok</HuiButton>
-                    </View>
-                  ),
-                },
-                {
-                  options,
-                  onChange: item => {
-                    console.log(item)
+                ],
+              }}
+              filtersContentConfig={{
+                filterItems: mockFiltersConfig,
+                onConfirm: val => console.log('single val', val),
+              }}
+            />
+            <HuiFilter
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  {
+                    title: '自定义title',
+                    footer: true,
+                    children: ({ hideMenu }) => (
+                      <View>
+                        <HuiButton onClick={() => hideMenu()}>ok</HuiButton>
+                      </View>
+                    ),
                   },
-                  value: options[0].value,
-                },
-              ],
-            }}
-            filtersContentConfig={{
-              position: 'top',
-            }}
-          />
-        </GroupSection>
-        <GroupSection title='左侧内容区自定义 + fixed'>
-          <HuiFilter
-            fixed
-            filtersContentConfig={{
-              position: 'right',
-              filterItems: mockFiltersConfig,
-            }}
-          >search</HuiFilter>
+                  {
+                    options,
+                    onChange: item => {
+                      console.log(item)
+                    },
+                    value: options[0].value,
+                  },
+                ],
+              }}
+              filtersContentConfig={{
+                filterItems: mockFiltersConfig,
+                onConfirm: val => console.log('single val', val),
+              }}
+            />
+            <HuiFilter
+              fixed
+              filtersContentConfig={{
+                position: 'right',
+                filterItems: mockFiltersConfig,
+              }}
+            >
+              <HuiInput placeholder='请输入搜索关键字' />
+            </HuiFilter>
+            <HuiFilter
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  { value: '1', options: options1 },
+                  { value: '2', options: options1 },
+                  { value: '1', options: options1 },
+                  { value: '2', options: options1 },
+                ],
+              }}
+              filtersContentConfig={{
+                position: 'right',
+                filterItems: mockFiltersConfig,
+              }}
+            />
+          </View>
         </GroupSection>
       </View>
       <View style={{ height: 3000 }}></View>
