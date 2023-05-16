@@ -60,6 +60,7 @@ export type HIconType =
   | 'h010-right'
   | 'h011-downward'
   | 'h017-plus'
+  | 'h025-phone'
   | 'h109-filter'
   | 'h110-upwards'
   | 'h188-workcirde'
