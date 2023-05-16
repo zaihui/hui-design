@@ -41,7 +41,8 @@ const Popup: React.FC<HuiPopupProps> = props => {
     children,
     ...rest
   } = props
-  const handleClose = () => {
+  const handleClose = e => {
+    e.stopPropagation()
     if (!maskClosable || !onClose) {
       return
     }
@@ -61,7 +62,13 @@ const Popup: React.FC<HuiPopupProps> = props => {
         { 'no-animation': position === 'center' },
       )}
     >
-      <View className='popup-mask' style={maskStyle} onTouchMove={handleTouchMove} onClick={handleClose} />
+      <View
+        catchMove
+        className='popup-mask'
+        style={maskStyle}
+        onTouchMove={handleTouchMove}
+        onClick={handleClose}
+      />
       <View
         className={`popup-content ${position} ${contentClassName}`}
         style={contentStyle}

@@ -2,7 +2,6 @@
 @import "@/styles/colors.scss";
 
 .filters-default-popup-content {
-  width: $filters-content-popup-left-right-width;
   padding: $filters-content-popup-default-padding;
 }
 
@@ -21,7 +20,8 @@ $prefix: filters-content;
 
     &.right,
     &.left {
-      height: 86%;
+      width: $filters-content-popup-left-right-width;
+      height: 82%;
     }
 
     &.top {
@@ -63,41 +63,15 @@ $prefix: filters-content;
 
     &-content {
       height: 0;
+      padding: 0;
       overflow: hidden;
       background: #f5f5f5;
       transition: all .4s ease;
 
       &-active {
-        height: px(30);
+        height: auto;
         padding: px(16);
       }
-    }
-  }
-}
-
-.action-container {
-  @include flex-between;
-
-  padding: $filters-content-button-container-padding;
-  border-top: 1px solid #f5f5f5;
-
-  .filters-button {
-    margin: 0;
-  }
-
-  &.left,
-  &.right {
-    height: $filters-content-button-container-height;
-
-    .filters-button {
-      width: $filters-content-button-side-width;
-    }
-  }
-
-  &.top,
-  &.bottom {
-    .filters-button {
-      width: $filters-content-button-full-width;
     }
   }
 }

@@ -1,9 +1,10 @@
-import { View, Text } from '@tarojs/components'
+import { View } from '@tarojs/components'
 import React, { useState, useMemo, useContext } from 'react'
 import cx from 'classnames'
 import HuiPopup, { HuiPopupProps } from '../../Popup'
 import { useBoundingClientRect } from '../../../utils/hooks'
 import HuiIcon from '../../Icon'
+import HuiText from '../../Text'
 
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
@@ -47,7 +48,6 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     parent,
     ...rest
   } = props as any
-
   const context = useContext(FilterContext)
 
   const info = useBoundingClientRect(parent.filterRef)
@@ -70,17 +70,17 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     return (
       <View className={`${prefix}-item`}>
         <View className={`${prefix}-item-title`}>
-          <Text className={`${prefix}-item-title-label`}>{label}</Text>
+          <HuiText className={`${prefix}-item-title-label`}>{label}</HuiText>
           <View
             className={`${prefix}-item-title-toggle`}
             onClick={() => setChildrenVisible(!childrenVisible)}
           >
-            <Text>收起</Text>
+            <HuiText>{!childrenVisible ? '展开' : '收起'}</HuiText>
             <HuiIcon
               name='h011-downward'
               className={cx({
-                upward: !childrenVisible,
-                downward: childrenVisible,
+                upward: childrenVisible,
+                downward: !childrenVisible,
               })}
             />
           </View>
@@ -107,37 +107,40 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
   }
 
   return (
-      <HuiPopup
-        className={cx('hui-filter-animation', { 'no-animation': position === 'top' && !visible })}
-        visible={visible}
-        position={position}
-        contentClassName={cx('filters-default-popup-content', { popupContentClassName })}
-        contentStyle={positionStyle}
-        maskStyle={positionStyle}
-        onClose={() => {
-          if (onClose) {
-            onClose()
-          }
-        }}
-        {...rest}
+    <HuiPopup
+      className={cx('hui-filter-animation', {
+        'no-animation': position === 'top' && !visible,
+      })}
+      visible={visible}
+      position={position}
+      contentClassName={cx({
+        popupContentClassName,
+      })}
+      contentStyle={positionStyle}
+      maskStyle={positionStyle}
+      onClose={() => {
+        if (onClose) {
+          onClose()
+        }
+      }}
+      {...rest}
+    >
+      <View
+        className={cx(
+          `filters-default-popup-content ${prefix}-content ${position} ${contentClassName}`,
+        )}
+        style={contentStyle}
       >
-        <View
-          className={cx(`${prefix}-content ${position} ${contentClassName}`)}
-          style={contentStyle}
-        >
-          {filterItems.length
-            && filterItems.map((item, index) => (
-              <FilterItem
-                key={index}
-                label={item.label}
-                name={item.name}
-              >
-                {item.children}
-              </FilterItem>
-            ))}
-        </View>
-         <ActionFooter {...actionButtonProps} />
-      </HuiPopup>
+        {visible
+          && filterItems.length
+          && filterItems.map((item, index) => (
+            <FilterItem key={index} label={item.label} name={item.name}>
+              {item.children}
+            </FilterItem>
+          ))}
+      </View>
+      <ActionFooter {...actionButtonProps} />
+    </HuiPopup>
   )
 }
 

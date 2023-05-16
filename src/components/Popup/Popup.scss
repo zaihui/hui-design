@@ -1,8 +1,8 @@
-@import '../../styles/variables.scss';
-@import '../../styles/colors.scss';
+@import "../../styles/variables.scss";
+@import "../../styles/colors.scss";
 
 .hui-popup {
-  position: relative;
+  position: fixed;
   z-index: $hui-z-index-s;
   visibility: hidden;
   transition: visibility $hui-popup-duration $hui-popup-timing-function;
