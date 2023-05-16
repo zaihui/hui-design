@@ -4,7 +4,11 @@
 
 .title-page {
   .group-section {
-    padding: 0 24px;
+    & > .title {
+      padding: 0 16px 16px;
+    }
+
+    padding: unset;
 
     .content {
       background: $hui-border-color;
