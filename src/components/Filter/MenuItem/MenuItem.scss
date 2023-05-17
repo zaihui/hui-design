@@ -4,10 +4,11 @@
   display: flex;
   flex-wrap: wrap;
   max-height: $hui-filter-menu-item-content-max-height;
+  padding: $hui-filter-menu-item-content-padding-y $hui-filter-menu-item-content-padding-x;
   overflow-y: auto;
 
-  &.is-options {
-    padding: $hui-filter-menu-item-content-padding-y $hui-filter-menu-item-content-padding-x;
+  &.is-footer {
+    padding-bottom: $hui-filter-menu-item-content-padding-bottom-is-footer;
   }
 
   .hui-filter-menu-item-option {
