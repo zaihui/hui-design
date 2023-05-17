@@ -39,6 +39,7 @@ $prefix: filters-content;
 
       &-label {
         max-width: 80%;
+        font-weight: $hui-font-weight-medium;
         color: $hui-color-grey-1;
 
         @include no-wrap;
