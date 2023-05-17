@@ -132,8 +132,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
         }}
         >
           <View className={cx('hui-filter-menu-item-content', {
-            // options 的时候默认加了padding
-            'is-options': options,
+            'is-footer': options,
           })}
           >
             {!options ? renderChildren() : renderOptions()}

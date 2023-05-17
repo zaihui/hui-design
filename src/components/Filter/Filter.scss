@@ -21,13 +21,26 @@
     overflow: hidden;
 
     &.custom {
-      padding: 8px 0 8px 16px;
+      padding: px(6) px(16);
     }
   }
 
   .hui-filter-right-content {
+    position: relative;
     flex: 0 0 75px;
     padding: $hui-filter-menu-bar-padding-y $hui-filter-menu-bar-padding-x;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: -1px;
+      left: 0;
+      width: 30px;
+      pointer-events: none;
+      content: "";
+      box-shadow: $hui-filter-box-shadow;
+      transform: translate(-100%);
+    }
 
     &-icon {
       display: flex;

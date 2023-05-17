@@ -6,8 +6,8 @@ import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 import HuiSwitch from '@/components/Switch'
 import HuiStepper from '@/components/Stepper'
-import HuiInput from '@/components/Input'
 import HuiTag from '@/components/Tag'
+import HuiSearch from '@/components/Search'
 
 import './Filter.scss'
 
@@ -31,6 +31,7 @@ const TagsGroup = props => {
   )
 }
 const MenuPage: React.FC = () => {
+  const [val1, setVal1] = useState('')
   const options = [
     { value: '1', text: '再惠' },
     { value: '2', text: '麒麟' },
@@ -145,7 +146,7 @@ const MenuPage: React.FC = () => {
 
   return (
     <View className='filter-page'>
-      <PageHeader title='Filter组件' desc='筛选器' />
+      <PageHeader title='筛选栏Filter' desc='' />
       <View className='content'>
         <GroupSection title='单维度筛选'>
           <View className='gap'>
@@ -171,6 +172,16 @@ const MenuPage: React.FC = () => {
                   { value: '1', options },
                   { value: '2', options },
                   { value: '2', options },
+                ],
+              }}
+            />
+            <HuiFilter
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  { value: '1', options: options1 },
+                  { value: '1', options: options1 },
+                  { value: '1', options: options1 },
                 ],
               }}
             />
@@ -236,7 +247,12 @@ const MenuPage: React.FC = () => {
                 onClear: () => allClear(),
               }}
             >
-              <HuiInput placeholder='请输入搜索关键字' />
+                <HuiSearch
+                  placeholder='请输入关键词'
+                  theme='dark'
+                  value={val1}
+                  onInput={val => setVal1(val)}
+                />
             </HuiFilter>
             <HuiFilter
               menuConfig={{
@@ -255,8 +271,8 @@ const MenuPage: React.FC = () => {
             />
           </View>
         </GroupSection>
+       <View style={{ height: 500 }}></View>
       </View>
-      <View style={{ height: 3000 }}></View>
     </View>
   )
 }
