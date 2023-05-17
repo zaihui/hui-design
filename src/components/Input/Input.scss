@@ -10,6 +10,8 @@
   }
 
   .input-container {
+    display: flex;
+    align-items: center;
     padding: $input-space-v $hui-page-space-m $input-space-v;
     background: $input-background-color;
 
@@ -124,11 +126,6 @@
     width: 100%;
     padding: 0 $hui-page-space-m;
     background: $hui-theme-color-background;
-
-    .line {
-      width: 100%;
-      border-bottom: 1px solid $hui-font-color-base-05;
-    }
   }
 
   &.disabled {
