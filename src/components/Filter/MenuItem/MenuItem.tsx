@@ -1,10 +1,16 @@
-import React, { CSSProperties, ReactNode, useContext, useImperativeHandle, useMemo } from 'react'
-import cx from 'classnames'
 import { View } from '@tarojs/components'
+import cx from 'classnames'
+import React, {
+  CSSProperties,
+  ReactNode,
+  useContext,
+  useImperativeHandle,
+  useMemo,
+} from 'react'
 import { useBoundingClientRect } from '../../../utils/hooks'
 import Popup from '../../Popup'
-import FilterContext from '../context'
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
+import FilterContext from '../context'
 
 export interface MenuItemOption {
   value: string | number
@@ -60,10 +66,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     return {}
   }, [context.isFixed, context.scrollTop, info])
 
-  useImperativeHandle(
-    ref,
-    () => ({ hideMenu }),
-  )
+  useImperativeHandle(ref, () => ({ hideMenu }))
 
   const hideMenu = () => {
     parent.hideMenuItem(parent.index)
@@ -116,33 +119,32 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
   }
 
   return (
-    <>
-      <Popup visible={parent.show}
-        position='top'
-        maskStyle={position}
-        contentStyle={position}
-        onClose={hideMenu}
-        className={cx('hui-filter-animation',
-          {
-            'no-animation': !parent.show,
-          })}
-      >
-        <View className={cx(className)} style={{
+    <Popup
+      visible={parent.show}
+      position='top'
+      maskStyle={position}
+      contentStyle={position}
+      onClose={hideMenu}
+      className={cx('hui-filter-animation', {
+        'no-animation': !parent.show,
+      })}
+    >
+      <View
+        className={cx(className)}
+        style={{
           ...style,
         }}
-        >
-          <View className={cx('hui-filter-menu-item-content', {
+      >
+        <View
+          className={cx('hui-filter-menu-item-content', {
             'is-footer': options,
           })}
-          >
-            {!options ? renderChildren() : renderOptions()}
-          </View>
-          {
-            footer && <ActionFooter {...actionFooterProps} />
-          }
+        >
+          {!options ? renderChildren() : renderOptions()}
         </View>
-      </Popup>
-    </>
+        {footer && <ActionFooter {...actionFooterProps} />}
+      </View>
+    </Popup>
   )
 })
 
