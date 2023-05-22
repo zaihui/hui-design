@@ -26,8 +26,6 @@ import Context, {
 } from '../constants'
 import { toArray } from '../util'
 
-import './index.scss'
-
 /**
  * form表单基础组件
  */
