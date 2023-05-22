@@ -35,6 +35,7 @@
   .input-wrapper {
     display: flex;
     align-items: center;
+    width: 100%;
     height: 20px;
     min-height: $input-min-height;
     color: $hui-font-color-base;
@@ -126,9 +127,18 @@
     width: 100%;
     padding: 0 $hui-page-space-m;
     background: $hui-theme-color-background;
+
+    .line {
+      width: 100%;
+      border-bottom: 1px solid $hui-font-color-base-05;
+    }
   }
 
   &.disabled {
+    .divider-line {
+      background: $hui-disabled-background-color;
+    }
+
     .input-item-placeholder {
       color: $hui-font-color-base-25;
     }

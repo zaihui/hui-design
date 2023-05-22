@@ -48,7 +48,7 @@ const InputPage: React.FC = () => {
             <HuiInput label='兑换人民币' disabled placeholder='请输入金额' unit='元' align='right' />
           </View>
           <HuiInput
-            label='输入名称特别长'
+            label='输入名称特别长，不带分割线'
             placeholder='提示文章的内容建议不超过24个字符'
             divider={false}
             value={value2}
@@ -58,7 +58,7 @@ const InputPage: React.FC = () => {
             onInput={e => setValue2(e.target.value)}
           />
           <HuiInput
-            label='输入名称特别长'
+            label='输入名称特别长，不带分割线'
             labelIcon='112-doubtfill'
             required={false}
             placeholder='提示文章的内容建议不超过24个字符'
