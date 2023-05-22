@@ -85,6 +85,7 @@ const Search: React.FC<HuiSearchProps> = props => {
             }) => {
               onInput(value)
             }}
+            divider={false}
           />
         </View>
         {allowClear ? (
