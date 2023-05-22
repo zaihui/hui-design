@@ -13,6 +13,10 @@
     .content {
       background: $hui-border-color;
     }
+
+    &:nth-child(2) {
+      padding-top: 70px;
+    }
   }
 
   .hui-demo-title {

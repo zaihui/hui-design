@@ -10,7 +10,7 @@ import './Title.scss'
 const TitlePage: React.FC = () => (
   <View className='title-page'>
     <PageHeader
-      title='标题Title'
+      title='🪶标题Title'
       desc=''
     />
     <View className='content'>
