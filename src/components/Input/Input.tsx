@@ -126,7 +126,8 @@ const HuiInput: React.FC<HuiInputProps> = props => {
   return (
     <View
       style={style}
-      className={`hui-input ${className} ${disabled ? 'disabled' : ''}`}
+      // 这里加个 hui-text-field 临时兼容老版本代码，后续会干掉
+      className={`hui-input hui-text-field ${className} ${disabled ? 'disabled' : ''}`}
     >
       <View
         className='input-container'
