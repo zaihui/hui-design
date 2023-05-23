@@ -66,7 +66,13 @@ const validatorRule = (
   }
 
   // rule校验 - 取两者皆不存在的反 - 任意一个存在
-  if (!(!require && !pattern)) globalInputStatus = pattern ? pattern.test(value) : !!value
+  if (!(!require && !pattern)) {
+    let result = true
+    if ([null, undefined, ''].includes(value as any)) {
+      result = false
+    }
+    globalInputStatus = pattern ? pattern.test(value) : result
+  }
 
   return {
     fieldState: globalInputStatus,
