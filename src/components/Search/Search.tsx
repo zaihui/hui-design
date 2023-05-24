@@ -91,7 +91,8 @@ const Search: React.FC<HuiSearchProps> = props => {
         {allowClear ? (
           <View
             className={cx(`${prefix}-search-icon clear`)}
-            onClick={() => {
+            onClick={e => {
+              e.stopPropagation()
               onInput('')
               if (onClear) {
                 onClear()
