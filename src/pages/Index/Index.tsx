@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import Taro, { useShareAppMessage } from '@tarojs/taro'
+import React, { useState } from 'react'
 
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
@@ -34,12 +34,15 @@ const NavCard: React.FC<NavCard> = props => {
 
   return (
     <View className='nav-card'>
-      <View className={cls('main-content', { 'with-border': expand })} onClick={() => setExpand(!expand)}>
-        <View className='left'><HuiIcon name={icon} size={32} /></View>
+      <View
+        className={cls('main-content', { 'with-border': expand })}
+        onClick={() => setExpand(!expand)}
+      >
+        <View className='left'>
+          <HuiIcon name={icon} size={32} />
+        </View>
         <View className='right'>
-          <View className='title'>
-            {title}
-          </View>
+          <View className='title'>{title}</View>
           <View className='desc'>{desc}</View>
         </View>
       </View>
@@ -47,7 +50,11 @@ const NavCard: React.FC<NavCard> = props => {
         {items.length > 0 && (
           <View className='sub-items-content'>
             {items.map(item => (
-              <View key={item.url} className='sub-item' onClick={() => handleClickSubItem(item)}>
+              <View
+                key={item.url}
+                className='sub-item'
+                onClick={() => handleClickSubItem(item)}
+              >
                 <View className='sub-title'>{item.title}</View>
                 <HuiIcon name='012-arrowright' color='#b1b1b1' />
               </View>
@@ -120,6 +127,7 @@ const NAV_LIST: {
       { title: '骨架屏Skeleton', url: router.Skeleton.url },
       { title: '标题栏Title', url: router.Title.url },
       { title: '卡片Card', url: router.Card.url },
+      { title: '折叠面板CollapsePanel', url: router.CollapsePanel.url },
     ],
   },
   {
@@ -168,7 +176,10 @@ const IndexPage: React.FC = () => {
     <View className='index-page'>
       <View className='header'>
         <View className='title'>HUI DESIGN</View>
-        <View className='desc'>HUI DESIGN是为再惠小程序、H5提供丰富的基础 UI 组件，使在实际业务中快速集成，开箱即用</View>
+        <View className='desc'>
+          HUI DESIGN是为再惠小程序、H5提供丰富的基础 UI
+          组件，使在实际业务中快速集成，开箱即用
+        </View>
       </View>
 
       <View className='content'>
@@ -188,7 +199,10 @@ const IndexPage: React.FC = () => {
           router.Team.navigateTo()
         }}
       >
-        <View>我们团队<HuiIcon name='012-right' size={12} /></View>
+        <View>
+          我们团队
+          <HuiIcon name='012-right' size={12} />
+        </View>
       </View>
     </View>
   )

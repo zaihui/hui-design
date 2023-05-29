@@ -61,6 +61,7 @@ export default {
     'pages/HighlightText/HighlightText',
     'pages/Card/Card',
     'pages/Steppers/Steppers',
+    'pages/CollapsePanel/CollapsePanel',
   ],
   window: {
     backgroundTextStyle: 'light',
