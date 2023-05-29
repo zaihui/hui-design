@@ -17,25 +17,19 @@ import { getPageUrl } from './page'
 /**
  * 包装原生的路由方法
  */
-function reLaunch<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function reLaunch<P>(packageName: string, name: string, params?: P): void {
   Taro.reLaunch({
     url: getPageUrl(packageName, name, params),
   })
 }
 
-function redirectTo<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function redirectTo<P>(packageName: string, name: string, params?: P): void {
   Taro.redirectTo({
     url: getPageUrl(packageName, name, params),
   })
 }
 
-function navigateTo<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function navigateTo<P>(packageName: string, name: string, params?: P): void {
   Taro.navigateTo({
     url: getPageUrl(packageName, name, params),
   })
@@ -45,17 +39,17 @@ class PageItem {
   /**
    * 页面名字
    */
-  name: string
+  name: string;
 
   /**
    * 子包名
    */
-  packageName: string
+  packageName: string;
 
   /**
    * 是否是tab
    */
-  isTab: boolean
+  isTab: boolean;
 
   constructor(name: string, packageName = '', isTab = false) {
     this.name = name
@@ -166,4 +160,5 @@ export default {
   Card: new PageItemNormal('Card'),
   Steppers: new PageItemNormal('Steppers'),
   Filter: new PageItemNormal('Filter'),
+  CollapsePanel: new PageItemNormal('CollapsePanel'),
 }
