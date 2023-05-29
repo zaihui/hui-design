@@ -23,17 +23,18 @@ const HuiAvatar: React.FC<HuiAvatarProps> = props => {
   const defaultStyle = {
     border: borderColor ? `${pxTransform(1.75)} solid ${borderColor}` : 'none',
   }
-  const avatarSizeMap = type === 'square'
-    ? {
-      'small': 40,
-      'medium': 60,
-      'large': 80,
-    }
-    : {
-      'small': 16,
-      'medium': 24,
-      'large': 36,
-    }
+  const avatarSizeMap =
+    type === 'square'
+      ? {
+          small: 40,
+          medium: 60,
+          large: 80,
+        }
+      : {
+          small: 16,
+          medium: 24,
+          large: 36,
+        }
   const avatarSize = avatarSizeMap[size] || size
 
   return (

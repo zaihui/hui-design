@@ -17,6 +17,7 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
+    'prettier',
   ],
   plugins: [
     '@zaihui/eslint-plugin-react',
@@ -203,6 +204,7 @@ module.exports = {
         'plugin:vue/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
+        'prettier',
       ],
       env: {
         node: true,

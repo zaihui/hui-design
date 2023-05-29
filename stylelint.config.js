@@ -12,6 +12,7 @@ module.exports = {
      * css属性顺序规则集
      */
     'stylelint-config-recess-order',
+    'stylelint-config-prettier',
   ],
   plugins: [
     'stylelint-scss',
