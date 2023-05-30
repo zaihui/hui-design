@@ -10859,6 +10859,11 @@ git-clone@^0.1.0:
   resolved "https://registry.npm.taobao.org/git-clone/download/git-clone-0.1.0.tgz#0d76163778093aef7f1c30238f2a9ef3f07a2eb9"
   integrity sha1-DXYWN3gJOu9/HDAjjyqe8/B6Lrk=
 
+git-format-staged@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/git-format-staged/-/git-format-staged-3.0.0.tgz#66fe89fcb537f78e8129412dc0b2511b34d49e32"
+  integrity sha512-cdDJxV06qY8ucBsW/uIFR4PYN/kDHl43nG8yg+VPPaDeLAf8hEPhEIJTeJ+yRClxcDSpoTmDPiFZUoxFx1wPCg==
+
 git-raw-commits@2.0.0:
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/git-raw-commits/download/git-raw-commits-2.0.0.tgz#d92addf74440c14bcc5c83ecce3fb7f8a79118b5"

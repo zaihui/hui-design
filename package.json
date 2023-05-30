@@ -41,7 +41,7 @@
     "commit": "npx git-cz",
     "release": "standard-version --commit-all",
     "prepare": "husky install",
-    "create-hook": "husky add .husky/commit-msg \"npx --no -- commitlint --edit ${1}\" && husky add .husky/pre-commit \"npx lint-staged\""
+    "create-hook": "husky add .husky/commit-msg \"npx --no -- commitlint --edit ${1}\" && husky set .husky/pre-commit \"npx pretty-quick --staged\""
   },
   "repository": {
     "type": "git",
@@ -111,6 +111,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-taro": "^3.3.20",
     "eslint-plugin-vue": "^6.2.2",
+    "git-format-staged": "^3.0.0",
     "husky": "^8.0.1",
     "jest": "^26.0.1",
     "lint-staged": "^13.2.1",
