@@ -40,11 +40,11 @@
   &.disabled {
     .hui-radio-icon {
       background-color: $hui-radio-icon-disabled-bg-color;
-      opacity: .35;
+      opacity: 0.35;
     }
 
     .hui-radio-content {
-      opacity: .35;
+      opacity: 0.35;
     }
   }
 }

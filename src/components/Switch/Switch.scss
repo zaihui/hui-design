@@ -1,9 +1,9 @@
 @import '../../styles/variables.scss';
 @import '../../styles/colors.scss';
 
-$hui-switch-dot-btn-box-shadow: 0 px(2) px(2) 0 rgba(0, 0, 0, .3), 0 px(4) 8px 0 rgba(0, 0, 0, .1);
-$hui-switch-dot-btn-checked-box-shadow: 0 px(1) px(2) 0 rgba(0, 0, 0, .3),
-  0 px(4) px(8) 0 rgba(0, 0, 0, .1);
+$hui-switch-dot-btn-box-shadow: 0 px(2) px(2) 0 rgba(0, 0, 0, 0.3), 0 px(4) 8px 0 rgba(0, 0, 0, 0.1);
+$hui-switch-dot-btn-checked-box-shadow: 0 px(1) px(2) 0 rgba(0, 0, 0, 0.3),
+  0 px(4) px(8) 0 rgba(0, 0, 0, 0.1);
 $hui-switch-dot-btn-checked-transform: translateX(
   calc(#{$hui-switch-width} - #{$hui-switch-dot-width} - #{$hui-switch-border-width} * 2)
 );
@@ -43,8 +43,8 @@ $hui-switch-dot-btn-checked-transform: translateX(
     border-radius: 50%;
     box-shadow: $hui-switch-dot-box-shadow;
     box-shadow: $hui-switch-dot-btn-box-shadow;
-    transition: transform .35s cubic-bezier(.4, .4, .25, 1.35),
-      -webkit-transform .35s cubic-bezier(.4, .4, .25, 1.35);
+    transition: transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35),
+      -webkit-transform 0.35s cubic-bezier(0.4, 0.4, 0.25, 1.35);
 
     &.checked {
       box-shadow: $hui-switch-dot-btn-checked-box-shadow;

@@ -27,7 +27,7 @@
       width: $stepper-btn-w;
       height: $stepper-btn-w;
       border-radius: 50%;
-      transition: all .2s;
+      transition: all 0.2s;
 
       &.active {
         transform: scale(1.2);
