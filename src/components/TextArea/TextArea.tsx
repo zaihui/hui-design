@@ -82,7 +82,14 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     <View className='label'>
       <View>{label}</View>
       {!required && <View className='label-required'>(选填)</View>}
-      {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
+      {labelIcon && (
+        <HuiIcon
+          name={labelIcon}
+          size={14}
+          className='label-icon'
+          color='#bbb'
+        />
+      )}
     </View>
   ) : null
 
@@ -110,7 +117,12 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
       onInput={(e) => {
         // eslint-disable-next-line
         // @ts-ignore
-        if (!props.errorMsg && required && !e.target.value && errorMsg !== requiredMsg) {
+        if (
+          !props.errorMsg &&
+          required &&
+          !e.detail.value &&
+          errorMsg !== requiredMsg
+        ) {
           setErrorMsg(requiredMsg)
         }
         onInput(e)
@@ -125,7 +137,10 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
   return (
     <View
       className={cx('hui-text-area', className, { disabled })}
-      style={{ height: typeof height === 'string' ? height : `${height}px`, ...style }}
+      style={{
+        height: typeof height === 'string' ? height : `${height}px`,
+        ...style,
+      }}
     >
       <View className='hui-text-area-label-area'>{labelDom}</View>
       {textareaDom}
@@ -133,7 +148,11 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
         <View className='indicator'>
           <Text
             className={`current-number ${
-              upperLimit && valueLen > upperLimit ? 'overage' : valueLen ? '' : 'zero'
+              upperLimit && valueLen > upperLimit
+                ? 'overage'
+                : valueLen
+                ? ''
+                : 'zero'
             }`}
           >
             {valueLen}

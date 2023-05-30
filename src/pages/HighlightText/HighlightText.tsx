@@ -10,7 +10,10 @@ import './HighlightText.scss'
 
 const FooterDemoPage: React.FC = () => (
   <View className='hight-light-text-demo-page'>
-    <PageHeader title='高亮文本' desc='高亮文本是为了对文本中的一些关键字高亮展示' />
+    <PageHeader
+      title='高亮文本'
+      desc='高亮文本是为了对文本中的一些关键字高亮展示'
+    />
     <View className='content'>
       <GroupSection title='单行文本和修改关键字颜色'>
         <HighlightText keyword='技术' keywordStyle={{ color: 'red' }}>

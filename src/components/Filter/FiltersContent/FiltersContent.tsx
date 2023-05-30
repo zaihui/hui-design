@@ -10,7 +10,9 @@ import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
 import FilterContext from '../context'
 
-export interface FiltersContentProps extends HuiPopupProps, Omit<ActionFooterProps, 'hideMenu'> {
+export interface FiltersContentProps
+  extends HuiPopupProps,
+    Omit<ActionFooterProps, 'hideMenu'> {
   /** 筛选内容 */
   contentClassName?: string
   contentStyle?: React.CSSProperties
@@ -61,7 +63,9 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
 
   const FilterItem: React.FC<FilterItemProps> = (itemProps) => {
     const { label = '筛选条件名称', children } = itemProps
-    const [childrenVisible, setChildrenVisible] = useState<boolean>(filterVisible || false)
+    const [childrenVisible, setChildrenVisible] = useState<boolean>(
+      filterVisible || false,
+    )
 
     return (
       <View className={`${prefix}-item`}>

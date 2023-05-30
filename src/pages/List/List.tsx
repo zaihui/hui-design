@@ -33,7 +33,10 @@ const ListPage: React.FC = () => (
         </SubGroupSection>
 
         <SubGroupSection title='带图列表'>
-          <List.Item avatar={<HuiImage width={32} height={32} src='' />} title='标题文字' />
+          <List.Item
+            avatar={<HuiImage width={32} height={32} src='' />}
+            title='标题文字'
+          />
           <List.Item
             avatar={<HuiImage width={32} height={32} src='' />}
             title='标题文字'
@@ -54,8 +57,16 @@ const ListPage: React.FC = () => (
 
         <SubGroupSection title='带描述列表'>
           <List.Item title='标题文字' description='描述信息' />
-          <List.Item title='标题文字' description='描述信息' icon={<DefaultIcon />} />
-          <List.Item title='标题文字' description='描述信息' tips='提示信息最长120px' />
+          <List.Item
+            title='标题文字'
+            description='描述信息'
+            icon={<DefaultIcon />}
+          />
+          <List.Item
+            title='标题文字'
+            description='描述信息'
+            tips='提示信息最长120px'
+          />
           <List.Item
             title='标题文字'
             description='描述信息'

@@ -9,7 +9,8 @@ import GroupSection from '@/demoComponents/GroupSection'
 
 import './Share.scss'
 
-const IMAGE = 'https://r.kezaihui.com/client/2021-07-22/hui-design-share-demo-2021072201.png'
+const IMAGE =
+  'https://r.kezaihui.com/client/2021-07-22/hui-design-share-demo-2021072201.png'
 
 const ShareDemoPage: React.FC = () => {
   const [singleShareVisible, setSingleShareVisible] = useState(false)
@@ -65,7 +66,11 @@ const ShareDemoPage: React.FC = () => {
             </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => handleShowShare(false)}>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => handleShowShare(false)}
+            >
               多张海报分享
             </HuiButton>
           </View>

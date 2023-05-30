@@ -34,7 +34,10 @@ const Modal: React.FC<HuiModalProps> = (props) => {
       position='bottom'
       onClose={onClose}
       className={className}
-      style={{ borderRadius: `${pxTransform(20)} ${pxTransform(20)} 0 0`, ...style }}
+      style={{
+        borderRadius: `${pxTransform(20)} ${pxTransform(20)} 0 0`,
+        ...style,
+      }}
       {...rest}
     >
       <View className='hui-modal'>
@@ -45,7 +48,10 @@ const Modal: React.FC<HuiModalProps> = (props) => {
           </View>
         </View>
         <HuiDivider />
-        <View className={`hui-modal-body ${contentClassName}`} style={contentStyle}>
+        <View
+          className={`hui-modal-body ${contentClassName}`}
+          style={contentStyle}
+        >
           {children}
         </View>
       </View>

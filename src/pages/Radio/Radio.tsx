@@ -44,7 +44,11 @@ const RadioPage: React.FC = () => {
             <Radio value='demo3' checked disabled />
           </RadioSample>
           <RadioSample title='未选中'>
-            <Radio value='demo4' checked={checked1} onClick={() => setChecked1(true)} />
+            <Radio
+              value='demo4'
+              checked={checked1}
+              onClick={() => setChecked1(true)}
+            />
           </RadioSample>
           <RadioSample title='未选中不可点'>
             <Radio value='demo5' checked={false} disabled />

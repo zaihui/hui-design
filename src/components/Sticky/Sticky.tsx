@@ -44,11 +44,20 @@ const HuiSticky: React.FC<HuiStickyProps> = (props) => {
 
   return (
     <View
-      className={cx(`hui-sticky-container ${className}`, { fixed: contentFixed })}
-      style={{ height: contentFixed ? contentClientRect?.height : 'unset', ...style }}
+      className={cx(`hui-sticky-container ${className}`, {
+        fixed: contentFixed,
+      })}
+      style={{
+        height: contentFixed ? contentClientRect?.height : 'unset',
+        ...style,
+      }}
       ref={containerRef}
     >
-      <View className='hui-sticky-content' ref={contentRef} style={{ top: offsetTop }}>
+      <View
+        className='hui-sticky-content'
+        ref={contentRef}
+        style={{ top: offsetTop }}
+      >
         {children}
       </View>
     </View>

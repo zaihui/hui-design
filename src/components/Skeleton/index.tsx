@@ -36,11 +36,17 @@ const HuiSkeleton: React.FC<HuiSkeletonProps> = (props) => {
   const { type, avatar, title, paragraph, className = '', style } = props
 
   const avartarSize =
-    typeof avatar === 'object' ? avatar.size ?? DEFAULT_AVATAR_SIZE : DEFAULT_AVATAR_SIZE
+    typeof avatar === 'object'
+      ? avatar.size ?? DEFAULT_AVATAR_SIZE
+      : DEFAULT_AVATAR_SIZE
   const avatarShap =
-    typeof avatar === 'object' ? avatar.shape ?? DEFAULT_AVATAR_SHAPE : DEFAULT_AVATAR_SHAPE
+    typeof avatar === 'object'
+      ? avatar.shape ?? DEFAULT_AVATAR_SHAPE
+      : DEFAULT_AVATAR_SHAPE
   const titleWidth =
-    typeof title === 'object' ? title.width ?? DEFAULT_TITLE_WIDTH : DEFAULT_TITLE_WIDTH
+    typeof title === 'object'
+      ? title.width ?? DEFAULT_TITLE_WIDTH
+      : DEFAULT_TITLE_WIDTH
   const paragraphRows =
     typeof paragraph === 'object'
       ? paragraph.rows ?? DEFAULT_PARAGRAPH_ROWS
@@ -72,19 +78,28 @@ const HuiSkeleton: React.FC<HuiSkeletonProps> = (props) => {
         />
       )}
       {(hasTitle || hasParagraph) && (
-        <View className={`hui-skeleton-content ${hasAvatar ? 'has-avatar' : ''}`}>
+        <View
+          className={`hui-skeleton-content ${hasAvatar ? 'has-avatar' : ''}`}
+        >
           {hasTitle && (
             <View
               className='hui-skeleton-title'
               style={{
-                width: typeof titleWidth === 'number' ? pxTransform(titleWidth) : titleWidth,
+                width:
+                  typeof titleWidth === 'number'
+                    ? pxTransform(titleWidth)
+                    : titleWidth,
               }}
             />
           )}
           {hasParagraph && (
             <View className='hui-skeleton-paragraph-content'>
               {paragraphs.map(({ width }, index) => (
-                <View key={index} className='hui-skeleton-paragraph' style={{ width }} />
+                <View
+                  key={index}
+                  className='hui-skeleton-paragraph'
+                  style={{ width }}
+                />
               ))}
             </View>
           )}

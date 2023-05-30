@@ -5,7 +5,7 @@
   "bracketSameLine": false,
   "trailingComma": "all",
   "trailingZero": "none",
-  "printWidth": 100,
+  "printWidth": 80,
   "arrowParens": "always",
   "semi": false,
   "proseWrap": "never",

@@ -97,7 +97,9 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
             })}
             onClick={() => toggleMenuItem(index)}
           >
-            <View className='hui-filter-menu-item-text'>{clipText(getTitle())}</View>
+            <View className='hui-filter-menu-item-text'>
+              {clipText(getTitle())}
+            </View>
             <View className='hui-filter-menu-item-icon'>
               <HuiIcon name='h110-upwards' size={14} />
             </View>
@@ -125,7 +127,11 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
     })
 
   return (
-    <View {...rest} className={cx('hui-filter-menu', className, generateUniqueId())} ref={menuRef}>
+    <View
+      {...rest}
+      className={cx('hui-filter-menu', className, generateUniqueId())}
+      ref={menuRef}
+    >
       <View className='hui-filter-menu-bar'>{renderMenuTitle()}</View>
       {renderMenuItem()}
     </View>

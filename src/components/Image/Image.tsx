@@ -50,7 +50,9 @@ const HuiImage: React.FC<HuiImageProps> = (props) => {
     onError,
     ...rest
   } = props
-  const [imageStatus, setImageStatus] = useState(src ? ImageStatus.Loading : ImageStatus.Empty)
+  const [imageStatus, setImageStatus] = useState(
+    src ? ImageStatus.Loading : ImageStatus.Empty,
+  )
   const defaultPlaceholderSize = width * 0.4
   const customPlaceholderSize = width * 0.16
 
@@ -61,7 +63,9 @@ const HuiImage: React.FC<HuiImageProps> = (props) => {
     onLoad && onLoad(event)
   }
 
-  const handleOnError = (event: BaseEventOrig<ImageProps.onErrorEventDetail>) => {
+  const handleOnError = (
+    event: BaseEventOrig<ImageProps.onErrorEventDetail>,
+  ) => {
     setImageStatus(ImageStatus.Fail)
     onError && onError(event)
   }
@@ -115,7 +119,9 @@ const HuiImage: React.FC<HuiImageProps> = (props) => {
   const showAnimation = animated || !height || !width
 
   const style = Object.assign(
-    height && width ? { height: pxTransform(height), width: pxTransform(width) } : {},
+    height && width
+      ? { height: pxTransform(height), width: pxTransform(width) }
+      : {},
     customStyle,
   )
 
@@ -128,9 +134,10 @@ const HuiImage: React.FC<HuiImageProps> = (props) => {
           })}
         >
           {imageSize === ImageSize.LARGE ? getPlaceholder() : null}
-          {imageSize === ImageSize.LARGE && imageStatus === ImageStatus.Loading && (
-            <View className='loading-text'>加载中…</View>
-          )}
+          {imageSize === ImageSize.LARGE &&
+            imageStatus === ImageStatus.Loading && (
+              <View className='loading-text'>加载中…</View>
+            )}
           {imageSize === ImageSize.MEDIUM ? getImageStatusText() : null}
         </View>
       )}

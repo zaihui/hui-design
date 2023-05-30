@@ -9,7 +9,9 @@ import './Login.scss'
 
 @inject('userStore')
 @observer
-export default class Login extends React.Component<Pick<StoreProps, 'userStore'>> {
+export default class Login extends React.Component<
+  Pick<StoreProps, 'userStore'>
+> {
   // eslint-disable-next-line class-methods-use-this
   handleOnLogin(): void {
     // eslint-disable-next-line no-console

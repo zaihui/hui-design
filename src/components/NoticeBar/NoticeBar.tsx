@@ -45,7 +45,9 @@ const NoticeBar: React.FC<HuiNoticeBarProps> = (props) => {
   useEffect(() => {
     if (type === 'marquee' && children) {
       setDuration(
-        (Taro.getSystemInfoSync().windowWidth + children.toString().length * FONT_SIZE) / speed,
+        (Taro.getSystemInfoSync().windowWidth +
+          children.toString().length * FONT_SIZE) /
+          speed,
       )
     }
   }, [type, children, speed])
@@ -70,7 +72,9 @@ const NoticeBar: React.FC<HuiNoticeBarProps> = (props) => {
 
   return visible ? (
     <View
-      className={cx(`hui-noticebar ${className}`, { marquee: type === 'marquee' })}
+      className={cx(`hui-noticebar ${className}`, {
+        marquee: type === 'marquee',
+      })}
       style={noticeBarStyle}
       onClick={handleGoToMore}
     >

@@ -2,7 +2,11 @@
 import React, { useState } from 'react'
 import { ViewProps } from '@tarojs/components/types/View'
 import { View, Input } from '@tarojs/components'
-import { CommonEvent, CommonEventFunction, ITouchEvent } from '@tarojs/components/types/common'
+import {
+  CommonEvent,
+  CommonEventFunction,
+  ITouchEvent,
+} from '@tarojs/components/types/common'
 import { pxTransform } from '../../utils'
 import Icon from '../Icon/Icon'
 
@@ -255,10 +259,15 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
 
   const initHideMinusAndInput = `${hideMinus && value === min ? 'hide' : ''}`
 
-  const disableInputFormat = hideMinus ? !!(initHideMinusAndInput || disabledInput) : disabledInput
+  const disableInputFormat = hideMinus
+    ? !!(initHideMinusAndInput || disabledInput)
+    : disabledInput
 
   return (
-    <View className={`hui-stepper ${className} ${initHideMinusAndInput}`} style={style}>
+    <View
+      className={`hui-stepper ${className} ${initHideMinusAndInput}`}
+      style={style}
+    >
       <View className={minusBtnCls} onClick={(e) => handleClick('minus', e)}>
         <View className={`btn ${scaleAnimation.minus ? 'active' : ''}`}>
           <Icon

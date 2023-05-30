@@ -118,7 +118,9 @@ const Page: React.FC = () => {
         columns={open2Columns}
         current={[4, 4]}
         onConfirm={handleOpen2Confirm}
-        onChange={(_, i) => Taro.showToast({ title: `你滚动了第${i + 1}列`, icon: 'none' })}
+        onChange={(_, i) =>
+          Taro.showToast({ title: `你滚动了第${i + 1}列`, icon: 'none' })
+        }
         title='双列滚动选择器'
       />
       <HuiPicker
@@ -128,7 +130,9 @@ const Page: React.FC = () => {
         columns={open3Columns}
         current={[4, 4, 6]}
         onConfirm={handleOpen3Confirm}
-        onChange={(_, i) => Taro.showToast({ title: `你滚动了第${i + 1}列`, icon: 'none' })}
+        onChange={(_, i) =>
+          Taro.showToast({ title: `你滚动了第${i + 1}列`, icon: 'none' })
+        }
         title='三列滚动选择器'
       />
     </View>

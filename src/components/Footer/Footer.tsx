@@ -22,7 +22,11 @@ const HuiFooter: React.FC<HuiFooterProps> = (props) => {
     <View className={`hui-footer ${className}`} style={style}>
       {!!image && (
         <View className='hui-footer-image'>
-          <HuiImage src={image} width={LOGO_SIZE.WIDTH} height={LOGO_SIZE.HEIGHT} />
+          <HuiImage
+            src={image}
+            width={LOGO_SIZE.WIDTH}
+            height={LOGO_SIZE.HEIGHT}
+          />
         </View>
       )}
       {isSimple ? <View>-&nbsp;{content}&nbsp;-</View> : content}

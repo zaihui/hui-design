@@ -85,7 +85,11 @@ const TextArea: React.FC = () => {
         </GroupSection>
         <GroupSection title='输入状态'>
           <View className='input-status-group-section'>
-            <HuiTextArea disabled upperLimit={50} placeholder='不可输入状态提示文案' />
+            <HuiTextArea
+              disabled
+              upperLimit={50}
+              placeholder='不可输入状态提示文案'
+            />
           </View>
           <View className='input-status-group-section'>
             <HuiTextArea

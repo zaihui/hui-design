@@ -45,5 +45,6 @@ export default {
           }
         : { code: 400, data: null },
     ),
-  bindPhone: (encryptedData, iv, sessionKey) => Promise.resolve({ encryptedData, iv, sessionKey }),
+  bindPhone: (encryptedData, iv, sessionKey) =>
+    Promise.resolve({ encryptedData, iv, sessionKey }),
 }

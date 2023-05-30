@@ -2,7 +2,10 @@
 import React from 'react'
 import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
-import { CommonEventFunction, ITouchEvent } from '@tarojs/components/types/common'
+import {
+  CommonEventFunction,
+  ITouchEvent,
+} from '@tarojs/components/types/common'
 import { ViewProps } from '@tarojs/components/types/View'
 import { InputProps } from '@tarojs/components/types/Input'
 import HuiIcon from '../Icon'
@@ -80,7 +83,14 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     <View className='label'>
       <View>{label}</View>
       {!required && <View className='label-required'>(选填)</View>}
-      {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
+      {labelIcon && (
+        <HuiIcon
+          name={labelIcon}
+          size={14}
+          className='label-icon'
+          color='#bbb'
+        />
+      )}
     </View>
   ) : null
 
@@ -145,7 +155,9 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     <View
       style={style}
       // 这里加个 hui-text-field 临时兼容老版本代码，后续会干掉
-      className={`hui-input hui-text-field ${className} ${disabled ? 'disabled' : ''}`}
+      className={`hui-input hui-text-field ${className} ${
+        disabled ? 'disabled' : ''
+      }`}
     >
       <View
         className='input-container'

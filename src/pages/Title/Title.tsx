@@ -12,9 +12,21 @@ const TitlePage: React.FC = () => (
     <PageHeader title='🪶标题Title' desc='' />
     <View className='content'>
       <GroupSection title='仅标题'>
-        <HuiTitle className='hui-demo-title' title='标题名称' size={HuiTitleSize.Small} />
-        <HuiTitle className='hui-demo-title' title='标题名称名称' size={HuiTitleSize.Medium} />
-        <HuiTitle className='hui-demo-title' title='标题名称' size={HuiTitleSize.Large} />
+        <HuiTitle
+          className='hui-demo-title'
+          title='标题名称'
+          size={HuiTitleSize.Small}
+        />
+        <HuiTitle
+          className='hui-demo-title'
+          title='标题名称名称'
+          size={HuiTitleSize.Medium}
+        />
+        <HuiTitle
+          className='hui-demo-title'
+          title='标题名称'
+          size={HuiTitleSize.Large}
+        />
       </GroupSection>
       <GroupSection title='标题&链接/交互'>
         <HuiTitle

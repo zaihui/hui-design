@@ -110,10 +110,16 @@ export default class Tooltip extends React.Component<HuiTooltipProps> {
     } = this.props
 
     return (
-      <View className={`hui-tooltip-container ${className}`} style={containerStyle}>
+      <View
+        className={`hui-tooltip-container ${className}`}
+        style={containerStyle}
+      >
         {children}
         {visible && (
-          <View className={`hui-tooltip ${placementCls[placement]}`} style={popStyle}>
+          <View
+            className={`hui-tooltip ${placementCls[placement]}`}
+            style={popStyle}
+          >
             <View className='hui-tooltip-content'>{content}</View>
             <View className='hui-tooltip-arrow'></View>
             {closable && (

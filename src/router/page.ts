@@ -2,7 +2,9 @@
  * 根据页面名生成页面路径
  */
 export const getPagePath = (packageName: string, pageName: string): string =>
-  packageName ? `/${packageName}/pages/${pageName}/${pageName}` : `/pages/${pageName}/${pageName}`
+  packageName
+    ? `/${packageName}/pages/${pageName}/${pageName}`
+    : `/pages/${pageName}/${pageName}`
 
 /**
  * 将对象格式参数转化为get请求格式的参数字符串
@@ -20,7 +22,11 @@ export const getParamsString = (params: Record<string, unknown>): string =>
 /**
  * 根据页面名和参数对象生成页面url
  */
-export const getPageUrl = (packageName: string, pageName: string, params = {}): string => {
+export const getPageUrl = (
+  packageName: string,
+  pageName: string,
+  params = {},
+): string => {
   const pagePath = getPagePath(packageName, pageName)
 
   return `${pagePath}?q=${encodeURIComponent(JSON.stringify(params))}`

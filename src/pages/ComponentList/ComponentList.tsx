@@ -81,7 +81,9 @@ const ComponentList: React.FC = () => {
   const { category = Category.Base } = obj
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const { title, icon } = CategoryMap.get((category as Category) || Category.Base)!
+  const { title, icon } = CategoryMap.get(
+    (category as Category) || Category.Base,
+  )!
 
   return (
     <View className='component-list-page'>

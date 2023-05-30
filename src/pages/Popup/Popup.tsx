@@ -60,7 +60,11 @@ const PopupPage: React.FC = () => {
         </GroupSection>
       </View>
 
-      <HuiPopup visible={v1} onClose={() => setV1(false)} style={{ padding: '30px 50px' }}>
+      <HuiPopup
+        visible={v1}
+        onClose={() => setV1(false)}
+        style={{ padding: '30px 50px' }}
+      >
         内容
       </HuiPopup>
       <HuiPopup
@@ -102,7 +106,9 @@ const PopupPage: React.FC = () => {
         onClose={() => setV6(false)}
         style={{ padding: '30px 16px' }}
         maskClosable={false}
-        onClick={() => Taro.showToast({ icon: 'none', title: '你点了内容区域' })}
+        onClick={() =>
+          Taro.showToast({ icon: 'none', title: '你点了内容区域' })
+        }
       >
         <HuiButton block size='large' onClick={() => setV6(false)}>
           只能点我关闭

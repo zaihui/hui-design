@@ -1,6 +1,12 @@
 import { View, Text } from '@tarojs/components'
 import classNames from 'classnames'
-import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import HuiIcon from '../../Icon/Icon'
 
@@ -66,23 +72,34 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   const requireIcon = useMemo(
     () =>
       !ruleTarget?.require && !hiddenOptionalStyle
-        ? customOptionalStyle || <Text className={`${formItemPrefix}-option`}>(选填)</Text>
+        ? customOptionalStyle || (
+            <Text className={`${formItemPrefix}-option`}>(选填)</Text>
+          )
         : null,
     [ruleTarget?.require, hiddenOptionalStyle, customOptionalStyle],
   )
 
   const labelIcon = useMemo(
-    () => (labelIconNode ? <View onClick={onLabelIconClick}>{labelIconNode}</View> : null),
+    () =>
+      labelIconNode ? (
+        <View onClick={onLabelIconClick}>{labelIconNode}</View>
+      ) : null,
     [labelIconNode, onLabelIconClick],
   )
 
   const ruleErrorView = useMemo(
-    () => (ruleText ? <View className={`${formItemPrefix}-rule`}>{ruleText}</View> : null),
+    () =>
+      ruleText ? (
+        <View className={`${formItemPrefix}-rule`}>{ruleText}</View>
+      ) : null,
     [ruleText],
   )
 
   const tipsView = useMemo(
-    () => (tipsText ? <View className={`${formItemPrefix}-tips`}>{tipsText}</View> : null),
+    () =>
+      tipsText ? (
+        <View className={`${formItemPrefix}-tips`}>{tipsText}</View>
+      ) : null,
     [tipsText],
   )
 
@@ -109,12 +126,20 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     [total, getFieldValue, path, children, setFieldValue],
   )
 
-  const [implementAnimation] = useAnimationCss(`${formItemPrefix}-animation`, !!ruleText)
+  const [implementAnimation] = useAnimationCss(
+    `${formItemPrefix}-animation`,
+    !!ruleText,
+  )
 
   const validatorRules = useCallback(
     async (value: string) => {
       try {
-        const [css, text] = validatorField(rule, value, renderType, getFieldValue)
+        const [css, text] = validatorField(
+          rule,
+          value,
+          renderType,
+          getFieldValue,
+        )
 
         setRuleCss(css)
         setRuleText(text)
@@ -194,7 +219,10 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
             <View>{extra}</View>
             {showArrow && (
               <View>
-                <HuiIcon className={`${formItemPrefix}-arrow`} name='012-right' />
+                <HuiIcon
+                  className={`${formItemPrefix}-arrow`}
+                  name='012-right'
+                />
               </View>
             )}
           </View>

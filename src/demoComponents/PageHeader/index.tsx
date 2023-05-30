@@ -18,7 +18,10 @@ const PageHeader: React.FC<PageHeaderProps> = (props) => {
       <View className='title'>
         {image && (
           <Image
-            style={{ width: Taro.pxTransform(33), height: Taro.pxTransform(33) }}
+            style={{
+              width: Taro.pxTransform(33),
+              height: Taro.pxTransform(33),
+            }}
             src={image}
           />
         )}

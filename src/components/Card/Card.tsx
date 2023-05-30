@@ -73,7 +73,9 @@ const HuiCard: React.FC<HuiCardProps> = (props) => {
             )}
           </View>
           {subtitle && <View className='hui-card-subtitle'>{subtitle}</View>}
-          {isHorizontal && content && <View className='hui-card-body'>{content}</View>}
+          {isHorizontal && content && (
+            <View className='hui-card-body'>{content}</View>
+          )}
         </View>
       </View>
       {!isHorizontal && content && (

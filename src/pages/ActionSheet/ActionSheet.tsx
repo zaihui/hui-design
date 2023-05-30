@@ -45,20 +45,34 @@ const ActionSheet: React.FC = () => {
         <HuiActionSheet.Item hasActive={false} onClick={() => handleClick(1)}>
           操作一(点击没有active样式效果)
         </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(2)}>操作二</HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(3)}>操作三</HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(2)}>
+          操作二
+        </HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(3)}>
+          操作三
+        </HuiActionSheet.Item>
       </HuiActionSheet>
 
-      <HuiActionSheet title='这是一个title' visible={open4} onClose={() => setOpen4(false)}>
+      <HuiActionSheet
+        title='这是一个title'
+        visible={open4}
+        onClose={() => setOpen4(false)}
+      >
         <HuiActionSheet.Item disabled onClick={() => handleClick(1)}>
           操作一
         </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(2)}>操作二</HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(2)}>
+          操作二
+        </HuiActionSheet.Item>
         <HuiActionSheet.Item disabled onClick={() => handleClick(3)}>
           操作三
         </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(4)}>操作四</HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(5)}>操作五</HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(4)}>
+          操作四
+        </HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(5)}>
+          操作五
+        </HuiActionSheet.Item>
       </HuiActionSheet>
     </View>
   )

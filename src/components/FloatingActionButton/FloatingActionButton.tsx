@@ -30,7 +30,9 @@ const DEFAULT_COLOR = '#ff5152'
 const COLOR_WHITE = '#fff'
 const DEFAULT_POSITION = { right: 12, bottom: 58 }
 
-const FloatingActionButton: React.FC<HuiFloatingActionButtonProps> = (props) => {
+const FloatingActionButton: React.FC<HuiFloatingActionButtonProps> = (
+  props,
+) => {
   const { prefixIcon, iconColor = COLOR_WHITE, style, color, position } = props
 
   return (
@@ -49,7 +51,10 @@ const FloatingActionButton: React.FC<HuiFloatingActionButtonProps> = (props) => 
               <HuiIcon
                 name={prefixIcon}
                 color={iconColor}
-                style={{ marginRight: prefixIcon && props.children ? pxTransform(8) : undefined }}
+                style={{
+                  marginRight:
+                    prefixIcon && props.children ? pxTransform(8) : undefined,
+                }}
                 size={24}
               />
             </View>

@@ -13,7 +13,12 @@ const HuiGridItem: React.FC<HuiGridItemProps> = (props) => {
   const { image, text, style, className = '', ...rest } = props
 
   return (
-    <Navigator className={`hui-grid-item ${className}`} hoverClass='none' style={style} {...rest}>
+    <Navigator
+      className={`hui-grid-item ${className}`}
+      hoverClass='none'
+      style={style}
+      {...rest}
+    >
       <Image src={image} mode='aspectFit' className='grid-image'></Image>
       <View className='grid-text'>{text}</View>
     </Navigator>

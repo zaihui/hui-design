@@ -34,13 +34,19 @@ const SwitchPage: React.FC = () => {
         </GroupSection>
         <GroupSection title='开关状态'>
           <SwitchSample title='开启'>
-            <Switch checked={demo2Checked} onChange={(v) => setDemo2Checked(v)} />
+            <Switch
+              checked={demo2Checked}
+              onChange={(v) => setDemo2Checked(v)}
+            />
           </SwitchSample>
           <SwitchSample title='开启不可点'>
             <Switch checked disabled />
           </SwitchSample>
           <SwitchSample title='关闭'>
-            <Switch checked={demo3Checked} onChange={(v) => setDemo3Checked(v)} />
+            <Switch
+              checked={demo3Checked}
+              onChange={(v) => setDemo3Checked(v)}
+            />
           </SwitchSample>
           <SwitchSample title='关闭不可点击'>
             <Switch checked={false} disabled />

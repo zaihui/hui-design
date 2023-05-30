@@ -15,10 +15,12 @@ const MOCK_IMAGE =
 const DialogDemoPage: React.FC = () => {
   const [simpleDialogVisible, setSimpleDialogVisible] = useState(false)
   const [imageDialogVisible, setImageDialogVisible] = useState(false)
-  const [bottomCloseDialogVisible, setBottomCloseDialogVisible] = useState(false)
+  const [bottomCloseDialogVisible, setBottomCloseDialogVisible] =
+    useState(false)
   const [maxHeightDialogVisible, setMaxHeightDialogVisble] = useState(false)
   const [iconDialogVisible, setIconDialogVisible] = useState(false)
-  const [defaultBtnWithDescDialogVisible, setDefaultBtnWithDescDialogVisible] = useState(false)
+  const [defaultBtnWithDescDialogVisible, setDefaultBtnWithDescDialogVisible] =
+    useState(false)
 
   return (
     <View className='dialog-page'>
@@ -30,31 +32,54 @@ const DialogDemoPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='对话框类型'>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setSimpleDialogVisible(true)}>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setSimpleDialogVisible(true)}
+            >
               基本用法
             </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setMaxHeightDialogVisble(true)}>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setMaxHeightDialogVisble(true)}
+            >
               内容溢出对话框
             </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setBottomCloseDialogVisible(true)}>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setBottomCloseDialogVisible(true)}
+            >
               关闭在下方的对话框
             </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setIconDialogVisible(true)}>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setIconDialogVisible(true)}
+            >
               有icon的对话框
             </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setImageDialogVisible(true)}>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setImageDialogVisible(true)}
+            >
               有图片的对话框
             </HuiButton>
           </View>
-          <View className='item' onClick={() => setDefaultBtnWithDescDialogVisible(true)}>
+          <View
+            className='item'
+            onClick={() => setDefaultBtnWithDescDialogVisible(true)}
+          >
             <HuiButton
               block
               type='secondary'
@@ -74,7 +99,11 @@ const DialogDemoPage: React.FC = () => {
         renderFooter={
           <Block>
             <View className='btn'>
-              <HuiButton size='large' block onClick={() => setSimpleDialogVisible(false)}>
+              <HuiButton
+                size='large'
+                block
+                onClick={() => setSimpleDialogVisible(false)}
+              >
                 确定
               </HuiButton>
             </View>
@@ -99,7 +128,11 @@ const DialogDemoPage: React.FC = () => {
         image={MOCK_IMAGE}
         closable={false}
         renderFooter={
-          <HuiButton size='large' block onClick={() => setImageDialogVisible(false)}>
+          <HuiButton
+            size='large'
+            block
+            onClick={() => setImageDialogVisible(false)}
+          >
             好的
           </HuiButton>
         }
@@ -129,7 +162,11 @@ const DialogDemoPage: React.FC = () => {
         有给人生命的本领似的，跨步格外高远。而且路也愈走愈分明，天也愈走愈亮了。
         老栓正在专心走路，忽然吃了一惊，远远里看见一条丁字街，明明白白横着。他便退了几步，寻到一家关着门的铺子，蹩进檐下，靠门立住了。好一会，身上觉得有些发冷。'
         renderFooter={
-          <HuiButton size='large' block onClick={() => setMaxHeightDialogVisble(false)}>
+          <HuiButton
+            size='large'
+            block
+            onClick={() => setMaxHeightDialogVisble(false)}
+          >
             知道了
           </HuiButton>
         }

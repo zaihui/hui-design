@@ -107,7 +107,11 @@ const Picker: React.FC<HuiPickerProps> = (props) => {
         <View className={`${prefix}-content`}>
           <View className={`${prefix}-header`}>
             {cancelText && (
-              <View className={`${prefix}-header-cancel`} style={cancelStyle} onClick={onClose}>
+              <View
+                className={`${prefix}-header-cancel`}
+                style={cancelStyle}
+                onClick={onClose}
+              >
                 {cancelText}
               </View>
             )}

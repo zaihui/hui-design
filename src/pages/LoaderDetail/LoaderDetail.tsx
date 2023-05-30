@@ -9,7 +9,9 @@ import './LoaderDetail.scss'
 type LoaderType = 'page' | 'bottom' | 'module'
 const LoaderDetail: React.FC = () => {
   const { q = '{}' } = useRouter().params
-  const { type = 'page' } = JSON.parse(decodeURIComponent(q)) as { type: LoaderType }
+  const { type = 'page' } = JSON.parse(decodeURIComponent(q)) as {
+    type: LoaderType
+  }
 
   const [bottomLoading, setBottomLoading] = useState(false)
 

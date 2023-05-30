@@ -28,10 +28,10 @@ export interface HuiCheckboxProps extends ViewProps {
 export interface HuiCheckboxRef {
   toggle: () => void
 }
-const HuiCheckbox: React.ForwardRefRenderFunction<HuiCheckboxRef, HuiCheckboxProps> = (
-  props,
-  ref,
-) => {
+const HuiCheckbox: React.ForwardRefRenderFunction<
+  HuiCheckboxRef,
+  HuiCheckboxProps
+> = (props, ref) => {
   const {
     value,
     size = DEFAULT_ICON_SIZE,
@@ -87,7 +87,11 @@ const HuiCheckbox: React.ForwardRefRenderFunction<HuiCheckboxRef, HuiCheckboxPro
           height: pxTransform(size),
         }}
       >
-        <HuiIcon name='009-checkbox' size={size} color={checked ? color : 'transparent'} />
+        <HuiIcon
+          name='009-checkbox'
+          size={size}
+          color={checked ? color : 'transparent'}
+        />
       </View>
       {hasChildren && <View className='hui-checkbox-content'>{children}</View>}
     </View>

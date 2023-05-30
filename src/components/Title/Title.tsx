@@ -36,9 +36,13 @@ const HuiTitle: React.FC<HuiTitleProps> = (props) => {
     <View className={cx(prefix, className, size)}>
       <View className='title'>{title}</View>
       <View className='link' onClick={onLinkClick}>
-        {linkLeftIcon && <HuiIcon className='link-left-icon' name={linkLeftIcon} />}
+        {linkLeftIcon && (
+          <HuiIcon className='link-left-icon' name={linkLeftIcon} />
+        )}
         {link}
-        {linkRightIcon && <HuiIcon className='link-right-icon' name={linkRightIcon} />}
+        {linkRightIcon && (
+          <HuiIcon className='link-right-icon' name={linkRightIcon} />
+        )}
       </View>
     </View>
   )

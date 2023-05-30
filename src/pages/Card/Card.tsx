@@ -11,14 +11,20 @@ import './Card.scss'
 const detail = (
   <View className='detail'>
     详情
-    <HuiIcon name='h010-right' size={12} style={{ marginLeft: pxTransform(2) }} />
+    <HuiIcon
+      name='h010-right'
+      size={12}
+      style={{ marginLeft: pxTransform(2) }}
+    />
   </View>
 )
 
 const content = (
   <View className='card-content'>
     <View className='content-tip'>字段名：字段内容字段内容字段内容</View>
-    <View className='content-tip'>字段名：字段内容字段内容字段内容字段内容</View>
+    <View className='content-tip'>
+      字段名：字段内容字段内容字段内容字段内容
+    </View>
     <View className='content-tip'>字段名：字段内容字段内容字段内容</View>
   </View>
 )

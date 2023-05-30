@@ -140,7 +140,11 @@ const data = [
       { label: '运动健身', value: '运动健身' },
     ],
   },
-  { label: '其他', value: '其他', children: [{ label: '其他', value: '其他' }] },
+  {
+    label: '其他',
+    value: '其他',
+    children: [{ label: '其他', value: '其他' }],
+  },
 ]
 const shortData = [
   {
@@ -175,7 +179,10 @@ const DemoPage: React.FC = () => {
   const [V5, setV5] = useState(false)
 
   const [data1, setData1] = useState<(string | number)[]>([])
-  const [data2, setData2] = useState<(string | number)[]>(['开发工程师', '测试工程师'])
+  const [data2, setData2] = useState<(string | number)[]>([
+    '开发工程师',
+    '测试工程师',
+  ])
   const [data3, setData3] = useState<(string | number)[]>([])
   const [data4, setData4] = useState<(string | number)[]>([])
   const [data5, setData5] = useState<(string | number)[]>([])

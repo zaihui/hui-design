@@ -43,7 +43,9 @@ const Loader: React.FC<HuiLoaderProps> = (props) => {
   const loadingElement = (
     <View className={loadingClassName} style={style} onClick={onClick}>
       {type !== 'bottom' && <View className={`${prefix}-padding`} />}
-      {type !== 'bottom' && <Image src={LOADER_URL} className={`${prefix}-image`}></Image>}
+      {type !== 'bottom' && (
+        <Image src={LOADER_URL} className={`${prefix}-image`}></Image>
+      )}
       <View className={`${prefix}-tip`}>{tip}</View>
     </View>
   )

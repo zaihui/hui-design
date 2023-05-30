@@ -8,7 +8,9 @@ import HuiButton from '../Button/Button'
 
 import './Search.scss'
 
-export interface HuiSearchProps extends ViewProps, Omit<HuiInputProps, 'onInput'> {
+export interface HuiSearchProps
+  extends ViewProps,
+    Omit<HuiInputProps, 'onInput'> {
   searchText?: string
   /** 是否显示搜索icon */
   searchIcon?: boolean
@@ -41,7 +43,10 @@ const Search: React.FC<HuiSearchProps> = (props) => {
     theme = 'light',
   } = props
   const [val, setVal] = useState('')
-  const allowClear = useMemo(() => clearIcon && props.value, [clearIcon, props.value])
+  const allowClear = useMemo(
+    () => clearIcon && props.value,
+    [clearIcon, props.value],
+  )
 
   const searchBg = useMemo<React.CSSProperties>(() => {
     let bgColor = '#fff'
@@ -105,7 +110,12 @@ const Search: React.FC<HuiSearchProps> = (props) => {
               }
             }}
           >
-            <HuiIcon name='005-close2' color='#1e1e1e40' size={16} style={{ display: 'block' }} />
+            <HuiIcon
+              name='005-close2'
+              color='#1e1e1e40'
+              size={16}
+              style={{ display: 'block' }}
+            />
           </View>
         ) : null}
       </View>

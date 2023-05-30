@@ -39,11 +39,17 @@ export interface HuiButtonProps {
   onClick?: (e: ITouchEvent) => void
   /** 微信开放能力 */
   openType?: ButtonProps.OpenType
-  onGetUserInfo?: (e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>) => void
-  onGetPhoneNumber?: (e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>) => void
+  onGetUserInfo?: (
+    e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>,
+  ) => void
+  onGetPhoneNumber?: (
+    e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>,
+  ) => void
   onChooseAvatar?: <T>(e: BaseEventOrig<T>) => void
   onContact?: (e: BaseEventOrig<ButtonProps.onContactEventDetail>) => void
-  onOpenSetting?: (e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>) => void
+  onOpenSetting?: (
+    e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>,
+  ) => void
   children?: React.ReactNode
 }
 

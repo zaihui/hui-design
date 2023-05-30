@@ -15,7 +15,10 @@ export interface HuiGridProps extends ViewProps {
   className?: string
 }
 
-const HuiGrid: React.ForwardRefRenderFunction<ViewProps, HuiGridProps> = (props, ref) => {
+const HuiGrid: React.ForwardRefRenderFunction<ViewProps, HuiGridProps> = (
+  props,
+  ref,
+) => {
   const { columnNum = 5, children, style, className = '', ...rest } = props
 
   const itemSize = React.Children.count(children)

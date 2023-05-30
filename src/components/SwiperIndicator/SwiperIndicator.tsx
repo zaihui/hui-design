@@ -29,7 +29,9 @@ const HuiSwiperIndicator: React.FC<HuiSwiperIndicatorProps> = (props) => {
         {Array.from(Array(swiperItemCount), (_, index) => (
           <View
             key={index}
-            className={cx('hui-swiper-indicator-item', { active: current === index })}
+            className={cx('hui-swiper-indicator-item', {
+              active: current === index,
+            })}
             style={{
               background: current === index ? activeColor : '',
             }}

@@ -52,7 +52,10 @@ const HuiContentListItem: React.FC<HuiContentListItemProps> = (props) => {
   }
 
   return (
-    <View className={`hui-content-list-item-${type} ${className}`} style={style}>
+    <View
+      className={`hui-content-list-item-${type} ${className}`}
+      style={style}
+    >
       <View className={`item-label${longLabel ? '-long' : ''}`}>{label}</View>
       <View
         className={`item-value${longLabel ? '-long' : ''}  ${

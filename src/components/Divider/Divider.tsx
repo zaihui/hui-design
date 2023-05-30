@@ -20,7 +20,14 @@ export interface HuiDividerProps {
 }
 
 const HuiDivider: React.FC<HuiDividerProps> = (props) => {
-  const { type = 'horizontal', margin, height, hairline, className = '', style: newStyle } = props
+  const {
+    type = 'horizontal',
+    margin,
+    height,
+    hairline,
+    className = '',
+    style: newStyle,
+  } = props
 
   const style = {
     margin: `0 ${margin && pxTransform(margin)}`,
@@ -33,9 +40,14 @@ const HuiDivider: React.FC<HuiDividerProps> = (props) => {
 
   return (
     <View
-      className={cx('hui-divider', `hui-divider-${dividerType}`, `${className}`, {
-        [hairlineClsName]: hairline,
-      })}
+      className={cx(
+        'hui-divider',
+        `hui-divider-${dividerType}`,
+        `${className}`,
+        {
+          [hairlineClsName]: hairline,
+        },
+      )}
       style={style}
     ></View>
   )

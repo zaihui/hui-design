@@ -5,7 +5,8 @@ import PageHeader from '@/demoComponents/PageHeader'
 
 import './Layer.scss'
 
-const LAYER_DESC_IMG = 'https://r.kezaihui.com/client/2021-05-31/hui-design-layer-demo-21053102.png'
+const LAYER_DESC_IMG =
+  'https://r.kezaihui.com/client/2021-05-31/hui-design-layer-demo-21053102.png'
 
 interface SectionProps {
   title: string

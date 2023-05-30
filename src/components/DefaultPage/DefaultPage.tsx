@@ -102,7 +102,10 @@ const DefaultPage: React.FC<HuiDefaultPageProps> = (props) => {
       {content.imageIcon && (
         <View className={`${prefix}-image`}>
           {content.isImage ? (
-            <Image src={content.imageIcon as never} className={`${prefix}-image-pic`} />
+            <Image
+              src={content.imageIcon as never}
+              className={`${prefix}-image-pic`}
+            />
           ) : (
             imageIcon
           )}

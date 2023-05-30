@@ -12,7 +12,9 @@ import HuiTextArea from '@/components/TextArea'
 
 import './Form.scss'
 
-const open1Columns: HuiPickerColumn<string>[][] = [[{ text: '男' }, { text: '女' }]]
+const open1Columns: HuiPickerColumn<string>[][] = [
+  [{ text: '男' }, { text: '女' }],
+]
 
 const InputPage: React.FC = () => {
   const [localData, setLocalData] = useState({
@@ -59,7 +61,11 @@ const InputPage: React.FC = () => {
       />
       <View className='content'>
         <GroupSection title='基础用法'>
-          <HuiForm onValuesChange={handleChange} form={form} onFinish={handleFinish}>
+          <HuiForm
+            onValuesChange={handleChange}
+            form={form}
+            onFinish={handleFinish}
+          >
             <HuiFormItem
               rule={[
                 {
@@ -95,7 +101,9 @@ const InputPage: React.FC = () => {
             </HuiFormItem>
 
             <HuiFormItem label='性别' name='gender'>
-              <View onClick={() => setOpen1(true)}>{form.getFieldValue('gender') || '请选择'}</View>
+              <View onClick={() => setOpen1(true)}>
+                {form.getFieldValue('gender') || '请选择'}
+              </View>
               <HuiPicker
                 visible={open1}
                 onClose={() => setOpen1(false)}
@@ -106,10 +114,17 @@ const InputPage: React.FC = () => {
               />
             </HuiFormItem>
 
-            <HuiFormItem rule={[{ require: true }]} align='column' label='简介' name='description'>
+            <HuiFormItem
+              rule={[{ require: true }]}
+              align='column'
+              label='简介'
+              name='description'
+            >
               <HuiTextArea
                 upperLimit={50}
-                onInput={(e) => form.setFieldValue('description', e.detail.value)}
+                onInput={(e) =>
+                  form.setFieldValue('description', e.detail.value)
+                }
               ></HuiTextArea>
             </HuiFormItem>
             <HuiButton block style={buttonStyle} onClick={() => form?.submit()}>

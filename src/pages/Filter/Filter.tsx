@@ -20,7 +20,10 @@ const TagsGroup = (props) => {
     <View className='tags-group'>
       {items.length &&
         items.map((t, index) => (
-          <HuiTag onClick={() => onChange(index)} type={value === index ? 'solid' : 'hollow'}>
+          <HuiTag
+            onClick={() => onChange(index)}
+            type={value === index ? 'solid' : 'hollow'}
+          >
             {t}
           </HuiTag>
         ))}
@@ -82,7 +85,11 @@ const MenuPage: React.FC = () => {
         label: '标签组',
         name: 'tags',
         children: (
-          <TagsGroup value={checkedTag} items={mockTags} onChange={(val) => setCheckedTag(val)} />
+          <TagsGroup
+            value={checkedTag}
+            items={mockTags}
+            onChange={(val) => setCheckedTag(val)}
+          />
         ),
       },
       {
@@ -120,7 +127,11 @@ const MenuPage: React.FC = () => {
         label: '标签组',
         name: 'tags',
         children: (
-          <TagsGroup value={checkedTag} items={mockTags} onChange={(val) => setCheckedTag(val)} />
+          <TagsGroup
+            value={checkedTag}
+            items={mockTags}
+            onChange={(val) => setCheckedTag(val)}
+          />
         ),
       },
     ],

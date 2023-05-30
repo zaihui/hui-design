@@ -64,7 +64,12 @@ export interface HuiTextProps {
 }
 
 const HuiText: React.FC<HuiTextProps> = (props) => {
-  const { style = {}, className = '', children, textLevel = TextLevel.Five } = props
+  const {
+    style = {},
+    className = '',
+    children,
+    textLevel = TextLevel.Five,
+  } = props
 
   if (!children && children !== 0) {
     return null

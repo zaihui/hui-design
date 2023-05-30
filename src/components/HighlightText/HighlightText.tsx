@@ -47,7 +47,9 @@ const HighlightText: React.FC<HighlightTextProps> = ({
           item.props.children = highLightText(children)
         }
         if (children && Array.isArray(children)) {
-          item.props.children = children.map((node) => HightLightStyleToKeyword(node))
+          item.props.children = children.map((node) =>
+            HightLightStyleToKeyword(node),
+          )
         }
         return item
       })

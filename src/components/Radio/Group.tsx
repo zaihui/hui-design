@@ -16,7 +16,12 @@ const defaultProps = {
 }
 
 const HuiRadioGroup: React.FC<HuiRadioGroupProps> = (props) => {
-  const { className = '', onChange = defaultProps.onChange, disabled = false, children } = props
+  const {
+    className = '',
+    onChange = defaultProps.onChange,
+    disabled = false,
+    children,
+  } = props
 
   const onRadioChange = (v) => {
     onChange(v)

@@ -65,7 +65,10 @@ const HuiRadio: React.FC<HuiRadioProps> = (props) => {
       style={style}
       onClick={() => handleChange(value)}
     >
-      <View className={cx('hui-radio-icon', { checked, disabled })} style={iconStyle}>
+      <View
+        className={cx('hui-radio-icon', { checked, disabled })}
+        style={iconStyle}
+      >
         <View className='inner' style={iconInnerStyle} />
       </View>
       {hasChildren && <View className='hui-radio-content'>{children}</View>}

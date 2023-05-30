@@ -81,7 +81,10 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
       const tabsItemEle = tabsRef.current?.childNodes
       tabsInfos.current = []
       for (let i = 0; tabsItemEle && i < tabsItemEle.length; i++) {
-        if (tabsItemEle[i].childNodes[0] && tabsItemEle[i].childNodes[0].childNodes[0]) {
+        if (
+          tabsItemEle[i].childNodes[0] &&
+          tabsItemEle[i].childNodes[0].childNodes[0]
+        ) {
           const res = await selectorQueryClientRect(
             `#${tabsItemEle[i].childNodes[0].childNodes[0].uid}`,
           )
@@ -111,7 +114,9 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
       width: activeRes.width,
     })
     if (scroll) {
-      setTabsWrapperScrollLeft(activeRes.left + activeRes.width / 2 - tabsWidth.current / 2)
+      setTabsWrapperScrollLeft(
+        activeRes.left + activeRes.width / 2 - tabsWidth.current / 2,
+      )
     }
   }, [active, scroll, tabs])
 
@@ -172,10 +177,16 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
   const getTabsItem = (tab: ITab) =>
     smile ? (
       <View className='tabs-title-smile'>
-        <View className='title' style={{ color: tab.name === active ? indicatorColor : '' }}>
+        <View
+          className='title'
+          style={{ color: tab.name === active ? indicatorColor : '' }}
+        >
           {tab.title}
         </View>
-        <View className='sub-title' style={{ color: tab.name === active ? indicatorColor : '' }}>
+        <View
+          className='sub-title'
+          style={{ color: tab.name === active ? indicatorColor : '' }}
+        >
           {tab.subTitle}
         </View>
       </View>
@@ -199,7 +210,9 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
           className={`tabs-item length-${tabsSize}`}
           onClick={() => handleClickTabs(tab.name)}
         >
-          <View className={cx('tabs-item-wrapper', { active: active === tab.name })}>
+          <View
+            className={cx('tabs-item-wrapper', { active: active === tab.name })}
+          >
             {getTabsItem(tab)}
           </View>
         </View>
@@ -230,11 +243,21 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
   )
   return (
     <View className={`hui-tabs ${className}`} style={style}>
-      {sticky ? <HuiSticky offsetTop={offsetTop}>{huiTabsBar}</HuiSticky> : huiTabsBar}
+      {sticky ? (
+        <HuiSticky offsetTop={offsetTop}>{huiTabsBar}</HuiSticky>
+      ) : (
+        huiTabsBar
+      )}
       <View className='hui-tabs-panel-wrapper'>
         <View
-          className={cx('hui-tabs-panel', { 'switch-with-animation': animated })}
-          style={animated ? { transform: `translateX(-${100 * activeTabIndex}%)` } : {}}
+          className={cx('hui-tabs-panel', {
+            'switch-with-animation': animated,
+          })}
+          style={
+            animated
+              ? { transform: `translateX(-${100 * activeTabIndex}%)` }
+              : {}
+          }
         >
           {getChildren()}
         </View>

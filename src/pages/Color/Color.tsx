@@ -132,7 +132,10 @@ const Color: React.FC = () => (
           style={{ backgroundColor: colorData.color }}
         >
           <View className='top'>
-            <Text className='color-value' style={{ color: colorData.valueColor }}>
+            <Text
+              className='color-value'
+              style={{ color: colorData.valueColor }}
+            >
               {colorData.type}: {colorData.color}
             </Text>
             <Text className='color-name' style={{ color: colorData.nameColor }}>

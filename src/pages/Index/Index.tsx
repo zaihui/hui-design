@@ -50,7 +50,11 @@ const NavCard: React.FC<NavCard> = (props) => {
         {items.length > 0 && (
           <View className='sub-items-content'>
             {items.map((item) => (
-              <View key={item.url} className='sub-item' onClick={() => handleClickSubItem(item)}>
+              <View
+                key={item.url}
+                className='sub-item'
+                onClick={() => handleClickSubItem(item)}
+              >
                 <View className='sub-title'>{item.title}</View>
                 <HuiIcon name='012-arrowright' color='#b1b1b1' />
               </View>
@@ -160,7 +164,8 @@ const NAV_LIST: {
   },
 ]
 
-const ZAIHUI_LOGO_URL = 'https://r.kezaihui.com/default/zaihui-logo-20201120001.png'
+const ZAIHUI_LOGO_URL =
+  'https://r.kezaihui.com/default/zaihui-logo-20201120001.png'
 
 const IndexPage: React.FC = () => {
   useShareAppMessage(() => ({
@@ -172,7 +177,8 @@ const IndexPage: React.FC = () => {
       <View className='header'>
         <View className='title'>HUI DESIGN</View>
         <View className='desc'>
-          HUI DESIGN是为再惠小程序、H5提供丰富的基础 UI 组件，使在实际业务中快速集成，开箱即用
+          HUI DESIGN是为再惠小程序、H5提供丰富的基础 UI
+          组件，使在实际业务中快速集成，开箱即用
         </View>
       </View>
 

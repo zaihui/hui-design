@@ -120,10 +120,18 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     list?.map((o) => optionValue.includes(o.value)).filter((o) => !!o).length
 
   const menuOptions =
-    level === 2 ? options.find((item) => item.value === activeMenu)?.children || [] : options
+    level === 2
+      ? options.find((item) => item.value === activeMenu)?.children || []
+      : options
 
   return (
-    <Modal visible={visible} title={title} className={className} style={style} onClose={onClose}>
+    <Modal
+      visible={visible}
+      title={title}
+      className={className}
+      style={style}
+      onClose={onClose}
+    >
       <View className='hui-select'>
         <View
           className='hui-select-body'
@@ -142,7 +150,9 @@ const Select: React.FC<HuiSelectProps> = (props) => {
                   {showBadge && multiSelect ? (
                     <Badge
                       value={
-                        getBadgeNumber(item.children) === 0 ? '' : getBadgeNumber(item.children)
+                        getBadgeNumber(item.children) === 0
+                          ? ''
+                          : getBadgeNumber(item.children)
                       }
                     >
                       {item.label}

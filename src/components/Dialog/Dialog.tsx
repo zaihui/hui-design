@@ -67,11 +67,16 @@ const Dialog: React.FC<HuiDialogProps> = (props) => {
   }
 
   return (
-    <View className={`hui-dialog ${visible ? 'visible' : ''} ${className}`} style={style}>
+    <View
+      className={`hui-dialog ${visible ? 'visible' : ''} ${className}`}
+      style={style}
+    >
       <View className='hui-dialog-mask' onClick={handleMaskClick} />
       <View className='hui-dialog-wrapper'>
         <View className='hui-dialog-container'>
-          {image && <Image className='hm-image' src={image} mode='aspectFill' />}
+          {image && (
+            <Image className='hm-image' src={image} mode='aspectFill' />
+          )}
 
           {!image && (
             <View className='header'>
@@ -87,7 +92,9 @@ const Dialog: React.FC<HuiDialogProps> = (props) => {
             </View>
           )}
 
-          {showIcon && !!props.renderIcon && <View className='icon-area'>{props.renderIcon}</View>}
+          {showIcon && !!props.renderIcon && (
+            <View className='icon-area'>{props.renderIcon}</View>
+          )}
 
           {title && <View className='title-area'>{title}</View>}
 

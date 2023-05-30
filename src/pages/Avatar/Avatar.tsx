@@ -45,7 +45,12 @@ const ImagePage: React.FC = () => (
             <HuiAvatar src={AVATAR_BG_IMG} type='square' size='medium' />
           </SampleItem>
           <SampleItem title='带边框的商户头像'>
-            <HuiAvatar src={AVATAR_BG_IMG} type='square' size='medium' borderColor='#198bff' />
+            <HuiAvatar
+              src={AVATAR_BG_IMG}
+              type='square'
+              size='medium'
+              borderColor='#198bff'
+            />
           </SampleItem>
         </View>
         <View>
@@ -53,7 +58,12 @@ const ImagePage: React.FC = () => (
             <HuiAvatar src={AVATAR_USER_IMG} type='circle' size='medium' />
           </SampleItem>
           <SampleItem title='带边框的用户头像'>
-            <HuiAvatar src={AVATAR_USER_IMG} type='circle' size='medium' borderColor='#198bff' />
+            <HuiAvatar
+              src={AVATAR_USER_IMG}
+              type='circle'
+              size='medium'
+              borderColor='#198bff'
+            />
           </SampleItem>
         </View>
       </GroupSection>

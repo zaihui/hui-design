@@ -1,5 +1,11 @@
 import { View } from '@tarojs/components'
-import React, { CSSProperties, useCallback, useEffect, useMemo, useState } from 'react'
+import React, {
+  CSSProperties,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import cx from 'classnames'
 
 import { isNumber, warning } from '../../utils/common'
@@ -139,8 +145,15 @@ const Steppers: React.FC<HuiSteppersProps> = (props) => {
         onClick={(event) => !itemDisabled && onHandleChange(index, event)}
         style={overflowAuto ? autoStyle : undefined}
       >
-        <View className={cx(`${prefix}-steps-step-indicator `, stepItemClassName)}>
-          <View className={cx(`${prefix}-steps-step-indicator-icon`, `${stepItemClassName}-icon`)}>
+        <View
+          className={cx(`${prefix}-steps-step-indicator `, stepItemClassName)}
+        >
+          <View
+            className={cx(
+              `${prefix}-steps-step-indicator-icon`,
+              `${stepItemClassName}-icon`,
+            )}
+          >
             <View
               className={cx(
                 `${prefix}-steps-step-indicator-icon-node`,
@@ -152,7 +165,12 @@ const Steppers: React.FC<HuiSteppersProps> = (props) => {
           </View>
         </View>
         <View className={cx(`${prefix}-steps-step-content`, stepItemClassName)}>
-          <View className={cx(`${prefix}-steps-step-title`, `${stepItemClassName}-title`)}>
+          <View
+            className={cx(
+              `${prefix}-steps-step-title`,
+              `${stepItemClassName}-title`,
+            )}
+          >
             {slicedTitle}
           </View>
           <View className={`${prefix}-steps-step-desc`}>{description}</View>

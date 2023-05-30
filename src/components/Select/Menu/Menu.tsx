@@ -54,7 +54,9 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
       {multiSelect ? (
         <CheckboxGroup
           value={value as string[]}
-          onChange={(checkedList) => handleChange(Array.from(new Set(checkedList)))}
+          onChange={(checkedList) =>
+            handleChange(Array.from(new Set(checkedList)))
+          }
         >
           {options.map((item, index) => (
             <ListItem

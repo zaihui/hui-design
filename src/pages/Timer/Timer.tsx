@@ -48,7 +48,12 @@ const Timer: React.FC = () => (
       </GroupSection>
       <GroupSection title='计时器样式'>
         <TimerPageItem isGrey>
-          <HuiTimer isCard isShowDay time={TIMER_NUM} format={TIME_FULL_FORMAT} />
+          <HuiTimer
+            isCard
+            isShowDay
+            time={TIMER_NUM}
+            format={TIME_FULL_FORMAT}
+          />
           <HuiTimer isCard time={TIMER_NUM} format={TIME_FORMAT} />
         </TimerPageItem>
         <TimerPageItem>

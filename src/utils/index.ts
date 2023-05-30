@@ -3,7 +3,8 @@ import dayjs from 'dayjs'
 import 'dayjs/plugin/duration'
 import { DESIGN_WIDTH } from './constant'
 
-export const pxTransform = (size: number): string => Taro.pxTransform(size, DESIGN_WIDTH)
+export const pxTransform = (size: number): string =>
+  Taro.pxTransform(size, DESIGN_WIDTH)
 
 export const selectorQueryClientRect = (
   selector: string,

@@ -17,7 +17,8 @@ const TabsPage: React.FC = () => {
   const [normalTabsTwoIndex, setNormalTabsTwoIndex] = useState<number>(0)
   const [normalTabsThreeIndex, setNormalTabsThreeIndex] = useState<number>(0)
   const [normalTabsFourIndex, setNormalTabsFourIndex] = useState<number>(0)
-  const [singleLineAutoTabsIndex, setSingleLineAutoTabsIndex] = useState<number>(0)
+  const [singleLineAutoTabsIndex, setSingleLineAutoTabsIndex] =
+    useState<number>(0)
   const [twoLineAutoTabsIndex, setTwoLineAutoTabsIndex] = useState<number>(0)
   const [stickyTabsIndex, setStickyTabsIndex] = useState<number>(0)
 

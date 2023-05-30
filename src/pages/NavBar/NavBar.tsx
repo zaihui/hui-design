@@ -20,7 +20,10 @@ const NavBarDemo: React.FC = () => (
     <View className='content'>
       <GroupSection
         title='Tab类型'
-        titleStyle={{ paddingLeft: Taro.pxTransform(16), paddingRight: Taro.pxTransform(16) }}
+        titleStyle={{
+          paddingLeft: Taro.pxTransform(16),
+          paddingRight: Taro.pxTransform(16),
+        }}
       >
         <SubGroupSection title='透明底导航'>
           <View
@@ -29,7 +32,8 @@ const NavBarDemo: React.FC = () => (
               router.NavBarWhiteDetail.navigateTo({
                 hideBack: false,
                 transparent: true,
-                backgroundUrl: 'https://r.kezaihui.com/client/2021-08-05/176961628141405_.pic.jpg',
+                backgroundUrl:
+                  'https://r.kezaihui.com/client/2021-08-05/176961628141405_.pic.jpg',
                 title: '标题',
                 theme: 'white',
               })
@@ -41,7 +45,8 @@ const NavBarDemo: React.FC = () => (
               theme='white'
               hideBack={false}
               extra={{
-                background: 'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-1-21080501.png',
+                background:
+                  'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-1-21080501.png',
               }}
             />
           </View>
@@ -51,7 +56,8 @@ const NavBarDemo: React.FC = () => (
               router.NavBarBlackDetail.navigateTo({
                 hideBack: false,
                 transparent: true,
-                backgroundUrl: 'https://r.kezaihui.com/client/2021-08-05/176971628141406_.pic.jpg',
+                backgroundUrl:
+                  'https://r.kezaihui.com/client/2021-08-05/176971628141406_.pic.jpg',
                 title: '标题',
                 theme: 'black',
               })
@@ -63,7 +69,8 @@ const NavBarDemo: React.FC = () => (
               theme='black'
               hideBack={false}
               extra={{
-                background: 'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-2-21080501.png',
+                background:
+                  'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-2-21080501.png',
               }}
             />
           </View>
@@ -97,7 +104,10 @@ const NavBarDemo: React.FC = () => (
       </GroupSection>
       <GroupSection
         title='有标题Tab的多种样式'
-        titleStyle={{ paddingLeft: Taro.pxTransform(16), paddingRight: Taro.pxTransform(16) }}
+        titleStyle={{
+          paddingLeft: Taro.pxTransform(16),
+          paddingRight: Taro.pxTransform(16),
+        }}
       >
         <View
           className='row'
@@ -174,7 +184,10 @@ const NavBarDemo: React.FC = () => (
       </GroupSection>
       <GroupSection
         title='无标题Tab的多种样式'
-        titleStyle={{ paddingLeft: Taro.pxTransform(16), paddingRight: Taro.pxTransform(16) }}
+        titleStyle={{
+          paddingLeft: Taro.pxTransform(16),
+          paddingRight: Taro.pxTransform(16),
+        }}
       >
         <View
           className='row'
