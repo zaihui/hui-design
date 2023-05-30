@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import Taro, { useShareAppMessage } from '@tarojs/taro'
+import React, { useState } from 'react'
 
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
@@ -127,6 +127,7 @@ const NAV_LIST: {
       { title: '骨架屏Skeleton', url: router.Skeleton.url },
       { title: '标题栏Title', url: router.Title.url },
       { title: '卡片Card', url: router.Card.url },
+      { title: '折叠面板CollapsePanel', url: router.CollapsePanel.url },
     ],
   },
   {

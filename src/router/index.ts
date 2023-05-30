@@ -160,4 +160,5 @@ export default {
   Card: new PageItemNormal('Card'),
   Steppers: new PageItemNormal('Steppers'),
   Filter: new PageItemNormal('Filter'),
+  CollapsePanel: new PageItemNormal('CollapsePanel'),
 }

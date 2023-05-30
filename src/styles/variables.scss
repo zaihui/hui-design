@@ -22,6 +22,11 @@ $hui-design-width: 375 !default; // 默认使用设计稿尺寸
   overflow: hidden;
 }
 
+@mixin flex-between() {
+  display: flex;
+  justify-content: space-between;
+}
+
 /** 通用字号 **/
 $hui-font-heading-l: px(20) !default; // 标题
 $hui-font-heading-m: px(18) !default; // 标题

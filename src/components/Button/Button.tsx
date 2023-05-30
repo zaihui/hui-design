@@ -1,8 +1,8 @@
-import React from 'react'
-import cx from 'classnames'
-import { View, Button, Block } from '@tarojs/components'
-import { ITouchEvent, BaseEventOrig } from '@tarojs/components/types/common'
+import { Block, Button, View } from '@tarojs/components'
 import { ButtonProps } from '@tarojs/components/types/Button'
+import { BaseEventOrig, ITouchEvent } from '@tarojs/components/types/common'
+import cx from 'classnames'
+import React from 'react'
 
 import { pxTransform } from '../../utils'
 import HuiIcon from '../Icon/Icon'
@@ -35,6 +35,8 @@ export interface HuiButtonProps {
   /** 按钮辅助文字，仅在large为large时可用 */
   extra?: string
   className?: string
+  /** 表单事件 */
+  formType?: keyof ButtonProps.FormType
   /** 点击事件 */
   onClick?: (e: ITouchEvent) => void
   /** 微信开放能力 */
@@ -72,6 +74,7 @@ const HuiButton: React.FC<HuiButtonProps> = (props) => {
     openType,
     children,
     className = '',
+    formType,
     onGetUserInfo,
     onGetPhoneNumber,
     onContact,
@@ -126,6 +129,7 @@ const HuiButton: React.FC<HuiButtonProps> = (props) => {
 
   return (
     <Button
+      formType={formType}
       openType={openType}
       onGetPhoneNumber={onGetPhoneNumber}
       onGetUserInfo={onGetUserInfo}

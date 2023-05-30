@@ -1,14 +1,14 @@
+import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { View } from '@tarojs/components'
 
-import HuiInput from '@/components/Input'
-import PageHeader from '@/demoComponents/PageHeader'
-import GroupSection from '@/demoComponents/GroupSection'
-import HuiForm, { useForm } from '@/components/Form/index'
 import HuiButton from '@/components/Button/Button'
+import HuiForm, { useForm } from '@/components/Form/index'
+import HuiInput from '@/components/Input'
 import HuiPicker, { HuiPickerColumn } from '@/components/Picker'
 import HuiTextArea from '@/components/TextArea'
+import GroupSection from '@/demoComponents/GroupSection'
+import PageHeader from '@/demoComponents/PageHeader'
 
 import './Form.scss'
 
@@ -49,6 +49,13 @@ const InputPage: React.FC = () => {
     })
   }, [])
 
+  const handleReset = useCallback(() => {
+    Taro.showModal({
+      title: '重置',
+      content: `重置成功：'${JSON.stringify(form.getFieldsValue())}`,
+    })
+  }, [])
+
   const buttonStyle = useMemo(() => ({ width: '50%', margin: '30px auto' }), [])
 
   const HuiFormItem = HuiForm.Item
@@ -65,6 +72,7 @@ const InputPage: React.FC = () => {
             onValuesChange={handleChange}
             form={form}
             onFinish={handleFinish}
+            onReset={handleReset}
           >
             <HuiFormItem
               rule={[
@@ -127,8 +135,11 @@ const InputPage: React.FC = () => {
                 }
               ></HuiTextArea>
             </HuiFormItem>
-            <HuiButton block style={buttonStyle} onClick={() => form?.submit()}>
+            <HuiButton formType='submit' block style={buttonStyle}>
               提交表单
+            </HuiButton>
+            <HuiButton formType='reset' block style={buttonStyle}>
+              重置表单
             </HuiButton>
           </HuiForm>
         </GroupSection>
