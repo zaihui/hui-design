@@ -25,7 +25,9 @@
     "test": "jest",
     "test:ci": "jest --coverage",
     "build:weapp": "taro build --type weapp",
-    "dev:weapp": "npm run build:weapp -- --watch && onchange src/**/*.{js,ts,tsx,scss} -- prettier --write '{{file}}' --ignore-unknown",
+    "dev": "concurrently \"npm run build:weapp -- --watch\" \"npm run watch:fix\"",
+    "dev:weapp": "npm run build:weapp -- --watch",
+    "watch:fix": "onchange src/**/*.{js,ts,tsx,scss} -- prettier --write '{{file}}' --ignore-unknown",
     "build:h5": "taro build --type h5",
     "build:h5:alpha": "cross-env BUILD_ENV=alpha npm run build:h5",
     "build:h5:prod": "cross-env BUILD_ENV=prod npm run build:h5",
@@ -51,7 +53,8 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.6",
-    "dayjs": "^1.10.6"
+    "dayjs": "^1.10.6",
+    "onchange": "^7.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
