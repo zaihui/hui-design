@@ -60,8 +60,6 @@ module.exports = {
     ],
     // 允许最大空行数为1（之前为4但发现其实绝大多数场景下空行只有1行）
     'max-empty-lines': 1,
-    // 强制省略小数点前面的0
-    'number-leading-zero': 'never',
     // 禁止内容为空的规则、文件、style标签
     'no-empty-source': true,
     // 禁止使用tag选择器
