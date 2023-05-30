@@ -1,20 +1,20 @@
-import { View } from '@tarojs/components'
 import React from 'react'
+import { View } from '@tarojs/components'
 
+import { HIconType } from './type'
 import { pxTransform } from '../../utils'
 import './Icon.scss'
-import { HIconType } from './type'
 
 export interface HuiIconProps {
   /** 图标图案 */
-  name: string | HIconType
+  name: HIconType
   /** 图标颜色 */
   color?: string
   /** 图标大小 */
   size?: number
   /**
    * className前缀，用于第三方字体图标库
-   * 比如想使用'fa fa-clock' 的图标，则 传入prefixClass='fa' name='clock'
+   * 比如想使用'fa fa-clock' 的图标，则 传入prefixClass='fa' value='clock'
    */
   prefixClass?: string
   style?: React.CSSProperties
@@ -43,7 +43,11 @@ const HuiIcon: React.FC<HuiIconProps> = ({
     : `hui-icons hui-icon-${name} ${className}`
 
   return (
-    <View className={iconClassName} style={style} onClick={() => onClick()} />
+    <View
+      className={iconClassName}
+      style={style}
+      onClick={() => onClick()}
+    />
   )
 }
 
