@@ -41,7 +41,7 @@
     "commit": "npx git-cz",
     "release": "standard-version --commit-all",
     "prepare": "husky install",
-    "create-hook": "husky add .husky/commit-msg \"npx --no -- commitlint --edit ${1}\" && husky set .husky/pre-commit \"npx pretty-quick --staged\""
+    "create-hook": "husky set .husky/commit-msg \"npx --no -- commitlint --edit ${1}\" && husky set .husky/pre-commit \"npx pretty-quick --staged\" && husky add .husky/pre-commit \"npx lint-staged\""
   },
   "repository": {
     "type": "git",
