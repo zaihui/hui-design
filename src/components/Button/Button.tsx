@@ -1,8 +1,8 @@
-import React from 'react'
-import cx from 'classnames'
-import { View, Button, Block } from '@tarojs/components'
-import { ITouchEvent, BaseEventOrig } from '@tarojs/components/types/common'
+import { Block, Button, View } from '@tarojs/components'
 import { ButtonProps } from '@tarojs/components/types/Button'
+import { BaseEventOrig, ITouchEvent } from '@tarojs/components/types/common'
+import cx from 'classnames'
+import React from 'react'
 
 import { pxTransform } from '../../utils'
 import HuiIcon from '../Icon/Icon'
@@ -35,6 +35,8 @@ export interface HuiButtonProps {
   /** 按钮辅助文字，仅在large为large时可用 */
   extra?: string
   className?: string
+  /** 表单事件 */
+  formType?: keyof ButtonProps.FormType
   /** 点击事件 */
   onClick?: (e: ITouchEvent) => void
   /** 微信开放能力 */
@@ -45,9 +47,7 @@ export interface HuiButtonProps {
   onGetPhoneNumber?: (
     e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>
   ) => void
-  onChooseAvatar?: <T>(
-    e: BaseEventOrig<T>
-  ) => void
+  onChooseAvatar?: <T>(e: BaseEventOrig<T>) => void
   onContact?: (e: BaseEventOrig<ButtonProps.onContactEventDetail>) => void
   onOpenSetting?: (
     e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>
@@ -74,6 +74,7 @@ const HuiButton: React.FC<HuiButtonProps> = props => {
     openType,
     children,
     className = '',
+    formType,
     onGetUserInfo,
     onGetPhoneNumber,
     onContact,
@@ -96,36 +97,39 @@ const HuiButton: React.FC<HuiButtonProps> = props => {
   }
 
   const iconSizeMap = {
-    'small': 13,
-    'medium': 14,
-    'large': 16,
+    small: 13,
+    medium: 14,
+    large: 16,
   }
 
   const buttonDisabled = disabled || loading
 
-  const buttonContent = <Block>{
-    prefixIcon
-    && <HuiIcon
-      name={prefixIcon}
-      style={{ marginRight: pxTransform(8) }}
-      size={iconSizeMap[size]}
-    />
-  }
-    <View className={cx('content-wrapper', { hidden: loading })} >
-      <View className='button-text'>{children}</View>
-      {extra && <View className='extra'>{extra}</View>}
-    </View>
-    {
-      suffixIcon
-      && <HuiIcon
-        name={suffixIcon}
-        style={{ marginLeft: pxTransform(8) }}
-        size={iconSizeMap[size]}
-      />
-    }</Block >
+  const buttonContent = (
+    <Block>
+      {prefixIcon && (
+        <HuiIcon
+          name={prefixIcon}
+          style={{ marginRight: pxTransform(8) }}
+          size={iconSizeMap[size]}
+        />
+      )}
+      <View className={cx('content-wrapper', { hidden: loading })}>
+        <View className='button-text'>{children}</View>
+        {extra && <View className='extra'>{extra}</View>}
+      </View>
+      {suffixIcon && (
+        <HuiIcon
+          name={suffixIcon}
+          style={{ marginLeft: pxTransform(8) }}
+          size={iconSizeMap[size]}
+        />
+      )}
+    </Block>
+  )
 
   return (
     <Button
+      formType={formType}
       openType={openType}
       onGetPhoneNumber={onGetPhoneNumber}
       onGetUserInfo={onGetUserInfo}
