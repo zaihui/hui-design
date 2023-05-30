@@ -1,21 +1,20 @@
+import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { View } from '@tarojs/components'
 
-import HuiInput from '@/components/Input'
-import PageHeader from '@/demoComponents/PageHeader'
-import GroupSection from '@/demoComponents/GroupSection'
-import HuiForm, { useForm } from '@/components/Form/index'
 import HuiButton from '@/components/Button/Button'
+import HuiForm, { useForm } from '@/components/Form/index'
+import HuiInput from '@/components/Input'
 import HuiPicker, { HuiPickerColumn } from '@/components/Picker'
 import HuiTextArea from '@/components/TextArea'
+import GroupSection from '@/demoComponents/GroupSection'
+import PageHeader from '@/demoComponents/PageHeader'
 
 import './Form.scss'
 
-const open1Columns: HuiPickerColumn<string>[][] = [[
-  { text: '男' },
-  { text: '女' },
-]]
+const open1Columns: HuiPickerColumn<string>[][] = [
+  [{ text: '男' }, { text: '女' }],
+]
 
 const InputPage: React.FC = () => {
   const [localData, setLocalData] = useState({
@@ -50,7 +49,17 @@ const InputPage: React.FC = () => {
     })
   }, [])
 
-  const buttonStyle = useMemo(() => ({ width: '50%', margin: '30px auto' }), [])
+  const handleReset = useCallback(() => {
+    Taro.showModal({
+      title: '重置',
+      content: `重置成功：'${JSON.stringify(form.getFieldsValue())}`,
+    })
+  }, [])
+
+  const buttonStyle = useMemo(
+    () => ({ width: '50%', margin: '30px auto' }),
+    [],
+  )
 
   const HuiFormItem = HuiForm.Item
   return (
@@ -62,17 +71,30 @@ const InputPage: React.FC = () => {
       />
       <View className='content'>
         <GroupSection title='基础用法'>
-          <HuiForm onValuesChange={handleChange} form={form} onFinish={handleFinish}>
-            <HuiFormItem rule={[
-              {
-                require: true,
-              },
-              value => value,
-            ]} label='账号' name='account'
+          <HuiForm
+            onValuesChange={handleChange}
+            form={form}
+            onFinish={handleFinish}
+            onReset={handleReset}
+          >
+            <HuiFormItem
+              rule={[
+                {
+                  require: true,
+                },
+                value => value,
+              ]}
+              label='账号'
+              name='account'
             >
-              <HuiInput divider={false} onInput={e => form.setFieldValue('account', e.detail.value)}></HuiInput>
+              <HuiInput
+                divider={false}
+                onInput={e => form.setFieldValue('account', e.detail.value)}
+              ></HuiInput>
             </HuiFormItem>
-            <HuiFormItem label='密码' name='password'
+            <HuiFormItem
+              label='密码'
+              name='password'
               rule={[
                 {
                   require: true,
@@ -82,13 +104,15 @@ const InputPage: React.FC = () => {
               ]}
               tipsText='密码必须为6-10个字符之间'
             >
-              <HuiInput divider={false} onInput={e => form.setFieldValue('password', e.detail.value)} type='safe-password'></HuiInput>
+              <HuiInput
+                divider={false}
+                onInput={e => form.setFieldValue('password', e.detail.value)}
+                type='safe-password'
+              ></HuiInput>
             </HuiFormItem>
 
             <HuiFormItem label='性别' name='gender'>
-              <View
-                onClick={() => setOpen1(true)}
-              >
+              <View onClick={() => setOpen1(true)}>
                 {form.getFieldValue('gender') || '请选择'}
               </View>
               <HuiPicker
@@ -101,10 +125,23 @@ const InputPage: React.FC = () => {
               />
             </HuiFormItem>
 
-            <HuiFormItem rule={[{ require: true }]} align='column' label='简介' name='description'>
-              <HuiTextArea upperLimit={50} onInput={e => form.setFieldValue('description', e.detail.value)}></HuiTextArea>
+            <HuiFormItem
+              rule={[{ require: true }]}
+              align='column'
+              label='简介'
+              name='description'
+            >
+              <HuiTextArea
+                upperLimit={50}
+                onInput={e => form.setFieldValue('description', e.detail.value)}
+              ></HuiTextArea>
             </HuiFormItem>
-            <HuiButton block style={buttonStyle} onClick={() => form?.submit()}>提交表单</HuiButton>
+            <HuiButton formType='submit' block style={buttonStyle}>
+              提交表单
+            </HuiButton>
+            <HuiButton formType='reset' block style={buttonStyle}>
+              重置表单
+            </HuiButton>
           </HuiForm>
         </GroupSection>
       </View>
