@@ -29,7 +29,7 @@ export interface HuiShareProps {
   onRefuseWritePhotosAlbum?: () => void
 }
 
-const HuiShare: React.FC<HuiShareProps> = props => {
+const HuiShare: React.FC<HuiShareProps> = (props) => {
   const {
     url,
     loading,
@@ -108,14 +108,14 @@ const HuiShare: React.FC<HuiShareProps> = props => {
           width={260}
           height={360}
         />
-     )}
+      )}
     </View>
   )
 
   const renderMultipleContent = () => (
     <View className='hui-share-multiple-content'>
-      {visible && !!url && !!url.filter(v => !!v).length && (
-        <ShareSwiper urlList={url} handleChange={index => setCurrentPostIndex(index)} />
+      {visible && !!url && !!url.filter((v) => !!v).length && (
+        <ShareSwiper urlList={url} handleChange={(index) => setCurrentPostIndex(index)} />
       )}
     </View>
   )
@@ -126,17 +126,16 @@ const HuiShare: React.FC<HuiShareProps> = props => {
         position='bottom'
         visible={visible}
         className={className}
-        style={{ borderRadius: `${pxTransform(24)} ${pxTransform(24)} 0 0`, overflow: 'hidden', ...style }}
+        style={{
+          borderRadius: `${pxTransform(24)} ${pxTransform(24)} 0 0`,
+          overflow: 'hidden',
+          ...style,
+        }}
         onClose={onClose}
       >
         <View className='hui-share'>
           <View className='hui-share-header'>
-            <HuiIcon
-              name='006-close3'
-              size={20}
-              color='rgba(30, 30, 30, .5)'
-              onClick={onClose}
-            />
+            <HuiIcon name='006-close3' size={20} color='rgba(30, 30, 30, .5)' onClick={onClose} />
           </View>
           {loading ? (
             <View className='loading-content'>
@@ -144,9 +143,7 @@ const HuiShare: React.FC<HuiShareProps> = props => {
               <View className='loading-tip'>加载中…</View>
             </View>
           ) : (
-            <Block>
-              {multiple ? renderMultipleContent() : renderSingleContent()}
-            </Block>
+            <Block>{multiple ? renderMultipleContent() : renderSingleContent()}</Block>
           )}
           <View className='hui-share-btn-group'>
             <HuiButton openType='share' type='text' disabled={loading}>

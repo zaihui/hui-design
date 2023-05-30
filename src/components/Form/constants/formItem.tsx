@@ -35,7 +35,7 @@ type RuleReg = (
   target: {
     getFieldValue: any
   },
-) => (boolean)
+) => boolean
 
 type FullRule = [
   /** rule对象 */

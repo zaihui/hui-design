@@ -24,10 +24,10 @@ class FormStore {
     this.store = {}
 
     /**
-   * name - key
-   * onStoreChange - 更新方法
-   * rules - 规则
-   */
+     * name - key
+     * onStoreChange - 更新方法
+     * rules - 规则
+     */
     this.watchList = []
 
     this.callbacks = {
@@ -41,7 +41,7 @@ class FormStore {
   registerWatch(field: registerWatchType): () => void {
     this.watchList.push(field)
     return () => {
-      this.watchList = this.watchList.filter(e => e !== field)
+      this.watchList = this.watchList.filter((e) => e !== field)
     }
   }
 
@@ -50,7 +50,7 @@ class FormStore {
     return get(this.store, toArray(name), undefined)
   }
 
-  getFieldsValue = (): any => this.store;
+  getFieldsValue = (): any => this.store
 
   setFieldValue<T>(name: string | string[], value: T): void {
     set(this.store, toArray(name), value)
@@ -80,7 +80,7 @@ class FormStore {
     )
     this.updateStore(restTarget)
     this.notifywatchList()
-  };
+  }
 
   setCallbacks(callbacks: Callbacks): void {
     this.callbacks = {
@@ -99,7 +99,8 @@ class FormStore {
   async validatorFields(): Promise<void | null | string> {
     const errorValiadtorArr: any[] = []
     const valiadtorPromiseArr = this.watchList.map(({ validatorRules, name }) =>
-      validatorRules(this.getFieldValue(name) || ''))
+      validatorRules(this.getFieldValue(name) || ''),
+    )
 
     const allRes = await Promise.all(valiadtorPromiseArr)
     // catch
@@ -107,8 +108,8 @@ class FormStore {
     if (!Array.isArray(allRes)) throw new Error(allRes)
     allRes.forEach(
       ({ state, name }) =>
-        !state
-        && errorValiadtorArr.push({
+        !state &&
+        errorValiadtorArr.push({
           name,
           value: this.getFieldValue(name),
         }),
@@ -125,13 +126,12 @@ class FormStore {
   async submit(): Promise<void> {
     const { onFinish, onFinishFailed } = this.callbacks
     this.validatorFields()
-      .then(res => onFinish(res))
-      .catch(err => {
+      .then((res) => onFinish(res))
+      .catch((err) => {
         const valiadtorErroTarget = getErrorTarget(err)
         onFinishFailed(valiadtorErroTarget || {})
         this.watchList.forEach(
-          ({ setSubmitTotal }) =>
-            setSubmitTotal && setSubmitTotal(pre => pre + 1),
+          ({ setSubmitTotal }) => setSubmitTotal && setSubmitTotal((pre) => pre + 1),
         )
       })
   }
@@ -140,8 +140,7 @@ class FormStore {
     const { onReset } = this.callbacks
     try {
       this.resetStore()
-      const arr = this.watchList.map(({ validatorRules }) =>
-        validatorRules(undefined))
+      const arr = this.watchList.map(({ validatorRules }) => validatorRules(undefined))
       await Promise.all(arr)
       onReset()
     } catch (error) {}

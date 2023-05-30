@@ -1,12 +1,12 @@
-"use strict";
+'use strict'
 
-var path = require('path');
+var path = require('path')
 
-var devConfig = require('./dev');
+var devConfig = require('./dev')
 
-var alphaConfig = require('./alpha');
+var alphaConfig = require('./alpha')
 
-var prodConfig = require('./prod');
+var prodConfig = require('./prod')
 
 var config = {
   projectName: 'example',
@@ -17,30 +17,29 @@ var config = {
     375: 2 / 1,
     640: 2.34 / 2,
     750: 1,
-    828: 1.81 / 2
+    828: 1.81 / 2,
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
   defineConstants: {},
   alias: {
-    '@': path.resolve(__dirname, '../src/')
+    '@': path.resolve(__dirname, '../src/'),
   },
   mini: {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {}
+        config: {},
       },
       pxtransform: {
         enable: true,
-        config: {}
+        config: {},
       },
       url: {
         enable: true,
         config: {
-          limit: 10240 // 设定转换尺寸上限
-
-        }
+          limit: 10240, // 设定转换尺寸上限
+        },
       },
       cssModules: {
         enable: false,
@@ -48,10 +47,10 @@ var config = {
         config: {
           namingPattern: 'module',
           // 转换模式，取值为 global/module
-          generateScopedName: '[name]__[local]___[hash:base64:5]'
-        }
-      }
-    }
+          generateScopedName: '[name]__[local]___[hash:base64:5]',
+        },
+      },
+    },
   },
   h5: {
     publicPath: '/',
@@ -59,7 +58,7 @@ var config = {
     postcss: {
       autoprefixer: {
         enable: true,
-        config: {}
+        config: {},
       },
       cssModules: {
         enable: false,
@@ -67,21 +66,24 @@ var config = {
         config: {
           namingPattern: 'module',
           // 转换模式，取值为 global/module
-          generateScopedName: '[name]__[local]___[hash:base64:5]'
-        }
-      }
-    }
-  }
-};
+          generateScopedName: '[name]__[local]___[hash:base64:5]',
+        },
+      },
+    },
+  },
+}
 
 module.exports = function (merge) {
   var getEnvConfig = function getEnvConfig(environment) {
     if (environment === 'prod') {
-      return prodConfig;
+      return prodConfig
     }
 
-    return alphaConfig;
-  };
+    return alphaConfig
+  }
 
-  return merge(config, process.env.NODE_ENV === 'development' ? devConfig : getEnvConfig(process.env.BUILD_ENV));
-};
+  return merge(
+    config,
+    process.env.NODE_ENV === 'development' ? devConfig : getEnvConfig(process.env.BUILD_ENV),
+  )
+}

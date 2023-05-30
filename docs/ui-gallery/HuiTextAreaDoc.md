@@ -39,7 +39,7 @@ const Demo: React.FC => () => (
 export default Demo
 ```
 
-需要注意的是，并没有迁移所有的 input 的可选项，以下简单罗列下未定义的一些props：
+需要注意的是，并没有迁移所有的 input 的可选项，以下简单罗列下未定义的一些 props：
 
 - `placeholderStyle`
 - `placeholderClass`、
@@ -54,6 +54,7 @@ export default Demo
 ## 参数
 
 ### TextArea
+
 <auto-doc path="components/TextArea/TextArea.tsx" />
 
 <demo-phone page="/pages/TextArea/TextArea" />

@@ -21,7 +21,7 @@ export interface HuiTagProps {
   className?: string
 }
 
-const HuiTag: React.FC<HuiTagProps> = props => {
+const HuiTag: React.FC<HuiTagProps> = (props) => {
   const {
     size = 'medium',
     type = 'solid',
@@ -66,16 +66,8 @@ const HuiTag: React.FC<HuiTagProps> = props => {
   }
 
   return (
-    <View
-      className={`hui-tag ${size} ${type} ${className}`}
-      style={tagStyle}
-      onClick={handleClick}
-    >
-      <View
-        className={cx(`tag-text ${size}-text`)}
-      >
-        {children}
-      </View>
+    <View className={`hui-tag ${size} ${type} ${className}`} style={tagStyle} onClick={handleClick}>
+      <View className={cx(`tag-text ${size}-text`)}>{children}</View>
     </View>
   )
 }

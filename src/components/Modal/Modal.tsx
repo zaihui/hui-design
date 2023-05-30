@@ -17,7 +17,7 @@ export interface HuiModalProps extends HuiPopupProps {
   onClose?: () => void
 }
 
-const Modal: React.FC<HuiModalProps> = props => {
+const Modal: React.FC<HuiModalProps> = (props) => {
   const {
     title,
     contentClassName,

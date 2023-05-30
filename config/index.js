@@ -17,8 +17,7 @@ const config = {
   },
   sourceRoot: 'src',
   outputRoot: 'dist',
-  defineConstants: {
-  },
+  defineConstants: {},
   alias: {
     '@': path.resolve(__dirname, '../src/'),
   },
@@ -30,9 +29,7 @@ const config = {
       },
       pxtransform: {
         enable: true,
-        config: {
-
-        },
+        config: {},
       },
       url: {
         enable: true,
@@ -72,7 +69,7 @@ const config = {
 }
 
 module.exports = function (merge) {
-  const getEnvConfig = environment => {
+  const getEnvConfig = (environment) => {
     if (environment === 'prod') {
       return prodConfig
     }

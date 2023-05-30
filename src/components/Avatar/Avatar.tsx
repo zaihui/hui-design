@@ -17,7 +17,7 @@ export interface HuiAvatarProps {
   style?: React.CSSProperties
 }
 
-const HuiAvatar: React.FC<HuiAvatarProps> = props => {
+const HuiAvatar: React.FC<HuiAvatarProps> = (props) => {
   const { type, size = 'small', borderColor, src, className = '', style } = props
   // 部分ios中，当父容器的宽度/2的值为偶数或者是偶数.5时border显示不全
   const defaultStyle = {

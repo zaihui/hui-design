@@ -29,33 +29,35 @@ module.exports = {
     // 参考：https://github.com/kristerkari/stylelint-scss/issues/196
     'at-rule-no-unknown': null,
     // 强制@import、@include等行前有一行空行
-    'at-rule-empty-line-before': ['always', {
-      except: [
-        // 允许非块内的同名at规则前不空行
-        'blockless-after-same-name-blockless',
-        // 允许最顶层的at规则前不空行
-        'first-nested',
-      ],
-      ignore: [
-        // 评论之后的at规则不受限制
-        'after-comment',
-      ],
-      // if、else除外
-      ignoreAtRules: [
-        'if', 'else',
-      ],
-    }],
+    'at-rule-empty-line-before': [
+      'always',
+      {
+        except: [
+          // 允许非块内的同名at规则前不空行
+          'blockless-after-same-name-blockless',
+          // 允许最顶层的at规则前不空行
+          'first-nested',
+        ],
+        ignore: [
+          // 评论之后的at规则不受限制
+          'after-comment',
+        ],
+        // if、else除外
+        ignoreAtRules: ['if', 'else'],
+      },
+    ],
     // 强制@import等行的";"后必须换行
     'at-rule-semicolon-newline-after': 'always',
     // 强制"{" 后必须换行
     'block-opening-brace-newline-after': 'always',
     // 强制"}" 后必须换行
-    'block-closing-brace-newline-after': ['always', {
-      // if、else除外
-      ignoreAtRules: [
-        'if', 'else',
-      ],
-    }],
+    'block-closing-brace-newline-after': [
+      'always',
+      {
+        // if、else除外
+        ignoreAtRules: ['if', 'else'],
+      },
+    ],
     // 允许最大空行数为1（之前为4但发现其实绝大多数场景下空行只有1行）
     'max-empty-lines': 1,
     // 强制省略小数点前面的0

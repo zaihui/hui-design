@@ -10,7 +10,7 @@ interface PageHeaderProps {
   desc: string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = props => {
+const PageHeader: React.FC<PageHeaderProps> = (props) => {
   const { image, title, desc } = props
 
   return (

@@ -8,7 +8,7 @@ export const pxTransform = (size: number): string => Taro.pxTransform(size, DESI
 export const selectorQueryClientRect = (
   selector: string,
 ): Promise<NodesRef.BoundingClientRectCallbackResult> =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     const query = Taro.createSelectorQuery()
     query
       .select(selector)
@@ -21,7 +21,7 @@ export const selectorQueryClientRect = (
 export const selectorQueryScrollOffset = (
   selector: string,
 ): Promise<NodesRef.ScrollOffsetCallbackResult> =>
-  new Promise(resolve => {
+  new Promise((resolve) => {
     const query = Taro.createSelectorQuery()
     query
       .select(selector)
@@ -35,10 +35,10 @@ const hexToRgb = (hex: string): { r: number; g: number; b: number } | null => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result
     ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-    }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
     : null
 }
 
@@ -114,7 +114,9 @@ export const parseDurationToTime = (d: number, format: string): string => {
  * 获取格式中的分隔符
  * @param format 格式
  */
-export const getTimerFormatSeparator = (format = 'HH:mm:ss'): {
+export const getTimerFormatSeparator = (
+  format = 'HH:mm:ss',
+): {
   day: string
   hour: string
   minute: string

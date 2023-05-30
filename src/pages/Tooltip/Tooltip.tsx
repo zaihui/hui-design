@@ -32,7 +32,11 @@ const TooltipPage: React.FC = () => {
 
       <View className='content'>
         <GroupSection title='提示类型'>
-          <HuiTooltip visible={showAutoClose} content='提示内容' onClose={() => setShowAutoClose(false)}>
+          <HuiTooltip
+            visible={showAutoClose}
+            content='提示内容'
+            onClose={() => setShowAutoClose(false)}
+          >
             <HuiButton
               type='secondary'
               style={{ marginRight: Taro.pxTransform(24) }}
@@ -49,11 +53,7 @@ const TooltipPage: React.FC = () => {
             closable
             onClose={() => setShowClosable(false)}
           >
-            <HuiButton
-              type='secondary'
-              width={146}
-              onClick={() => setShowClosable(true)}
-            >
+            <HuiButton type='secondary' width={146} onClick={() => setShowClosable(true)}>
               手动关闭提示
             </HuiButton>
           </HuiTooltip>
@@ -61,33 +61,89 @@ const TooltipPage: React.FC = () => {
 
         <GroupSection title='提示样式'>
           <View className='row'>
-            <HuiTooltip visible={showTopLeft} placement='topLeft' content='提示内容' onClose={() => setShowTopLeft(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowTopLeft(true)}>左上方提示</HuiButton>
+            <HuiTooltip
+              visible={showTopLeft}
+              placement='topLeft'
+              content='提示内容'
+              onClose={() => setShowTopLeft(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowTopLeft(true)}>
+                左上方提示
+              </HuiButton>
             </HuiTooltip>
-            <HuiTooltip visible={showTop} placement='top' content='提示内容' onClose={() => setShowTop(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowTop(true)}>居中上提示</HuiButton>
+            <HuiTooltip
+              visible={showTop}
+              placement='top'
+              content='提示内容'
+              onClose={() => setShowTop(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowTop(true)}>
+                居中上提示
+              </HuiButton>
             </HuiTooltip>
-            <HuiTooltip visible={showTopRight} placement='topRight' content='提示内容' onClose={() => setShowTopRight(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowTopRight(true)}>右上方提示</HuiButton>
+            <HuiTooltip
+              visible={showTopRight}
+              placement='topRight'
+              content='提示内容'
+              onClose={() => setShowTopRight(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowTopRight(true)}>
+                右上方提示
+              </HuiButton>
             </HuiTooltip>
           </View>
           <View className='row center-special'>
-            <HuiTooltip visible={showRight} placement='right' content='提示内容' onClose={() => setShowRight(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowRight(true)}>右侧提示</HuiButton>
+            <HuiTooltip
+              visible={showRight}
+              placement='right'
+              content='提示内容'
+              onClose={() => setShowRight(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowRight(true)}>
+                右侧提示
+              </HuiButton>
             </HuiTooltip>
-            <HuiTooltip visible={showLeft} placement='left' content='提示内容' onClose={() => setShowLeft(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowLeft(true)}>左侧提示</HuiButton>
+            <HuiTooltip
+              visible={showLeft}
+              placement='left'
+              content='提示内容'
+              onClose={() => setShowLeft(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowLeft(true)}>
+                左侧提示
+              </HuiButton>
             </HuiTooltip>
           </View>
           <View className='row'>
-            <HuiTooltip visible={showBottomLeft} placement='bottomLeft' content='提示内容' onClose={() => setShowBottomLeft(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowBottomLeft(true)}>左下方提示</HuiButton>
+            <HuiTooltip
+              visible={showBottomLeft}
+              placement='bottomLeft'
+              content='提示内容'
+              onClose={() => setShowBottomLeft(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowBottomLeft(true)}>
+                左下方提示
+              </HuiButton>
             </HuiTooltip>
-            <HuiTooltip visible={showBottom} placement='bottom' content='提示内容' onClose={() => setShowBottom(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowBottom(true)}>居中下提示</HuiButton>
+            <HuiTooltip
+              visible={showBottom}
+              placement='bottom'
+              content='提示内容'
+              onClose={() => setShowBottom(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowBottom(true)}>
+                居中下提示
+              </HuiButton>
             </HuiTooltip>
-            <HuiTooltip visible={showBottomRight} placement='bottomRight' content='提示内容' onClose={() => setShowBottomRight(false)}>
-              <HuiButton type='secondary' width={104} onClick={() => setShowBottomRight(true)}>右下方提示</HuiButton>
+            <HuiTooltip
+              visible={showBottomRight}
+              placement='bottomRight'
+              content='提示内容'
+              onClose={() => setShowBottomRight(false)}
+            >
+              <HuiButton type='secondary' width={104} onClick={() => setShowBottomRight(true)}>
+                右下方提示
+              </HuiButton>
             </HuiTooltip>
           </View>
         </GroupSection>
@@ -98,7 +154,9 @@ const TooltipPage: React.FC = () => {
             content='提示内容提示内容提示内容提示内容提示内容提示内容提示内容提示内容提示内容提示内容提示内容提示内容'
             onClose={() => setShowEllipsis(false)}
           >
-            <HuiButton type='secondary' width={146} onClick={() => setShowEllipsis(true)}>提示文案溢出</HuiButton>
+            <HuiButton type='secondary' width={146} onClick={() => setShowEllipsis(true)}>
+              提示文案溢出
+            </HuiButton>
           </HuiTooltip>
         </GroupSection>
       </View>

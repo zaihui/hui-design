@@ -47,11 +47,7 @@ const ContentListPage: React.FC = () => {
 
           <SubGroupSection title='上下布局'>
             <ContentList>
-              <Item
-                type='vertical'
-                label='标题文字'
-                value='内容内容内容内容内容内容内容内容'
-              />
+              <Item type='vertical' label='标题文字' value='内容内容内容内容内容内容内容内容' />
               <Item type='vertical' label='图片' value={imgs} />
             </ContentList>
           </SubGroupSection>

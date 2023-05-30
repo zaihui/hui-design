@@ -21,7 +21,7 @@ export interface HuiLoaderProps {
   onClick?(e): void
 }
 const prefix = 'hui-loader'
-const Loader: React.FC<HuiLoaderProps> = props => {
+const Loader: React.FC<HuiLoaderProps> = (props) => {
   const {
     className = '',
     loading = false,
@@ -63,7 +63,7 @@ const Loader: React.FC<HuiLoaderProps> = props => {
     )
   }
 
-  return loading ? loadingElement : child as React.ReactElement
+  return loading ? loadingElement : (child as React.ReactElement)
 }
 
 export default Loader

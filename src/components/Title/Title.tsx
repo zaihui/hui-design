@@ -9,7 +9,7 @@ import './Title.scss'
 export enum TitleSize {
   Small = 'small',
   Medium = 'medium',
-  Large = 'large'
+  Large = 'large',
 }
 
 export interface HuiTitleProps {
@@ -22,7 +22,7 @@ export interface HuiTitleProps {
   onLinkClick?: () => void
 }
 const prefix = 'hui-title'
-const HuiTitle: React.FC<HuiTitleProps> = props => {
+const HuiTitle: React.FC<HuiTitleProps> = (props) => {
   const {
     className,
     title,
@@ -36,13 +36,9 @@ const HuiTitle: React.FC<HuiTitleProps> = props => {
     <View className={cx(prefix, className, size)}>
       <View className='title'>{title}</View>
       <View className='link' onClick={onLinkClick}>
-        {linkLeftIcon && (
-          <HuiIcon className='link-left-icon' name={linkLeftIcon} />
-        )}
+        {linkLeftIcon && <HuiIcon className='link-left-icon' name={linkLeftIcon} />}
         {link}
-        {linkRightIcon && (
-          <HuiIcon className='link-right-icon' name={linkRightIcon} />
-        )}
+        {linkRightIcon && <HuiIcon className='link-right-icon' name={linkRightIcon} />}
       </View>
     </View>
   )

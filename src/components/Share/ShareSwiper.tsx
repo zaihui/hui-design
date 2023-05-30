@@ -1,9 +1,4 @@
-import {
-  Block,
-  Swiper,
-  SwiperItem,
-  View,
-} from '@tarojs/components'
+import { Block, Swiper, SwiperItem, View } from '@tarojs/components'
 import React, { FunctionComponent, useState } from 'react'
 import { pxTransform } from '../../utils'
 
@@ -40,9 +35,7 @@ const ShareSwiper: FunctionComponent<ShareSwiperProps> = ({
     >
       {urlList.map((item, index) => (
         <SwiperItem key={index} className='swiper-item' onClick={() => onChange(index)}>
-          <View
-            className={`item ${index === current ? 'current' : ''}`}
-          >
+          <View className={`item ${index === current ? 'current' : ''}`}>
             <HImage className='post-image' src={item} width={260} height={360} mode='aspectFill' />
             {index === current && (
               <Block>

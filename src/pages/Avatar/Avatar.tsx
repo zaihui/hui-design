@@ -17,8 +17,10 @@ const SampleItem: React.FC<{
   </View>
 )
 
-const AVATAR_BG_IMG = 'https://r.kezaihui.com/client/2021-05-30/hui-design-avartar-demo-21053001.png'
-const AVATAR_USER_IMG = 'https://r.kezaihui.com/client/2021-05-30/hui-design-avatar-user-21053001.png'
+const AVATAR_BG_IMG =
+  'https://r.kezaihui.com/client/2021-05-30/hui-design-avartar-demo-21053001.png'
+const AVATAR_USER_IMG =
+  'https://r.kezaihui.com/client/2021-05-30/hui-design-avatar-user-21053001.png'
 
 const ImagePage: React.FC = () => (
   <View className='avatar-page'>

@@ -20,17 +20,19 @@ const DefaultPageDetail: React.FC = () => {
       {type === 'noSearch' && (
         <HuiDefaultPage visible type='noSearch' onClick={() => Taro.navigateBack()} />
       )}
-      {type === 'failed' && (
-        <HuiDefaultPage visible type='failed' />
-      )}
+      {type === 'failed' && <HuiDefaultPage visible type='failed' />}
       {type === 'custom' && (
         <HuiDefaultPage
           visible
           description='这是自定义定义描述文案'
           info='描述文案'
-          imageIcon={(
-            <HuiImage src={MOCK_IMAGE} mode='aspectFill' style={{ width: '100%', height: '100%' }} />
-          )}
+          imageIcon={
+            <HuiImage
+              src={MOCK_IMAGE}
+              mode='aspectFill'
+              style={{ width: '100%', height: '100%' }}
+            />
+          }
           buttonText='返回上一页'
           onClick={() => Taro.navigateBack()}
         />

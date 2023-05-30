@@ -25,69 +25,73 @@ const NavBarDemo: React.FC = () => (
         <SubGroupSection title='透明底导航'>
           <View
             className='row'
-            onClick={() => router.NavBarWhiteDetail.navigateTo({
-              hideBack: false,
-              transparent: true,
-              backgroundUrl: 'https://r.kezaihui.com/client/2021-08-05/176961628141405_.pic.jpg',
-              title: '标题',
-              theme: 'white',
-            })}
+            onClick={() =>
+              router.NavBarWhiteDetail.navigateTo({
+                hideBack: false,
+                transparent: true,
+                backgroundUrl: 'https://r.kezaihui.com/client/2021-08-05/176961628141405_.pic.jpg',
+                title: '标题',
+                theme: 'white',
+              })
+            }
           >
             <DemoNavBar
               transparent
               title='标题'
               theme='white'
               hideBack={false}
-              extra={{ background: 'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-1-21080501.png' }}
+              extra={{
+                background: 'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-1-21080501.png',
+              }}
             />
           </View>
           <View
             className='row'
-            onClick={() => router.NavBarBlackDetail.navigateTo({
-              hideBack: false,
-              transparent: true,
-              backgroundUrl: 'https://r.kezaihui.com/client/2021-08-05/176971628141406_.pic.jpg',
-              title: '标题',
-              theme: 'black',
-            })}
+            onClick={() =>
+              router.NavBarBlackDetail.navigateTo({
+                hideBack: false,
+                transparent: true,
+                backgroundUrl: 'https://r.kezaihui.com/client/2021-08-05/176971628141406_.pic.jpg',
+                title: '标题',
+                theme: 'black',
+              })
+            }
           >
             <DemoNavBar
               transparent
               title='标题'
               theme='black'
               hideBack={false}
-              extra={{ background: 'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-2-21080501.png' }}
+              extra={{
+                background: 'https://r.kezaihui.com/client/2021-08-05/nav-bar-bg-2-21080501.png',
+              }}
             />
           </View>
         </SubGroupSection>
         <SubGroupSection title='有底色导航'>
           <View
             className='row'
-            onClick={() => router.NavBarWhiteDetail.navigateTo({
-              hideBack: false,
-              title: '标题',
-              theme: 'white',
-            })}
+            onClick={() =>
+              router.NavBarWhiteDetail.navigateTo({
+                hideBack: false,
+                title: '标题',
+                theme: 'white',
+              })
+            }
           >
-            <DemoNavBar
-              title='标题'
-              theme='white'
-              hideBack={false}
-            />
+            <DemoNavBar title='标题' theme='white' hideBack={false} />
           </View>
           <View
             className='row'
-            onClick={() => router.NavBarBlackDetail.navigateTo({
-              hideBack: false,
-              title: '标题',
-              theme: 'black',
-            })}
+            onClick={() =>
+              router.NavBarBlackDetail.navigateTo({
+                hideBack: false,
+                title: '标题',
+                theme: 'black',
+              })
+            }
           >
-            <DemoNavBar
-              title='标题'
-              theme='black'
-              hideBack={false}
-            />
+            <DemoNavBar title='标题' theme='black' hideBack={false} />
           </View>
         </SubGroupSection>
       </GroupSection>
@@ -97,79 +101,75 @@ const NavBarDemo: React.FC = () => (
       >
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: true,
-            title: '标题',
-            theme: 'white',
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: true,
+              title: '标题',
+              theme: 'white',
+            })
+          }
         >
-          <DemoNavBar
-            title='标题'
-            theme='white'
-            hideBack
-          />
+          <DemoNavBar title='标题' theme='white' hideBack />
         </View>
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: false,
-            title: '标题',
-            theme: 'white',
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: false,
+              title: '标题',
+              theme: 'white',
+            })
+          }
+        >
+          <DemoNavBar title='标题' theme='white' hideBack={false} />
+        </View>
+        <View
+          className='row'
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: false,
+              title: '标题',
+              customButton: true,
+              theme: 'white',
+            })
+          }
         >
           <DemoNavBar
             title='标题'
             theme='white'
             hideBack={false}
+            button={
+              <View className='fake-button'>
+                <View className='fake-square'></View>按钮文案
+              </View>
+            }
           />
         </View>
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: false,
-            title: '标题',
-            customButton: true,
-            theme: 'white',
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: false,
+              showHome: true,
+              title: '标题',
+              theme: 'white',
+            })
+          }
         >
-          <DemoNavBar
-            title='标题'
-            theme='white'
-            hideBack={false}
-            button={<View className='fake-button'><View className='fake-square'></View>按钮文案</View>}
-          />
+          <DemoNavBar showHome title='标题' theme='white' hideBack={false} />
         </View>
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: false,
-            showHome: true,
-            title: '标题',
-            theme: 'white',
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: true,
+              showHome: true,
+              title: '标题',
+              theme: 'white',
+            })
+          }
         >
-          <DemoNavBar
-            showHome
-            title='标题'
-            theme='white'
-            hideBack={false}
-          />
-        </View>
-        <View
-          className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: true,
-            showHome: true,
-            title: '标题',
-            theme: 'white',
-          })}
-        >
-          <DemoNavBar
-            showHome
-            hideBack
-            title='标题'
-            theme='white'
-          />
+          <DemoNavBar showHome hideBack title='标题' theme='white' />
         </View>
       </GroupSection>
       <GroupSection
@@ -178,68 +178,68 @@ const NavBarDemo: React.FC = () => (
       >
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: true,
-            theme: 'white',
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: true,
+              theme: 'white',
+            })
+          }
         >
-          <DemoNavBar
-            theme='white'
-            hideBack
-          />
+          <DemoNavBar theme='white' hideBack />
         </View>
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: false,
-            theme: 'white',
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: false,
+              theme: 'white',
+            })
+          }
+        >
+          <DemoNavBar theme='white' hideBack={false} />
+        </View>
+        <View
+          className='row'
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: false,
+              customButton: true,
+            })
+          }
         >
           <DemoNavBar
             theme='white'
             hideBack={false}
+            button={
+              <View className='fake-button'>
+                <View className='fake-square'></View>按钮文案
+              </View>
+            }
           />
         </View>
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: false,
-            customButton: true,
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: false,
+              showHome: true,
+              theme: 'white',
+            })
+          }
         >
-          <DemoNavBar
-            theme='white'
-            hideBack={false}
-            button={<View className='fake-button'><View className='fake-square'></View>按钮文案</View>}
-          />
+          <DemoNavBar showHome theme='white' hideBack={false} />
         </View>
         <View
           className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: false,
-            showHome: true,
-            theme: 'white',
-          })}
+          onClick={() =>
+            router.NavBarWhiteDetail.navigateTo({
+              hideBack: true,
+              showHome: true,
+              theme: 'white',
+            })
+          }
         >
-          <DemoNavBar
-            showHome
-            theme='white'
-            hideBack={false}
-          />
-        </View>
-        <View
-          className='row'
-          onClick={() => router.NavBarWhiteDetail.navigateTo({
-            hideBack: true,
-            showHome: true,
-            theme: 'white',
-          })}
-        >
-          <DemoNavBar
-            showHome
-            hideBack
-            theme='white'
-          />
+          <DemoNavBar showHome hideBack theme='white' />
         </View>
       </GroupSection>
     </View>

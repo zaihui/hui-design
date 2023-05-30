@@ -17,25 +17,19 @@ import { getPageUrl } from './page'
 /**
  * 包装原生的路由方法
  */
-function reLaunch<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function reLaunch<P>(packageName: string, name: string, params?: P): void {
   Taro.reLaunch({
     url: getPageUrl(packageName, name, params),
   })
 }
 
-function redirectTo<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function redirectTo<P>(packageName: string, name: string, params?: P): void {
   Taro.redirectTo({
     url: getPageUrl(packageName, name, params),
   })
 }
 
-function navigateTo<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function navigateTo<P>(packageName: string, name: string, params?: P): void {
   Taro.navigateTo({
     url: getPageUrl(packageName, name, params),
   })

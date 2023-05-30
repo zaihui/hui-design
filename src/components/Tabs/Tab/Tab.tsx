@@ -21,7 +21,7 @@ const defaultProps = {
   updateParent: () => undefined,
 }
 
-const HuiTab: React.FC<HuiTabProps> = props => {
+const HuiTab: React.FC<HuiTabProps> = (props) => {
   const {
     title,
     subTitle,
@@ -42,7 +42,7 @@ const HuiTab: React.FC<HuiTabProps> = props => {
   return (
     <View
       className={`hui-tab ${className}`}
-      style={{ display: (!animated && active !== name) ? 'none' : 'block', ...style }}
+      style={{ display: !animated && active !== name ? 'none' : 'block', ...style }}
     >
       {children}
     </View>

@@ -51,7 +51,7 @@ export interface HuiTextAreaProps {
   onKeyboardHeightChange?: CommonEventFunction<TextareaProps.onKeyboardHeightChangeEventDetail>
 }
 
-const HuiTextArea: React.FC<HuiTextAreaProps> = props => {
+const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
   const {
     label,
     labelIcon,
@@ -75,19 +75,23 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = props => {
     style,
     className = '',
   } = props
-  const valueLen = useMemo(() => (value && value.length || 0), [value])
+  const valueLen = useMemo(() => (value && value.length) || 0, [value])
   const [errorMsg, setErrorMsg] = useState(props.errorMsg)
 
-  const labelDom = label ? (<View className='label'>
-    <View>{ label }</View>
-    {!required && <View className='label-required'>(选填)</View>}
-    {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
-  </View>) : null
+  const labelDom = label ? (
+    <View className='label'>
+      <View>{label}</View>
+      {!required && <View className='label-required'>(选填)</View>}
+      {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
+    </View>
+  ) : null
 
   // 错误信息是否展示
-  const errorMsgDom = errorMsg ? <View className='error-wrapper'>
-    <View className='error-msg-wrapper'>{ errorMsg }</View>
-  </View> : null
+  const errorMsgDom = errorMsg ? (
+    <View className='error-wrapper'>
+      <View className='error-msg-wrapper'>{errorMsg}</View>
+    </View>
+  ) : null
 
   const textareaDom = (
     <Textarea
@@ -103,7 +107,7 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = props => {
       placeholderClass='placeholder'
       className='text-area'
       onLineChange={onLineChange}
-      onInput={e => {
+      onInput={(e) => {
         // eslint-disable-next-line
         // @ts-ignore
         if (!props.errorMsg && required && !e.target.value && errorMsg !== requiredMsg) {
@@ -123,16 +127,20 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = props => {
       className={cx('hui-text-area', className, { disabled })}
       style={{ height: typeof height === 'string' ? height : `${height}px`, ...style }}
     >
-      <View className='hui-text-area-label-area'>
-        {labelDom}
-      </View>
+      <View className='hui-text-area-label-area'>{labelDom}</View>
       {textareaDom}
-      {errorMsgDom || <View className='indicator'>
-        <Text
-          className={`current-number ${upperLimit && valueLen > upperLimit ? 'overage' : (valueLen ? '' : 'zero')}`}
-        >{ valueLen }</Text>
-        <Text>/{ upperLimit || '-' }</Text>
-      </View>}
+      {errorMsgDom || (
+        <View className='indicator'>
+          <Text
+            className={`current-number ${
+              upperLimit && valueLen > upperLimit ? 'overage' : valueLen ? '' : 'zero'
+            }`}
+          >
+            {valueLen}
+          </Text>
+          <Text>/{upperLimit || '-'}</Text>
+        </View>
+      )}
     </View>
   )
 }

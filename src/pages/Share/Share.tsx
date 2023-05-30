@@ -24,7 +24,13 @@ const ShareDemoPage: React.FC = () => {
       setMultipleShareVisble(true)
     }
     setLoading(true)
-    Taro.getImageInfo({ src: IMAGE }).then(res => setImages(Array(4).fill(0).map(() => res.path)))
+    Taro.getImageInfo({ src: IMAGE }).then((res) =>
+      setImages(
+        Array(4)
+          .fill(0)
+          .map(() => res.path),
+      ),
+    )
     setTimeout(() => {
       setLoading(false)
     }, 600)
@@ -54,10 +60,14 @@ const ShareDemoPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='分享类型'>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => handleShowShare()}>单张海报分享</HuiButton>
+            <HuiButton block type='secondary' onClick={() => handleShowShare()}>
+              单张海报分享
+            </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => handleShowShare(false)}>多张海报分享</HuiButton>
+            <HuiButton block type='secondary' onClick={() => handleShowShare(false)}>
+              多张海报分享
+            </HuiButton>
           </View>
         </GroupSection>
       </View>

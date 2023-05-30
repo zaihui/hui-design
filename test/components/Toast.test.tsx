@@ -10,25 +10,19 @@ Taro.initPxTransform({ designWidth: 375, deviceRatio: {} })
 describe('huiIcon Snap', () => {
   it('renders HuiToast -- text', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiToast title='Hello' type='text' visible />,
-    )
+    const component = renderToString(<HuiToast title='Hello' type='text' visible />)
     expect(component).toMatchSnapshot()
   })
 
   it('renders HuiToast -- success', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiToast title='success' type='success' visible />,
-    )
+    const component = renderToString(<HuiToast title='success' type='success' visible />)
     expect(component).toMatchSnapshot()
   })
 
   it('renders HuiToast -- fail', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiToast title='fail' type='fail' visible />,
-    )
+    const component = renderToString(<HuiToast title='fail' type='fail' visible />)
     expect(component).toMatchSnapshot()
   })
 

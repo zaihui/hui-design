@@ -10,9 +10,7 @@ import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
 import FilterContext from '../context'
 
-export interface FiltersContentProps
-  extends HuiPopupProps,
-    Omit<ActionFooterProps, 'hideMenu'> {
+export interface FiltersContentProps extends HuiPopupProps, Omit<ActionFooterProps, 'hideMenu'> {
   /** 筛选内容 */
   contentClassName?: string
   contentStyle?: React.CSSProperties
@@ -35,7 +33,7 @@ export interface FilterItemProps {
 
 const prefix = 'filters-content'
 
-const FiltersContent: React.FC<FiltersContentProps> = props => {
+const FiltersContent: React.FC<FiltersContentProps> = (props) => {
   const {
     contentClassName = '',
     contentStyle,
@@ -61,11 +59,9 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
     return {}
   }, [info, position, context.isFixed, context.scrollTop])
 
-  const FilterItem: React.FC<FilterItemProps> = itemProps => {
+  const FilterItem: React.FC<FilterItemProps> = (itemProps) => {
     const { label = '筛选条件名称', children } = itemProps
-    const [childrenVisible, setChildrenVisible] = useState<boolean>(
-      filterVisible || false,
-    )
+    const [childrenVisible, setChildrenVisible] = useState<boolean>(filterVisible || false)
 
     return (
       <View className={`${prefix}-item`}>
@@ -131,9 +127,9 @@ const FiltersContent: React.FC<FiltersContentProps> = props => {
         )}
         style={contentStyle}
       >
-        {visible
-          && filterItems.length
-          && filterItems.map((item, index) => (
+        {visible &&
+          filterItems.length &&
+          filterItems.map((item, index) => (
             <FilterItem key={index} label={item.label} name={item.name}>
               {item.children}
             </FilterItem>

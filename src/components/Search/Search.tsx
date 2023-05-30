@@ -26,7 +26,7 @@ export interface HuiSearchProps extends ViewProps, Omit<HuiInputProps, 'onInput'
 const prefix = 'hui-search'
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const empty = () => {}
-const Search: React.FC<HuiSearchProps> = props => {
+const Search: React.FC<HuiSearchProps> = (props) => {
   const {
     searchText,
     searchIcon = true,
@@ -61,7 +61,7 @@ const Search: React.FC<HuiSearchProps> = props => {
     <View
       style={style}
       className={`${prefix} ${className}`}
-      onClick={e => {
+      onClick={(e) => {
         if (onlyClick && onClick) {
           onClick(e)
         }
@@ -70,19 +70,25 @@ const Search: React.FC<HuiSearchProps> = props => {
       <View className={cx(`${prefix}-content`)} style={searchBg}>
         {searchIcon ? (
           <View className={cx(`${prefix}-search-icon search`)}>
-            <HuiIcon name='015-searchcircle' color='#a4a4a4ff' size={16} style={{ display: 'block' }} />
+            <HuiIcon
+              name='015-searchcircle'
+              color='#a4a4a4ff'
+              size={16}
+              style={{ display: 'block' }}
+            />
           </View>
         ) : null}
-        <View className={cx(`${prefix}-input-box`, { 'small-gap': allowClear, 'search-icon': searchIcon })}>
+        <View
+          className={cx(`${prefix}-input-box`, {
+            'small-gap': allowClear,
+            'search-icon': searchIcon,
+          })}
+        >
           <HuiInput
             {...props}
             style={{ padding: 0, height: '100%', background: 'transparent' }}
             value={val}
-            onInput={({
-              detail: {
-                value,
-              },
-            }) => {
+            onInput={({ detail: { value } }) => {
               onInput(value)
             }}
             divider={false}
@@ -91,7 +97,7 @@ const Search: React.FC<HuiSearchProps> = props => {
         {allowClear ? (
           <View
             className={cx(`${prefix}-search-icon clear`)}
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation()
               onInput('')
               if (onClear) {
@@ -106,17 +112,15 @@ const Search: React.FC<HuiSearchProps> = props => {
       {searchText ? (
         <View
           className={cx(`${prefix}-search-text`)}
-          onClick={e => {
+          onClick={(e) => {
             if (onSearch) {
               onSearch(val, e)
             }
           }}
         >
-          <HuiButton
-            type='text'
-            size='small'
-            radiusType='square'
-          >{searchText}</HuiButton>
+          <HuiButton type='text' size='small' radiusType='square'>
+            {searchText}
+          </HuiButton>
         </View>
       ) : null}
     </View>

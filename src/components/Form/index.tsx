@@ -11,7 +11,7 @@ type InstanceFormType = typeof InstanceForm
 interface FormInterface extends InstanceFormType {
   Item: typeof Item
 }
-(InstanceForm as FormInterface).Item = Item
+;(InstanceForm as FormInterface).Item = Item
 
 const Instance = InstanceForm as FormInterface
 

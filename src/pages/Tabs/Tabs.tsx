@@ -35,7 +35,7 @@ const TabsPage: React.FC = () => {
             <View style={{ marginBottom: Taro.pxTransform(16) }}>
               <HuiTabs
                 active={normalTabsFourIndex}
-                onChange={index => setNormalTabsFourIndex(Number(index))}
+                onChange={(index) => setNormalTabsFourIndex(Number(index))}
               >
                 <HuiTab title='案例展示'></HuiTab>
                 <HuiTab title='案例二'> </HuiTab>
@@ -47,7 +47,7 @@ const TabsPage: React.FC = () => {
             <View style={{ marginBottom: Taro.pxTransform(16) }}>
               <HuiTabs
                 active={normalTabsThreeIndex}
-                onChange={index => setNormalTabsThreeIndex(Number(index))}
+                onChange={(index) => setNormalTabsThreeIndex(Number(index))}
               >
                 <HuiTab title='案例一'></HuiTab>
                 <HuiTab title='案例二'></HuiTab>
@@ -58,7 +58,7 @@ const TabsPage: React.FC = () => {
             <View style={{ marginBottom: Taro.pxTransform(16) }}>
               <HuiTabs
                 active={normalTabsTwoIndex}
-                onChange={i => setNormalTabsTwoIndex(Number(i))}
+                onChange={(i) => setNormalTabsTwoIndex(Number(i))}
               >
                 <HuiTab title='案例展示'></HuiTab>
                 <HuiTab title='案例展示名称溢出省略了很多'></HuiTab>
@@ -70,7 +70,7 @@ const TabsPage: React.FC = () => {
             <HuiTabs
               scroll
               active={singleLineAutoTabsIndex}
-              onChange={index => setSingleLineAutoTabsIndex(Number(index))}
+              onChange={(index) => setSingleLineAutoTabsIndex(Number(index))}
             >
               <HuiTab title='展示案例'></HuiTab>
               <HuiTab title='案例'></HuiTab>
@@ -86,7 +86,7 @@ const TabsPage: React.FC = () => {
               smile
               scroll
               active={twoLineAutoTabsIndex}
-              onChange={index => setTwoLineAutoTabsIndex(Number(index))}
+              onChange={(index) => setTwoLineAutoTabsIndex(Number(index))}
             >
               <HuiTab title='案例展示' subTitle='描述文案'></HuiTab>
               <HuiTab title='案例' subTitle='描述文案'></HuiTab>
@@ -101,7 +101,7 @@ const TabsPage: React.FC = () => {
           <HuiTabs
             sticky
             active={stickyTabsIndex}
-            onChange={index => setStickyTabsIndex(Number(index))}
+            onChange={(index) => setStickyTabsIndex(Number(index))}
           >
             <HuiTab title='第一导航'>
               <View className='sticky-tab-content item-3'>第一导航内容</View>

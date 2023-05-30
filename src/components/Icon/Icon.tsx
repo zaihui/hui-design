@@ -42,13 +42,7 @@ const HuiIcon: React.FC<HuiIconProps> = ({
     ? `${prefixClass} ${prefixClass}-${name} ${className}`
     : `hui-icons hui-icon-${name} ${className}`
 
-  return (
-    <View
-      className={iconClassName}
-      style={style}
-      onClick={() => onClick()}
-    />
-  )
+  return <View className={iconClassName} style={style} onClick={() => onClick()} />
 }
 
 export default HuiIcon

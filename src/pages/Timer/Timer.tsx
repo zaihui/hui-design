@@ -18,7 +18,7 @@ interface TimerPageItemProps {
   children?: React.ReactNode
 }
 
-const TimerPageItem: React.FC<TimerPageItemProps> = props => {
+const TimerPageItem: React.FC<TimerPageItemProps> = (props) => {
   const { name, isGrey = false, children } = props
   return (
     <View className={cx('timer-page-item', { 'is-grey': isGrey })}>
@@ -38,50 +38,22 @@ const Timer: React.FC = () => (
     <View className='content'>
       <GroupSection title='计时器类型'>
         <TimerPageItem name='卡片计时器' isGrey>
-          <HuiTimer
-            isCard
-            isShowDay
-            time={TIMER_NUM}
-          />
-          <HuiTimer
-            isCard
-            time={TIMER_NUM}
-          />
+          <HuiTimer isCard isShowDay time={TIMER_NUM} />
+          <HuiTimer isCard time={TIMER_NUM} />
         </TimerPageItem>
         <TimerPageItem name='文字计时器'>
-          <HuiTimer
-            isShowDay
-            time={TIMER_NUM}
-          />
-          <HuiTimer
-            time={TIMER_NUM}
-          />
+          <HuiTimer isShowDay time={TIMER_NUM} />
+          <HuiTimer time={TIMER_NUM} />
         </TimerPageItem>
       </GroupSection>
       <GroupSection title='计时器样式'>
         <TimerPageItem isGrey>
-          <HuiTimer
-            isCard
-            isShowDay
-            time={TIMER_NUM}
-            format={TIME_FULL_FORMAT}
-          />
-          <HuiTimer
-            isCard
-            time={TIMER_NUM}
-            format={TIME_FORMAT}
-          />
+          <HuiTimer isCard isShowDay time={TIMER_NUM} format={TIME_FULL_FORMAT} />
+          <HuiTimer isCard time={TIMER_NUM} format={TIME_FORMAT} />
         </TimerPageItem>
         <TimerPageItem>
-          <HuiTimer
-            isShowDay
-            time={TIMER_NUM}
-            format={TIME_FULL_FORMAT}
-          />
-          <HuiTimer
-            time={TIMER_NUM}
-            format={TIME_FORMAT}
-          />
+          <HuiTimer isShowDay time={TIMER_NUM} format={TIME_FULL_FORMAT} />
+          <HuiTimer time={TIMER_NUM} format={TIME_FORMAT} />
         </TimerPageItem>
       </GroupSection>
     </View>

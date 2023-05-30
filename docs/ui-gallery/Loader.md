@@ -1,8 +1,8 @@
-# Loader组件
+# Loader 组件
 
 ## 介绍
 
-提供了页面级loading、模块级loading以及触底加载loading效果
+提供了页面级 loading、模块级 loading 以及触底加载 loading 效果
 
 ## 使用指南
 
@@ -39,6 +39,7 @@ export default Demo
 ## 参数
 
 ### Loader
+
 <auto-doc path="components/Loader/Loader.tsx" />
 
 <demo-phone page="/pages/Loader/Loader" />

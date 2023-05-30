@@ -10,7 +10,7 @@ export interface HuiCheckboxGroupProps {
   disabled?: boolean
   children?: React.ReactNode
 }
-const HuiCheckboxGroup: React.FC<HuiCheckboxGroupProps> = props => {
+const HuiCheckboxGroup: React.FC<HuiCheckboxGroupProps> = (props) => {
   const { value, onChange, disabled = false } = props
   const [checkedList, setCheckedList] = useState<string[]>([])
 

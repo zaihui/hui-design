@@ -28,67 +28,39 @@ const PopupPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='弹出层类型'>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV1(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV1(true)}>
               中间弹窗
             </HuiButton>
           </View>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV2(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV2(true)}>
               顶部弹出
             </HuiButton>
           </View>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV3(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV3(true)}>
               底部弹出
             </HuiButton>
           </View>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV4(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV4(true)}>
               左侧弹出
             </HuiButton>
           </View>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV5(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV5(true)}>
               右侧弹出
             </HuiButton>
           </View>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV6(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV6(true)}>
               点击空白遮罩无法关闭
             </HuiButton>
           </View>
         </GroupSection>
       </View>
 
-      <HuiPopup
-        visible={v1}
-        onClose={() => setV1(false)}
-        style={{ padding: '30px 50px' }}
-      >
+      <HuiPopup visible={v1} onClose={() => setV1(false)} style={{ padding: '30px 50px' }}>
         内容
       </HuiPopup>
       <HuiPopup
@@ -132,7 +104,9 @@ const PopupPage: React.FC = () => {
         maskClosable={false}
         onClick={() => Taro.showToast({ icon: 'none', title: '你点了内容区域' })}
       >
-        <HuiButton block size='large' onClick={() => setV6(false)}>只能点我关闭</HuiButton>
+        <HuiButton block size='large' onClick={() => setV6(false)}>
+          只能点我关闭
+        </HuiButton>
       </HuiPopup>
     </View>
   )

@@ -28,10 +28,10 @@ export interface HuiCheckboxProps extends ViewProps {
 export interface HuiCheckboxRef {
   toggle: () => void
 }
-const HuiCheckbox: React.ForwardRefRenderFunction<
-  HuiCheckboxRef,
-  HuiCheckboxProps
-> = (props, ref) => {
+const HuiCheckbox: React.ForwardRefRenderFunction<HuiCheckboxRef, HuiCheckboxProps> = (
+  props,
+  ref,
+) => {
   const {
     value,
     size = DEFAULT_ICON_SIZE,
@@ -51,12 +51,12 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
   const toggle = () => {
     const beforeCheckedList = context?.checkedList ?? []
     const afterCheckedList = checked
-      ? beforeCheckedList.filter(item => item !== value)
+      ? beforeCheckedList.filter((item) => item !== value)
       : beforeCheckedList.concat(value)
 
     context?.onChange(afterCheckedList)
   }
-  const handleClick = e => {
+  const handleClick = (e) => {
     e.stopPropagation()
     if (!finalDisabled) {
       toggle()
@@ -76,28 +76,20 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
     <View
       style={style}
       ref={ref}
-      className={cx(`hui-checkbox ${className}`, { 'disabled': finalDisabled })}
+      className={cx(`hui-checkbox ${className}`, { disabled: finalDisabled })}
       onClick={handleClick}
       {...rest}
     >
       <View
-        className={cx('hui-checkbox-icon', { 'unchecked': !checked })}
+        className={cx('hui-checkbox-icon', { unchecked: !checked })}
         style={{
           width: pxTransform(size),
           height: pxTransform(size),
         }}
       >
-        <HuiIcon
-          name='009-checkbox'
-          size={size}
-          color={checked ? color : 'transparent'}
-        />
+        <HuiIcon name='009-checkbox' size={size} color={checked ? color : 'transparent'} />
       </View>
-      {hasChildren && (
-        <View className='hui-checkbox-content'>
-          {children}
-        </View>
-      )}
+      {hasChildren && <View className='hui-checkbox-content'>{children}</View>}
     </View>
   )
 }

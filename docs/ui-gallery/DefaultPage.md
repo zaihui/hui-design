@@ -1,4 +1,4 @@
-# DefaultPage组件
+# DefaultPage 组件
 
 ## 介绍
 
@@ -40,6 +40,7 @@ export default Demo
 ## 参数
 
 ### DefaultPage
+
 <auto-doc path="components/DefaultPage/DefaultPage.tsx" />
 
 <demo-phone page="/pages/DefaultPage/DefaultPage " />

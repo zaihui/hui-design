@@ -1,5 +1,5 @@
 export const toArray = (element: string | any[]): any[] =>
-  (Array.isArray(element) ? element : [element])
+  Array.isArray(element) ? element : [element]
 
 export function getErrorTarget(err: Error): string | null {
   const msg = err.message.replace('Error: ', '')

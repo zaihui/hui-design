@@ -14,7 +14,7 @@ export enum TextLevel {
   Six = 'six',
   Seven = 'seven',
   Eight = 'eight',
-  Nine = 'nine'
+  Nine = 'nine',
 }
 
 export const TextFont = {
@@ -63,13 +63,8 @@ export interface HuiTextProps {
   textLevel?: TextLevel
 }
 
-const HuiText: React.FC<HuiTextProps> = props => {
-  const {
-    style = {},
-    className = '',
-    children,
-    textLevel = TextLevel.Five,
-  } = props
+const HuiText: React.FC<HuiTextProps> = (props) => {
+  const { style = {}, className = '', children, textLevel = TextLevel.Five } = props
 
   if (!children && children !== 0) {
     return null

@@ -1,10 +1,4 @@
-import React, {
-  CSSProperties,
-  ReactNode,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import React, { CSSProperties, ReactNode, useMemo, useRef, useState } from 'react'
 import { View } from '@tarojs/components'
 import { usePageScroll } from '@tarojs/taro'
 import cx from 'classnames'
@@ -37,7 +31,7 @@ const defaultProps = {
   filterType: 'single',
 }
 
-const HuiFilter: React.FC<HuiFilterProps> = props => {
+const HuiFilter: React.FC<HuiFilterProps> = (props) => {
   const {
     className,
     menuConfig,
@@ -66,7 +60,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
 
   const info = useBoundingClientRect(filterRef)
 
-  usePageScroll(res => {
+  usePageScroll((res) => {
     setScrollTop(res.scrollTop)
     if (!info || !fixed) return
     if (res.scrollTop >= info.top) {
@@ -112,11 +106,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
     >
       <FilterContext.Provider value={contextValue}>
         {isMenu ? (
-          <Menu
-            {...menuProps}
-            className='hui-filter-left-content'
-            ref={menuRef}
-          >
+          <Menu {...menuProps} className='hui-filter-left-content' ref={menuRef}>
             {menuItems?.map((item, index) => (
               <Menu.Item {...item} key={index} />
             ))}
@@ -126,10 +116,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
         )}
         {filtersContentConfig && (
           <View className='hui-filter-right-content'>
-            <View
-              className='hui-filter-right-content-icon'
-              onClick={handleFilter}
-            >
+            <View className='hui-filter-right-content-icon' onClick={handleFilter}>
               <HuiIcon name='h109-filter' size={14} />
               <View>筛选</View>
             </View>

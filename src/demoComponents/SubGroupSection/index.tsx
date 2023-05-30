@@ -8,7 +8,7 @@ interface SubGroupSectionProps {
   style?: React.CSSProperties
   children?: React.ReactNode
 }
-const SubGroupSection: React.FC<SubGroupSectionProps> = props => {
+const SubGroupSection: React.FC<SubGroupSectionProps> = (props) => {
   const { title, style, children } = props
 
   return (

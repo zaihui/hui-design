@@ -42,7 +42,7 @@ const defaultContent: ContentProps = {
   imageIcon: noData,
 }
 
-const DefaultPage: React.FC<HuiDefaultPageProps> = props => {
+const DefaultPage: React.FC<HuiDefaultPageProps> = (props) => {
   const {
     className = '',
     type,
@@ -86,7 +86,7 @@ const DefaultPage: React.FC<HuiDefaultPageProps> = props => {
         setContent(defaultContent)
         break
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type])
 
   const btnProps: HuiButtonProps = {
@@ -101,25 +101,27 @@ const DefaultPage: React.FC<HuiDefaultPageProps> = props => {
       <View className={`${prefix}-padding`} />
       {content.imageIcon && (
         <View className={`${prefix}-image`}>
-          {content.isImage
-            ? (<Image src={content.imageIcon as never} className={`${prefix}-image-pic`} />)
-            : imageIcon}
+          {content.isImage ? (
+            <Image src={content.imageIcon as never} className={`${prefix}-image-pic`} />
+          ) : (
+            imageIcon
+          )}
         </View>
       )}
-      {content.description && <View className={`${prefix}-description`}>{content.description}</View>}
+      {content.description && (
+        <View className={`${prefix}-description`}>{content.description}</View>
+      )}
       {content.info && <View className={`${prefix}-info`}>{content.info}</View>}
       {content.showButton && props.showButton && (
         <View className={`${prefix}-btn`}>
-          <HuiButton {...btnProps}>
-            {content.buttonText}
-          </HuiButton>
+          <HuiButton {...btnProps}>{content.buttonText}</HuiButton>
         </View>
       )}
     </View>
   )
   const childs = children ?? null
 
-  return visible ? defaultPage : childs as React.ReactElement
+  return visible ? defaultPage : (childs as React.ReactElement)
 }
 
 DefaultPage.defaultProps = {

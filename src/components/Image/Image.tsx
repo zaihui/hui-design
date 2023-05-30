@@ -36,7 +36,7 @@ export interface HuiImageProps extends Omit<ImageProps, 'src'> {
   wapperClassName?: string
 }
 
-const HuiImage: React.FC<HuiImageProps> = props => {
+const HuiImage: React.FC<HuiImageProps> = (props) => {
   const {
     style: customStyle,
     width = 0,
@@ -82,7 +82,13 @@ const HuiImage: React.FC<HuiImageProps> = props => {
     }
     if (placeholderImg) {
       const placeholderImgSize = pxTransform(customPlaceholderSize)
-      return <Image mode='aspectFill' src={placeholderImg} style={{ width: placeholderImgSize, height: placeholderImgSize }} />
+      return (
+        <Image
+          mode='aspectFill'
+          src={placeholderImg}
+          style={{ width: placeholderImgSize, height: placeholderImgSize }}
+        />
+      )
     }
     return ''
   }
@@ -96,8 +102,10 @@ const HuiImage: React.FC<HuiImageProps> = props => {
   const getImageSize = () => {
     if (height && width) {
       return width < 60 || height < 60
-        ? ImageSize.SMALL : width < 86 || height < 86
-          ? ImageSize.MEDIUM : ImageSize.LARGE
+        ? ImageSize.SMALL
+        : width < 86 || height < 86
+        ? ImageSize.MEDIUM
+        : ImageSize.LARGE
     }
     return ImageSize.SMALL
   }
@@ -113,26 +121,28 @@ const HuiImage: React.FC<HuiImageProps> = props => {
 
   return (
     <View className={`hui-image ${wapperClassName}`} style={style}>
-      {
-        imageStatus !== ImageStatus.Success && (
-          <View className={cx('placeholder', { 'shine': imageStatus === ImageStatus.Loading && showAnimation })}>
-            {imageSize === ImageSize.LARGE ? getPlaceholder() : null}
-            {imageSize === ImageSize.LARGE && imageStatus === ImageStatus.Loading && <View className='loading-text'>加载中…</View>}
-            {imageSize === ImageSize.MEDIUM ? getImageStatusText() : null}
-          </View>
-        )
-      }
-      {
-        src && (
-          <Image
-            src={src}
-            className='image'
-            onLoad={handleOnLoad}
-            onError={handleOnError}
-            {... rest}
-          />
-        )
-      }
+      {imageStatus !== ImageStatus.Success && (
+        <View
+          className={cx('placeholder', {
+            shine: imageStatus === ImageStatus.Loading && showAnimation,
+          })}
+        >
+          {imageSize === ImageSize.LARGE ? getPlaceholder() : null}
+          {imageSize === ImageSize.LARGE && imageStatus === ImageStatus.Loading && (
+            <View className='loading-text'>加载中…</View>
+          )}
+          {imageSize === ImageSize.MEDIUM ? getImageStatusText() : null}
+        </View>
+      )}
+      {src && (
+        <Image
+          src={src}
+          className='image'
+          onLoad={handleOnLoad}
+          onError={handleOnError}
+          {...rest}
+        />
+      )}
     </View>
   )
 }

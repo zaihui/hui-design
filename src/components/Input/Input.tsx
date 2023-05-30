@@ -57,7 +57,7 @@ export interface HuiInputProps extends ViewProps {
   onKeyboardHeightChange?: CommonEventFunction<InputProps.onKeyboardHeightChangeEventDetail>
 }
 
-const HuiInput: React.FC<HuiInputProps> = props => {
+const HuiInput: React.FC<HuiInputProps> = (props) => {
   const {
     errorMsg,
     divider = true,
@@ -76,52 +76,70 @@ const HuiInput: React.FC<HuiInputProps> = props => {
     labelIcon,
   } = props
 
-  const labelDom = label ? (<View className='label'>
-    <View>{ label }</View>
-    {!required && <View className='label-required'>(选填)</View>}
-    {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
-  </View>) : null
-
-  // 输入框和只用来展示的div
-  const inputDom = onlyClick || disabled ? <View
-    className={cx('display-area', { 'none-value': !value }, { 'right-align': label && align === 'right' })}
-  >{ value || placeholder }</View> : <Input
-    value={value}
-    className={cx('input', { 'right-align': label && align === 'right' })}
-    type={type}
-    placeholder={placeholder}
-    placeholderClass='input-item-placeholder'
-    focus={props.focus}
-    disabled={disabled}
-    adjustPosition={props.adjustPosition}
-    confirmType={props.confirmType || 'done'}
-    maxlength={props.maxLength || 140}
-    onInput={props.onInput || (() => {})}
-    onBlur={props.onBlur || (() => {})}
-    onFocus={props.onFocus || (() => {})}
-    onConfirm={props.onConfirm || (() => {})}
-    onKeyboardHeightChange={props.onKeyboardHeightChange || (() => {})}
-  />
-
-  // input右侧箭头是否展示
-  const inputArrayDom = arrow ? <HuiIcon
-    name='012-right'
-    style={{
-      marginLeft: '10px',
-    }}
-  /> : null
-
-  // 分割线是否展示 & 分割线颜色
-  const divideLineDom = errorMsg || divider ? (
-    <View
-      className='divider-line'
-    ><View className='line' /></View>
+  const labelDom = label ? (
+    <View className='label'>
+      <View>{label}</View>
+      {!required && <View className='label-required'>(选填)</View>}
+      {labelIcon && <HuiIcon name={labelIcon} size={14} className='label-icon' color='#bbb' />}
+    </View>
   ) : null
 
+  // 输入框和只用来展示的div
+  const inputDom =
+    onlyClick || disabled ? (
+      <View
+        className={cx(
+          'display-area',
+          { 'none-value': !value },
+          { 'right-align': label && align === 'right' },
+        )}
+      >
+        {value || placeholder}
+      </View>
+    ) : (
+      <Input
+        value={value}
+        className={cx('input', { 'right-align': label && align === 'right' })}
+        type={type}
+        placeholder={placeholder}
+        placeholderClass='input-item-placeholder'
+        focus={props.focus}
+        disabled={disabled}
+        adjustPosition={props.adjustPosition}
+        confirmType={props.confirmType || 'done'}
+        maxlength={props.maxLength || 140}
+        onInput={props.onInput || (() => {})}
+        onBlur={props.onBlur || (() => {})}
+        onFocus={props.onFocus || (() => {})}
+        onConfirm={props.onConfirm || (() => {})}
+        onKeyboardHeightChange={props.onKeyboardHeightChange || (() => {})}
+      />
+    )
+
+  // input右侧箭头是否展示
+  const inputArrayDom = arrow ? (
+    <HuiIcon
+      name='012-right'
+      style={{
+        marginLeft: '10px',
+      }}
+    />
+  ) : null
+
+  // 分割线是否展示 & 分割线颜色
+  const divideLineDom =
+    errorMsg || divider ? (
+      <View className='divider-line'>
+        <View className='line' />
+      </View>
+    ) : null
+
   // 错误信息是否展示
-  const errorMsgDom = errorMsg ? <View className='error-wrapper'>
-    <View className='error-msg-wrapper'>{ errorMsg }</View>
-  </View> : null
+  const errorMsgDom = errorMsg ? (
+    <View className='error-wrapper'>
+      <View className='error-msg-wrapper'>{errorMsg}</View>
+    </View>
+  ) : null
 
   return (
     <View
@@ -139,11 +157,7 @@ const HuiInput: React.FC<HuiInputProps> = props => {
           {labelDom}
           <View className='input-content'>
             {inputDom}
-            {
-              props.unit ? (
-                <View className='unit'>{props.unit}</View>
-              ) : null
-            }
+            {props.unit ? <View className='unit'>{props.unit}</View> : null}
           </View>
           {inputArrayDom}
         </View>

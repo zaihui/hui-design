@@ -39,23 +39,15 @@ export interface HuiButtonProps {
   onClick?: (e: ITouchEvent) => void
   /** 微信开放能力 */
   openType?: ButtonProps.OpenType
-  onGetUserInfo?: (
-    e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>
-  ) => void
-  onGetPhoneNumber?: (
-    e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>
-  ) => void
-  onChooseAvatar?: <T>(
-    e: BaseEventOrig<T>
-  ) => void
+  onGetUserInfo?: (e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>) => void
+  onGetPhoneNumber?: (e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>) => void
+  onChooseAvatar?: <T>(e: BaseEventOrig<T>) => void
   onContact?: (e: BaseEventOrig<ButtonProps.onContactEventDetail>) => void
-  onOpenSetting?: (
-    e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>
-  ) => void
+  onOpenSetting?: (e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>) => void
   children?: React.ReactNode
 }
 
-const HuiButton: React.FC<HuiButtonProps> = props => {
+const HuiButton: React.FC<HuiButtonProps> = (props) => {
   const {
     size = 'medium',
     type = 'primary',
@@ -96,33 +88,35 @@ const HuiButton: React.FC<HuiButtonProps> = props => {
   }
 
   const iconSizeMap = {
-    'small': 13,
-    'medium': 14,
-    'large': 16,
+    small: 13,
+    medium: 14,
+    large: 16,
   }
 
   const buttonDisabled = disabled || loading
 
-  const buttonContent = <Block>{
-    prefixIcon
-    && <HuiIcon
-      name={prefixIcon}
-      style={{ marginRight: pxTransform(8) }}
-      size={iconSizeMap[size]}
-    />
-  }
-    <View className={cx('content-wrapper', { hidden: loading })} >
-      <View className='button-text'>{children}</View>
-      {extra && <View className='extra'>{extra}</View>}
-    </View>
-    {
-      suffixIcon
-      && <HuiIcon
-        name={suffixIcon}
-        style={{ marginLeft: pxTransform(8) }}
-        size={iconSizeMap[size]}
-      />
-    }</Block >
+  const buttonContent = (
+    <Block>
+      {prefixIcon && (
+        <HuiIcon
+          name={prefixIcon}
+          style={{ marginRight: pxTransform(8) }}
+          size={iconSizeMap[size]}
+        />
+      )}
+      <View className={cx('content-wrapper', { hidden: loading })}>
+        <View className='button-text'>{children}</View>
+        {extra && <View className='extra'>{extra}</View>}
+      </View>
+      {suffixIcon && (
+        <HuiIcon
+          name={suffixIcon}
+          style={{ marginLeft: pxTransform(8) }}
+          size={iconSizeMap[size]}
+        />
+      )}
+    </Block>
+  )
 
   return (
     <Button

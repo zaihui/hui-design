@@ -1,8 +1,4 @@
-import errorParser, {
-  getErrorTip,
-  tipToString,
-  ErrorLike,
-} from '@/utils/errorParser'
+import errorParser, { getErrorTip, tipToString, ErrorLike } from '@/utils/errorParser'
 
 describe('错误解析', () => {
   it('错误提示转字符串', () => {

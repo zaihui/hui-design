@@ -32,7 +32,12 @@ const IconPage: React.FC = () => {
         desc='图标的主要目的是快速传达概念，因此需要易于理解，尽量在不同文化、不同年纪和不同背景下的情况下也很普遍，让使用者与之共鸣'
       />
       <View className='content'>
-        <HuiTabs active={activeTabIndex} shadow={false} style={{ background: 'none' }} onChange={index => setActiveTabIndex(Number(index))}>
+        <HuiTabs
+          active={activeTabIndex}
+          shadow={false}
+          style={{ background: 'none' }}
+          onChange={(index) => setActiveTabIndex(Number(index))}
+        >
           <HuiTab title='案例展示'>
             <View className='tab-container no-flex'>
               <SubGroupSection title='Icon基础用法'>

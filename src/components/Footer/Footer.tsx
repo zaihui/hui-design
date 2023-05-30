@@ -14,7 +14,7 @@ export interface HuiFooterProps {
   style?: React.CSSProperties
   className?: string
 }
-const HuiFooter: React.FC<HuiFooterProps> = props => {
+const HuiFooter: React.FC<HuiFooterProps> = (props) => {
   const { image, content, style, className = '' } = props
   const isSimple = !image
 

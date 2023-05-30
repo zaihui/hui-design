@@ -38,10 +38,8 @@ export default class Login extends React.Component<Pick<StoreProps, 'userStore'>
           getPhoneLoading='do getPhoneNumber'
           getPhoneSuccessTip='getPhoneNumber done'
         >
-          <View
-            className='login-button'
-          >一键登录, 体验完整功能</View>
-      </LoginWidget>
+          <View className='login-button'>一键登录, 体验完整功能</View>
+        </LoginWidget>
       </View>
     )
   }

@@ -1,12 +1,6 @@
 import { View } from '@tarojs/components'
 import cx from 'classnames'
-import React, {
-  CSSProperties,
-  ReactNode,
-  useContext,
-  useImperativeHandle,
-  useMemo,
-} from 'react'
+import React, { CSSProperties, ReactNode, useContext, useImperativeHandle, useMemo } from 'react'
 import { useBoundingClientRect } from '../../../utils/hooks'
 import Popup from '../../Popup'
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
@@ -42,17 +36,8 @@ const defaultProps = {
 }
 
 const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
-  const {
-    title,
-    options,
-    columns,
-    onChange,
-    className,
-    style,
-    parent,
-    children,
-    footer,
-  } = props as any
+  const { title, options, columns, onChange, className, style, parent, children, footer } =
+    props as any
   const context = useContext(FilterContext)
 
   const info = useBoundingClientRect(parent.menuRef)
@@ -78,7 +63,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     }
   }
 
-  const handleClick = item => {
+  const handleClick = (item) => {
     hideMenu()
     updateTitle(item.text)
     onChange && onChange(item)

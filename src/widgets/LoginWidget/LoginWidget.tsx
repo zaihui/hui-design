@@ -120,14 +120,16 @@ export default class LoginWidget extends React.Component<LoginWidgetProps> {
   }
 
   render(): JSX.Element {
-    return (
-      this.props.isSettled ? <Block /> : <Button
+    return this.props.isSettled ? (
+      <Block />
+    ) : (
+      <Button
         plain
         openType='getPhoneNumber'
         className='login-widget button-reset'
         onGetPhoneNumber={this.handleBind}
       >
-        { this.props.children }
+        {this.props.children}
       </Button>
     )
   }

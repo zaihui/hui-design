@@ -1,8 +1,8 @@
 # HighlightText 高亮文本
 
 ## 介绍
-高亮组件内部的文本
 
+高亮组件内部的文本
 
 ## 使用指南
 
@@ -13,7 +13,7 @@ import { HighlightText } from '@zaihui/hui-design'
 
 const Demo: React.FC = () => (
   <View>
-    <HighlightText keyword="技术" keywordStyle={{color:"blue"}}>
+    <HighlightText keyword='技术' keywordStyle={{ color: 'blue' }}>
       再惠提供技术支持
     </HighlightText>
   </View>
@@ -29,6 +29,7 @@ export default Demo
 ## 参数
 
 ### HighlightText
+
 <auto-doc path="components/HighlightText/HighlightText.tsx" />
 
 <demo-phone page="/pages/HighlightText/HighlightText" />

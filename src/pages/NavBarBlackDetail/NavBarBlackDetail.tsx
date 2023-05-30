@@ -23,9 +23,7 @@ const NavBarBlackDetail: React.FC = () => {
   const [navBarOpacity, setNavBarOpacity] = useState(0)
   const noCapsule = (!showHome && hideBack) || customButton
 
-  const background = backgroundUrl
-    ? `url(${backgroundUrl})`
-    : undefined
+  const background = backgroundUrl ? `url(${backgroundUrl})` : undefined
 
   return (
     <View className='nav-bar-black-detail-page' style={{ backgroundImage: background }}>
@@ -44,12 +42,16 @@ const NavBarBlackDetail: React.FC = () => {
         scrollY
         scrollWithAnimation
         style={{ height: '100vh' }}
-        onScroll={e => getOpacityChangeHandlerGenerator(e, opacity => setNavBarOpacity(opacity))}
+        onScroll={(e) =>
+          getOpacityChangeHandlerGenerator(e, (opacity) => setNavBarOpacity(opacity))
+        }
       >
         <View className='custom-content'>
           {noCapsule && (
             <View className='special-button'>
-              <HuiButton block onClick={() => Taro.navigateBack()}>返回</HuiButton>
+              <HuiButton block onClick={() => Taro.navigateBack()}>
+                返回
+              </HuiButton>
             </View>
           )}
         </View>

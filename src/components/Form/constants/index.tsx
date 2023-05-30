@@ -48,9 +48,7 @@ const Context = React.createContext<FieldContext>({
 export interface FormItemContextProps {
   setRenderType: React.Dispatch<React.SetStateAction<keyof ItemType>>
 }
-export const FormItemContext = React.createContext<FormItemContextProps | null>(
-  null,
-)
+export const FormItemContext = React.createContext<FormItemContextProps | null>(null)
 
 export interface FormListContextProps {
   name: string | null

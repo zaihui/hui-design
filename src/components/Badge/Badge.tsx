@@ -19,7 +19,7 @@ export interface HuiBadgeProps {
   children?: React.ReactNode
 }
 
-const HuiBadge: React.FC<HuiBadgeProps> = props => {
+const HuiBadge: React.FC<HuiBadgeProps> = (props) => {
   const {
     showZero = false,
     dot = false,
@@ -39,16 +39,9 @@ const HuiBadge: React.FC<HuiBadgeProps> = props => {
   )
 
   return (
-    <View
-      style={style}
-      className={cx(`hui-badge ${type} ${className}`, { fixed: !!children })}
-    >
+    <View style={style} className={cx(`hui-badge ${type} ${className}`, { fixed: !!children })}>
       {children}
-      {dot ? (
-        <View className='hui-badge-dot' />
-      ) : (
-        isShow && <View className={numCls}>{val}</View>
-      )}
+      {dot ? <View className='hui-badge-dot' /> : isShow && <View className={numCls}>{val}</View>}
     </View>
   )
 }

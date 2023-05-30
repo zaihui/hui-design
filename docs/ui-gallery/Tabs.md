@@ -2,8 +2,7 @@
 
 ## 介绍
 
-标签，分为固定标签栏和滚动标签栏。
-固定标签栏支持2到4个标签。滚动标签栏则不做限制，但有部分标签可能被隐藏。
+标签，分为固定标签栏和滚动标签栏。固定标签栏支持 2 到 4 个标签。滚动标签栏则不做限制，但有部分标签可能被隐藏。
 
 ## 使用指南
 
@@ -36,9 +35,11 @@ export default Demo
 ## 参数
 
 ### Tabs
+
 <auto-doc path="components/Tabs/Tabs.tsx" />
 
 ### Tab
+
 <auto-doc path="components/Tabs/Tab/Tab.tsx" />
 
 <demo-phone page="/pages/Tabs/Tabs" />

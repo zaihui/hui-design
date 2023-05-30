@@ -26,12 +26,9 @@ const Members: { name: string; desc: string }[] = [
 
 const TeamsPage: React.FC = () => (
   <View className='team-page'>
-    <PageHeader
-      title='团队介绍'
-      desc='感谢大家为组件库贡献的代码以及设计(排名不分先后)'
-    />
+    <PageHeader title='团队介绍' desc='感谢大家为组件库贡献的代码以及设计(排名不分先后)' />
     <View className='team-content'>
-      {Members.map(member => (
+      {Members.map((member) => (
         <View key={member.name} className='team-member'>
           <View className='name'>{member.name}</View>
           <View className='desc'>{member.desc}</View>

@@ -1,5 +1,5 @@
-@import "../../styles/variables.scss";
-@import "../../styles/colors.scss";
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
 
 .hui-steps {
   padding: 16px 0;
@@ -71,7 +71,7 @@
           left: 100%;
           width: calc(100% - 43px);
           height: 1px;
-          content: "";
+          content: '';
           background-color: $hui-color-grey-5;
           transform: translateX(-50%);
         }
@@ -112,7 +112,6 @@
 
       /* stylelint-disable-line */
       &:last-child &-indicator {
-
         /* stylelint-disable-line */
         &::after {
           display: none;

@@ -6,11 +6,7 @@
     "declaration": true,
     "declarationDir": "lib/types",
     "jsx": "react",
-    "module": "es6",
+    "module": "es6"
   },
-  "include": [
-    "./src/index.ts",
-    "./src/bin.ts",
-    "./global.d.ts"
-  ]
+  "include": ["./src/index.ts", "./src/bin.ts", "./global.d.ts"]
 }

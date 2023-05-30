@@ -63,9 +63,7 @@ const ImagePage: React.FC = () => (
         </SubGroupSection>
         <SubGroupSection title='加载中的图片'>
           <SampleItem>
-            <View className='fake-image'>
-              加载中…
-            </View>
+            <View className='fake-image'>加载中…</View>
           </SampleItem>
           <SampleItem>
             <View className='fake-image large'>
@@ -94,10 +92,22 @@ const ImagePage: React.FC = () => (
           <HuiImage src={FULL_IMG3} mode='aspectFit' width={160} height={71} />
         </SampleItem>
         <SampleItem title='等比例优先满足高度(不裁剪)'>
-          <HuiImage src={FULL_IMG} mode='aspectFit' width={100} height={100} style={{ borderRadius: '50%' }} />
+          <HuiImage
+            src={FULL_IMG}
+            mode='aspectFit'
+            width={100}
+            height={100}
+            style={{ borderRadius: '50%' }}
+          />
         </SampleItem>
         <SampleItem title='等比例优先满足宽度(裁剪)'>
-          <HuiImage src={FULL_IMG} mode='widthFix' width={100} height={100} style={{ borderRadius: '50%' }} />
+          <HuiImage
+            src={FULL_IMG}
+            mode='widthFix'
+            width={100}
+            height={100}
+            style={{ borderRadius: '50%' }}
+          />
         </SampleItem>
       </GroupSection>
     </View>

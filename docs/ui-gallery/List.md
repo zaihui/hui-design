@@ -18,11 +18,7 @@ const ListItem = List.Item
 const Demo: React.FC = () => {
   return (
     <>
-      <ListItem
-        title='列表标题'
-        description='描述信息'
-        tips='提示信息'
-      />
+      <ListItem title='列表标题' description='描述信息' tips='提示信息' />
     </>
   )
 }
@@ -37,6 +33,7 @@ export default Demo
 ## 参数
 
 ### ListItem
+
 <auto-doc path="components/List/ListItem.tsx" />
 
 <demo-phone page="/pages/List/List" />

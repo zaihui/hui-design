@@ -5,7 +5,9 @@ import Taro from '@tarojs/taro'
 import { CommonEvent } from '@tarojs/components/types/common'
 import HuiDivider from '../Divider'
 
-export interface HuiPickerColumn<T> { [key: string]: T }
+export interface HuiPickerColumn<T> {
+  [key: string]: T
+}
 export interface HuiPickerProps {
   className?: string
   style?: React.CSSProperties
@@ -21,7 +23,7 @@ export interface HuiPickerProps {
    *        [{text: '第二列选项1'}, {text: '第二列选项2'}]
    *      ]
    * 需要传入的用于渲染的数据列表，每一项需要有text属性用来展示文案用
-  */
+   */
   columns: HuiPickerColumn<string>[][]
   /** 相应column的默认选中项索引 */
   current?: number[]
@@ -40,7 +42,7 @@ const handleTouchMove = (e: CommonEvent) => {
 const prefix = 'hui-picker'
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const empty = () => {}
-const Picker: React.FC<HuiPickerProps> = props => {
+const Picker: React.FC<HuiPickerProps> = (props) => {
   const {
     className,
     style,
@@ -67,7 +69,7 @@ const Picker: React.FC<HuiPickerProps> = props => {
     if (!visible) {
       doClose()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible])
 
   const doClose = (e?: CommonEvent) => {
@@ -76,12 +78,12 @@ const Picker: React.FC<HuiPickerProps> = props => {
     }
   }
 
-  const handleClose = e => {
+  const handleClose = (e) => {
     setIsOpened(false)
     doClose(e)
   }
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const value = e.detail.value
     if (valueRef.current.length === 0) {
       valueRef.current = Array(value.length).fill(0)
@@ -99,21 +101,14 @@ const Picker: React.FC<HuiPickerProps> = props => {
     onChange(value, changedColumn)
   }
   return (
-    <View
-      className={rootClass}
-      style={style}
-      onTouchMove={handleTouchMove}
-    >
+    <View className={rootClass} style={style} onTouchMove={handleTouchMove}>
       <View onClick={handleClose} className={`${prefix}-mask`} />
       <View className={`${prefix}-container`}>
         <View className={`${prefix}-content`}>
           <View className={`${prefix}-header`}>
             {cancelText && (
-              <View
-                className={`${prefix}-header-cancel`}
-                style={cancelStyle}
-                onClick={onClose}
-              >{cancelText}
+              <View className={`${prefix}-header-cancel`} style={cancelStyle} onClick={onClose}>
+                {cancelText}
               </View>
             )}
             {title && <View className={`${prefix}-header-title`}>{title}</View>}
@@ -122,7 +117,8 @@ const Picker: React.FC<HuiPickerProps> = props => {
                 className={`${prefix}-header-confirm`}
                 style={confirmStyle}
                 onClick={() => onConfirm(valueRef.current)}
-              >{confirmText}
+              >
+                {confirmText}
               </View>
             )}
           </View>

@@ -12,7 +12,7 @@ import './ActionSheet.scss'
 const ActionSheet: React.FC = () => {
   const [open3, setOpen3] = useState(false)
   const [open4, setOpen4] = useState(false)
-  const handleClick = o => {
+  const handleClick = (o) => {
     Taro.showToast({
       title: `您点击了操作${o}`,
       icon: 'none',
@@ -29,61 +29,36 @@ const ActionSheet: React.FC = () => {
       <View className='content'>
         <GroupSection title='动作表类型'>
           <View className='row'>
-            <HuiButton
-              block
-              type='secondary'
-              onClick={() => setOpen3(true)}
-            >
+            <HuiButton block type='secondary' onClick={() => setOpen3(true)}>
               无标题的Actionsheet
             </HuiButton>
           </View>
           <View className='row'>
-            <HuiButton
-              block
-              type='secondary'
-              onClick={() => setOpen4(true)}
-            >
+            <HuiButton block type='secondary' onClick={() => setOpen4(true)}>
               有标题的Actionsheet
             </HuiButton>
           </View>
         </GroupSection>
       </View>
 
-      <HuiActionSheet
-        visible={open3}
-        onClose={() => setOpen3(false)}
-      >
+      <HuiActionSheet visible={open3} onClose={() => setOpen3(false)}>
         <HuiActionSheet.Item hasActive={false} onClick={() => handleClick(1)}>
           操作一(点击没有active样式效果)
         </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(2)}>
-          操作二
-        </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(3)}>
-          操作三
-        </HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(2)}>操作二</HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(3)}>操作三</HuiActionSheet.Item>
       </HuiActionSheet>
 
-      <HuiActionSheet
-        title='这是一个title'
-        visible={open4}
-        onClose={() => setOpen4(false)}
-      >
+      <HuiActionSheet title='这是一个title' visible={open4} onClose={() => setOpen4(false)}>
         <HuiActionSheet.Item disabled onClick={() => handleClick(1)}>
           操作一
         </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(2)}>
-          操作二
-        </HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(2)}>操作二</HuiActionSheet.Item>
         <HuiActionSheet.Item disabled onClick={() => handleClick(3)}>
           操作三
         </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(4)}>
-          操作四
-        </HuiActionSheet.Item>
-        <HuiActionSheet.Item onClick={() => handleClick(5)}>
-          操作五
-        </HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(4)}>操作四</HuiActionSheet.Item>
+        <HuiActionSheet.Item onClick={() => handleClick(5)}>操作五</HuiActionSheet.Item>
       </HuiActionSheet>
     </View>
   )

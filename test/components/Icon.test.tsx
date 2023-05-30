@@ -12,16 +12,14 @@ Taro.initPxTransform({ designWidth: 375, deviceRatio: {} })
 describe('huiIcon Snap', () => {
   it('renders HuiIcon', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiIcon name='015-searchcircle'></HuiIcon>,
-    )
+    const component = renderToString(<HuiIcon name='015-searchcircle'></HuiIcon>)
     expect(component).toMatchSnapshot()
   })
 
   it('renders HuiIcon -- color', () => {
     expect.hasAssertions()
     const component = renderToString(
-      <HuiIcon name='015-searchcircle'color='rgba(30, 30, 30)'></HuiIcon>,
+      <HuiIcon name='015-searchcircle' color='rgba(30, 30, 30)'></HuiIcon>,
     )
     expect(component).toMatchSnapshot()
   })
@@ -29,7 +27,7 @@ describe('huiIcon Snap', () => {
   it('renders HuiIcon -- size', () => {
     expect.hasAssertions()
     const component = renderToString(
-      <HuiIcon name='015-searchcircle'color='rgba(30, 30, 30)' size={20}></HuiIcon>,
+      <HuiIcon name='015-searchcircle' color='rgba(30, 30, 30)' size={20}></HuiIcon>,
     )
     expect(component).toMatchSnapshot()
   })

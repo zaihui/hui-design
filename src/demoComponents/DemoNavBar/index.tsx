@@ -9,8 +9,10 @@ import HuiIcon from '../../components/Icon'
 
 import './style.scss'
 
-const BLACK_THEME_CAPSULE_IMG = 'https://r.kezaihui.com/client/2021-08-06/wechat-capsule-black-21080601.png'
-const WHITE_THEME_CAPSULE_IMG = 'https://r.kezaihui.com/client/2021-08-06/wechat-capsule-white-21080602.png'
+const BLACK_THEME_CAPSULE_IMG =
+  'https://r.kezaihui.com/client/2021-08-06/wechat-capsule-black-21080601.png'
+const WHITE_THEME_CAPSULE_IMG =
+  'https://r.kezaihui.com/client/2021-08-06/wechat-capsule-white-21080602.png'
 const DEFAULT_ICON_SIZE = 18
 const DEFAULT_HOME_PAGE_PATH = '/pages/Index/Index'
 
@@ -45,7 +47,7 @@ interface HuiNavBarProps {
   /** 返回首页前的钩子函数，返回false或者Promise.resolve(false)跳转首页失败 */
   beforeBackToHome?: () => boolean | Promise<boolean>
 }
-const HuiNavBar: React.FC<HuiNavBarProps> = props => {
+const HuiNavBar: React.FC<HuiNavBarProps> = (props) => {
   const {
     transparent,
     title,
@@ -66,9 +68,7 @@ const HuiNavBar: React.FC<HuiNavBarProps> = props => {
   const { height } = Taro.getMenuButtonBoundingClientRect()
 
   const handleBackToHome = async () => {
-    const canBackToHome = typeof beforeBackToHome === 'function'
-      ? await beforeBackToHome()
-      : true
+    const canBackToHome = typeof beforeBackToHome === 'function' ? await beforeBackToHome() : true
 
     if (!canBackToHome) {
       return
@@ -80,9 +80,7 @@ const HuiNavBar: React.FC<HuiNavBarProps> = props => {
   }
 
   const handleBack = async () => {
-    const canBack = typeof beforeNavBack === 'function'
-      ? await beforeNavBack()
-      : true
+    const canBack = typeof beforeNavBack === 'function' ? await beforeNavBack() : true
 
     if (!canBack) {
       return
@@ -117,13 +115,16 @@ const HuiNavBar: React.FC<HuiNavBarProps> = props => {
       <View className='hui-nav-bar-content' style={{ height: pxTransform(height) }}>
         {!!button && <View className='hui-nav-bar-custom-button'>{button}</View>}
         {showCapsule && (
-          <View className={cx('hui-nav-bar-capsule', { 'with-border': showBorder })} style={{ color: fontColor }}>
+          <View
+            className={cx('hui-nav-bar-capsule', { 'with-border': showBorder })}
+            style={{ color: fontColor }}
+          >
             {showBack && (
               <View className='hui-nav-bar-back' onClick={handleBack}>
                 <HuiIcon name='011-left' size={DEFAULT_ICON_SIZE} />
               </View>
             )}
-            {(showBack && showHome) && <View className='hui-nav-bar-divider' />}
+            {showBack && showHome && <View className='hui-nav-bar-divider' />}
             {showHome && (
               <View className='hui-nav-bar-back-home' onClick={handleBackToHome}>
                 <HuiIcon name='078-homefill' size={DEFAULT_ICON_SIZE} color={fontColor} />
@@ -132,10 +133,7 @@ const HuiNavBar: React.FC<HuiNavBarProps> = props => {
           </View>
         )}
         {title && (
-          <View
-            className='hui-nav-bar-title'
-            style={{ color: fontColor }}
-          >
+          <View className='hui-nav-bar-title' style={{ color: fontColor }}>
             {title}
           </View>
         )}
@@ -157,8 +155,8 @@ export const getOpacityChangeHandlerGenerator = (
   e: BaseEventOrig<ScrollViewProps.onScrollDetail>,
   cb: (opacity: number) => void,
 ): void => {
-  let opacity = Math.max(e.detail.scrollTop - OPACITY_CHANGE_SCROLL_UPPER, 0)
-    / OPACITY_CHANGE_SCROLL_RANGE
+  let opacity =
+    Math.max(e.detail.scrollTop - OPACITY_CHANGE_SCROLL_UPPER, 0) / OPACITY_CHANGE_SCROLL_RANGE
 
   if (opacity > 1) {
     opacity = 1

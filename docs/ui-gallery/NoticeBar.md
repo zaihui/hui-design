@@ -17,8 +17,12 @@ const Demo: React.FC = () => (
     <HuiNoticeBar>通知文字</HuiNoticeBar>
     <HuiNoticeBar icon>通知文字</HuiNoticeBar>
     <HuiNoticeBar type='marquee'>通知文字</HuiNoticeBar>
-    <HuiNoticeBar icon type='close'>通知文字</HuiNoticeBar>
-    <HuiNoticeBar icon type='more'>通知文字</HuiNoticeBar>
+    <HuiNoticeBar icon type='close'>
+      通知文字
+    </HuiNoticeBar>
+    <HuiNoticeBar icon type='more'>
+      通知文字
+    </HuiNoticeBar>
   </>
 )
 
