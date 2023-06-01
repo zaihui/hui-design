@@ -1,8 +1,8 @@
 # Form 表单
 
 ## 介绍
-具有基础的提交验证功能，默认会给FormItem的children绑定上value和onChange方法去触发表单数据的变更事件，同时也可以自定义表单change的逻辑。
 
+具有基础的提交验证功能，默认会给 FormItem 的 children 绑定上 value 和 onChange 方法去触发表单数据的变更事件，同时也可以自定义表单 change 的逻辑。
 
 ## 使用指南
 
@@ -37,12 +37,15 @@ export default Demo
 ## 参数
 
 ### Form
+
 <auto-doc path="components/Form/Form.tsx" />
 
 ### FormItem
+
 <auto-doc path="components/Form/FormItem/index.tsx" />
 
 ### FieldContext
+
 <auto-doc path="components/Form/index.tsx" />
 
 <demo-phone page="/pages/Form/Form" />

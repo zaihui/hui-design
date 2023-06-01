@@ -17,9 +17,7 @@ const Demo: React.FC = () => {
 
   return (
     <View>
-      <HuiButton onClick={() => setV1(true)}>
-        显示遮罩
-      </HuiButton>
+      <HuiButton onClick={() => setV1(true)}>显示遮罩</HuiButton>
       <HuiMask visible={v1} onClick={() => setV1(false)} />
     </View>
   )

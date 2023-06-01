@@ -43,11 +43,7 @@ const HuiIcon: React.FC<HuiIconProps> = ({
     : `hui-icons hui-icon-${name} ${className}`
 
   return (
-    <View
-      className={iconClassName}
-      style={style}
-      onClick={() => onClick()}
-    />
+    <View className={iconClassName} style={style} onClick={() => onClick()} />
   )
 }
 

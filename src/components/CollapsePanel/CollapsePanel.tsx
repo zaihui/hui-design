@@ -20,7 +20,7 @@ export interface CollapsePanelProps {
 const defaultChildPadding = 16
 const prefix = 'hui-collapse'
 
-const CollapsePanel: React.FC<CollapsePanelProps> = props => {
+const CollapsePanel: React.FC<CollapsePanelProps> = (props) => {
   const {
     title = '折叠面板',
     name = 'collapse-panel',

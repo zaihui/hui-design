@@ -18,7 +18,7 @@ const defaultProps = {
   onChange: () => void 0,
 }
 
-const HuiSwitch: React.FC<HuiSwitchProps> = props => {
+const HuiSwitch: React.FC<HuiSwitchProps> = (props) => {
   const {
     disabled = false,
     checked = false,
@@ -30,11 +30,11 @@ const HuiSwitch: React.FC<HuiSwitchProps> = props => {
 
   return (
     <View
-      className={cx(`hui-switch ${className}`, { 'checked': checked, 'disabled': disabled })}
+      className={cx(`hui-switch ${className}`, { checked, disabled })}
       style={{ backgroundColor: checked ? color : '', ...style }}
       onClick={() => onChange(!checked)}
     >
-      <View className={cx('hui-switch-dot-btn', { 'checked': checked })} />
+      <View className={cx('hui-switch-dot-btn', { checked })} />
     </View>
   )
 }

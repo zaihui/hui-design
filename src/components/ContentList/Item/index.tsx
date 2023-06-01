@@ -17,7 +17,7 @@ export interface HuiContentListItemProps {
   style?: React.CSSProperties
 }
 
-const HuiContentListItem: React.FC<HuiContentListItemProps> = props => {
+const HuiContentListItem: React.FC<HuiContentListItemProps> = (props) => {
   const {
     label = '',
     value = '',
@@ -37,7 +37,7 @@ const HuiContentListItem: React.FC<HuiContentListItemProps> = props => {
 
   const renderValue = (v: string | string[] | React.ReactNode) => {
     if (Array.isArray(v)) {
-      return v.map(item => (
+      return v.map((item) => (
         <HuiImage
           key={item}
           className='list-item-img'

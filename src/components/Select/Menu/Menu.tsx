@@ -31,7 +31,7 @@ export interface HuiMenuProps extends ViewProps {
   onChange?(v: (number | string)[]): void
 }
 
-const Menu: React.FC<HuiMenuProps> = props => {
+const Menu: React.FC<HuiMenuProps> = (props) => {
   const { options, value, color, multiSelect = false, onChange } = props
   const handleChange = (v: (string | number)[]) => {
     if (!onChange) {
@@ -42,9 +42,11 @@ const Menu: React.FC<HuiMenuProps> = props => {
 
   const [refList, setRefList] = useState<React.RefObject<HuiCheckboxRef>[]>([])
   React.useEffect(() => {
-    setRefList(refs => (
-      Array(options.length).fill(0).map((_, i) => refs[i] || createRef())
-    ))
+    setRefList((refs) =>
+      Array(options.length)
+        .fill(0)
+        .map((_, i) => refs[i] || createRef()),
+    )
   }, [options.length])
 
   return (
@@ -52,7 +54,7 @@ const Menu: React.FC<HuiMenuProps> = props => {
       {multiSelect ? (
         <CheckboxGroup
           value={value as string[]}
-          onChange={checkedList =>
+          onChange={(checkedList) =>
             handleChange(Array.from(new Set(checkedList)))
           }
         >
@@ -60,7 +62,7 @@ const Menu: React.FC<HuiMenuProps> = props => {
             <ListItem
               key={item.value}
               title={item.label}
-              icon={(
+              icon={
                 <Checkbox
                   ref={refList[index]}
                   color={color}
@@ -68,14 +70,14 @@ const Menu: React.FC<HuiMenuProps> = props => {
                   value={`${item.value}`}
                   checked={value.includes(item.value)}
                 />
-              )}
+              }
               onClick={() => refList[index]?.current?.toggle()}
             />
           ))}
         </CheckboxGroup>
       ) : (
         <RadioGroup>
-          {options.map(item => (
+          {options.map((item) => (
             <ListItem
               key={item.value}
               title={item.label}

@@ -15,17 +15,11 @@ export default class Demo extends React.Component {
      * 锚点的格式为以region开头和endregion结尾，后接锚点名
      */
     // eslint-disable-next-line operator-linebreak
-    const DemoWidteCase1 =
-    /* #region DemoWidget-case1 */
-    <DemoWidget
-      prop1='hello world'
-      prop2={2333}
-    />
-    /* #endregion DemoWidget-case1 */
-    return (
-      <View className='demo'>
-        {DemoWidteCase1}
-      </View>
+    const DemoWidteCase1 = (
+      /* #region DemoWidget-case1 */
+      <DemoWidget prop1='hello world' prop2={2333} />
     )
+    /* #endregion DemoWidget-case1 */
+    return <View className='demo'>{DemoWidteCase1}</View>
   }
 }

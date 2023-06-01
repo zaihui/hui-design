@@ -22,13 +22,13 @@ function copyFilesByExtensions(srcDir, destDir, fileExtensions) {
   }
 
   // 遍历文件类型数组
-  fileExtensions.forEach(fileExtension => {
+  fileExtensions.forEach((fileExtension) => {
     // 使用glob模块匹配指定后缀的文件
     const filePattern = path.join(srcDir, '**', `*.${fileExtension}`)
     const files = glob.sync(filePattern, { nodir: true, dot: true })
 
     // 复制文件
-    files.forEach(file => {
+    files.forEach((file) => {
       const destFile = path.join(destDir, path.relative(srcDir, file))
 
       // 创建目标文件的目录

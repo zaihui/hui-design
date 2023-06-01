@@ -25,7 +25,7 @@ export interface HuiCardProps {
   onAssistTipClick?(): void
 }
 
-const HuiCard: React.FC<HuiCardProps> = props => {
+const HuiCard: React.FC<HuiCardProps> = (props) => {
   const {
     style,
     className,

@@ -38,13 +38,13 @@ const HuiForm = (props: HuiFormProps, ref) => {
 
   const { Provider } = Context
 
-  const handleSubmit = event => {
+  const handleSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
     submit()
   }
 
-  const handleReset = event => {
+  const handleReset = (event) => {
     event.preventDefault()
     event.stopPropagation()
     reset()
@@ -60,7 +60,11 @@ const HuiForm = (props: HuiFormProps, ref) => {
   useImperativeHandle(ref, () => formInstance, [])
 
   return (
-    <Form className={classNames('hui-form', className)} onSubmit={handleSubmit} onReset={handleReset}>
+    <Form
+      className={classNames('hui-form', className)}
+      onSubmit={handleSubmit}
+      onReset={handleReset}
+    >
       <Provider value={formInstance}>{children}</Provider>
     </Form>
   )

@@ -4,7 +4,9 @@ import { View } from '@tarojs/components'
 import HuiButton from '@/components/Button'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
-import HuiFAB, { HuiFloatingActionButtonPosition } from '@/components/FloatingActionButton'
+import HuiFAB, {
+  HuiFloatingActionButtonPosition,
+} from '@/components/FloatingActionButton'
 
 import './FloatingActionButton.scss'
 
@@ -14,10 +16,7 @@ const FloatingActionButton: React.FC = () => {
   const [position, setPosition] = useState<HuiFloatingActionButtonPosition>()
   return (
     <View className='floating-action-button'>
-      <PageHeader
-        title='🎈悬浮按钮'
-        desc='用于代表应用内最重要的操作'
-      />
+      <PageHeader title='🎈悬浮按钮' desc='用于代表应用内最重要的操作' />
       <HuiFAB
         prefixIcon='h203-takingpicturesfill'
         color={color}

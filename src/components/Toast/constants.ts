@@ -5,5 +5,5 @@ export enum ToastTypeEnum {
   FAIL = 'fail',
   WARNING = 'warning',
   TEXT = 'text',
-  CUSTOM = 'custom'
+  CUSTOM = 'custom',
 }

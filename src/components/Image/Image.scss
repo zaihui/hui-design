@@ -1,5 +1,5 @@
-@import "../../styles/colors.scss";
-@import "../../styles/variables.scss";
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
 
 .hui-image {
   position: relative;
@@ -43,7 +43,12 @@
     width: 100%;
     height: 100%;
     background: none;
-    background-image: linear-gradient(90deg, $hui-image-placeholder-bg 20%, $hui-image-placeholder-light-color 50%, $hui-image-placeholder-bg 80%);
+    background-image: linear-gradient(
+      90deg,
+      $hui-image-placeholder-bg 20%,
+      $hui-image-placeholder-light-color 50%,
+      $hui-image-placeholder-bg 80%
+    );
     background-clip: content-box;
     background-size: 200%;
     background-blend-mode: hard-light;

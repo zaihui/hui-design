@@ -37,7 +37,7 @@ const defaultProps = {
   filterType: 'single',
 }
 
-const HuiFilter: React.FC<HuiFilterProps> = props => {
+const HuiFilter: React.FC<HuiFilterProps> = (props) => {
   const {
     className,
     menuConfig,
@@ -66,7 +66,7 @@ const HuiFilter: React.FC<HuiFilterProps> = props => {
 
   const info = useBoundingClientRect(filterRef)
 
-  usePageScroll(res => {
+  usePageScroll((res) => {
     setScrollTop(res.scrollTop)
     if (!info || !fixed) return
     if (res.scrollTop >= info.top) {

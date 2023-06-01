@@ -44,7 +44,7 @@ const defaultProps = {
   onClose: () => void 0,
 }
 
-const Dialog: React.FC<HuiDialogProps> = props => {
+const Dialog: React.FC<HuiDialogProps> = (props) => {
   const {
     visible,
     image,
@@ -67,7 +67,10 @@ const Dialog: React.FC<HuiDialogProps> = props => {
   }
 
   return (
-    <View className={`hui-dialog ${visible ? 'visible' : ''} ${className}`} style={style}>
+    <View
+      className={`hui-dialog ${visible ? 'visible' : ''} ${className}`}
+      style={style}
+    >
       <View className='hui-dialog-mask' onClick={handleMaskClick} />
       <View className='hui-dialog-wrapper'>
         <View className='hui-dialog-container'>
@@ -90,27 +93,15 @@ const Dialog: React.FC<HuiDialogProps> = props => {
           )}
 
           {showIcon && !!props.renderIcon && (
-            <View className='icon-area'>
-              {props.renderIcon}
-            </View>
+            <View className='icon-area'>{props.renderIcon}</View>
           )}
 
-          {title && (
-            <View className='title-area'>
-              {title}
-            </View>
-          )}
+          {title && <View className='title-area'>{title}</View>}
 
-          {content && (
-            <View className='content-area'>
-              {content}
-            </View>
-          )}
+          {content && <View className='content-area'>{content}</View>}
 
           {showFooter && !!props.renderFooter && (
-            <View className='footer-area'>
-              {props.renderFooter}
-            </View>
+            <View className='footer-area'>{props.renderFooter}</View>
           )}
         </View>
         {closable && closeType === 'bottom' && (

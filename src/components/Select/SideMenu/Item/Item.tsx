@@ -14,7 +14,7 @@ export interface HuiSideMenuItemProps extends ViewProps {
   onChange?(v?: number | string): void
 }
 
-const Item: React.FC<HuiSideMenuItemProps> = props => {
+const Item: React.FC<HuiSideMenuItemProps> = (props) => {
   const { label, value, children, active, indicatorColor, onChange } = props
 
   return (

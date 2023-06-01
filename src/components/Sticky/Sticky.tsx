@@ -13,7 +13,7 @@ export interface HuiStickyProps {
   className?: string
 }
 
-const HuiSticky: React.FC<HuiStickyProps> = props => {
+const HuiSticky: React.FC<HuiStickyProps> = (props) => {
   const { offsetTop = 0, children, className = '', style } = props
 
   const contentRef = useRef()
@@ -30,7 +30,7 @@ const HuiSticky: React.FC<HuiStickyProps> = props => {
     })
     observer
       .relativeToViewport({ top: -offsetTop - (contentFixed ? height : 0) })
-      .observe(`#${containerRef.current?.uid}`, res => {
+      .observe(`#${containerRef.current?.uid}`, (res) => {
         if (res.boundingClientRect.top < offsetTop) {
           setContentFixed(true)
         } else {
@@ -44,8 +44,13 @@ const HuiSticky: React.FC<HuiStickyProps> = props => {
 
   return (
     <View
-      className={cx(`hui-sticky-container ${className}`, { fixed: contentFixed })}
-      style={{ height: contentFixed ? contentClientRect?.height : 'unset', ...style }}
+      className={cx(`hui-sticky-container ${className}`, {
+        fixed: contentFixed,
+      })}
+      style={{
+        height: contentFixed ? contentClientRect?.height : 'unset',
+        ...style,
+      }}
       ref={containerRef}
     >
       <View

@@ -18,11 +18,7 @@ const Demo: React.FC = () => {
   return (
     <View>
       <HuiListItem title='弹窗层' onClick={() => setV1(true)}></HuiListItem>
-      <HuiPopup
-        visible={v1}
-        onClose={() => setV1(false)}
-        style={{ padding: '30px 50px' }}
-      >
+      <HuiPopup visible={v1} onClose={() => setV1(false)} style={{ padding: '30px 50px' }}>
         内容
       </HuiPopup>
     </View>

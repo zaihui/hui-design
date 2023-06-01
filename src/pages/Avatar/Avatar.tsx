@@ -17,8 +17,10 @@ const SampleItem: React.FC<{
   </View>
 )
 
-const AVATAR_BG_IMG = 'https://r.kezaihui.com/client/2021-05-30/hui-design-avartar-demo-21053001.png'
-const AVATAR_USER_IMG = 'https://r.kezaihui.com/client/2021-05-30/hui-design-avatar-user-21053001.png'
+const AVATAR_BG_IMG =
+  'https://r.kezaihui.com/client/2021-05-30/hui-design-avartar-demo-21053001.png'
+const AVATAR_USER_IMG =
+  'https://r.kezaihui.com/client/2021-05-30/hui-design-avatar-user-21053001.png'
 
 const ImagePage: React.FC = () => (
   <View className='avatar-page'>
@@ -43,7 +45,12 @@ const ImagePage: React.FC = () => (
             <HuiAvatar src={AVATAR_BG_IMG} type='square' size='medium' />
           </SampleItem>
           <SampleItem title='带边框的商户头像'>
-            <HuiAvatar src={AVATAR_BG_IMG} type='square' size='medium' borderColor='#198bff' />
+            <HuiAvatar
+              src={AVATAR_BG_IMG}
+              type='square'
+              size='medium'
+              borderColor='#198bff'
+            />
           </SampleItem>
         </View>
         <View>
@@ -51,7 +58,12 @@ const ImagePage: React.FC = () => (
             <HuiAvatar src={AVATAR_USER_IMG} type='circle' size='medium' />
           </SampleItem>
           <SampleItem title='带边框的用户头像'>
-            <HuiAvatar src={AVATAR_USER_IMG} type='circle' size='medium' borderColor='#198bff' />
+            <HuiAvatar
+              src={AVATAR_USER_IMG}
+              type='circle'
+              size='medium'
+              borderColor='#198bff'
+            />
           </SampleItem>
         </View>
       </GroupSection>

@@ -42,20 +42,20 @@ export interface HuiButtonProps {
   /** 微信开放能力 */
   openType?: ButtonProps.OpenType
   onGetUserInfo?: (
-    e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>
+    e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>,
   ) => void
   onGetPhoneNumber?: (
-    e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>
+    e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>,
   ) => void
   onChooseAvatar?: <T>(e: BaseEventOrig<T>) => void
   onContact?: (e: BaseEventOrig<ButtonProps.onContactEventDetail>) => void
   onOpenSetting?: (
-    e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>
+    e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>,
   ) => void
   children?: React.ReactNode
 }
 
-const HuiButton: React.FC<HuiButtonProps> = props => {
+const HuiButton: React.FC<HuiButtonProps> = (props) => {
   const {
     size = 'medium',
     type = 'primary',

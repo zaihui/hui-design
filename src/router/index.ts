@@ -39,17 +39,17 @@ class PageItem {
   /**
    * 页面名字
    */
-  name: string;
+  name: string
 
   /**
    * 子包名
    */
-  packageName: string;
+  packageName: string
 
   /**
    * 是否是tab
    */
-  isTab: boolean;
+  isTab: boolean
 
   constructor(name: string, packageName = '', isTab = false) {
     this.name = name

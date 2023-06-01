@@ -62,7 +62,7 @@ export interface HuiSelectProps extends ViewProps {
   onConfirm?(v: (number | string)[]): void
 }
 
-const Select: React.FC<HuiSelectProps> = props => {
+const Select: React.FC<HuiSelectProps> = (props) => {
   const {
     visible,
     title,
@@ -97,31 +97,32 @@ const Select: React.FC<HuiSelectProps> = props => {
     if (level === 1) {
       return
     }
-    const initActiveMenu = options.find(
-      item => item.children?.some(ic => value?.includes(ic.value)),
+    const initActiveMenu = options.find((item) =>
+      item.children?.some((ic) => value?.includes(ic.value)),
     )?.value
     const defalutActiveMenu = options.length > 0 ? options[0].value : 0
     setActiveMenu(initActiveMenu ?? defalutActiveMenu)
   }, [level, options, value, visible])
 
-  const handleChangeSideMenu = v => {
+  const handleChangeSideMenu = (v) => {
     if (v !== activeMenu) {
       setActiveMenu(v)
       onChangeSideMenu && onChangeSideMenu(v)
     }
   }
 
-  const handleChangeOption = v => {
+  const handleChangeOption = (v) => {
     setOptionValue(v)
     onChange && onChange(v)
   }
 
-  const getBadgeNumber = list =>
-    list?.map(o => optionValue.includes(o.value)).filter(o => !!o).length
+  const getBadgeNumber = (list) =>
+    list?.map((o) => optionValue.includes(o.value)).filter((o) => !!o).length
 
-  const menuOptions = level === 2
-    ? options.find(item => item.value === activeMenu)?.children || []
-    : options
+  const menuOptions =
+    level === 2
+      ? options.find((item) => item.value === activeMenu)?.children || []
+      : options
 
   return (
     <Modal
@@ -132,17 +133,19 @@ const Select: React.FC<HuiSelectProps> = props => {
       onClose={onClose}
     >
       <View className='hui-select'>
-        <View className='hui-select-body' style={{
-          height: contentHeight && pxTransform(contentHeight) || 'unset',
-        }}
+        <View
+          className='hui-select-body'
+          style={{
+            height: (contentHeight && pxTransform(contentHeight)) || 'unset',
+          }}
         >
           {level === 2 && (
             <SideMenu
               indicatorColor={color}
               active={activeMenu}
-              onChange={v => handleChangeSideMenu(v)}
+              onChange={(v) => handleChangeSideMenu(v)}
             >
-              {options.map(item => (
+              {options.map((item) => (
                 <SideMenuItem key={item.value} value={item.value}>
                   {showBadge && multiSelect ? (
                     <Badge

@@ -16,10 +16,10 @@
   }
 
   &.horizontal-hairline {
-    transform: scaleY(.5);
+    transform: scaleY(0.5);
   }
 
   &.vertical-hairline {
-    transform: scaleX(.5);
+    transform: scaleX(0.5);
   }
 }

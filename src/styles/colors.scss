@@ -30,12 +30,12 @@ $hui-color-success: $hui-color-green-1 !default; // 主要可用成功icon、文
 $hui-color-warning: $hui-color-amber-1 !default; // 主要可用于等待或其它中性icon、文字状态提示
 
 /** 字体颜色 **/
-$hui-font-color-base: $hui-color-grey-1 !default;  // 主要用于可点击按钮、标题文字、重要文字等
+$hui-font-color-base: $hui-color-grey-1 !default; // 主要用于可点击按钮、标题文字、重要文字等
 $hui-font-color-base-75: $hui-color-grey-2 !default; // 主要用于正文、列表文字等
-$hui-font-color-base-50: $hui-color-grey-3 !default;  // 主要用于描述性文字等
+$hui-font-color-base-50: $hui-color-grey-3 !default; // 主要用于描述性文字等
 $hui-font-color-base-35: $hui-color-grey-4 !default; // 主要用于不可点击按钮，输入框提示文字显示
-$hui-font-color-base-25: $hui-color-grey-5 !default;  // 主要用于描述性文字等
-$hui-font-color-base-05: rgba(#1e1e1e, .05) !default; // 分割线颜色
+$hui-font-color-base-25: $hui-color-grey-5 !default; // 主要用于描述性文字等
+$hui-font-color-base-05: rgba(#1e1e1e, 0.05) !default; // 分割线颜色
 $hui-font-color-white: $hui-color-grey-8 !default; // 用于轻提示灰背景文字
 $hui-font-color-input-disabled: $hui-color-grey-4 !default;
 $hui-font-color-stepper-disabled: #c0c1c6 !default; // 步进器颜色
@@ -46,10 +46,10 @@ $hui-border-color-light: #f8f8f8 !default; // 用于8px分割线颜色
 
 /** 背景色 **/
 $hui-page-background-color: #f8f8f8 !default; // 空页面背景色
-$hui-toast-background-color:rgba(0, 0, 0, .7) !default; // 轻提示背景色
+$hui-toast-background-color: rgba(0, 0, 0, 0.7) !default; // 轻提示背景色
 $hui-list-background-color: #f9f9f9 !default; // 列表禁用背景色
 
 /** 遮罩层颜色 **/
-$hui-mask-color: rgba(#1e1e1e, .75) !default;
-$hui-mask-color-transparent:  rgba(#1e1e1e, 0) !default; // 全透明遮罩层颜色
+$hui-mask-color: rgba(#1e1e1e, 0.75) !default;
+$hui-mask-color-transparent: rgba(#1e1e1e, 0) !default; // 全透明遮罩层颜色
 $hui-disabled-background-color: #f9f9f9 !default; // 输入框禁用色

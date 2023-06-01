@@ -25,7 +25,7 @@ export interface HuiPopupProps extends ViewProps {
   onClose?: () => void
 }
 
-const Popup: React.FC<HuiPopupProps> = props => {
+const Popup: React.FC<HuiPopupProps> = (props) => {
   const {
     wapperClassName = '',
     wrapperClassName = '',
@@ -41,7 +41,7 @@ const Popup: React.FC<HuiPopupProps> = props => {
     children,
     ...rest
   } = props
-  const handleClose = e => {
+  const handleClose = (e) => {
     e.stopPropagation()
     if (!maskClosable || !onClose) {
       return
@@ -49,7 +49,7 @@ const Popup: React.FC<HuiPopupProps> = props => {
     onClose()
   }
 
-  const handleTouchMove = e => {
+  const handleTouchMove = (e) => {
     e.stopPropagation()
   }
 

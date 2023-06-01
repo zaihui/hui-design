@@ -29,7 +29,7 @@ import { toArray } from '../util'
 /**
  * form表单基础组件
  */
-const Item: React.FC<HuiFormItemProps> = props => {
+const Item: React.FC<HuiFormItemProps> = (props) => {
   const context = useContext<FieldContext>(Context)
   const { registerWatch, getFieldValue, setFieldValue } = context
   const listContext = useContext<FormListContextProps>(FormListContext)
@@ -71,33 +71,35 @@ const Item: React.FC<HuiFormItemProps> = props => {
 
   const requireIcon = useMemo(
     () =>
-      (!ruleTarget?.require && !hiddenOptionalStyle
-        ? customOptionalStyle || <Text className={`${formItemPrefix}-option`}>(选填)</Text>
-        : null),
+      !ruleTarget?.require && !hiddenOptionalStyle
+        ? customOptionalStyle || (
+            <Text className={`${formItemPrefix}-option`}>(选填)</Text>
+          )
+        : null,
     [ruleTarget?.require, hiddenOptionalStyle, customOptionalStyle],
   )
 
   const labelIcon = useMemo(
     () =>
-      (labelIconNode ? (
+      labelIconNode ? (
         <View onClick={onLabelIconClick}>{labelIconNode}</View>
-      ) : null),
+      ) : null,
     [labelIconNode, onLabelIconClick],
   )
 
   const ruleErrorView = useMemo(
     () =>
-      (ruleText ? (
+      ruleText ? (
         <View className={`${formItemPrefix}-rule`}>{ruleText}</View>
-      ) : null),
+      ) : null,
     [ruleText],
   )
 
   const tipsView = useMemo(
     () =>
-      (tipsText ? (
+      tipsText ? (
         <View className={`${formItemPrefix}-tips`}>{tipsText}</View>
-      ) : null),
+      ) : null,
     [tipsText],
   )
 
@@ -109,7 +111,7 @@ const Item: React.FC<HuiFormItemProps> = props => {
           value?: string
         } = {}
         if (!children.props.onChange) {
-          newProps.onChange = event => {
+          newProps.onChange = (event) => {
             setFieldValue(path, event?.detail?.value ?? event)
           }
         }
@@ -161,7 +163,7 @@ const Item: React.FC<HuiFormItemProps> = props => {
       name: path,
       setSubmitTotal,
       validatorRules,
-      onStoreChange: () => setTotal(pre => pre + 1),
+      onStoreChange: () => setTotal((pre) => pre + 1),
     } as any)
     return () => {
       unMount()

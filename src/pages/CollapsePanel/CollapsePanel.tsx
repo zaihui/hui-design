@@ -82,13 +82,13 @@ const CollapsePanelDemo: React.FC = () => (
         <HuiCollapsePanel
           title='custom-icon2'
           name='custom-icon2'
-          expandText={visible => (visible ? 'open' : 'close')}
-          expandIcon={visible =>
-            (visible ? (
+          expandText={(visible) => (visible ? 'open' : 'close')}
+          expandIcon={(visible) =>
+            visible ? (
               <HuiIcon name='003-right' />
             ) : (
               <HuiIcon name='001-close' />
-            ))
+            )
           }
         >
           <HuiText>

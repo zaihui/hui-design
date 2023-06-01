@@ -80,10 +80,7 @@ const validatorRule = (
   }
 }
 
-const validatorStyleInner = (
-  type: keyof FieldType,
-  value: string,
-): [string, string] => {
+const validatorStyleInner = (type: keyof FieldType, value: string): [string, string] => {
   let str = ''
   switch (type) {
     case 'inputNumber':
@@ -117,19 +114,14 @@ const validatorStyle = (
   }
 }
 
-const validatorField = <T> (
+const validatorField = <T>(
   rule: Rule,
   value: string | undefined,
   fieldType: keyof ItemType,
   getFieldValue: T,
 ): string[] => {
   if (typeof value === 'undefined') return [normalCss, '']
-  const { fieldState, validatorType } = validatorRule(
-    rule,
-    value,
-    fieldType,
-    getFieldValue,
-  )
+  const { fieldState, validatorType } = validatorRule(rule, value, fieldType, getFieldValue)
   if (fieldState) {
     // 兼容下item里面的处理
     return [normalCss, '']

@@ -50,7 +50,7 @@ import HuiIcon from '../Icon'
         );
     };
 */
-const Steppers: React.FC<HuiSteppersProps> = props => {
+const Steppers: React.FC<HuiSteppersProps> = (props) => {
   const {
     onChange,
     className,
@@ -60,26 +60,26 @@ const Steppers: React.FC<HuiSteppersProps> = props => {
     showSlicedTitle = false,
   } = props
   const [cur, setCur] = useState(current)
-  const list = useMemo(() => items.filter(e => e), [items])
+  const list = useMemo(() => items.filter((e) => e), [items])
   const overflowAuto = useMemo(() => list.length > 4, [list])
   const stepsAutoStyle: CSSProperties | undefined = useMemo(
     () =>
-      (overflowAuto
+      overflowAuto
         ? {
-          overflowX: 'auto',
-        }
-        : undefined),
+            overflowX: 'auto',
+          }
+        : undefined,
     [overflowAuto],
   )
 
   const stepAutoStyle: CSSProperties | undefined = useMemo(
     () =>
-      (overflowAuto
+      overflowAuto
         ? {
-          display: 'flex',
-          width: stepFixWidth * list.length,
-        }
-        : undefined),
+            display: 'flex',
+            width: stepFixWidth * list.length,
+          }
+        : undefined,
     [overflowAuto, list],
   )
 
@@ -92,7 +92,7 @@ const Steppers: React.FC<HuiSteppersProps> = props => {
     [disabled],
   )
   const computeClassName = useCallback(
-    i => {
+    (i) => {
       if (i === cur) return stepLive
       if (i < cur) return stepActive
       return stepNormal
@@ -101,15 +101,7 @@ const Steppers: React.FC<HuiSteppersProps> = props => {
   )
 
   const computeIconNode = useCallback(
-    i =>
-      (i < cur ? (
-        <HuiIcon
-          name='003-right'
-          size={27}
-        />
-      ) : (
-        i
-      )),
+    (i) => (i < cur ? <HuiIcon name='003-right' size={27} /> : i),
     [cur],
   )
 
@@ -150,7 +142,7 @@ const Steppers: React.FC<HuiSteppersProps> = props => {
     return (
       <View
         className={`${prefix}-steps-step`}
-        onClick={event => !itemDisabled && onHandleChange(index, event)}
+        onClick={(event) => !itemDisabled && onHandleChange(index, event)}
         style={overflowAuto ? autoStyle : undefined}
       >
         <View
@@ -162,11 +154,14 @@ const Steppers: React.FC<HuiSteppersProps> = props => {
               `${stepItemClassName}-icon`,
             )}
           >
-            <View className={cx(
-              `${prefix}-steps-step-indicator-icon-node`,
-              `${stepItemClassName}-icon-node`,
-            )}
-            >{stepItemIconNode}</View>
+            <View
+              className={cx(
+                `${prefix}-steps-step-indicator-icon-node`,
+                `${stepItemClassName}-icon-node`,
+              )}
+            >
+              {stepItemIconNode}
+            </View>
           </View>
         </View>
         <View className={cx(`${prefix}-steps-step-content`, stepItemClassName)}>

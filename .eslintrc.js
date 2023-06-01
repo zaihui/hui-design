@@ -17,10 +17,9 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:import/typescript',
+    'prettier',
   ],
-  plugins: [
-    '@zaihui/eslint-plugin-react',
-  ],
+  plugins: ['@zaihui/eslint-plugin-react'],
   env: {
     node: false,
     browser: false,
@@ -99,7 +98,8 @@ module.exports = {
       },
     ],
     '@typescript-eslint/member-delimiter-style': [
-      'error', {
+      'error',
+      {
         multiline: {
           delimiter: 'none',
           requireLast: false,
@@ -111,9 +111,7 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-function-return-type': 'off',
-    '@typescript-eslint/no-empty-function': [
-      'warn',
-    ],
+    '@typescript-eslint/no-empty-function': ['warn'],
     '@typescript-eslint/type-annotation-spacing': [
       'error',
       {
@@ -131,10 +129,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: [
-        '**/*.js',
-        '**/.*.js',
-      ],
+      files: ['**/*.js', '**/.*.js'],
       parser: 'esprima',
       env: {
         node: true,
@@ -146,9 +141,7 @@ module.exports = {
       },
     },
     {
-      files: [
-        '**/*.tsx',
-      ],
+      files: ['**/*.tsx'],
       rules: {
         /**
          * taro的枚举条件渲染写法中对象的属性一定要用引号包裹，否则运行时会报错
@@ -160,11 +153,7 @@ module.exports = {
       },
     },
     {
-      files: [
-        'test/**/*.ts',
-        'test/**/*.tsx',
-        'test/**/*.js',
-      ],
+      files: ['test/**/*.ts', 'test/**/*.tsx', 'test/**/*.js'],
       env: {
         jest: true,
       },
@@ -180,9 +169,7 @@ module.exports = {
        * 开启了这里的extends会报Unexpected top-level property "overrides[2].extends".
        * 怀疑是vscode下eslint插件的报错，待研究
        */
-      extends: [
-        'plugin:jest/all',
-      ],
+      extends: ['plugin:jest/all'],
       rules: {
         'jest/prefer-inline-snapshots': 'off',
         'jest/prefer-called-with': 'off',
@@ -193,16 +180,14 @@ module.exports = {
      * 针对vuepress下的lint规则
      */
     {
-      files: [
-        'docs/.vuepress/**/*.js',
-        'docs/.vuepress/**/*.vue',
-      ],
+      files: ['docs/.vuepress/**/*.js', 'docs/.vuepress/**/*.vue'],
       extends: [
         'airbnb-base',
         '@zaihui/base',
         'plugin:vue/recommended',
         'plugin:import/errors',
         'plugin:import/warnings',
+        'prettier',
       ],
       env: {
         node: true,
@@ -217,9 +202,7 @@ module.exports = {
      * 允许src/pages下使用@作为alias以方便demo编写
      */
     {
-      files: [
-        'src/pages/**/*.*',
-      ],
+      files: ['src/pages/**/*.*'],
       settings: {
         'import/resolver': {
           typescript: {

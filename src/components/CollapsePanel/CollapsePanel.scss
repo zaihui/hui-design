@@ -1,5 +1,5 @@
-@import "@/styles/variables.scss";
-@import "@/styles/colors.scss";
+@import '@/styles/variables.scss';
+@import '@/styles/colors.scss';
 
 $prefix: hui-collapse;
 
@@ -14,7 +14,7 @@ $prefix: hui-collapse;
 
     &-disabled {
       cursor: not-allowed;
-      opacity: .4;
+      opacity: 0.4;
     }
 
     &-title {
@@ -36,12 +36,12 @@ $prefix: hui-collapse;
         margin-left: px(4);
 
         &.upward {
-          transition: all .3s ease;
+          transition: all 0.3s ease;
           transform: rotate(-180deg);
         }
 
         &.downward {
-          transition: all .3s ease;
+          transition: all 0.3s ease;
           transform: rotate(0deg);
         }
       }
@@ -51,6 +51,6 @@ $prefix: hui-collapse;
   &-child {
     overflow: hidden;
     background: #f5f5f5;
-    transition: height .4s ease;
+    transition: height 0.4s ease;
   }
 }

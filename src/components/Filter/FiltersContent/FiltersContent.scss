@@ -1,5 +1,5 @@
-@import "@/styles/variables.scss";
-@import "@/styles/colors.scss";
+@import '@/styles/variables.scss';
+@import '@/styles/colors.scss';
 
 .filters-default-popup-content {
   padding: $filters-content-popup-default-padding;
@@ -51,12 +51,12 @@ $prefix: filters-content;
         text-align: center;
 
         .upward {
-          transition: all .3s ease;
+          transition: all 0.3s ease;
           transform: rotate(-180deg);
         }
 
         .downward {
-          transition: all .3s ease;
+          transition: all 0.3s ease;
           transform: rotate(0deg);
         }
       }
@@ -67,7 +67,7 @@ $prefix: filters-content;
       padding: 0;
       overflow: hidden;
       background: #f5f5f5;
-      transition: all .4s ease;
+      transition: all 0.4s ease;
 
       &-active {
         height: auto;

@@ -78,7 +78,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     }
   }
 
-  const handleClick = item => {
+  const handleClick = (item) => {
     hideMenu()
     updateTitle(item.text)
     onChange && onChange(item)

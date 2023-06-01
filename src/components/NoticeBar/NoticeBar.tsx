@@ -27,7 +27,7 @@ export interface HuiNoticeBarProps {
   children?: string
 }
 
-const NoticeBar: React.FC<HuiNoticeBarProps> = props => {
+const NoticeBar: React.FC<HuiNoticeBarProps> = (props) => {
   const {
     speed = 80,
     visible = true,
@@ -45,7 +45,9 @@ const NoticeBar: React.FC<HuiNoticeBarProps> = props => {
   useEffect(() => {
     if (type === 'marquee' && children) {
       setDuration(
-        (Taro.getSystemInfoSync().windowWidth + children.toString().length * FONT_SIZE) / speed,
+        (Taro.getSystemInfoSync().windowWidth +
+          children.toString().length * FONT_SIZE) /
+          speed,
       )
     }
   }, [type, children, speed])
@@ -68,60 +70,45 @@ const NoticeBar: React.FC<HuiNoticeBarProps> = props => {
     }
   }
 
-  return (
-    visible ? (
-      <View
-        className={cx(
-          `hui-noticebar ${className}`,
-          { marquee: type === 'marquee' },
+  return visible ? (
+    <View
+      className={cx(`hui-noticebar ${className}`, {
+        marquee: type === 'marquee',
+      })}
+      style={noticeBarStyle}
+      onClick={handleGoToMore}
+    >
+      <View className='hui-noticebar-content'>
+        {hasIcon && (
+          <View className='hui-noticebar-content-icon'>
+            <HuiIcon name='011-notice' size={16} />
+          </View>
         )}
-        style={noticeBarStyle}
-        onClick={handleGoToMore}
-      >
-        <View className='hui-noticebar-content'>
-          {hasIcon && (
-            <View className='hui-noticebar-content-icon'>
-              <HuiIcon
-                name='011-notice'
-                size={16}
-              />
-            </View>
-          )}
-          <View className='hui-noticebar-content-text'>
-            <View
-              className={cx('hui-noticebar-content-inner', {
-                'no-icon-width': !hasIcon && type !== 'marquee',
-                'icon-width': hasIcon && type !== 'marquee',
-                'max-width': type === 'default',
-              })}
-              style={{ animationDuration: `${duration}s` }}
-            >
-              {children}
-            </View>
+        <View className='hui-noticebar-content-text'>
+          <View
+            className={cx('hui-noticebar-content-inner', {
+              'no-icon-width': !hasIcon && type !== 'marquee',
+              'icon-width': hasIcon && type !== 'marquee',
+              'max-width': type === 'default',
+            })}
+            style={{ animationDuration: `${duration}s` }}
+          >
+            {children}
           </View>
         </View>
-        {type === 'close' && (
-          <View
-            className='hui-noticebar-close'
-            onClick={handleClose}
-          >
-            <HuiIcon
-              name='006-close3'
-              size={16}
-            />
-          </View>
-        )}
-        {type === 'more' && (
-          <View className='hui-noticebar-more'>
-            <HuiIcon
-              name='012-arrowright'
-              size={16}
-            />
-          </View>
-        )}
       </View>
-    ) : null
-  )
+      {type === 'close' && (
+        <View className='hui-noticebar-close' onClick={handleClose}>
+          <HuiIcon name='006-close3' size={16} />
+        </View>
+      )}
+      {type === 'more' && (
+        <View className='hui-noticebar-more'>
+          <HuiIcon name='012-arrowright' size={16} />
+        </View>
+      )}
+    </View>
+  ) : null
 }
 
 export default NoticeBar

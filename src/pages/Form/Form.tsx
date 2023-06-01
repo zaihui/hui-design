@@ -28,7 +28,7 @@ const InputPage: React.FC = () => {
   const [form] = useForm()
 
   const [open1, setOpen1] = useState(false)
-  const handleOpen1Confirm = value => {
+  const handleOpen1Confirm = (value) => {
     const checkedVal = open1Columns[0][value[0]].text
     form.setFieldValue('gender', checkedVal)
     setOpen1(false)
@@ -42,7 +42,7 @@ const InputPage: React.FC = () => {
     setLocalData({ ...formData })
   }, [])
 
-  const handleFinish = useCallback(data => {
+  const handleFinish = useCallback((data) => {
     Taro.showModal({
       title: '提示',
       content: `提交成功：'${JSON.stringify(data)}`,
@@ -56,10 +56,7 @@ const InputPage: React.FC = () => {
     })
   }, [])
 
-  const buttonStyle = useMemo(
-    () => ({ width: '50%', margin: '30px auto' }),
-    [],
-  )
+  const buttonStyle = useMemo(() => ({ width: '50%', margin: '30px auto' }), [])
 
   const HuiFormItem = HuiForm.Item
   return (
@@ -82,14 +79,14 @@ const InputPage: React.FC = () => {
                 {
                   require: true,
                 },
-                value => value,
+                (value) => value,
               ]}
               label='账号'
               name='account'
             >
               <HuiInput
                 divider={false}
-                onInput={e => form.setFieldValue('account', e.detail.value)}
+                onInput={(e) => form.setFieldValue('account', e.detail.value)}
               ></HuiInput>
             </HuiFormItem>
             <HuiFormItem
@@ -100,13 +97,13 @@ const InputPage: React.FC = () => {
                   require: true,
                   message: '密码格式校验失败',
                 },
-                value => value.length >= 6 && value.length <= 10,
+                (value) => value.length >= 6 && value.length <= 10,
               ]}
               tipsText='密码必须为6-10个字符之间'
             >
               <HuiInput
                 divider={false}
-                onInput={e => form.setFieldValue('password', e.detail.value)}
+                onInput={(e) => form.setFieldValue('password', e.detail.value)}
                 type='safe-password'
               ></HuiInput>
             </HuiFormItem>
@@ -133,7 +130,9 @@ const InputPage: React.FC = () => {
             >
               <HuiTextArea
                 upperLimit={50}
-                onInput={e => form.setFieldValue('description', e.detail.value)}
+                onInput={(e) =>
+                  form.setFieldValue('description', e.detail.value)
+                }
               ></HuiTextArea>
             </HuiFormItem>
             <HuiButton formType='submit' block style={buttonStyle}>

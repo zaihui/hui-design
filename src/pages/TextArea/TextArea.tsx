@@ -29,24 +29,25 @@ const TextArea: React.FC = () => {
             upperLimit={50}
             placeholder='请输入内容，最多50字'
             value={value1}
-            onInput={e => {
+            onInput={(e) => {
               // eslint-disable-next-line
-                // @ts-ignore
+              // @ts-ignore
               if (!e.target.value) {
                 setErrorMsg('此为必填项')
               }
               // eslint-disable-next-line
-                // @ts-ignore
+              // @ts-ignore
               setValue1(e.target.value)
             }}
           />
           <HuiTextArea
-            label='备注' required={false}
+            label='备注'
+            required={false}
             errorMsg={errorMsg}
             upperLimit={50}
             placeholder='请输入内容，最多50字'
             value={value2}
-            onInput={e => {
+            onInput={(e) => {
               // eslint-disable-next-line
               // @ts-ignore
               if (!e.target.value) {
@@ -66,7 +67,7 @@ const TextArea: React.FC = () => {
             value={value3}
             // eslint-disable-next-line
             // @ts-ignore
-            onInput={e => setValue3(e.target.value)}
+            onInput={(e) => setValue3(e.target.value)}
           />
         </GroupSection>
         <GroupSection title='带标签和图标'>
@@ -79,7 +80,7 @@ const TextArea: React.FC = () => {
             value={value3}
             // eslint-disable-next-line
             // @ts-ignore
-            onInput={e => setValue3(e.target.value)}
+            onInput={(e) => setValue3(e.target.value)}
           />
         </GroupSection>
         <GroupSection title='输入状态'>
@@ -106,7 +107,7 @@ const TextArea: React.FC = () => {
             upperLimit={50}
             // eslint-disable-next-line
             // @ts-ignore
-            onInput={e => setValue4(e.target.value)}
+            onInput={(e) => setValue4(e.target.value)}
           />
         </GroupSection>
       </View>

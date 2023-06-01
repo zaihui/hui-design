@@ -14,12 +14,12 @@ import './Filter.scss'
 const tags = new Array(10).fill('标签')
 const mockTags = tags.map((t, index) => `${t}${index + 1}`)
 
-const TagsGroup = props => {
+const TagsGroup = (props) => {
   const { items = [], onChange, value } = props
   return (
     <View className='tags-group'>
-      {items.length
-        && items.map((t, index) => (
+      {items.length &&
+        items.map((t, index) => (
           <HuiTag
             onClick={() => onChange(index)}
             type={value === index ? 'solid' : 'hollow'}
@@ -58,7 +58,7 @@ const MenuPage: React.FC = () => {
           <HuiStepper
             type='number'
             value={valState.val1}
-            onChange={val => {
+            onChange={(val) => {
               setValState({
                 ...valState,
                 val1: val,
@@ -74,7 +74,7 @@ const MenuPage: React.FC = () => {
         children: (
           <HuiSwitch
             checked={checked}
-            onChange={e => {
+            onChange={(e) => {
               setChecked(e)
             }}
           />
@@ -88,7 +88,7 @@ const MenuPage: React.FC = () => {
           <TagsGroup
             value={checkedTag}
             items={mockTags}
-            onChange={val => setCheckedTag(val)}
+            onChange={(val) => setCheckedTag(val)}
           />
         ),
       },
@@ -100,7 +100,7 @@ const MenuPage: React.FC = () => {
           <HuiStepper
             type='number'
             value={valState.val1}
-            onChange={val => {
+            onChange={(val) => {
               setValState({
                 ...valState,
                 val1: val,
@@ -116,7 +116,7 @@ const MenuPage: React.FC = () => {
         children: (
           <HuiSwitch
             checked={checked}
-            onChange={e => {
+            onChange={(e) => {
               setChecked(e)
             }}
           />
@@ -130,7 +130,7 @@ const MenuPage: React.FC = () => {
           <TagsGroup
             value={checkedTag}
             items={mockTags}
-            onChange={val => setCheckedTag(val)}
+            onChange={(val) => setCheckedTag(val)}
           />
         ),
       },
@@ -207,7 +207,7 @@ const MenuPage: React.FC = () => {
               filtersContentConfig={{
                 position: 'top',
                 filterItems: mockFiltersConfig,
-                onConfirm: val => console.log('single val', val),
+                onConfirm: (val) => console.log('single val', val),
                 onClear: () => allClear(),
               }}
             />
@@ -226,7 +226,7 @@ const MenuPage: React.FC = () => {
                   },
                   {
                     options,
-                    onChange: item => {
+                    onChange: (item) => {
                       console.log(item)
                     },
                     value: options[0].value,
@@ -235,7 +235,7 @@ const MenuPage: React.FC = () => {
               }}
               filtersContentConfig={{
                 filterItems: mockFiltersConfig,
-                onConfirm: val => console.log('single val', val),
+                onConfirm: (val) => console.log('single val', val),
                 onClear: () => allClear(),
               }}
             />
@@ -247,12 +247,12 @@ const MenuPage: React.FC = () => {
                 onClear: () => allClear(),
               }}
             >
-                <HuiSearch
-                  placeholder='请输入关键词'
-                  theme='dark'
-                  value={val1}
-                  onInput={val => setVal1(val)}
-                />
+              <HuiSearch
+                placeholder='请输入关键词'
+                theme='dark'
+                value={val1}
+                onInput={(val) => setVal1(val)}
+              />
             </HuiFilter>
             <HuiFilter
               menuConfig={{
@@ -271,7 +271,7 @@ const MenuPage: React.FC = () => {
             />
           </View>
         </GroupSection>
-       <View style={{ height: 500 }}></View>
+        <View style={{ height: 500 }}></View>
       </View>
     </View>
   )

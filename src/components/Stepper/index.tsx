@@ -19,7 +19,7 @@ type ExtendEvent = {
   target: {
     value: string | number
   }
-};
+}
 
 export interface HuiStepperProps extends ViewProps {
   /**
@@ -268,7 +268,7 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
       className={`hui-stepper ${className} ${initHideMinusAndInput}`}
       style={style}
     >
-      <View className={minusBtnCls} onClick={e => handleClick('minus', e)}>
+      <View className={minusBtnCls} onClick={(e) => handleClick('minus', e)}>
         <View className={`btn ${scaleAnimation.minus ? 'active' : ''}`}>
           <Icon
             name='008-remove'
@@ -286,10 +286,10 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
         type={type}
         value={String(inputValue)}
         disabled={disableInputFormat || disabled}
-        onInput={e => handleInput(e as CommonEvent & ExtendEvent)}
-        onBlur={e => handleBlur(e as ITouchEvent)}
+        onInput={(e) => handleInput(e as CommonEvent & ExtendEvent)}
+        onBlur={(e) => handleBlur(e as ITouchEvent)}
       />
-      <View className={plusBtnCls} onClick={e => handleClick('plus', e)}>
+      <View className={plusBtnCls} onClick={(e) => handleClick('plus', e)}>
         <View className={`btn ${scaleAnimation.plus ? 'active' : ''}`}>
           <Icon
             name='007-add'

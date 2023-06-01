@@ -19,13 +19,8 @@ export interface ActionFooterProps {
   hideMenu: () => void
 }
 
-const ActionFooter: FC<ActionFooterProps> = props => {
-  const {
-    confirmButtonProps,
-    clearButtonProps,
-    confirmText,
-    clearText,
-  } = props
+const ActionFooter: FC<ActionFooterProps> = (props) => {
+  const { confirmButtonProps, clearButtonProps, confirmText, clearText } = props
 
   const handleClear = (e: ITouchEvent) => {
     if (props.onClear) {

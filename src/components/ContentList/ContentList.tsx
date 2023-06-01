@@ -7,7 +7,7 @@ export interface HuiContentListProps extends ViewProps {
   children?: React.ReactNode
 }
 
-const HuiContentList: React.FC<HuiContentListProps> = props => {
+const HuiContentList: React.FC<HuiContentListProps> = (props) => {
   const { className = '', style = {}, children } = props
 
   return (

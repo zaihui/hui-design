@@ -37,7 +37,7 @@ const HighlightText: React.FC<HighlightTextProps> = ({
 
   const highlightTextNode = useMemo(() => {
     function HightLightStyleToKeyword(reactNode) {
-      return Children.map(reactNode, item => {
+      return Children.map(reactNode, (item) => {
         // eslint-disable-next-line @typescript-eslint/no-shadow
         const { children } = item?.props ?? {}
         if (typeof item === 'string') {
@@ -47,8 +47,9 @@ const HighlightText: React.FC<HighlightTextProps> = ({
           item.props.children = highLightText(children)
         }
         if (children && Array.isArray(children)) {
-          item.props.children = children.map(node =>
-            HightLightStyleToKeyword(node))
+          item.props.children = children.map((node) =>
+            HightLightStyleToKeyword(node),
+          )
         }
         return item
       })

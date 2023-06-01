@@ -9,7 +9,7 @@ import './Title.scss'
 export enum TitleSize {
   Small = 'small',
   Medium = 'medium',
-  Large = 'large'
+  Large = 'large',
 }
 
 export interface HuiTitleProps {
@@ -22,7 +22,7 @@ export interface HuiTitleProps {
   onLinkClick?: () => void
 }
 const prefix = 'hui-title'
-const HuiTitle: React.FC<HuiTitleProps> = props => {
+const HuiTitle: React.FC<HuiTitleProps> = (props) => {
   const {
     className,
     title,

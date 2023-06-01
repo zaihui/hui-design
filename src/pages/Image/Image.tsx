@@ -18,10 +18,14 @@ const SampleItem: React.FC<{
   </View>
 )
 
-const RECTANGLE_IMG = 'https://r.kezaihui.com/client/2021-05-31/hui-design-image-1-21053101.png'
-const FULL_IMG = 'https://r.kezaihui.com/client/2021-05-31/hui-design-image-3-21053101.png'
-const FULL_IMG2 = 'https://r.kezaihui.com/client/2021-05-31/hui-design-image-2-21053101.png'
-const FULL_IMG3 = 'https://r.kezaihui.com/client/2021-05-31/hui-design-image-4-21053101.png'
+const RECTANGLE_IMG =
+  'https://r.kezaihui.com/client/2021-05-31/hui-design-image-1-21053101.png'
+const FULL_IMG =
+  'https://r.kezaihui.com/client/2021-05-31/hui-design-image-3-21053101.png'
+const FULL_IMG2 =
+  'https://r.kezaihui.com/client/2021-05-31/hui-design-image-2-21053101.png'
+const FULL_IMG3 =
+  'https://r.kezaihui.com/client/2021-05-31/hui-design-image-4-21053101.png'
 
 const ImagePage: React.FC = () => (
   <View className='image-page'>
@@ -33,22 +37,52 @@ const ImagePage: React.FC = () => (
     <View className='content'>
       <GroupSection title='常用图片比例'>
         <SampleItem title='16:9'>
-          <HuiImage width={160} height={90} src={RECTANGLE_IMG} mode='aspectFill' />
+          <HuiImage
+            width={160}
+            height={90}
+            src={RECTANGLE_IMG}
+            mode='aspectFill'
+          />
         </SampleItem>
         <SampleItem title='3:2'>
-          <HuiImage width={160} height={160.67} src={RECTANGLE_IMG} mode='aspectFill' />
+          <HuiImage
+            width={160}
+            height={160.67}
+            src={RECTANGLE_IMG}
+            mode='aspectFill'
+          />
         </SampleItem>
         <SampleItem title='4:3'>
-          <HuiImage width={160} height={120} src={RECTANGLE_IMG} mode='aspectFill' />
+          <HuiImage
+            width={160}
+            height={120}
+            src={RECTANGLE_IMG}
+            mode='aspectFill'
+          />
         </SampleItem>
         <SampleItem title='1:1'>
-          <HuiImage width={160} height={160} src={RECTANGLE_IMG} mode='aspectFill' />
+          <HuiImage
+            width={160}
+            height={160}
+            src={RECTANGLE_IMG}
+            mode='aspectFill'
+          />
         </SampleItem>
         <SampleItem title='3:4'>
-          <HuiImage width={160} height={213.33} src={RECTANGLE_IMG} mode='aspectFill' />
+          <HuiImage
+            width={160}
+            height={213.33}
+            src={RECTANGLE_IMG}
+            mode='aspectFill'
+          />
         </SampleItem>
         <SampleItem title='2:3'>
-          <HuiImage width={160} height={240} src={RECTANGLE_IMG} mode='aspectFill' />
+          <HuiImage
+            width={160}
+            height={240}
+            src={RECTANGLE_IMG}
+            mode='aspectFill'
+          />
         </SampleItem>
       </GroupSection>
 
@@ -63,9 +97,7 @@ const ImagePage: React.FC = () => (
         </SubGroupSection>
         <SubGroupSection title='加载中的图片'>
           <SampleItem>
-            <View className='fake-image'>
-              加载中…
-            </View>
+            <View className='fake-image'>加载中…</View>
           </SampleItem>
           <SampleItem>
             <View className='fake-image large'>
@@ -94,10 +126,22 @@ const ImagePage: React.FC = () => (
           <HuiImage src={FULL_IMG3} mode='aspectFit' width={160} height={71} />
         </SampleItem>
         <SampleItem title='等比例优先满足高度(不裁剪)'>
-          <HuiImage src={FULL_IMG} mode='aspectFit' width={100} height={100} style={{ borderRadius: '50%' }} />
+          <HuiImage
+            src={FULL_IMG}
+            mode='aspectFit'
+            width={100}
+            height={100}
+            style={{ borderRadius: '50%' }}
+          />
         </SampleItem>
         <SampleItem title='等比例优先满足宽度(裁剪)'>
-          <HuiImage src={FULL_IMG} mode='widthFix' width={100} height={100} style={{ borderRadius: '50%' }} />
+          <HuiImage
+            src={FULL_IMG}
+            mode='widthFix'
+            width={100}
+            height={100}
+            style={{ borderRadius: '50%' }}
+          />
         </SampleItem>
       </GroupSection>
     </View>

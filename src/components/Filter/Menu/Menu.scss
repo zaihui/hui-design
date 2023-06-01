@@ -1,4 +1,4 @@
-@import "../../../styles/variables";
+@import '../../../styles/variables';
 
 .hui-filter-menu {
   position: relative;
@@ -23,7 +23,7 @@
       color: $hui-filter-menu-text-color;
 
       .hui-filter-menu-item-icon {
-        transition: all .2s linear;
+        transition: all 0.2s linear;
       }
 
       &.active {

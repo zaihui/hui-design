@@ -1,6 +1,6 @@
 /* stylelint-disable csstree/validator */
-@import "../../styles/colors.scss";
-@import "../../styles/variables.scss";
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
 
 .hui-card {
   box-sizing: border-box;
@@ -8,7 +8,7 @@
   padding: 16px;
   background: $hui-color-grey-8;
   border-radius: 4px;
-  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, .03);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.03);
 
   &-header {
     display: flex;

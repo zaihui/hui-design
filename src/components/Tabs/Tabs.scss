@@ -1,13 +1,13 @@
 /* stylelint-disable no-descending-specificity */
-@import "../../styles/colors.scss";
-@import "../../styles/variables.scss";
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
 
 .hui-tabs {
   .hui-tabs-bar {
     position: relative;
     z-index: 1;
     overflow: hidden;
-    box-shadow: 0 0 px(10) 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 0 px(10) 0 rgba(0, 0, 0, 0.05);
 
     &.no-shadow {
       box-shadow: unset;
@@ -122,7 +122,7 @@
           bottom: 0;
           margin-bottom: px(2);
           color: $hui-tabs-indicator-bg-color;
-          transition: width .3s, left .3s;
+          transition: width 0.3s, left 0.3s;
           transform: translateX(-50%);
         }
       }
@@ -155,7 +155,7 @@
         height: px(3);
         margin-bottom: px(6);
         background: $hui-tabs-indicator-bg-color;
-        transition: width .3s, left .3s;
+        transition: width 0.3s, left 0.3s;
       }
     }
   }
@@ -166,7 +166,7 @@
     .hui-tabs-panel {
       &.switch-with-animation {
         display: flex;
-        transition: transform .3s;
+        transition: transform 0.3s;
       }
 
       .hui-tab {

@@ -4,13 +4,15 @@ import { pxTransform } from '@tarojs/taro'
 import HuiIcon from '../Icon/Icon'
 import { HIconType } from '../Icon/type'
 
-export type HuiFloatingActionButtonPosition = {
-  top?: number
-  left?: number
-} | {
-  bottom?: number
-  right?: number
-}
+export type HuiFloatingActionButtonPosition =
+  | {
+      top?: number
+      left?: number
+    }
+  | {
+      bottom?: number
+      right?: number
+    }
 export interface HuiFloatingActionButtonProps {
   /** 按钮图标(左侧) */
   prefixIcon?: HIconType
@@ -28,14 +30,10 @@ const DEFAULT_COLOR = '#ff5152'
 const COLOR_WHITE = '#fff'
 const DEFAULT_POSITION = { right: 12, bottom: 58 }
 
-const FloatingActionButton: React.FC<HuiFloatingActionButtonProps> = props => {
-  const {
-    prefixIcon,
-    iconColor = COLOR_WHITE,
-    style,
-    color,
-    position,
-  } = props
+const FloatingActionButton: React.FC<HuiFloatingActionButtonProps> = (
+  props,
+) => {
+  const { prefixIcon, iconColor = COLOR_WHITE, style, color, position } = props
 
   return (
     <View className='hui-floating-action-button'>
@@ -47,15 +45,16 @@ const FloatingActionButton: React.FC<HuiFloatingActionButtonProps> = props => {
           ...style,
         }}
       >
-        <View
-          className='button-content'
-        >
+        <View className='button-content'>
           {prefixIcon && (
             <View>
               <HuiIcon
                 name={prefixIcon}
                 color={iconColor}
-                style={{ marginRight: prefixIcon && props.children ? pxTransform(8) : undefined }}
+                style={{
+                  marginRight:
+                    prefixIcon && props.children ? pxTransform(8) : undefined,
+                }}
                 size={24}
               />
             </View>

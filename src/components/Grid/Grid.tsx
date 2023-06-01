@@ -15,7 +15,10 @@ export interface HuiGridProps extends ViewProps {
   className?: string
 }
 
-const HuiGrid: React.ForwardRefRenderFunction<ViewProps, HuiGridProps> = (props, ref) => {
+const HuiGrid: React.ForwardRefRenderFunction<ViewProps, HuiGridProps> = (
+  props,
+  ref,
+) => {
   const { columnNum = 5, children, style, className = '', ...rest } = props
 
   const itemSize = React.Children.count(children)
@@ -26,7 +29,10 @@ const HuiGrid: React.ForwardRefRenderFunction<ViewProps, HuiGridProps> = (props,
         'hui-grid',
         `${className}`,
         { 'layout-evenly': itemSize < Math.min(columnNum, MAX_COLUMN_NUM) },
-        { [`layout-column-${Math.min(columnNum, MAX_COLUMN_NUM)}`]: itemSize >= Math.min(columnNum, MAX_COLUMN_NUM) },
+        {
+          [`layout-column-${Math.min(columnNum, MAX_COLUMN_NUM)}`]:
+            itemSize >= Math.min(columnNum, MAX_COLUMN_NUM),
+        },
       )}
       ref={ref}
       style={style}

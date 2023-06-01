@@ -9,7 +9,9 @@ import './Login.scss'
 
 @inject('userStore')
 @observer
-export default class Login extends React.Component<Pick<StoreProps, 'userStore'>> {
+export default class Login extends React.Component<
+  Pick<StoreProps, 'userStore'>
+> {
   // eslint-disable-next-line class-methods-use-this
   handleOnLogin(): void {
     // eslint-disable-next-line no-console
@@ -38,10 +40,8 @@ export default class Login extends React.Component<Pick<StoreProps, 'userStore'>
           getPhoneLoading='do getPhoneNumber'
           getPhoneSuccessTip='getPhoneNumber done'
         >
-          <View
-            className='login-button'
-          >一键登录, 体验完整功能</View>
-      </LoginWidget>
+          <View className='login-button'>一键登录, 体验完整功能</View>
+        </LoginWidget>
       </View>
     )
   }

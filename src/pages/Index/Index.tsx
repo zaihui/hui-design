@@ -21,12 +21,12 @@ interface NavCard extends ViewProps {
   }[]
 }
 
-const NavCard: React.FC<NavCard> = props => {
+const NavCard: React.FC<NavCard> = (props) => {
   const { title, desc, icon, items } = props
 
   const [expand, setExpand] = useState(false)
 
-  const handleClickSubItem = subItem => {
+  const handleClickSubItem = (subItem) => {
     Taro.navigateTo({
       url: subItem.url,
     })
@@ -49,7 +49,7 @@ const NavCard: React.FC<NavCard> = props => {
       <View className={cls('sub-items', { visible: expand })}>
         {items.length > 0 && (
           <View className='sub-items-content'>
-            {items.map(item => (
+            {items.map((item) => (
               <View
                 key={item.url}
                 className='sub-item'
@@ -165,7 +165,8 @@ const NAV_LIST: {
   },
 ]
 
-const ZAIHUI_LOGO_URL = 'https://r.kezaihui.com/default/zaihui-logo-20201120001.png'
+const ZAIHUI_LOGO_URL =
+  'https://r.kezaihui.com/default/zaihui-logo-20201120001.png'
 
 const IndexPage: React.FC = () => {
   useShareAppMessage(() => ({
@@ -183,7 +184,7 @@ const IndexPage: React.FC = () => {
       </View>
 
       <View className='content'>
-        {NAV_LIST.map(navData => (
+        {NAV_LIST.map((navData) => (
           <NavCard
             key={navData.title}
             title={navData.title}
