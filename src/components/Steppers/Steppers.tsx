@@ -83,14 +83,12 @@ const Steppers: React.FC<HuiSteppersProps> = (props) => {
     [overflowAuto, list],
   )
 
-  const onHandleChange = useCallback(
-    (i: number, e: any) => {
-      if (disabled) return
-      setCur(i)
-      onChange?.(i, e)
-    },
-    [disabled],
-  )
+  const onHandleChange = (i: number, e: any) => {
+    if (disabled) return
+    setCur(i)
+    onChange?.(i, e)
+  }
+
   const computeClassName = useCallback(
     (i) => {
       if (i === cur) return stepLive
@@ -111,8 +109,8 @@ const Steppers: React.FC<HuiSteppersProps> = (props) => {
       return
     }
     const listLength = list?.length
-    if (current > listLength || current < 0) {
-      setCur(current < 0 ? 0 : listLength)
+    if (current > listLength || current < 1) {
+      setCur(current < 1 ? 1 : listLength)
       warning(`current边界异常： ${current}不在合理区间范围内`)
       return
     }
