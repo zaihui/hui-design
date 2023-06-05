@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
-import React, { useState, createRef } from 'react'
+import React, { useState, createRef, useEffect } from 'react'
 
 import Checkbox, { HuiCheckboxRef } from '../../Checkbox'
 
@@ -37,11 +37,17 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
     if (!onChange) {
       return
     }
-    onChange(v)
+    const res: (string | number)[] = []
+    options.forEach((item) => {
+      if (v.includes(item.value)) {
+        res.push(item.value)
+      }
+    })
+    onChange(res)
   }
 
   const [refList, setRefList] = useState<React.RefObject<HuiCheckboxRef>[]>([])
-  React.useEffect(() => {
+  useEffect(() => {
     setRefList((refs) =>
       Array(options.length)
         .fill(0)

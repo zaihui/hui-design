@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 
 import Badge from '../Badge'
 import HuiButton from '../Button/Button'
@@ -43,7 +43,7 @@ export interface HuiSelectProps extends ViewProps {
    * 一级菜单时为选中项的value
    * 二级菜单时为所有子选项的value
    * */
-  value?: (string | number)[]
+  value?: (string | number)[] | (string | number)[][]
   /** 确认按钮文字 */
   confirmText?: string
   /** 主题色设置 */
@@ -55,11 +55,11 @@ export interface HuiSelectProps extends ViewProps {
   style?: React.CSSProperties
   className?: string
   /** 选中选项时的回调 */
-  onChange?(v: (number | string)[]): void
+  onChange?(v: (number | string)[] | (number | string)[]): void
   /** level为2时，切换侧边菜单时的回调 */
   onChangeSideMenu?(v: number | string): void
   /** 确认回调 */
-  onConfirm?(v: (number | string)[]): void
+  onConfirm?(v: any): void
 }
 
 const Select: React.FC<HuiSelectProps> = (props) => {
@@ -83,8 +83,13 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     onChangeSideMenu,
   } = props
 
+  const defaultValue = useMemo(
+    () => (level === 2 ? options.map(() => []) : [1]),
+    [level, options],
+  )
+
   const [activeMenu, setActiveMenu] = useState<string | number>(0)
-  const [optionValue, setOptionValue] = useState(value || [])
+  const [optionValue, setOptionValue] = useState<any>(value || defaultValue)
 
   useEffect(() => {
     if (!value) {
@@ -93,16 +98,16 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     setOptionValue(value)
   }, [value, visible])
 
-  useEffect(() => {
-    if (level === 1) {
-      return
-    }
-    const initActiveMenu = options.find((item) =>
-      item.children?.some((ic) => value?.includes(ic.value)),
-    )?.value
-    const defalutActiveMenu = options.length > 0 ? options[0].value : 0
-    setActiveMenu(initActiveMenu ?? defalutActiveMenu)
-  }, [level, options, value, visible])
+  // useEffect(() => {
+  //   if (level === 1) {
+  //     return
+  //   }
+  //   const initActiveMenu = options.find((item) =>
+  //     item.children?.some((ic) => value?.includes(ic.value)),
+  //   )?.value
+  //   const defalutActiveMenu = options.length > 0 ? options[0].value : 0
+  //   setActiveMenu(initActiveMenu ?? defalutActiveMenu)
+  // }, [level, options, value, visible])
 
   const handleChangeSideMenu = (v) => {
     if (v !== activeMenu) {
@@ -112,17 +117,23 @@ const Select: React.FC<HuiSelectProps> = (props) => {
   }
 
   const handleChangeOption = (v) => {
-    setOptionValue(v)
-    onChange && onChange(v)
+    if (level === 1) {
+      setOptionValue(v)
+      onChange && onChange(v)
+    }
+    if (level === 2) {
+      const newValue = optionValue.map((item, index) =>
+        activeMenu === index ? v : item,
+      )
+      setOptionValue(newValue)
+      onChange && onChange(newValue)
+    }
   }
 
-  const getBadgeNumber = (list) =>
-    list?.map((o) => optionValue.includes(o.value)).filter((o) => !!o).length
-
   const menuOptions =
-    level === 2
-      ? options.find((item) => item.value === activeMenu)?.children || []
-      : options
+    level === 2 ? options?.[activeMenu]?.children || [] : options
+
+  const menuValue = level === 2 ? optionValue?.[activeMenu] || [] : optionValue
 
   return (
     <Modal
@@ -145,14 +156,14 @@ const Select: React.FC<HuiSelectProps> = (props) => {
               active={activeMenu}
               onChange={(v) => handleChangeSideMenu(v)}
             >
-              {options.map((item) => (
-                <SideMenuItem key={item.value} value={item.value}>
+              {options.map((item, index) => (
+                <SideMenuItem key={item.value} value={index}>
                   {showBadge && multiSelect ? (
                     <Badge
                       value={
-                        getBadgeNumber(item.children) === 0
+                        optionValue?.[index]?.length === 0
                           ? ''
-                          : getBadgeNumber(item.children)
+                          : optionValue?.[index]?.length
                       }
                     >
                       {item.label}
@@ -169,7 +180,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
               color={color}
               multiSelect={multiSelect}
               options={menuOptions}
-              value={optionValue}
+              value={menuValue}
               onChange={handleChangeOption}
             ></Menu>
           </Loader>

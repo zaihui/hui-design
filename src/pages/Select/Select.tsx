@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { View } from '@tarojs/components'
 
 import HuiSelect from '@/components/Select'
@@ -178,14 +178,21 @@ const DemoPage: React.FC = () => {
   const [V4, setV4] = useState(false)
   const [V5, setV5] = useState(false)
 
+  const defaultValue = useMemo(() => data.map(() => []), [])
+  const defaultValue2 = useMemo(
+    () =>
+      data.map((_item, index) =>
+        index !== 1 ? [] : ['开发工程师', '测试工程师'],
+      ),
+    [],
+  )
+  const defaultValue3 = useMemo(() => shortData.map(() => []), [])
+
   const [data1, setData1] = useState<(string | number)[]>([])
-  const [data2, setData2] = useState<(string | number)[]>([
-    '开发工程师',
-    '测试工程师',
-  ])
-  const [data3, setData3] = useState<(string | number)[]>([])
-  const [data4, setData4] = useState<(string | number)[]>([])
-  const [data5, setData5] = useState<(string | number)[]>([])
+  const [data2, setData2] = useState<(string | number)[][]>(defaultValue2)
+  const [data3, setData3] = useState<(string | number)[][]>(defaultValue)
+  const [data4, setData4] = useState<(string | number)[][]>(defaultValue3)
+  const [data5, setData5] = useState<(string | number)[][]>(defaultValue3)
 
   const [loading5, setLoading5] = useState(false)
 
@@ -230,6 +237,7 @@ const DemoPage: React.FC = () => {
       </View>
 
       <HuiSelect
+        multiSelect
         visible={v1}
         title='这是个标题'
         level={1}
