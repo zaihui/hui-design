@@ -1,4 +1,4 @@
-import { View, Text } from '@tarojs/components'
+import { View, Text, Label } from '@tarojs/components'
 import classNames from 'classnames'
 import React, {
   useCallback,
@@ -205,7 +205,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
               </View>
             </View>
           )}
-          <View className={`${formItemPrefix}-content`}>
+          <Label className={`${formItemPrefix}-content`}>
             <Provider
               value={{
                 setRenderType,
@@ -213,7 +213,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
             >
               {copyChildren}
             </Provider>
-          </View>
+          </Label>
           {/* 水平布局额外区域内容 */}
           <View className={`${formItemPrefix}-extra`}>
             <View>{extra}</View>
