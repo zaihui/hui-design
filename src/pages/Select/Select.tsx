@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react'
 import { View } from '@tarojs/components'
 
-import HuiSelect from '@/components/Select'
+import HuiSelect, { OptionValue, Level } from '@/components/Select'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 import HuiButton from '@/components/Button/Button'
@@ -188,11 +188,11 @@ const DemoPage: React.FC = () => {
   )
   const defaultValue3 = useMemo(() => shortData.map(() => []), [])
 
-  const [data1, setData1] = useState<(string | number)[]>([])
-  const [data2, setData2] = useState<(string | number)[][]>(defaultValue2)
-  const [data3, setData3] = useState<(string | number)[][]>(defaultValue)
-  const [data4, setData4] = useState<(string | number)[][]>(defaultValue3)
-  const [data5, setData5] = useState<(string | number)[][]>(defaultValue3)
+  const [data1, setData1] = useState<OptionValue<Level>>([])
+  const [data2, setData2] = useState<OptionValue<Level>>(defaultValue2)
+  const [data3, setData3] = useState<OptionValue<Level>>(defaultValue)
+  const [data4, setData4] = useState<OptionValue<Level>>(defaultValue3)
+  const [data5, setData5] = useState<OptionValue<Level>>(defaultValue3)
 
   const [loading5, setLoading5] = useState(false)
 

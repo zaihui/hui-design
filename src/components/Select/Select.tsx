@@ -12,7 +12,7 @@ import { pxTransform } from '../../utils'
 
 const SideMenuItem = SideMenu.Item
 
-interface HuiSelectOption {
+export interface HuiSelectOption {
   /** 选项名 */
   label: string
   /** 选项值 */
@@ -23,6 +23,12 @@ interface HuiSelectOption {
   children?: HuiSelectOption[]
 }
 
+export type Level = 1 | 2
+
+export type OptionValue<T extends number> = T extends 2
+  ? (string | number)[][]
+  : (string | number)[]
+
 export interface HuiSelectProps extends ViewProps {
   /** 是否展示 */
   visible: boolean
@@ -31,7 +37,7 @@ export interface HuiSelectProps extends ViewProps {
   /** 关闭回调 */
   onClose?(): void
   /** 菜单层级，默认为2 */
-  level?: 1 | 2
+  level?: Level
   /** 是否支持多选, 默认为false，即单选 */
   multiSelect?: boolean
   /** 是否展示徽标，level为2 且 multiSelect为true时生效 */
@@ -43,7 +49,7 @@ export interface HuiSelectProps extends ViewProps {
    * 一级菜单时为选中项的value
    * 二级菜单时为所有子选项的value
    * */
-  value?: (string | number)[] | (string | number)[][]
+  value?: OptionValue<Level>
   /** 确认按钮文字 */
   confirmText?: string
   /** 主题色设置 */
@@ -55,11 +61,11 @@ export interface HuiSelectProps extends ViewProps {
   style?: React.CSSProperties
   className?: string
   /** 选中选项时的回调 */
-  onChange?(v: (number | string)[] | (number | string)[]): void
+  onChange?(v: OptionValue<Level>): void
   /** level为2时，切换侧边菜单时的回调 */
   onChangeSideMenu?(v: number | string): void
   /** 确认回调 */
-  onConfirm?(v: any): void
+  onConfirm?(v: OptionValue<Level>): void
 }
 
 const Select: React.FC<HuiSelectProps> = (props) => {
@@ -89,7 +95,9 @@ const Select: React.FC<HuiSelectProps> = (props) => {
   )
 
   const [activeMenu, setActiveMenu] = useState<string | number>(0)
-  const [optionValue, setOptionValue] = useState<any>(value || defaultValue)
+  const [optionValue, setOptionValue] = useState<OptionValue<Level>>(
+    value || defaultValue,
+  )
 
   useEffect(() => {
     if (!value) {
@@ -98,16 +106,14 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     setOptionValue(value)
   }, [value, visible])
 
-  // useEffect(() => {
-  //   if (level === 1) {
-  //     return
-  //   }
-  //   const initActiveMenu = options.find((item) =>
-  //     item.children?.some((ic) => value?.includes(ic.value)),
-  //   )?.value
-  //   const defalutActiveMenu = options.length > 0 ? options[0].value : 0
-  //   setActiveMenu(initActiveMenu ?? defalutActiveMenu)
-  // }, [level, options, value, visible])
+  useEffect(() => {
+    if (level === 1) {
+      return
+    }
+    const initActiveMenu = value?.findIndex((item) => item.length)
+    const defaultActiveMenu = initActiveMenu === -1 ? 0 : initActiveMenu
+    setActiveMenu(defaultActiveMenu ?? 0)
+  }, [level, options, value, visible])
 
   const handleChangeSideMenu = (v) => {
     if (v !== activeMenu) {
@@ -122,7 +128,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
       onChange && onChange(v)
     }
     if (level === 2) {
-      const newValue = optionValue.map((item, index) =>
+      const newValue = (optionValue as OptionValue<2>).map((item, index) =>
         activeMenu === index ? v : item,
       )
       setOptionValue(newValue)
@@ -161,9 +167,9 @@ const Select: React.FC<HuiSelectProps> = (props) => {
                   {showBadge && multiSelect ? (
                     <Badge
                       value={
-                        optionValue?.[index]?.length === 0
+                        (optionValue as OptionValue<2>)?.[index]?.length === 0
                           ? ''
-                          : optionValue?.[index]?.length
+                          : (optionValue as OptionValue<2>)?.[index]?.length
                       }
                     >
                       {item.label}
