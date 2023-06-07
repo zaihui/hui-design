@@ -2,10 +2,11 @@
 @import '../../styles/variables.scss';
 
 .hui-radio {
+  position: relative;
   display: inline-flex;
   align-items: center;
 
-  .hui-radio-icon {
+  &-icon {
     box-sizing: border-box;
     display: inline-flex;
     flex-shrink: 0;
@@ -32,7 +33,15 @@
     }
   }
 
-  .hui-radio-content {
+  &-mask {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+  }
+
+  &-content {
     padding-left: $hui-radio-content-padding-left;
     font-size: $hui-font-body-m;
   }

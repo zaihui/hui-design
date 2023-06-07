@@ -28,6 +28,8 @@ export interface HuiCheckboxProps extends ViewProps {
 export interface HuiCheckboxRef {
   toggle: () => void
 }
+
+const prefix = 'hui-checkbox'
 const HuiCheckbox: React.ForwardRefRenderFunction<
   HuiCheckboxRef,
   HuiCheckboxProps
@@ -76,12 +78,11 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
     <View
       style={style}
       ref={ref}
-      className={cx(`hui-checkbox ${className}`, { disabled: finalDisabled })}
-      onClick={handleClick}
+      className={cx(`${prefix} ${className}`, { disabled: finalDisabled })}
       {...rest}
     >
       <View
-        className={cx('hui-checkbox-icon', { unchecked: !checked })}
+        className={cx(`${prefix}-icon`, { unchecked: !checked })}
         style={{
           width: pxTransform(size),
           height: pxTransform(size),
@@ -93,7 +94,8 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
           color={checked ? color : 'transparent'}
         />
       </View>
-      {hasChildren && <View className='hui-checkbox-content'>{children}</View>}
+      {hasChildren && <View className={`${prefix}-content`}>{children}</View>}
+      <View className={`${prefix}-mask`} onClick={handleClick}></View>
     </View>
   )
 }
