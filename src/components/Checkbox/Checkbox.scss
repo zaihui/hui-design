@@ -2,9 +2,10 @@
 @import '../../styles/colors.scss';
 
 .hui-checkbox {
+  position: relative;
   display: inline-flex;
 
-  .hui-checkbox-icon {
+  &-icon {
     box-sizing: border-box;
     display: flex;
     flex-shrink: 0;
@@ -17,11 +18,19 @@
     }
   }
 
-  .hui-checkbox-content {
+  &-content {
     display: flex;
     align-items: center;
     padding-left: $hui-checkbox-icon-content-padding-left;
     font-size: $hui-font-body-m;
+  }
+
+  &-mask {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
   }
 
   &.disabled {

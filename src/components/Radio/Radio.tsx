@@ -23,6 +23,7 @@ export interface HuiRadioProps extends ViewProps {
   style?: React.CSSProperties
 }
 
+const prefix = 'hui-radio'
 const HuiRadio: React.FC<HuiRadioProps> = (props) => {
   const {
     className = '',
@@ -61,17 +62,20 @@ const HuiRadio: React.FC<HuiRadioProps> = (props) => {
   return (
     <View
       {...props}
-      className={cx(`hui-radio ${className || ''}`, { disabled })}
+      className={cx(`${prefix} ${className || ''}`, { disabled })}
       style={style}
-      onClick={() => handleChange(value)}
     >
       <View
-        className={cx('hui-radio-icon', { checked, disabled })}
+        className={cx(`${prefix}-icon`, { checked, disabled })}
         style={iconStyle}
       >
         <View className='inner' style={iconInnerStyle} />
       </View>
       {hasChildren && <View className='hui-radio-content'>{children}</View>}
+      <View
+        className={`${prefix}-mask`}
+        onClick={() => handleChange(value)}
+      ></View>
     </View>
   )
 }
