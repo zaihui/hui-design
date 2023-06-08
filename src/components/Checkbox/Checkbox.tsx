@@ -59,7 +59,6 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
     context?.onChange(afterCheckedList)
   }
   const handleClick = (e) => {
-    e.stopPropagation()
     if (!finalDisabled) {
       toggle()
       onClick && onClick(e)
