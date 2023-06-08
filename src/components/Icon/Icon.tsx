@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from '@tarojs/components'
+import { ITouchEvent, View } from '@tarojs/components'
 
 import { HIconType } from './type'
 import { pxTransform } from '../../utils'
@@ -20,7 +20,7 @@ export interface HuiIconProps {
   style?: React.CSSProperties
   className?: string
   /** 点击事件 */
-  onClick?: () => void
+  onClick?: (e: ITouchEvent) => void
 }
 
 const HuiIcon: React.FC<HuiIconProps> = ({
@@ -42,9 +42,7 @@ const HuiIcon: React.FC<HuiIconProps> = ({
     ? `${prefixClass} ${prefixClass}-${name} ${className}`
     : `hui-icons hui-icon-${name} ${className}`
 
-  return (
-    <View className={iconClassName} style={style} onClick={() => onClick()} />
-  )
+  return <View className={iconClassName} style={style} onClick={onClick} />
 }
 
 export default HuiIcon

@@ -1,7 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import { View } from '@tarojs/components'
+import Taro from '@tarojs/taro'
 
-import HuiSelect from '@/components/Select'
+import HuiIcon from '@/components/Icon'
+
+import HuiSelect, { OptionValue, Level } from '@/components/Select'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 import HuiButton from '@/components/Button/Button'
@@ -144,6 +147,24 @@ const data = [
     label: '其他',
     value: '其他',
     children: [{ label: '其他', value: '其他' }],
+    record(item) {
+      return (
+        <View>
+          <HuiIcon name='006-close3' />
+          {item.value}
+        </View>
+      )
+    },
+    customBottom: (
+      <View
+        style={{
+          padding: '20px',
+          textAlign: 'center',
+        }}
+      >
+        自定义底部部分
+      </View>
+    ),
   },
 ]
 const shortData = [
@@ -177,17 +198,58 @@ const DemoPage: React.FC = () => {
   const [V3, setV3] = useState(false)
   const [V4, setV4] = useState(false)
   const [V5, setV5] = useState(false)
+  const [V6, setV6] = useState(false)
 
-  const [data1, setData1] = useState<(string | number)[]>([])
-  const [data2, setData2] = useState<(string | number)[]>([
-    '开发工程师',
-    '测试工程师',
-  ])
-  const [data3, setData3] = useState<(string | number)[]>([])
-  const [data4, setData4] = useState<(string | number)[]>([])
-  const [data5, setData5] = useState<(string | number)[]>([])
+  const defaultValue = useMemo(() => data.map(() => []), [])
+  const defaultValue2 = useMemo(
+    () =>
+      data.map((_item, index) =>
+        index !== 1 ? [] : ['开发工程师', '测试工程师'],
+      ),
+    [],
+  )
+  const defaultValue3 = useMemo(() => shortData.map(() => []), [])
+
+  const [data1, setData1] = useState<OptionValue<Level>>([])
+  const [data2, setData2] = useState<OptionValue<Level>>(defaultValue2)
+  const [data3, setData3] = useState<OptionValue<Level>>(defaultValue)
+  const [data4, setData4] = useState<OptionValue<Level>>(defaultValue3)
+  const [data5, setData5] = useState<OptionValue<Level>>(defaultValue3)
 
   const [loading5, setLoading5] = useState(false)
+
+  const record2 = useCallback(
+    (item): React.ReactNode => (
+      <View>
+        <HuiIcon
+          onClick={(e) => {
+            e.stopPropagation()
+            Taro.showToast({
+              title: '阻止默认事件',
+              icon: 'none',
+            })
+          }}
+          name='006-close3'
+        />
+        {item.value}
+      </View>
+    ),
+    [],
+  )
+
+  const CustomBottom = useCallback(
+    () => (
+      <View
+        style={{
+          padding: '20px',
+          textAlign: 'center',
+        }}
+      >
+        自定义底部部分
+      </View>
+    ),
+    [],
+  )
 
   // #region demo
   return (
@@ -202,6 +264,11 @@ const DemoPage: React.FC = () => {
           <View className='row'>
             <HuiButton block type='secondary' onClick={() => setV1(true)}>
               单组选择器样式
+            </HuiButton>
+          </View>
+          <View className='row'>
+            <HuiButton block type='secondary' onClick={() => setV6(true)}>
+              单组选择器自定义item样式
             </HuiButton>
           </View>
           <View className='row'>
@@ -230,6 +297,7 @@ const DemoPage: React.FC = () => {
       </View>
 
       <HuiSelect
+        multiSelect
         visible={v1}
         title='这是个标题'
         level={1}
@@ -243,6 +311,24 @@ const DemoPage: React.FC = () => {
       ></HuiSelect>
 
       <HuiSelect
+        customBottom={<CustomBottom />}
+        record={record2}
+        multiSelect
+        visible={V6}
+        title='这是个标题'
+        level={1}
+        options={data}
+        value={data1}
+        onConfirm={(v) => {
+          setData1(v)
+          setV6(false)
+        }}
+        onClose={() => setV6(false)}
+      ></HuiSelect>
+
+      <HuiSelect
+        record={record2}
+        customBottom={<CustomBottom />}
         multiSelect
         showBadge
         visible={V2}

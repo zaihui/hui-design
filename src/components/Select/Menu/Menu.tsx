@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
-import React, { useState, createRef } from 'react'
+import React, { useState, createRef, useEffect } from 'react'
 
 import Checkbox, { HuiCheckboxRef } from '../../Checkbox'
 
@@ -29,19 +29,37 @@ export interface HuiMenuProps extends ViewProps {
   color?: string
   /** 选中选项的回调 */
   onChange?(v: (number | string)[]): void
+  /** 自定义item */
+  record?: <T>(item: T, index?: number) => React.ReactNode
+  /** 自定义bottom */
+  menuCustomBottom?: React.ReactNode
 }
 
 const Menu: React.FC<HuiMenuProps> = (props) => {
-  const { options, value, color, multiSelect = false, onChange } = props
+  const {
+    options,
+    value,
+    color,
+    multiSelect = false,
+    onChange,
+    record,
+    menuCustomBottom,
+  } = props
   const handleChange = (v: (string | number)[]) => {
     if (!onChange) {
       return
     }
-    onChange(v)
+    const res: (string | number)[] = []
+    options.forEach((item) => {
+      if (v.includes(item.value)) {
+        res.push(item.value)
+      }
+    })
+    onChange(res)
   }
 
   const [refList, setRefList] = useState<React.RefObject<HuiCheckboxRef>[]>([])
-  React.useEffect(() => {
+  useEffect(() => {
     setRefList((refs) =>
       Array(options.length)
         .fill(0)
@@ -61,7 +79,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
           {options.map((item, index) => (
             <ListItem
               key={item.value}
-              title={item.label}
+              title={record ? record(item, index) : item.label}
               icon={
                 <Checkbox
                   ref={refList[index]}
@@ -77,10 +95,10 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
         </CheckboxGroup>
       ) : (
         <RadioGroup>
-          {options.map((item) => (
+          {options.map((item, index) => (
             <ListItem
               key={item.value}
-              title={item.label}
+              title={record ? record(item, index) : item.label}
               icon={
                 <Radio
                   color={color}
@@ -94,6 +112,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
           ))}
         </RadioGroup>
       )}
+      {menuCustomBottom}
     </View>
   )
 }
