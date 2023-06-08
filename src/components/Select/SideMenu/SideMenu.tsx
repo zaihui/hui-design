@@ -15,15 +15,17 @@ export interface HuiSideMenuProps extends ViewProps {
 
 const SideMenu: React.FC<HuiSideMenuProps> = (props) => {
   const { active, indicatorColor, onChange, children, ...rest } = props
-
   const getChildren = () => {
     const fn = (child, index) =>
-      React.cloneElement(child, {
-        value: child.props.value || index,
-        onChange: (v: number | string) => onChange && onChange(v),
-        active,
-        indicatorColor,
-      })
+      child && child.type.name === 'SideMenuItem'
+        ? React.cloneElement(child, {
+            value: child?.props?.value || index,
+            onChange: (v: number | string) => onChange && onChange(v),
+            active,
+            indicatorColor,
+          })
+        : child
+
     return (children && React.Children.map(children, fn)) || null
   }
 

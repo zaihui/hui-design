@@ -31,10 +31,20 @@ export interface HuiMenuProps extends ViewProps {
   onChange?(v: (number | string)[]): void
   /** 自定义item */
   record?: <T>(item: T, index?: number) => React.ReactNode
+  /** 自定义bottom */
+  menuCustomBottom?: React.ReactNode
 }
 
 const Menu: React.FC<HuiMenuProps> = (props) => {
-  const { options, value, color, multiSelect = false, onChange, record } = props
+  const {
+    options,
+    value,
+    color,
+    multiSelect = false,
+    onChange,
+    record,
+    menuCustomBottom,
+  } = props
   const handleChange = (v: (string | number)[]) => {
     if (!onChange) {
       return
@@ -102,6 +112,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
           ))}
         </RadioGroup>
       )}
+      {menuCustomBottom}
     </View>
   )
 }

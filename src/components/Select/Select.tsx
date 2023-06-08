@@ -23,11 +23,13 @@ export interface HuiSelectOption {
   children?: HuiSelectOption[]
 }
 
-type HuiSelectRecord = <T>(item: T, index?: number) => React.ReactNode
+type HuiSelectCustom = <T>(item: T, index?: number) => React.ReactNode
 
 export interface HuiSelectParentOption extends HuiSelectOption {
   /** 自定义 level 2 item */
-  record?: HuiSelectRecord
+  record?: HuiSelectCustom
+  /** 自定义 level 2 底部元素 */
+  customBottom?: React.ReactNode
 }
 
 export type Level = 1 | 2
@@ -58,7 +60,9 @@ export interface HuiSelectProps extends ViewProps {
    * */
   value?: OptionValue<Level>
   /** 自定义 level 1 item */
-  record?: HuiSelectRecord
+  record?: HuiSelectCustom
+  /** 自定义 level 2 底部元素 */
+  customBottom?: React.ReactNode
   /** 确认按钮文字 */
   confirmText?: string
   /** 主题色设置 */
@@ -80,6 +84,7 @@ export interface HuiSelectProps extends ViewProps {
 const Select: React.FC<HuiSelectProps> = (props) => {
   const {
     record,
+    customBottom,
     visible,
     title,
     value,
@@ -152,6 +157,11 @@ const Select: React.FC<HuiSelectProps> = (props) => {
   const menuRecord =
     level === 2 ? options?.[activeMenu]?.record || undefined : record
 
+  const menuCustomBottom =
+    level === 2
+      ? options?.[activeMenu]?.customBottom || undefined
+      : customBottom
+
   const menuValue = level === 2 ? optionValue?.[activeMenu] || [] : optionValue
 
   return (
@@ -194,10 +204,12 @@ const Select: React.FC<HuiSelectProps> = (props) => {
                   )}
                 </SideMenuItem>
               ))}
+              {customBottom}
             </SideMenu>
           )}
           <Loader loading={loading} type='module' style={{ height: 'unset' }}>
             <Menu
+              menuCustomBottom={menuCustomBottom}
               color={color}
               multiSelect={multiSelect}
               options={menuOptions}

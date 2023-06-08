@@ -155,6 +155,16 @@ const data = [
         </View>
       )
     },
+    customBottom: (
+      <View
+        style={{
+          padding: '20px',
+          textAlign: 'center',
+        }}
+      >
+        自定义底部部分
+      </View>
+    ),
   },
 ]
 const shortData = [
@@ -227,6 +237,20 @@ const DemoPage: React.FC = () => {
     [],
   )
 
+  const CustomBottom = useCallback(
+    () => (
+      <View
+        style={{
+          padding: '20px',
+          textAlign: 'center',
+        }}
+      >
+        自定义底部部分
+      </View>
+    ),
+    [],
+  )
+
   // #region demo
   return (
     <View className='select-page'>
@@ -287,6 +311,7 @@ const DemoPage: React.FC = () => {
       ></HuiSelect>
 
       <HuiSelect
+        customBottom={<CustomBottom />}
         record={record2}
         multiSelect
         visible={V6}
@@ -303,6 +328,7 @@ const DemoPage: React.FC = () => {
 
       <HuiSelect
         record={record2}
+        customBottom={<CustomBottom />}
         multiSelect
         showBadge
         visible={V2}
