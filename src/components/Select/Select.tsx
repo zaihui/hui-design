@@ -23,6 +23,13 @@ export interface HuiSelectOption {
   children?: HuiSelectOption[]
 }
 
+type HuiSelectRecord = <T>(item: T, index?: number) => React.ReactNode
+
+export interface HuiSelectParentOption extends HuiSelectOption {
+  /** 自定义 level 2 item */
+  record?: HuiSelectRecord
+}
+
 export type Level = 1 | 2
 
 export type OptionValue<T extends number> = T extends 2
@@ -43,13 +50,15 @@ export interface HuiSelectProps extends ViewProps {
   /** 是否展示徽标，level为2 且 multiSelect为true时生效 */
   showBadge?: boolean
   /** 选项 */
-  options: HuiSelectOption[]
+  options: HuiSelectParentOption[]
   /**
    * 选中值
    * 一级菜单时为选中项的value
    * 二级菜单时为所有子选项的value
    * */
   value?: OptionValue<Level>
+  /** 自定义 level 1 item */
+  record?: HuiSelectRecord
   /** 确认按钮文字 */
   confirmText?: string
   /** 主题色设置 */
@@ -70,6 +79,7 @@ export interface HuiSelectProps extends ViewProps {
 
 const Select: React.FC<HuiSelectProps> = (props) => {
   const {
+    record,
     visible,
     title,
     value,
@@ -139,6 +149,9 @@ const Select: React.FC<HuiSelectProps> = (props) => {
   const menuOptions =
     level === 2 ? options?.[activeMenu]?.children || [] : options
 
+  const menuRecord =
+    level === 2 ? options?.[activeMenu]?.record || undefined : record
+
   const menuValue = level === 2 ? optionValue?.[activeMenu] || [] : optionValue
 
   return (
@@ -164,7 +177,9 @@ const Select: React.FC<HuiSelectProps> = (props) => {
             >
               {options.map((item, index) => (
                 <SideMenuItem key={item.value} value={index}>
-                  {showBadge && multiSelect ? (
+                  {record ? (
+                    record(item, index)
+                  ) : showBadge && multiSelect ? (
                     <Badge
                       value={
                         (optionValue as OptionValue<2>)?.[index]?.length === 0
@@ -188,6 +203,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
               options={menuOptions}
               value={menuValue}
               onChange={handleChangeOption}
+              record={menuRecord}
             ></Menu>
           </Loader>
         </View>

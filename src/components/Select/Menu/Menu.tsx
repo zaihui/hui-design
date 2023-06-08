@@ -29,10 +29,12 @@ export interface HuiMenuProps extends ViewProps {
   color?: string
   /** 选中选项的回调 */
   onChange?(v: (number | string)[]): void
+  /** 自定义item */
+  record?: <T>(item: T, index?: number) => React.ReactNode
 }
 
 const Menu: React.FC<HuiMenuProps> = (props) => {
-  const { options, value, color, multiSelect = false, onChange } = props
+  const { options, value, color, multiSelect = false, onChange, record } = props
   const handleChange = (v: (string | number)[]) => {
     if (!onChange) {
       return
@@ -67,7 +69,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
           {options.map((item, index) => (
             <ListItem
               key={item.value}
-              title={item.label}
+              title={record ? record(item, index) : item.label}
               icon={
                 <Checkbox
                   ref={refList[index]}
@@ -83,10 +85,10 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
         </CheckboxGroup>
       ) : (
         <RadioGroup>
-          {options.map((item) => (
+          {options.map((item, index) => (
             <ListItem
               key={item.value}
-              title={item.label}
+              title={record ? record(item, index) : item.label}
               icon={
                 <Radio
                   color={color}
