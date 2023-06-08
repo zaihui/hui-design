@@ -105,7 +105,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
   } = props
 
   const defaultValue = useMemo(
-    () => (level === 2 ? options.map(() => []) : [1]),
+    () => (level === 2 ? options.map(() => []) : []),
     [level, options],
   )
 
