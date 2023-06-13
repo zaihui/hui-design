@@ -73,7 +73,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
         <CheckboxGroup
           value={value as string[]}
           onChange={(checkedList) =>
-            handleChange(Array.from(new Set(checkedList)))
+            handleChange([...Array.from(new Set(checkedList))])
           }
         >
           {options.map((item, index) => (
