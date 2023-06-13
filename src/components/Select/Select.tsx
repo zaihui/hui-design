@@ -119,8 +119,27 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     if (!value) {
       return
     }
-    setOptionValue(value)
-  }, [value, visible])
+    if (level === 2) {
+      const res = (value as OptionValue<2>).map((item, index) =>
+        countCommonStrings(
+          item,
+          options?.[index]?.children
+            ? (options?.[index]?.children as HuiSelectOption[]).map(
+                (itemChild) => itemChild.value,
+              )
+            : [],
+        ),
+      )
+      setOptionValue(res)
+    }
+    if (level === 1) {
+      const res = countCommonStrings(
+        value as OptionValue<1>,
+        options.map((item) => item.value),
+      )
+      setOptionValue(res)
+    }
+  }, [level, options, value])
 
   useEffect(() => {
     if (level === 1) {
