@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import Badge from '../Badge'
 import HuiButton from '../Button/Button'
@@ -9,6 +9,7 @@ import Modal from '../Modal'
 import Menu from './Menu/Menu'
 import SideMenu from './SideMenu/SideMenu'
 import { pxTransform } from '../../utils'
+import { countCommonStrings } from '../../utils/common'
 
 const SideMenuItem = SideMenu.Item
 
@@ -128,7 +129,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     const initActiveMenu = value?.findIndex((item) => item.length)
     const defaultActiveMenu = initActiveMenu === -1 ? 0 : initActiveMenu
     setActiveMenu(defaultActiveMenu ?? 0)
-  }, [level, options, value, visible])
+  }, [level, value])
 
   const handleChangeSideMenu = (v) => {
     if (v !== activeMenu) {
@@ -164,6 +165,17 @@ const Select: React.FC<HuiSelectProps> = (props) => {
 
   const menuValue = level === 2 ? optionValue?.[activeMenu] || [] : optionValue
 
+  const getBadgeNumber = useCallback(
+    (index, item) => {
+      const res = countCommonStrings(
+        (optionValue as OptionValue<2>)?.[index],
+        item.children.map((itemChild) => itemChild.value),
+      )
+      return res.length || ''
+    },
+    [optionValue],
+  )
+
   return (
     <Modal
       visible={visible}
@@ -187,18 +199,12 @@ const Select: React.FC<HuiSelectProps> = (props) => {
             >
               {options.map((item, index) => (
                 <SideMenuItem key={item.value} value={index}>
-                  {record ? (
-                    record(item, index)
-                  ) : showBadge && multiSelect ? (
-                    <Badge
-                      value={
-                        (optionValue as OptionValue<2>)?.[index]?.length === 0
-                          ? ''
-                          : (optionValue as OptionValue<2>)?.[index]?.length
-                      }
-                    >
-                      {item.label}
+                  {showBadge && multiSelect ? (
+                    <Badge value={getBadgeNumber(index, item)}>
+                      {record ? record(item, index) : item.label}
                     </Badge>
+                  ) : record ? (
+                    record(item, index)
                   ) : (
                     item.label
                   )}
