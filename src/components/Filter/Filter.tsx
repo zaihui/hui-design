@@ -1,3 +1,6 @@
+import { View } from '@tarojs/components'
+import { usePageScroll } from '@tarojs/taro'
+import cx from 'classnames'
 import React, {
   CSSProperties,
   ReactNode,
@@ -5,16 +8,13 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { View } from '@tarojs/components'
-import { usePageScroll } from '@tarojs/taro'
-import cx from 'classnames'
+import { useBoundingClientRect } from '../../utils/hooks'
+import HuiIcon from '../Icon'
+import FiltersContent, { FiltersContentProps } from './FiltersContent'
 import Menu, { MenuProps } from './Menu/Menu'
 import { MenuItemProps } from './MenuItem/MenuItem'
-import FiltersContent, { FiltersContentProps } from './FiltersContent'
-import { useBoundingClientRect } from '../../utils/hooks'
-import { generateUniqueId } from './utils'
-import HuiIcon from '../Icon'
 import FilterContext from './context'
+import { generateUniqueId } from './utils'
 
 interface MenuConfig extends MenuProps {
   menuItems: MenuItemProps[]
@@ -97,6 +97,11 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
     [filtersContentConfig, fixed, visible],
   )
 
+  const filtersContent = useMemo(
+    () => <FiltersContent {...filterProps} />,
+    [filterProps, filterProps.position],
+  )
+
   const handleFilter = () => {
     contextValue.hideMenu()
     setVisible(!visible)
@@ -133,7 +138,7 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
               <HuiIcon name='h109-filter' size={14} />
               <View>筛选</View>
             </View>
-            <FiltersContent {...filterProps} />
+            {filtersContent}
           </View>
         )}
       </FilterContext.Provider>

@@ -1,5 +1,5 @@
+import type { FiltersContentProps } from './FiltersContent'
 import FiltersContent from './FiltersContent'
-import type { FiltersContentProps, FilterItemProps } from './FiltersContent'
 
-export type { FiltersContentProps, FilterItemProps }
+export type { FiltersContentProps }
 export default FiltersContent

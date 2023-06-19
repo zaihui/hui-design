@@ -45,12 +45,12 @@ const CollapsePanel: React.FC<CollapsePanelProps> = (props) => {
   useEffect(() => {
     if (visible) {
       if (panelChildRect) {
-        setHeight(panelChildRect?.height ?? 0)
+        setHeight(panelChildRect?.height ? panelChildRect?.height : 100)
       }
     } else {
       setHeight(0)
     }
-  }, [visible, panelChildRect, children])
+  }, [visible, panelChildRect, childClassName])
 
   const panel = useMemo(
     () => (

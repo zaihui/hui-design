@@ -77,7 +77,7 @@ export interface HuiStepperProps extends ViewProps {
    * @param {number} value 输入框当前值
    * @description 开发者需要通过 onChange 事件来更新 value 值变化，onChange 函数必填
    */
-  onChange: (value: number, e: CommonEvent) => void
+  onChange?: (value: number, e: CommonEvent) => void
   /**
    * 输入框值失去焦点时触发的事件
    */
