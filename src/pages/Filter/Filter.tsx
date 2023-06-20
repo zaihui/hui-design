@@ -51,32 +51,28 @@ const MenuPage: React.FC = () => {
     { value: '2', text: '麒麟' },
   ]
 
-  const [checked, setChecked] = useState<boolean>(false)
-
   const MockFilters = () => (
     <HuiForm form={form}>
-      <CollapsePanel title='步进器' name='1' active>
+      <CollapsePanel title='步进器' name={`${Date.now()}`} active>
         <HuiForm.Item name='stepper'>
           <HuiStepper type='number' />
         </HuiForm.Item>
       </CollapsePanel>
-      <CollapsePanel title='开关' name='2'>
+      <CollapsePanel title='开关' name={`${Date.now()}`}>
         <HuiForm.Item name='switch'>
-          <HuiSwitch
-            checked={checked}
-            onChange={(e) => {
-              setChecked(e)
-              form.setFieldValue('switch', e)
-            }}
-          />
+          <HuiSwitch />
         </HuiForm.Item>
       </CollapsePanel>
-      <CollapsePanel title='标签组1' name='3' active={false}>
+      <CollapsePanel
+        title='标签组1'
+        name={`tags1-${Date.now()}`}
+        active={false}
+      >
         <HuiForm.Item name='tags1'>
           <TagsGroup length={10} />
         </HuiForm.Item>
       </CollapsePanel>
-      <CollapsePanel title='标签组2' name='4'>
+      <CollapsePanel title='标签组2' name={`tags2-${Date.now()}`}>
         <HuiForm.Item name='tags2'>
           <TagsGroup length={20} />
         </HuiForm.Item>
@@ -85,7 +81,6 @@ const MenuPage: React.FC = () => {
   )
 
   const allClear = () => {
-    setChecked(false)
     form?.reset()
   }
 

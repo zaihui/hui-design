@@ -28,7 +28,7 @@ const prefix = 'filters-content'
 const FiltersContent: React.FC<FiltersContentProps> = (props) => {
   const {
     contentClassName = '',
-    contentStyle,
+    contentStyle = {},
     position = 'right',
     popupContentClassName,
     filterContent,
@@ -89,7 +89,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
         )}
         style={contentStyle}
       >
-        {visible && filterContent}
+        {filterContent}
       </View>
       {actionFooter}
     </HuiPopup>
