@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
 
@@ -29,8 +29,6 @@ const HuiSwitch: React.FC<HuiSwitchProps> = (props) => {
     onChange = defaultProps.onChange,
   } = props
 
-  const switchRef = useRef<any>()
-
   const [_checked, setChecked] = useState<boolean>(checked)
 
   useEffect(() => {
@@ -39,7 +37,6 @@ const HuiSwitch: React.FC<HuiSwitchProps> = (props) => {
 
   return (
     <View
-      ref={switchRef}
       className={cx(`hui-switch ${className}`, { checked: _checked, disabled })}
       style={{ backgroundColor: _checked ? color : '', ...style }}
       onClick={() => {
