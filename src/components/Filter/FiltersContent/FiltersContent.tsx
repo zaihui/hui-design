@@ -59,11 +59,6 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
     hideMenu: onClose,
   }
 
-  const actionFooter = useMemo(
-    () => <ActionFooter {...actionButtonProps} />,
-    [actionButtonProps],
-  )
-
   return (
     <HuiPopup
       className={cx('hui-filter-animation', {
@@ -91,7 +86,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
       >
         {filterContent}
       </View>
-      {actionFooter}
+      <ActionFooter {...actionButtonProps} />
     </HuiPopup>
   )
 }

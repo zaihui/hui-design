@@ -97,11 +97,6 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
     [filtersContentConfig, fixed, visible],
   )
 
-  const filtersContent = useMemo(
-    () => <FiltersContent {...filterProps} />,
-    [filterProps, filterProps.position],
-  )
-
   const handleFilter = () => {
     contextValue.hideMenu()
     setVisible(!visible)
@@ -138,7 +133,7 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
               <HuiIcon name='h109-filter' size={14} />
               <View>筛选</View>
             </View>
-            {filtersContent}
+            <FiltersContent {...filterProps} />,
           </View>
         )}
       </FilterContext.Provider>
