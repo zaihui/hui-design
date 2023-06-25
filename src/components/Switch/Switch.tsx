@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
 
@@ -8,6 +8,7 @@ export interface HuiSwitchProps {
   color?: string
   /** 是否选中 */
   checked?: boolean
+  value?: boolean
   style?: React.CSSProperties
   className?: string
   /** 切换的回调函数 */
@@ -21,20 +22,29 @@ const defaultProps = {
 const HuiSwitch: React.FC<HuiSwitchProps> = (props) => {
   const {
     disabled = false,
-    checked = false,
     color,
     style,
+    checked = false,
     className = '',
     onChange = defaultProps.onChange,
   } = props
 
+  const [_checked, setChecked] = useState<boolean>(checked)
+
+  useEffect(() => {
+    setChecked(Boolean(props.value))
+  }, [props.value])
+
   return (
     <View
-      className={cx(`hui-switch ${className}`, { checked, disabled })}
-      style={{ backgroundColor: checked ? color : '', ...style }}
-      onClick={() => onChange(!checked)}
+      className={cx(`hui-switch ${className}`, { checked: _checked, disabled })}
+      style={{ backgroundColor: _checked ? color : '', ...style }}
+      onClick={() => {
+        if (disabled) return
+        onChange?.(!_checked)
+      }}
     >
-      <View className={cx('hui-switch-dot-btn', { checked })} />
+      <View className={cx('hui-switch-dot-btn', { checked: _checked })} />
     </View>
   )
 }
@@ -42,7 +52,6 @@ const HuiSwitch: React.FC<HuiSwitchProps> = (props) => {
 HuiSwitch.defaultProps = {
   disabled: false,
   checked: false,
-  onChange: () => void 0,
 }
 
 export default HuiSwitch
