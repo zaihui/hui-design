@@ -148,7 +148,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     const initActiveMenu = value?.findIndex((item) => item.length)
     const defaultActiveMenu = initActiveMenu === -1 ? 0 : initActiveMenu
     setActiveMenu(defaultActiveMenu ?? 0)
-  }, [level, value])
+  }, [])
 
   const handleChangeSideMenu = (v) => {
     if (v !== activeMenu) {
