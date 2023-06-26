@@ -14,7 +14,7 @@ export interface HuiStickyProps {
 }
 
 const HuiSticky: React.FC<HuiStickyProps> = (props) => {
-  const { offsetTop = 0, children, className = '', style } = props
+  const { offsetTop = 0, children, className = '', style = {} } = props
 
   const contentRef = useRef()
   const containerRef = useRef<{ uid: string }>()

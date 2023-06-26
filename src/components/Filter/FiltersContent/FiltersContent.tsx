@@ -1,10 +1,8 @@
 import { View } from '@tarojs/components'
-import React, { useState, useMemo, useContext } from 'react'
 import cx from 'classnames'
-import HuiPopup, { HuiPopupProps } from '../../Popup'
+import React, { useContext, useMemo } from 'react'
 import { useBoundingClientRect } from '../../../utils/hooks'
-import HuiIcon from '../../Icon'
-import HuiText from '../../Text'
+import HuiPopup, { HuiPopupProps } from '../../Popup'
 
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
 
@@ -19,18 +17,10 @@ export interface FiltersContentProps
   popupContentClassName?: string
   /** 筛选模式 */
   type?: 'single' | 'multiple'
-  /** 筛选项是否展开 */
-  filterVisible?: boolean
-  filterItems?: FilterItemProps[]
   onChange?: (val?: any) => void
   /** 点击遮罩层和筛选必用 */
   onClose?: () => void
-}
-
-export interface FilterItemProps {
-  label: string
-  name: string
-  children?: React.ReactNode
+  filterContent?: React.ReactNode
 }
 
 const prefix = 'filters-content'
@@ -38,18 +28,16 @@ const prefix = 'filters-content'
 const FiltersContent: React.FC<FiltersContentProps> = (props) => {
   const {
     contentClassName = '',
-    contentStyle,
+    contentStyle = {},
     position = 'right',
     popupContentClassName,
-    filterVisible = true,
-    filterItems = [{ label: '', name: '', value: '', children: '' }],
+    filterContent,
     onClose,
     visible,
     parent,
     ...rest
   } = props as any
   const context = useContext(FilterContext)
-
   const info = useBoundingClientRect(parent.filterRef)
   const positionStyle = useMemo(() => {
     if (info && position === 'top') {
@@ -59,42 +47,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
       }
     }
     return {}
-  }, [info, position, context.isFixed, context.scrollTop])
-
-  const FilterItem: React.FC<FilterItemProps> = (itemProps) => {
-    const { label = '筛选条件名称', children } = itemProps
-    const [childrenVisible, setChildrenVisible] = useState<boolean>(
-      filterVisible || false,
-    )
-
-    return (
-      <View className={`${prefix}-item`}>
-        <View className={`${prefix}-item-title`}>
-          <HuiText className={`${prefix}-item-title-label`}>{label}</HuiText>
-          <View
-            className={`${prefix}-item-title-toggle`}
-            onClick={() => setChildrenVisible(!childrenVisible)}
-          >
-            <HuiText>{!childrenVisible ? '展开' : '收起'}</HuiText>
-            <HuiIcon
-              name='h011-downward'
-              className={cx({
-                upward: childrenVisible,
-                downward: !childrenVisible,
-              })}
-            />
-          </View>
-        </View>
-        <View
-          className={cx(`${prefix}-item-content`, {
-            [`${prefix}-item-content-active`]: childrenVisible,
-          })}
-        >
-          {children}
-        </View>
-      </View>
-    )
-  }
+  }, [info, position, context.isFixed, context.scrollTop, visible])
 
   const actionButtonProps: ActionFooterProps = {
     confirmButtonProps: props.confirmButtonProps,
@@ -131,13 +84,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
         )}
         style={contentStyle}
       >
-        {visible &&
-          filterItems.length &&
-          filterItems.map((item, index) => (
-            <FilterItem key={index} label={item.label} name={item.name}>
-              {item.children}
-            </FilterItem>
-          ))}
+        {filterContent}
       </View>
       <ActionFooter {...actionButtonProps} />
     </HuiPopup>

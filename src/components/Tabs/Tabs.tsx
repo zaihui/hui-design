@@ -56,7 +56,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     sticky = false,
     offsetTop = 0,
     children,
-    style,
+    style = {},
     className = '',
     ...rest
   } = props

@@ -33,7 +33,6 @@ const Loader: React.FC<HuiLoaderProps> = (props) => {
     onClick,
     children,
   } = props
-  const child = children
   const loadingClassName = classname(prefix, className, {
     'loader-page': type === 'page',
     'loader-bottom': type === 'bottom',
@@ -59,13 +58,13 @@ const Loader: React.FC<HuiLoaderProps> = (props) => {
   if (type === 'bottom') {
     return (
       <Block>
-        {child}
+        {children}
         {loading ? loadingElement : bottomContent}
       </Block>
     )
   }
 
-  return loading ? loadingElement : (child as React.ReactElement)
+  return loading ? loadingElement : (children as React.ReactElement)
 }
 
 export default Loader
