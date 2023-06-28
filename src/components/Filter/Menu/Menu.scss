@@ -34,6 +34,10 @@
         }
       }
 
+      &.disabled {
+        color: $hui-color-grey-4;
+      }
+
       .hui-filter-menu-item-text {
         padding: 0 $hui-filter-menu-item-text-padding-x;
         font-size: $hui-filter-menu-text-font-size;
