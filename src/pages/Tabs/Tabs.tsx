@@ -19,6 +19,7 @@ const TabsPage: React.FC = () => {
   const [normalTabsFourIndex, setNormalTabsFourIndex] = useState<number>(0)
   const [singleLineAutoTabsIndex, setSingleLineAutoTabsIndex] =
     useState<number>(0)
+  const [smileTabsIndex, setSmileTabsIndex] = useState<number>(0)
   const [twoLineAutoTabsIndex, setTwoLineAutoTabsIndex] = useState<number>(0)
   const [stickyTabsIndex, setStickyTabsIndex] = useState<number>(0)
 
@@ -84,8 +85,8 @@ const TabsPage: React.FC = () => {
 
           <SubGroupSection title='双行自适应宽度Tab'>
             <HuiTabs
+              hasSubTitle
               smile
-              scroll
               active={twoLineAutoTabsIndex}
               onChange={(index) => setTwoLineAutoTabsIndex(Number(index))}
             >
@@ -94,6 +95,21 @@ const TabsPage: React.FC = () => {
               <HuiTab title='案例三' subTitle='描述文案'></HuiTab>
               <HuiTab title='案例四' subTitle='描述文案'></HuiTab>
               <HuiTab title='案例展示' subTitle='描述文案'></HuiTab>
+            </HuiTabs>
+          </SubGroupSection>
+
+          <SubGroupSection title='微笑样式Tab'>
+            <HuiTabs
+              smile
+              scroll
+              active={smileTabsIndex}
+              onChange={(index) => setSmileTabsIndex(Number(index))}
+            >
+              <HuiTab title='案例展示'></HuiTab>
+              <HuiTab title='案例'></HuiTab>
+              <HuiTab title='案例三'></HuiTab>
+              <HuiTab title='案例四'></HuiTab>
+              <HuiTab title='案例展示'></HuiTab>
             </HuiTabs>
           </SubGroupSection>
         </GroupSection>

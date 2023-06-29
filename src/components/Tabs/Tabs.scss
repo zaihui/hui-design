@@ -67,7 +67,7 @@
           }
 
           .tabs-item-wrapper {
-            .tabs-title-smile {
+            .tabs-title-twin {
               display: flex;
               flex-direction: column;
               align-items: center;
@@ -98,13 +98,13 @@
             }
 
             &.active {
-              .tabs-title-smile {
+              .tabs-title-twin {
                 .title {
-                  color: $hui-tabs-smile-title-color;
+                  color: $hui-tabs-twin-title-color;
                 }
 
                 .sub-title {
-                  color: $hui-tabs-smile-title-color;
+                  color: $hui-tabs-twin-title-color;
                 }
               }
             }
@@ -145,6 +145,10 @@
             color: $hui-font-color-base-50;
 
             @include no-wrap();
+
+            &-smile {
+              padding: px(18) 0 px(23);
+            }
           }
         }
       }
