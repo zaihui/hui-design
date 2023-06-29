@@ -38,14 +38,18 @@ const CheckboxPage: React.FC = () => {
               value='demo1'
               size={32}
               onClick={() => setDemo1Checked(!demo1Checked)}
-            />
+            >
+              <View>苹果</View>
+            </Checkbox>
           </CheckboxSample>
           <CheckboxSample title=''>
             <Checkbox
               checked={demo2Checked}
               value='demo2'
               onClick={() => setDemo2Checked(!demo2Checked)}
-            />
+            >
+              <View>桃子</View>
+            </Checkbox>
           </CheckboxSample>
         </GroupSection>
 

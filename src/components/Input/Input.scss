@@ -71,16 +71,6 @@
       align-items: center;
       font-size: $hui-font-body-s;
 
-      .input {
-        width: 100%;
-        font-size: $hui-font-body-s;
-        font-weight: $hui-font-weight-regular;
-
-        &.right-align {
-          text-align: right;
-        }
-      }
-
       .display-area {
         @include line-clamp(1);
 
@@ -115,9 +105,19 @@
         height: 0;
         border-color: $input-triangle-color;
         border-style: solid;
-        border-width: $input-label-array-width-half 0 $input-label-array-width-half
-          $input-label-array-width;
+        border-width: $input-label-array-width-half 0
+          $input-label-array-width-half $input-label-array-width;
       }
+    }
+  }
+
+  .input {
+    width: 100%;
+    font-size: $hui-font-body-s;
+    font-weight: $hui-font-weight-regular;
+
+    &.right-align {
+      text-align: right;
     }
   }
 

@@ -71,7 +71,11 @@ const HuiRadio: React.FC<HuiRadioProps> = (props) => {
       >
         <View className='inner' style={iconInnerStyle} />
       </View>
-      {hasChildren && <View className='hui-radio-content'>{children}</View>}
+      {hasChildren && (
+        <View className='hui-radio-content' onClick={() => handleChange(value)}>
+          {children}
+        </View>
+      )}
       <View
         className={`${prefix}-mask`}
         onClick={() => handleChange(value)}
