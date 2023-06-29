@@ -39,7 +39,8 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
 
   const context = useContext(FilterContext)
 
-  const toggleMenuItem = (index: number) => {
+  const toggleMenuItem = (index: number, disabled: boolean) => {
+    if (disabled) return
     const temp = [...activatedList]
     temp[index] = !temp[index]
     for (let i = 0; i < temp.length; i++) {
@@ -70,7 +71,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
   const renderMenuTitle = () =>
     React.Children.map(children, (child, index) => {
       if (React.isValidElement(child)) {
-        const { title, options, value } = child.props
+        const { title, options, value, icon, disabled } = child.props
 
         const selected = options?.filter((item) => item.value === value)
 
@@ -94,15 +95,18 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
           <View
             className={cx('hui-filter-menu-item', {
               active: activatedList[index],
+              disabled,
             })}
-            onClick={() => toggleMenuItem(index)}
+            onClick={() => toggleMenuItem(index, disabled)}
           >
             <View className='hui-filter-menu-item-text'>
               {clipText(getTitle())}
             </View>
-            <View className='hui-filter-menu-item-icon'>
-              <HuiIcon name='h110-upwards' size={14} />
-            </View>
+            {icon || (
+              <View className='hui-filter-menu-item-icon'>
+                <HuiIcon name='h110-upwards' size={14} />
+              </View>
+            )}
           </View>
         )
       }

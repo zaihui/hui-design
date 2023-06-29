@@ -26,6 +26,10 @@ export interface MenuItemProps extends Omit<ActionFooterProps, 'hideMenu'> {
   columns?: number
   /** 选中的值 */
   value?: string | number
+  /** 菜单标题右侧icon */
+  icon?: React.ReactNode
+  /** 能否展开当前列表选项 */
+  disabled?: boolean
   /** option改变的回调 */
   onChange?: (option: MenuItemOption) => void
   /** 下拉框底部筛选 */
