@@ -18,8 +18,10 @@ export interface HuiTabsProps extends ViewProps {
   scroll?: boolean
   /** 是否使用动画切换Tab，使用后，Tab容器的高度将保持不变 */
   animated?: boolean
-  /** 是否使用微笑样式（双行标题） */
+  /** 是否使用微笑样式 */
   smile?: boolean
+  /** 是否使用双行标题, 默认为 false */
+  hasSubTitle?: boolean
   /** 是否开启阴影，默认开启 */
   shadow?: boolean
   /** 指示器颜色、微笑样式下高亮标签颜色 */
@@ -50,6 +52,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     scroll = false,
     animated = false,
     smile = false,
+    hasSubTitle = false,
     shadow = true,
     onChange = defaultProps.onChange,
     indicatorColor = '',
@@ -85,9 +88,12 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
           tabsItemEle[i].childNodes[0] &&
           tabsItemEle[i].childNodes[0].childNodes[0]
         ) {
-          const res = await selectorQueryClientRect(
-            `#${tabsItemEle[i].childNodes[0].childNodes[0].uid}`,
-          )
+          const childNode = tabsItemEle[i].childNodes[0].childNodes[0]
+          const childNodeId =
+            hasSubTitle && childNode?.childNodes?.[0].uid
+              ? childNode.childNodes[0].uid
+              : childNode.uid
+          const res = await selectorQueryClientRect(`#${childNodeId}`)
           tabsInfos.current.push(res)
         }
       }
@@ -95,7 +101,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
       tabsWidth.current = res.width
       updateActiveTabInfo()
     })
-  }, [tabs])
+  }, [tabs, hasSubTitle])
 
   const updateActiveTabInfo = useCallback(() => {
     if (!tabs) {
@@ -175,8 +181,8 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     )
 
   const getTabsItem = (tab: ITab) =>
-    smile ? (
-      <View className='tabs-title-smile'>
+    hasSubTitle ? (
+      <View className='tabs-title-twin'>
         <View
           className='title'
           style={{ color: tab.name === active ? indicatorColor : '' }}
@@ -191,7 +197,13 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
         </View>
       </View>
     ) : (
-      <View className='tabs-title'>{tab.title}</View>
+      <View
+        className={cx('tabs-title', {
+          [`tabs-title-smile`]: smile,
+        })}
+      >
+        {tab.title}
+      </View>
     )
 
   const tabsContent = (
