@@ -40,31 +40,6 @@
     min-height: $input-min-height;
     color: $hui-font-color-base;
 
-    .label {
-      display: flex;
-      flex-shrink: 0;
-      align-items: center;
-      padding-right: $input-label-space;
-      font-size: $hui-font-body-m;
-      font-weight: $hui-font-weight-regular;
-      color: $hui-color-grey-9;
-
-      &-icon {
-        margin-left: 4px;
-        color: $hui-font-color-base-35;
-      }
-
-      &-required {
-        margin-left: 4px;
-        font-family: PingFangSC-Regular, sans-serif;
-        font-size: $hui-font-caption-m;
-        font-weight: $hui-font-weight-regular;
-        line-height: 20px;
-        color: $hui-font-color-base-75;
-        letter-spacing: 0;
-      }
-    }
-
     .input-content {
       display: flex;
       flex: 1;
@@ -108,6 +83,31 @@
         border-width: $input-label-array-width-half 0
           $input-label-array-width-half $input-label-array-width;
       }
+    }
+  }
+
+  .label {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    padding-right: $input-label-space;
+    font-size: $hui-font-body-m;
+    font-weight: $hui-font-weight-regular;
+    color: $hui-color-grey-9;
+
+    &-icon {
+      margin-left: 4px;
+      color: $hui-font-color-base-35;
+    }
+
+    &-required {
+      margin-left: 4px;
+      font-family: PingFangSC-Regular, sans-serif;
+      font-size: $hui-font-caption-m;
+      font-weight: $hui-font-weight-regular;
+      line-height: 20px;
+      color: $hui-font-color-base-75;
+      letter-spacing: 0;
     }
   }
 
