@@ -1,0 +1,15 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/colors.scss';
+
+.hui-select-body {
+  display: flex;
+  max-height: 60vh;
+
+  .hui-select-side-menu {
+    flex-shrink: 0;
+  }
+
+  .hui-select-menu {
+    flex: 1;
+  }
+}

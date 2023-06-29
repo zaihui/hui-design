@@ -87,7 +87,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
       setOptionValue(e)
       onChange?.(e)
     },
-    [onChange],
+    [onChange, setOptionValue],
   )
 
   return (
@@ -102,7 +102,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
         <SelectBody
           record={record}
           customBottom={customBottom}
-          value={value}
+          value={optionValue}
           options={options}
           color={color}
           contentHeight={contentHeight}

@@ -1,6 +1,7 @@
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
 import React, { useCallback, useEffect, useState } from 'react'
+import cx from 'classnames'
 
 import Badge from '../../Badge'
 import Loader from '../../Loader'
@@ -8,6 +9,8 @@ import Menu from '../Menu/Menu'
 import SideMenu from '../SideMenu/SideMenu'
 import { pxTransform } from '../../../utils'
 import { countCommonStrings } from '../../../utils/common'
+
+import './SelectBody.scss'
 
 const SideMenuItem = SideMenu.Item
 
@@ -72,6 +75,7 @@ export interface HuiSelectBodyProps extends ViewProps {
 
 const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
   const {
+    className,
     record,
     customBottom,
     value,
@@ -142,7 +146,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
 
   return (
     <View
-      className='hui-select-body'
+      className={cx(className, 'hui-select-body')}
       style={{
         height: (contentHeight && pxTransform(contentHeight)) || 'unset',
       }}
