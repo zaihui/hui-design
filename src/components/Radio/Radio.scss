@@ -42,6 +42,8 @@
   }
 
   &-content {
+    position: relative;
+    z-index: 1;
     padding-left: $hui-radio-content-padding-left;
     font-size: $hui-font-body-m;
   }

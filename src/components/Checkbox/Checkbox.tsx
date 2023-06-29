@@ -93,7 +93,11 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
           color={checked ? color : 'transparent'}
         />
       </View>
-      {hasChildren && <View className={`${prefix}-content`}>{children}</View>}
+      {hasChildren && (
+        <View onClick={handleClick} className={`${prefix}-content`}>
+          {children}
+        </View>
+      )}
       <View className={`${prefix}-mask`} onClick={handleClick}></View>
     </View>
   )
