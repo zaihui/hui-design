@@ -1,6 +1,6 @@
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 import Badge from '../../Badge'
 import Loader from '../../Loader'
@@ -86,38 +86,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
     onChangeSideMenu,
   } = props
 
-  const defaultValue = useMemo(
-    () => (level === 2 ? options.map(() => []) : []),
-    [level, options],
-  )
-
   const [activeMenu, setActiveMenu] = useState<string | number>(0)
-
-  useEffect(() => {
-    if (!value) {
-      return
-    }
-    if (level === 2) {
-      const res = (value as OptionValue<2>).map((item, index) =>
-        countCommonStrings(
-          item,
-          options?.[index]?.children
-            ? (options?.[index]?.children as HuiSelectOption[]).map(
-                (itemChild) => itemChild.value,
-              )
-            : [],
-        ),
-      )
-      setOptionValue(res)
-    }
-    if (level === 1) {
-      const res = countCommonStrings(
-        value as OptionValue<1>,
-        options.map((item) => item.value),
-      )
-      setOptionValue(res)
-    }
-  }, [level, options, value])
 
   useEffect(() => {
     if (level === 1) {
@@ -137,14 +106,12 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
 
   const handleChangeOption = (v) => {
     if (level === 1) {
-      setOptionValue(v)
       onChange && onChange(v)
     }
     if (level === 2) {
-      const newValue = (optionValue as OptionValue<2>).map((item, index) =>
+      const newValue = (value as OptionValue<2>).map((item, index) =>
         activeMenu === index ? v : item,
       )
-      setOptionValue(newValue)
       onChange && onChange(newValue)
     }
   }
@@ -160,17 +127,17 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
       ? options?.[activeMenu]?.customBottom || undefined
       : customBottom
 
-  const menuValue = level === 2 ? optionValue?.[activeMenu] || [] : optionValue
+  const menuValue = level === 2 ? value?.[activeMenu] || [] : value
 
   const getBadgeNumber = useCallback(
     (index, item) => {
       const res = countCommonStrings(
-        (optionValue as OptionValue<2>)?.[index],
+        (value as OptionValue<2>)?.[index],
         item.children.map((itemChild) => itemChild.value),
       )
       return res.length || ''
     },
-    [optionValue],
+    [value],
   )
 
   return (

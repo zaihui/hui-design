@@ -1,10 +1,12 @@
 import { View } from '@tarojs/components'
-import React, { useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
+import { countCommonStrings } from '../../utils/common'
 import HuiButton from '../Button/Button'
 import Modal from '../Modal'
 import SelectBody, {
   HuiSelectBodyProps,
+  HuiSelectOption,
   Level,
   OptionValue,
 } from './SelectBody/SelectBody'
@@ -45,14 +47,48 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     onChangeSideMenu,
   } = props
 
+  const defaultValue = useMemo(
+    () => (level === 2 ? options.map(() => []) : []),
+    [level, options],
+  )
+
   const [optionValue, setOptionValue] = useState<OptionValue<Level>>(
     value || defaultValue,
   )
 
-  const isDisabled =
-    level === 2
-      ? !!(value as OptionValue<2>).filter((item) => !!item.length).length
-      : !!value.length
+  useEffect(() => {
+    if (!value) {
+      return
+    }
+    if (level === 2) {
+      const res = (value as OptionValue<2>).map((item, index) =>
+        countCommonStrings(
+          item,
+          options?.[index]?.children
+            ? (options?.[index]?.children as HuiSelectOption[]).map(
+                (itemChild) => itemChild.value,
+              )
+            : [],
+        ),
+      )
+      setOptionValue(res)
+    }
+    if (level === 1) {
+      const res = countCommonStrings(
+        value as OptionValue<1>,
+        options.map((item) => item.value),
+      )
+      setOptionValue(res)
+    }
+  }, [level, options, value])
+
+  const handleChange = useCallback(
+    (e) => {
+      setOptionValue(e)
+      onChange?.(e)
+    },
+    [onChange],
+  )
 
   return (
     <Modal
@@ -74,7 +110,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
           level={level}
           multiSelect={multiSelect}
           showBadge={showBadge}
-          onChange={onChange}
+          onChange={handleChange}
           onChangeSideMenu={onChangeSideMenu}
         ></SelectBody>
         <View className='hui-select-footer'>
@@ -82,8 +118,8 @@ const Select: React.FC<HuiSelectProps> = (props) => {
             block
             size='large'
             color={color}
-            disabled={isDisabled}
-            onClick={() => onConfirm && onConfirm(value)}
+            disabled={optionValue.length === 0}
+            onClick={() => onConfirm && onConfirm(optionValue)}
           >
             {confirmText}
           </HuiButton>
