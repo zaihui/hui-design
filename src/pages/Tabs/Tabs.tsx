@@ -86,7 +86,6 @@ const TabsPage: React.FC = () => {
           <SubGroupSection title='双行自适应宽度Tab'>
             <HuiTabs
               hasSubTitle
-              smile
               active={twoLineAutoTabsIndex}
               onChange={(index) => setTwoLineAutoTabsIndex(Number(index))}
             >

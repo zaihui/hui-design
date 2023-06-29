@@ -66,50 +66,6 @@
             margin-left: px(32);
           }
 
-          .tabs-item-wrapper {
-            .tabs-title-twin {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              padding: px(12) 0 px(23);
-              line-height: 1;
-
-              .title {
-                max-width: px(163);
-                font-size: $hui-font-body-m;
-                font-weight: $hui-font-weight-medium;
-                line-height: 1;
-                color: $hui-font-color-base-50;
-
-                @include no-wrap();
-              }
-
-              .sub-title {
-                max-width: px(163);
-                margin-top: px(4);
-                font-size: $hui-font-caption-m;
-                font-weight: $hui-font-weight-regular;
-                line-height: 1;
-                color: $hui-font-color-base-35;
-
-                @include no-wrap();
-              }
-            }
-
-            &.active {
-              .tabs-title-twin {
-                .title {
-                  color: $hui-tabs-twin-title-color;
-                }
-
-                .sub-title {
-                  color: $hui-tabs-twin-title-color;
-                }
-              }
-            }
-          }
-
           &:nth-last-child(2) {
             .tabs-item-wrapper {
               padding-right: px(16);
@@ -131,9 +87,49 @@
         .tabs-item-wrapper {
           overflow: hidden;
 
+          .tabs-title-twin {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: px(12) 0 px(23);
+            line-height: 1;
+
+            .title {
+              max-width: px(163);
+              font-size: $hui-font-body-m;
+              font-weight: $hui-font-weight-medium;
+              line-height: 1;
+              color: $hui-font-color-base-50;
+
+              @include no-wrap();
+            }
+
+            .sub-title {
+              max-width: px(163);
+              margin-top: px(4);
+              font-size: $hui-font-caption-m;
+              font-weight: $hui-font-weight-regular;
+              line-height: 1;
+              color: $hui-font-color-base-35;
+
+              @include no-wrap();
+            }
+          }
+
           &.active {
             .tabs-title {
               color: $hui-font-color-base;
+            }
+
+            .tabs-title-twin {
+              .title {
+                color: $hui-font-color-base;
+              }
+
+              .sub-title {
+                color: $hui-font-color-base-75;
+              }
             }
           }
 
