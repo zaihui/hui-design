@@ -54,7 +54,9 @@
   "dependencies": {
     "classnames": "^2.2.6",
     "dayjs": "^1.10.6",
-    "onchange": "^7.1.0"
+    "father": "^4.2.3",
+    "onchange": "^7.1.0",
+    "@rc-component/father-plugin": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",
