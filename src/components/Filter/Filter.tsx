@@ -133,7 +133,7 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
               <HuiIcon name='h109-filter' size={14} />
               <View>筛选</View>
             </View>
-            <FiltersContent {...filterProps} />,
+            <FiltersContent {...filterProps} />
           </View>
         )}
       </FilterContext.Provider>
