@@ -12,6 +12,10 @@ npm install @zaihui/hui-design
 
 ## 使用
 
+### 本地调试
+
+[组件库本地调试方案](https://zaihui.feishu.cn/docx/B7ONd4WLwoh4gPxamEDcnfsWnwb)
+
 ## 开发
 
 参考[基于 Taro 开发第三方多端 UI 库](https://nervjs.github.io/taro/docs/ui-lib.html)。
