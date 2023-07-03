@@ -98,7 +98,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
         }
       }
       const res = await selectorQueryClientRect(`#${tabsRef.current.uid}`)
-      tabsWidth.current = res.width
+      tabsWidth.current = res?.width
       updateActiveTabInfo()
     })
   }, [tabs, hasSubTitle])
