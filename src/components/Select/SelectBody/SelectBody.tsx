@@ -96,7 +96,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
     if (level === 1) {
       return
     }
-    const initActiveMenu = value?.findIndex((item) => item.length)
+    const initActiveMenu = value?.findIndex((item) => item.length) ?? 0
     const defaultActiveMenu = initActiveMenu === -1 ? 0 : initActiveMenu
     setActiveMenu(defaultActiveMenu ?? 0)
   }, [])
