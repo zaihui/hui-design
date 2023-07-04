@@ -85,7 +85,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
                   ref={refList[index]}
                   color={color}
                   key={item.value}
-                  value={`${item.value}`}
+                  value={item.value}
                   checked={value.includes(item.value)}
                 />
               }
