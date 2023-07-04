@@ -3,7 +3,7 @@ import cx from 'classnames'
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
 
-import CheckboxGroupContext from './context'
+import CheckboxGroupContext, { CheckboxValue } from './context'
 import HuiIcon from '../Icon/Icon'
 import { pxTransform } from '../../utils'
 
@@ -11,7 +11,7 @@ const DEFAULT_ICON_COLOR = '#ed3737'
 const DEFAULT_ICON_SIZE = 20
 
 export interface HuiCheckboxProps extends ViewProps {
-  value: string
+  value: CheckboxValue
   /** 是否禁用 */
   disabled?: boolean
   /** 是否被选中 */
@@ -93,7 +93,11 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
           color={checked ? color : 'transparent'}
         />
       </View>
-      {hasChildren && <View className={`${prefix}-content`}>{children}</View>}
+      {hasChildren && (
+        <View onClick={handleClick} className={`${prefix}-content`}>
+          {children}
+        </View>
+      )}
       <View className={`${prefix}-mask`} onClick={handleClick}></View>
     </View>
   )

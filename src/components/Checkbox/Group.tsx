@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import { CheckboxGroupContextProvider } from './context'
+import { CheckboxGroupContextProvider, CheckboxValue } from './context'
 
 export interface HuiCheckboxGroupProps {
   /** 选中的checkbox值 */
-  value?: string[]
+  value?: CheckboxValue[]
   /** 选中的checkbox有变化时候的回调 */
-  onChange: (checkedList: string[]) => void
+  onChange: (checkedList: CheckboxValue[]) => void
   /** 是否禁用所有子checkbox */
   disabled?: boolean
   children?: React.ReactNode
 }
 const HuiCheckboxGroup: React.FC<HuiCheckboxGroupProps> = (props) => {
   const { value, onChange, disabled = false } = props
-  const [checkedList, setCheckedList] = useState<string[]>([])
+  const [checkedList, setCheckedList] = useState<CheckboxValue[]>([])
 
   useEffect(() => {
     if (value) {
@@ -20,7 +20,7 @@ const HuiCheckboxGroup: React.FC<HuiCheckboxGroupProps> = (props) => {
     }
   }, [value])
 
-  const handleChange = (checkedValues: string[]) => {
+  const handleChange = (checkedValues: CheckboxValue[]) => {
     if (!disabled) {
       setCheckedList(checkedValues)
       onChange(checkedValues)

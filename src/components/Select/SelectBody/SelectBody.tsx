@@ -113,7 +113,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
       onChange && onChange(v)
     }
     if (level === 2) {
-      const newValue = (value as OptionValue<2>).map((item, index) =>
+      const newValue = ((value as OptionValue<2>) ?? []).map((item, index) =>
         activeMenu === index ? v : item,
       )
       onChange && onChange(newValue)
@@ -137,7 +137,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
     (index, item) => {
       const res = countCommonStrings(
         (value as OptionValue<2>)?.[index],
-        item.children.map((itemChild) => itemChild.value),
+        (item.children ?? []).map((itemChild) => itemChild.value),
       )
       return res.length || ''
     },
@@ -157,7 +157,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
           active={activeMenu}
           onChange={(v) => handleChangeSideMenu(v)}
         >
-          {options.map((item, index) => (
+          {(options ?? []).map((item, index) => (
             <SideMenuItem key={item.value} value={index}>
               {showBadge && multiSelect ? (
                 <Badge value={getBadgeNumber(index, item)}>

@@ -8,6 +8,7 @@ import HuiSelect, { OptionValue, Level } from '@/components/Select'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'
 import HuiButton from '@/components/Button/Button'
+import { business } from './data'
 
 import './Select.scss'
 
@@ -215,6 +216,7 @@ const DemoPage: React.FC = () => {
   const [data3, setData3] = useState<OptionValue<Level>>(defaultValue)
   const [data4, setData4] = useState<OptionValue<Level>>(defaultValue3)
   const [data5, setData5] = useState<OptionValue<Level>>(defaultValue3)
+  const [data6, setData6] = useState<OptionValue<Level>>(business.map(() => []))
 
   const [loading5, setLoading5] = useState(false)
 
@@ -293,6 +295,15 @@ const DemoPage: React.FC = () => {
               多组时，每个分组选项高度不一致
             </HuiButton>
           </View>
+        </GroupSection>
+
+        <GroupSection title='单独使用SelectBody'>
+          <HuiSelect.SelectBody
+            multiSelect
+            options={business}
+            value={data6}
+            onChange={setData6}
+          ></HuiSelect.SelectBody>
         </GroupSection>
       </View>
 

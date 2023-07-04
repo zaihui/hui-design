@@ -30,10 +30,14 @@ const RadioPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='单选框大小'>
           <RadioSample title=''>
-            <Radio size={32} value='demo1' checked />
+            <Radio size={32} value='demo1' checked>
+              <View>苹果</View>
+            </Radio>
           </RadioSample>
           <RadioSample title=''>
-            <Radio value='demo2' checked />
+            <Radio value='demo2' checked>
+              <View>桃子</View>
+            </Radio>
           </RadioSample>
         </GroupSection>
         <GroupSection title='单选框状态'>
