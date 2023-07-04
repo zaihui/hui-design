@@ -79,7 +79,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
     record,
     customBottom,
     value,
-    options,
+    options = [],
     color,
     contentHeight,
     loading = false,
@@ -157,7 +157,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
           active={activeMenu}
           onChange={(v) => handleChangeSideMenu(v)}
         >
-          {(options ?? []).map((item, index) => (
+          {options.map((item, index) => (
             <SideMenuItem key={item.value} value={index}>
               {showBadge && multiSelect ? (
                 <Badge value={getBadgeNumber(index, item)}>

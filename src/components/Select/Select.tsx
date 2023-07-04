@@ -31,7 +31,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     visible,
     title,
     value,
-    options,
+    options = [],
     color,
     contentHeight,
     loading = false,
@@ -48,7 +48,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
   } = props
 
   const defaultValue = useMemo(
-    () => (level === 2 ? (options ?? []).map(() => []) : []),
+    () => (level === 2 ? options.map(() => []) : []),
     [level, options],
   )
 
@@ -76,7 +76,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     if (level === 1) {
       const res = countCommonStrings(
         value as OptionValue<1>,
-        (options ?? []).map((item) => item.value),
+        options.map((item) => item.value),
       )
       setOptionValue(res)
     }
