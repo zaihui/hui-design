@@ -112,7 +112,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
           showBadge={showBadge}
           onChange={handleChange}
           onChangeSideMenu={onChangeSideMenu}
-        ></SelectBody>
+        />
         <View className='hui-select-footer'>
           <HuiButton
             block
