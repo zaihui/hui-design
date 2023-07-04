@@ -172,6 +172,9 @@ const MenuPage: React.FC = () => {
                     value: options[0].value,
                   },
                 ],
+                onMenuTitleClick: (e, index) => {
+                  console.log('e===>', e, 'index===>', index)
+                },
               }}
               filtersContentConfig={{
                 filterContent: <MockFilters />,
