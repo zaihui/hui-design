@@ -7,7 +7,7 @@ import React, {
   forwardRef,
   useContext,
 } from 'react'
-import { View } from '@tarojs/components'
+import { View, ITouchEvent } from '@tarojs/components'
 import cx from 'classnames'
 import MenuItem, { MenuItemOption } from '../MenuItem/MenuItem'
 import HuiIcon from '../../Icon'
@@ -20,6 +20,8 @@ export interface MenuProps {
   children?: ReactNode
   /** 透传到menu组件 当筛选项变化的时候调用 */
   menuOnChange?: (option: MenuItemOption) => void
+  /** 点击menu title */
+  onMenuTitleClick?: (e: ITouchEvent, index: number, maskShow: boolean) => void
 }
 
 export interface MenuRef {
@@ -32,14 +34,14 @@ const defaultProps = {
 }
 
 const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
-  const { menuOnChange, className, children, ...rest } = props
+  const { menuOnChange, onMenuTitleClick, className, children, ...rest } = props
   const menuRef = useRef()
   const [activatedList, setActivatedList] = useState<boolean[]>([])
   const [menuItemTitle, setMenuItemTitle] = useState<string[]>([])
 
   const context = useContext(FilterContext)
 
-  const toggleMenuItem = (index: number, disabled: boolean) => {
+  const toggleMenuItem = (index: number, disabled: boolean, e: ITouchEvent) => {
     if (disabled) return
     const temp = [...activatedList]
     temp[index] = !temp[index]
@@ -47,6 +49,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
       temp[i] = i === index ? temp[i] : false
     }
     setActivatedList(temp)
+    onMenuTitleClick && onMenuTitleClick(e, index, temp.includes(true))
     context?.hideFilter()
   }
 
@@ -97,7 +100,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
               active: activatedList[index],
               disabled,
             })}
-            onClick={() => toggleMenuItem(index, disabled)}
+            onClick={(e) => toggleMenuItem(index, disabled, e)}
           >
             <View className='hui-filter-menu-item-text'>
               {clipText(getTitle())}

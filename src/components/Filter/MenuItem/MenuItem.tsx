@@ -1,4 +1,4 @@
-import { View } from '@tarojs/components'
+import { ITouchEvent, View } from '@tarojs/components'
 import cx from 'classnames'
 import React, {
   CSSProperties,
@@ -32,6 +32,8 @@ export interface MenuItemProps extends Omit<ActionFooterProps, 'hideMenu'> {
   disabled?: boolean
   /** option改变的回调 */
   onChange?: (option: MenuItemOption) => void
+  /** 关闭mask回调 */
+  onMaskClose?: (e?: ITouchEvent) => void
   /** 下拉框底部筛选 */
   footer?: boolean
   className?: string
@@ -56,6 +58,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     parent,
     children,
     footer,
+    onMaskClose,
   } = props as any
   const context = useContext(FilterContext)
 
@@ -74,6 +77,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
 
   const hideMenu = () => {
     parent.hideMenuItem(parent.index)
+    onMaskClose && onMaskClose()
   }
 
   const updateTitle = (text: string) => {
@@ -124,6 +128,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
 
   return (
     <Popup
+      catchMove
       visible={parent.show}
       position='top'
       maskStyle={position}
