@@ -4,6 +4,7 @@ import GroupSection from '@/demoComponents/GroupSection'
 import PageHeader from '@/demoComponents/PageHeader'
 import { View } from '@tarojs/components'
 import React, { useMemo, useState } from 'react'
+import cx from 'classnames'
 
 import HuiForm, { useForm } from '@/components/Form/index'
 
@@ -40,6 +41,8 @@ const TagsGroup = (props) => {
 }
 const MenuPage: React.FC = () => {
   const [form] = useForm()
+  const [pageScrollable, setPageScrollable] = useState<boolean>(false)
+
   const [val1, setVal1] = useState('')
 
   const options = [
@@ -85,27 +88,24 @@ const MenuPage: React.FC = () => {
   }
 
   return (
-    <View className='filter-page'>
+    <View
+      className={cx('filter-page', {
+        'page-disable-scroll': pageScrollable,
+      })}
+    >
       <PageHeader title='筛选栏Filter' desc='' />
       <View className='content'>
         <GroupSection title='单维度筛选'>
           <View className='gap'>
             <HuiFilter
+              sticky
               menuConfig={{
                 className: 'hui-menu-xxx',
                 menuItems: [{ value: '1', options }],
               }}
             />
             <HuiFilter
-              menuConfig={{
-                className: 'hui-menu-xxx',
-                menuItems: [
-                  { value: '1', options },
-                  { value: '2', options },
-                ],
-              }}
-            />
-            <HuiFilter
+              sticky
               menuConfig={{
                 className: 'hui-menu-xxx',
                 menuItems: [
@@ -116,6 +116,7 @@ const MenuPage: React.FC = () => {
               }}
             />
             <HuiFilter
+              sticky
               menuConfig={{
                 className: 'hui-menu-xxx',
                 menuItems: [
@@ -127,9 +128,37 @@ const MenuPage: React.FC = () => {
             />
           </View>
         </GroupSection>
+        <GroupSection title='单维度筛选(打开弹窗禁止页面滚动)'>
+          <HuiFilter
+            sticky
+            menuConfig={{
+              className: 'hui-menu-xxx',
+              menuItems: [
+                {
+                  value: '1',
+                  options,
+                  onMaskClose: () => {
+                    setPageScrollable(false)
+                  },
+                },
+                {
+                  value: '2',
+                  options,
+                  onMaskClose: () => {
+                    setPageScrollable(false)
+                  },
+                },
+              ],
+              onMenuTitleClick: (_e, _index, maskShow) => {
+                setPageScrollable(maskShow)
+              },
+            }}
+          />
+        </GroupSection>
         <GroupSection title='多维度收纳筛选'>
           <View className='gap'>
             <HuiFilter
+              sticky
               menuConfig={{
                 className: 'hui-menu-xxx',
                 menuItems: [
@@ -152,6 +181,7 @@ const MenuPage: React.FC = () => {
               }}
             />
             <HuiFilter
+              sticky
               menuConfig={{
                 className: 'hui-menu-xxx',
                 menuItems: [
@@ -172,8 +202,15 @@ const MenuPage: React.FC = () => {
                     value: options[0].value,
                   },
                 ],
-                onMenuTitleClick: (e, index) => {
-                  console.log('e===>', e, 'index===>', index)
+                onMenuTitleClick: (e, index, maskShow) => {
+                  console.log(
+                    'e===>',
+                    e,
+                    'index===>',
+                    index,
+                    'maskShow===>',
+                    maskShow,
+                  )
                 },
               }}
               filtersContentConfig={{

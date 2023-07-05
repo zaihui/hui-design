@@ -2,6 +2,12 @@
 @import '@/styles/variables.scss';
 
 .filter-page {
+  height: 100%;
+
+  &.page-disable-scroll {
+    overflow: hidden;
+  }
+
   > .content {
     .title {
       padding: 10px 20px;

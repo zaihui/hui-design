@@ -14,7 +14,7 @@ import FiltersContent, { FiltersContentProps } from './FiltersContent'
 import Menu, { MenuProps } from './Menu/Menu'
 import { MenuItemProps } from './MenuItem/MenuItem'
 import FilterContext from './context'
-import { generateUniqueId } from './utils'
+import HuiSticky from '../Sticky/Sticky'
 
 interface MenuConfig extends MenuProps {
   menuItems: MenuItemProps[]
@@ -28,6 +28,7 @@ export interface HuiFilterProps {
   fixed?: boolean
   menuConfig?: MenuConfig
   filtersContentConfig?: Omit<FiltersContentProps, 'visible'>
+  sticky?: boolean
 }
 
 const defaultProps = {
@@ -39,11 +40,12 @@ const defaultProps = {
 
 const HuiFilter: React.FC<HuiFilterProps> = (props) => {
   const {
-    className,
+    className = '',
     menuConfig,
     children,
     filtersContentConfig,
     fixed = false,
+    sticky = false,
     ...rest
   } = { ...defaultProps, ...props }
   const [isFixed, setIsFixed] = useState(false)
@@ -68,7 +70,7 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
 
   usePageScroll((res) => {
     setScrollTop(res.scrollTop)
-    if (!info || !fixed) return
+    if (!info || !res) return
     if (res.scrollTop >= info.top) {
       setIsFixed(true)
     } else {
@@ -102,14 +104,8 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
     setVisible(!visible)
   }
 
-  return (
-    <View
-      {...rest}
-      ref={filterRef}
-      className={cx('hui-filter', className, generateUniqueId(), {
-        fixed: isFixed,
-      })}
-    >
+  const render = () => (
+    <View {...rest} ref={filterRef} className={cx('hui-filter', className)}>
       <FilterContext.Provider value={contextValue}>
         {isMenu ? (
           <Menu
@@ -139,6 +135,8 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
       </FilterContext.Provider>
     </View>
   )
+
+  return sticky ? <HuiSticky>{render()}</HuiSticky> : render()
 }
 
 export default HuiFilter

@@ -21,7 +21,7 @@ export interface MenuProps {
   /** 透传到menu组件 当筛选项变化的时候调用 */
   menuOnChange?: (option: MenuItemOption) => void
   /** 点击menu title */
-  onMenuTitleClick?: (e: ITouchEvent, index: number) => void
+  onMenuTitleClick?: (e: ITouchEvent, index: number, maskShow: boolean) => void
 }
 
 export interface MenuRef {
@@ -49,7 +49,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
       temp[i] = i === index ? temp[i] : false
     }
     setActivatedList(temp)
-    onMenuTitleClick && onMenuTitleClick(e, index)
+    onMenuTitleClick && onMenuTitleClick(e, index, temp.includes(true))
     context?.hideFilter()
   }
 

@@ -128,6 +128,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
 
   return (
     <Popup
+      catchMove
       visible={parent.show}
       position='top'
       maskStyle={position}
