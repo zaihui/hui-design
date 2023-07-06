@@ -200,6 +200,7 @@ const DemoPage: React.FC = () => {
   const [V4, setV4] = useState(false)
   const [V5, setV5] = useState(false)
   const [V6, setV6] = useState(false)
+  const [V7, setV7] = useState(false)
 
   const defaultValue = useMemo(() => data.map(() => []), [])
   const defaultValue2 = useMemo(
@@ -274,6 +275,11 @@ const DemoPage: React.FC = () => {
             </HuiButton>
           </View>
           <View className='row'>
+            <HuiButton block type='secondary' onClick={() => setV7(true)}>
+              单组选择器自定义item样式 + 全选{' '}
+            </HuiButton>
+          </View>
+          <View className='row'>
             <HuiButton block type='secondary' onClick={() => setV2(true)}>
               多组选择器样式
             </HuiButton>
@@ -310,6 +316,7 @@ const DemoPage: React.FC = () => {
       <HuiSelect
         multiSelect
         visible={v1}
+        isNeedAllCheck
         title='这是个标题'
         level={1}
         options={data}
@@ -338,10 +345,28 @@ const DemoPage: React.FC = () => {
       ></HuiSelect>
 
       <HuiSelect
+        isNeedAllCheck
+        customBottom={<CustomBottom />}
+        record={record2}
+        multiSelect
+        visible={V7}
+        title='这是个标题'
+        level={1}
+        options={data}
+        value={data1}
+        onConfirm={(v) => {
+          setData1(v)
+          setV7(false)
+        }}
+        onClose={() => setV6(false)}
+      ></HuiSelect>
+
+      <HuiSelect
         record={record2}
         customBottom={<CustomBottom />}
         multiSelect
         showBadge
+        isNeedAllCheck
         visible={V2}
         title='选择后展示徽标'
         options={data}
