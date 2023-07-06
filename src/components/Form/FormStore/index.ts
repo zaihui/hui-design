@@ -1,7 +1,7 @@
 import get from 'lodash/get'
 import set from 'lodash/set'
 
-import { toArray, getErrorTarget } from '../util'
+import { toArray, getErrorTarget, toString } from '../util'
 import { FieldContext, registerWatchType } from '../constants'
 
 interface Callbacks {
@@ -56,7 +56,7 @@ class FormStore {
     set(this.store, toArray(name), value)
     const { onValuesChange } = this.callbacks
     onValuesChange?.({ name, value }, this.store)
-    this.notifywatchList()
+    this.notifywatchList(name)
   }
 
   setFieldsValue(newStore: Store): void {
@@ -89,21 +89,26 @@ class FormStore {
     }
   }
 
-  notifywatchList(): void {
+  notifywatchList(name?: string | string[]): void {
     this.watchList.forEach((field: any) => {
       const { onStoreChange } = field
-      onStoreChange()
+      if (name) {
+        if (toString(name) === toString(field.name)) {
+          onStoreChange()
+        }
+      } else {
+        onStoreChange()
+      }
     })
   }
 
   async validatorFields(): Promise<void | null | string> {
     const errorValiadtorArr: any[] = []
     const valiadtorPromiseArr = this.watchList.map(({ validatorRules, name }) =>
-      validatorRules(this.getFieldValue(name) || ''),
+      validatorRules(this.getFieldValue(name) ?? ''),
     )
 
     const allRes = await Promise.all(valiadtorPromiseArr)
-    // catch
 
     if (!Array.isArray(allRes)) throw new Error(allRes)
     allRes.forEach(
@@ -131,7 +136,8 @@ class FormStore {
         const valiadtorErroTarget = getErrorTarget(err)
         onFinishFailed(valiadtorErroTarget || {})
         this.watchList.forEach(
-          ({ setSubmitTotal }) => setSubmitTotal && setSubmitTotal((pre) => pre + 1),
+          ({ setSubmitTotal }) =>
+            setSubmitTotal && setSubmitTotal((pre) => pre + 1),
         )
       })
   }
@@ -140,7 +146,9 @@ class FormStore {
     const { onReset } = this.callbacks
     try {
       this.resetStore()
-      const arr = this.watchList.map(({ validatorRules }) => validatorRules(undefined))
+      const arr = this.watchList.map(({ validatorRules }) =>
+        validatorRules(undefined),
+      )
       await Promise.all(arr)
       onReset()
     } catch (error) {}

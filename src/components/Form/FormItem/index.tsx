@@ -34,7 +34,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   const { registerWatch, getFieldValue, setFieldValue } = context
   const listContext = useContext<FormListContextProps>(FormListContext)
   const [renderType, setRenderType] = useState<keyof ItemType>('other')
-  const [total, setTotal] = useState(0)
+  const [, update] = useState({})
   const [submitTotal, setSubmitTotal] = useState(0)
   const [ruleCss, setRuleCss] = useState<string>(NormalCss)
   const [ruleText, setRuleText] = useState<string>()
@@ -103,28 +103,24 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     [tipsText],
   )
 
-  const copyChildren = useMemo(
-    () => {
-      if (React.isValidElement(children)) {
-        const newProps: {
-          onChange?: (event: any) => void
-          value?: string
-        } = {}
-        if (!children.props.onChange) {
-          newProps.onChange = (event) => {
-            setFieldValue(path, event?.detail?.value ?? event)
-          }
+  const copyChildren = () => {
+    if (React.isValidElement(children)) {
+      const newProps: {
+        onChange?: (event: any) => void
+        value?: string
+      } = {}
+      if (!children.props.onChange) {
+        newProps.onChange = (event) => {
+          setFieldValue(path, event?.detail?.value ?? event)
         }
-        if (children.props.value === undefined) {
-          newProps.value = getFieldValue(path)
-        }
-        return children && React.cloneElement(children as any, newProps)
       }
-      return children
-    },
-    // total是为了值变化手动刷新子组件
-    [total, getFieldValue, path, children, setFieldValue],
-  )
+      if (children.props.value === undefined) {
+        newProps.value = getFieldValue(path)
+      }
+      return children && React.cloneElement(children as any, newProps)
+    }
+    return children
+  }
 
   const [implementAnimation] = useAnimationCss(
     `${formItemPrefix}-animation`,
@@ -163,7 +159,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
       name: path,
       setSubmitTotal,
       validatorRules,
-      onStoreChange: () => setTotal((pre) => pre + 1),
+      onStoreChange: () => update({}),
     } as any)
     return () => {
       unMount()
@@ -211,7 +207,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
                 setRenderType,
               }}
             >
-              {copyChildren}
+              {copyChildren()}
             </Provider>
           </Label>
           {/* 水平布局额外区域内容 */}

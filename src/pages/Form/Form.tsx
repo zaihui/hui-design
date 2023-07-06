@@ -9,8 +9,50 @@ import HuiPicker, { HuiPickerColumn } from '@/components/Picker'
 import HuiTextArea from '@/components/TextArea'
 import GroupSection from '@/demoComponents/GroupSection'
 import PageHeader from '@/demoComponents/PageHeader'
+import HuiRadio from '@/components/Radio'
 
 import './Form.scss'
+
+const BooleanRadioGroup: React.FC<{
+  options?: [React.ReactNode, React.ReactNode]
+  value?: boolean
+  onChange?: (value: boolean) => void
+}> = (props) => {
+  const { value, onChange, options } = props
+  let trueNode
+  let falseNode
+  if (options instanceof Array && options.length > 0) {
+    ;[trueNode, falseNode] = options
+  }
+  return (
+    <View className='boolean-radio-group'>
+      <View
+        className='boolean-radio-group-item'
+        onClick={() => {
+          if (onChange) {
+            onChange(true)
+          }
+        }}
+      >
+        <HuiRadio size={16} value={1} checked={value === !!1}>
+          {trueNode ?? <View>是</View>}
+        </HuiRadio>
+      </View>
+      <View
+        className='boolean-radio-group-item'
+        onClick={() => {
+          if (onChange) {
+            onChange(false)
+          }
+        }}
+      >
+        <HuiRadio size={16} value={0} checked={value === !!0}>
+          {falseNode ?? <View>否</View>}
+        </HuiRadio>
+      </View>
+    </View>
+  )
+}
 
 const open1Columns: HuiPickerColumn<string>[][] = [
   [{ text: '男' }, { text: '女' }],
@@ -108,6 +150,14 @@ const InputPage: React.FC = () => {
               ></HuiInput>
             </HuiFormItem>
 
+            <HuiFormItem
+              rule={[{ require: true }]}
+              label='是否同步信息'
+              name='sync'
+            >
+              <BooleanRadioGroup />
+            </HuiFormItem>
+
             <HuiFormItem label='性别' name='gender'>
               <View onClick={() => setOpen1(true)}>
                 {form.getFieldValue('gender') || '请选择'}
@@ -129,12 +179,14 @@ const InputPage: React.FC = () => {
               name='description'
             >
               <HuiTextArea
+                required={false}
                 upperLimit={50}
                 onInput={(e) =>
                   form.setFieldValue('description', e.detail.value)
                 }
               ></HuiTextArea>
             </HuiFormItem>
+
             <HuiButton formType='submit' block style={buttonStyle}>
               提交表单
             </HuiButton>

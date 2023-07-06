@@ -13,4 +13,8 @@ export function getErrorTarget(err: Error): string | null {
   return null
 }
 
-export const replaceComma = (str = ''): string => str.toString().replace(/,/g, '')
+export const replaceComma = (str = ''): string =>
+  str.toString().replace(/,/g, '')
+
+export const toString = (arr: string | string[]): string =>
+  Array.isArray(arr) ? arr.join('') : arr
