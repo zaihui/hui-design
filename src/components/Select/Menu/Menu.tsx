@@ -22,7 +22,7 @@ export interface HuiMenuOption {
 
 export interface HuiMenuProps extends ViewProps {
   /** 是否需要全选 选项 只有在 multiSelect=true 时生效 */
-  isNeedAllCheck?: boolean
+  checkAll?: boolean
   /** 选项 */
   options: HuiMenuOption[]
   /** 当前选中的值 */
@@ -41,7 +41,7 @@ export interface HuiMenuProps extends ViewProps {
 
 const Menu: React.FC<HuiMenuProps> = (props) => {
   const {
-    isNeedAllCheck = false,
+    checkAll = false,
     options,
     value,
     color,
@@ -90,7 +90,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
             handleChange(Array.from(new Set(checkedList)))
           }
         >
-          {isNeedAllCheck && options.length >= 1 && (
+          {checkAll && options.length > 1 && (
             <ListItem
               title='全部'
               icon={<Checkbox color={color} value={1} checked={isAllChecked} />}

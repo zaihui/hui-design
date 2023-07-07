@@ -66,7 +66,7 @@ export interface HuiSelectBodyProps extends ViewProps {
   /** hui-select-body的高度，默认由内容撑开，可以选择设置 */
   contentHeight?: number
   /** 是否需要全选 选项 只有在 multiSelect=true 时生效 */
-  isNeedAllCheck?: boolean
+  checkAll?: boolean
   style?: React.CSSProperties
   className?: string
   /** 选中选项时的回调 */
@@ -77,7 +77,7 @@ export interface HuiSelectBodyProps extends ViewProps {
 
 const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
   const {
-    isNeedAllCheck = false,
+    checkAll = false,
     className,
     record,
     customBottom,
@@ -178,7 +178,7 @@ const SelectBody: React.FC<HuiSelectBodyProps> = (props) => {
       )}
       <Loader loading={loading} type='module' style={{ height: 'unset' }}>
         <Menu
-          isNeedAllCheck={isNeedAllCheck}
+          checkAll={checkAll}
           menuCustomBottom={menuCustomBottom}
           color={color}
           multiSelect={multiSelect}

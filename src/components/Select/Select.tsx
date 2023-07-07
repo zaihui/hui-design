@@ -37,7 +37,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
     loading = false,
     level = 2,
     multiSelect = false,
-    isNeedAllCheck = false,
+    checkAll = false,
     showBadge = false,
     confirmText = '确定',
     style,
@@ -102,7 +102,7 @@ const Select: React.FC<HuiSelectProps> = (props) => {
       <View className='hui-select'>
         <SelectBody
           record={record}
-          isNeedAllCheck={isNeedAllCheck}
+          checkAll={checkAll}
           customBottom={customBottom}
           value={optionValue}
           options={options}

@@ -316,7 +316,7 @@ const DemoPage: React.FC = () => {
       <HuiSelect
         multiSelect
         visible={v1}
-        isNeedAllCheck
+        checkAll
         title='这是个标题'
         level={1}
         options={data}
@@ -345,7 +345,7 @@ const DemoPage: React.FC = () => {
       ></HuiSelect>
 
       <HuiSelect
-        isNeedAllCheck
+        checkAll
         customBottom={<CustomBottom />}
         record={record2}
         multiSelect
@@ -355,7 +355,6 @@ const DemoPage: React.FC = () => {
         options={data}
         value={data1}
         onConfirm={(v) => {
-          console.log(v)
           setData1(v)
           setV7(false)
         }}
@@ -367,7 +366,7 @@ const DemoPage: React.FC = () => {
         customBottom={<CustomBottom />}
         multiSelect
         showBadge
-        isNeedAllCheck
+        checkAll
         visible={V2}
         title='选择后展示徽标'
         options={data}
