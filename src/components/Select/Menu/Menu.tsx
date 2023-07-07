@@ -2,6 +2,7 @@ import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
 import React, { useState, createRef, useEffect, useMemo } from 'react'
 import isEqual from 'lodash/isEqual'
+import clone from 'lodash/clone'
 
 import Checkbox, { HuiCheckboxRef } from '../../Checkbox'
 
@@ -51,10 +52,11 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
   } = props
 
   const allValues = useMemo(() => options.map((item) => item.value), [options])
-  const isAllChecked = useMemo(
-    () => isEqual(allValues, value),
-    [allValues, value],
-  )
+  const isAllChecked = useMemo(() => {
+    const originalValue = clone(allValues).sort()
+    const targetValue = clone(value).sort()
+    return isEqual(originalValue, targetValue)
+  }, [allValues, value])
 
   const handleChange = (v: (string | number)[]) => {
     if (!onChange) {

@@ -355,10 +355,11 @@ const DemoPage: React.FC = () => {
         options={data}
         value={data1}
         onConfirm={(v) => {
+          console.log(v)
           setData1(v)
           setV7(false)
         }}
-        onClose={() => setV6(false)}
+        onClose={() => setV7(false)}
       ></HuiSelect>
 
       <HuiSelect
