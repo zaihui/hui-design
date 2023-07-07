@@ -1,6 +1,8 @@
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
-import React, { useState, createRef, useEffect } from 'react'
+import React, { useState, createRef, useEffect, useMemo } from 'react'
+import isEqual from 'lodash/isEqual'
+import clone from 'lodash/clone'
 
 import Checkbox, { HuiCheckboxRef } from '../../Checkbox'
 
@@ -19,6 +21,8 @@ export interface HuiMenuOption {
 }
 
 export interface HuiMenuProps extends ViewProps {
+  /** 是否需要全选 选项 只有在 multiSelect=true 时生效 */
+  checkAll?: boolean
   /** 选项 */
   options: HuiMenuOption[]
   /** 当前选中的值 */
@@ -37,6 +41,7 @@ export interface HuiMenuProps extends ViewProps {
 
 const Menu: React.FC<HuiMenuProps> = (props) => {
   const {
+    checkAll = false,
     options,
     value,
     color,
@@ -45,6 +50,14 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
     record,
     menuCustomBottom,
   } = props
+
+  const allValues = useMemo(() => options.map((item) => item.value), [options])
+  const isAllChecked = useMemo(() => {
+    const originalValue = clone(allValues).sort()
+    const targetValue = clone(value).sort()
+    return isEqual(originalValue, targetValue)
+  }, [allValues, value])
+
   const handleChange = (v: (string | number)[]) => {
     if (!onChange) {
       return
@@ -59,6 +72,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
   }
 
   const [refList, setRefList] = useState<React.RefObject<HuiCheckboxRef>[]>([])
+
   useEffect(() => {
     setRefList((refs) =>
       Array(options.length)
@@ -76,6 +90,15 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
             handleChange(Array.from(new Set(checkedList)))
           }
         >
+          {checkAll && options.length > 1 && (
+            <ListItem
+              title='全部'
+              icon={<Checkbox color={color} value={1} checked={isAllChecked} />}
+              onClick={() =>
+                isAllChecked ? onChange?.([]) : onChange?.([...allValues])
+              }
+            />
+          )}
           {options.map((item, index) => (
             <ListItem
               key={item.value}
