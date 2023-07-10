@@ -1,4 +1,4 @@
-import { View } from '@tarojs/components'
+import { ScrollView } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
 import React, { useState, createRef, useEffect, useMemo } from 'react'
 import isEqual from 'lodash/isEqual'
@@ -82,7 +82,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
   }, [options.length])
 
   return (
-    <View className='hui-select-menu'>
+    <ScrollView scrollY className='hui-select-menu'>
       {multiSelect ? (
         <CheckboxGroup
           value={value as string[]}
@@ -136,7 +136,7 @@ const Menu: React.FC<HuiMenuProps> = (props) => {
         </RadioGroup>
       )}
       {menuCustomBottom}
-    </View>
+    </ScrollView>
   )
 }
 

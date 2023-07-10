@@ -1,4 +1,4 @@
-import { View } from '@tarojs/components'
+import { ScrollView } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
 import React from 'react'
 
@@ -30,9 +30,9 @@ const SideMenu: React.FC<HuiSideMenuProps> = (props) => {
   }
 
   return (
-    <View className='hui-select-side-menu' {...rest}>
+    <ScrollView scrollY className='hui-select-side-menu' {...rest}>
       {getChildren()}
-    </View>
+    </ScrollView>
   )
 }
 
