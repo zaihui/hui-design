@@ -77,7 +77,6 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
 
   const hideMenu = () => {
     parent.hideMenuItem(parent.index)
-    onMaskClose && onMaskClose()
   }
 
   const updateTitle = (text: string) => {
@@ -133,7 +132,10 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
       position='top'
       maskStyle={position}
       contentStyle={position}
-      onClose={hideMenu}
+      onClose={() => {
+        hideMenu()
+        onMaskClose && onMaskClose()
+      }}
       className={cx('hui-filter-animation', {
         'no-animation': !parent.show,
       })}
