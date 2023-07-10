@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import cx from 'classnames'
 import Taro from '@tarojs/taro'
 
@@ -66,15 +66,39 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const tabsRef = useRef<any>()
-  const tabsInfos = useRef<Taro.NodesRef.BoundingClientRectCallbackResult[]>([])
-  const tabsWidth = useRef<number>(0)
+  const [tabsInfos, setTabsInfos] = useState<
+    Taro.NodesRef.BoundingClientRectCallbackResult[]
+  >([])
+  const [tabsWidth, setTabsWidth] = useState<number>(0)
   const [tabs, setTabs] = useState<ITab[]>([])
 
-  const [activeTabInfo, setActiveTabInfo] = useState<{
-    width: number
-    left: number
-  }>({ width: 0, left: 0 })
-  const [tabsWrapperScrollLeft, setTabsWrapperScrollLeft] = useState<number>(0)
+  const [defaultTabInfo] = useState({
+    width: 0,
+    left: 0,
+    tabsWrapperScrollLeft: 0,
+  })
+
+  const activeTabInfo = useMemo(() => {
+    if (!tabs) {
+      return defaultTabInfo
+    }
+    let index = active
+    if (typeof active === 'string') {
+      index = tabs.findIndex((t) => t.name === active)
+    }
+    const activeRes = tabsInfos[index]
+    if (!activeRes) {
+      return defaultTabInfo
+    }
+    return {
+      left: activeRes.left,
+      width: activeRes.width,
+      tabsWrapperScrollLeft:
+        scroll && activeRes.left && activeRes.width && tabsWidth
+          ? activeRes.left + activeRes.width / 2 - tabsWidth / 2
+          : 0,
+    }
+  }, [active, defaultTabInfo, scroll, tabs, tabsInfos, tabsWidth])
 
   useEffect(() => {
     Taro.nextTick(async () => {
@@ -82,7 +106,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
         return
       }
       const tabsItemEle = tabsRef.current?.childNodes
-      tabsInfos.current = []
+      const temp: Taro.NodesRef.BoundingClientRectCallbackResult[] = []
       for (let i = 0; tabsItemEle && i < tabsItemEle.length; i++) {
         if (
           tabsItemEle[i].childNodes[0] &&
@@ -94,41 +118,14 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
               ? childNode.childNodes[0].uid
               : childNode.uid
           const res = await selectorQueryClientRect(`#${childNodeId}`)
-          tabsInfos.current.push(res)
+          temp.push(res)
         }
       }
       const res = await selectorQueryClientRect(`#${tabsRef.current.uid}`)
-      tabsWidth.current = res?.width
-      updateActiveTabInfo()
+      setTabsInfos(temp)
+      setTabsWidth(res?.width)
     })
   }, [tabs, hasSubTitle])
-
-  const updateActiveTabInfo = useCallback(() => {
-    if (!tabs) {
-      return
-    }
-    let index = active
-    if (typeof active === 'string') {
-      index = tabs.findIndex((t) => t.name === active)
-    }
-    const activeRes = tabsInfos.current[index]
-    if (!activeRes) {
-      return
-    }
-    setActiveTabInfo({
-      left: activeRes.left,
-      width: activeRes.width,
-    })
-    if (scroll) {
-      setTabsWrapperScrollLeft(
-        activeRes.left + activeRes.width / 2 - tabsWidth.current / 2,
-      )
-    }
-  }, [active, scroll, tabs])
-
-  useEffect(() => {
-    updateActiveTabInfo()
-  }, [updateActiveTabInfo])
 
   const handleUpdateParent = (i: number) => (tabValue) => {
     setTabs((t) => {
@@ -242,7 +239,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
           enhanced
           showScrollbar={false}
           scrollX={scroll}
-          scrollLeft={tabsWrapperScrollLeft}
+          scrollLeft={activeTabInfo.tabsWrapperScrollLeft}
           scrollWithAnimation
           className='scrollable-tabs-wrapper'
         >
