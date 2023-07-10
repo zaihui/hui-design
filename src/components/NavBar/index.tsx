@@ -37,6 +37,8 @@ interface HuiNavBarProps {
   className?: string
   /** 首页地址，默认为/pages/Index/Index */
   homepagePath?: string
+  /** 标题自定义样式 */
+  titleStyle?: React.CSSProperties
   /** 返回上一页的钩子函数，返回false或者Promise.resolve(false)跳转首页失败 */
   beforeNavBack?: () => boolean | Promise<boolean>
   /** 返回首页前的钩子函数，返回false或者Promise.resolve(false)跳转首页失败 */
@@ -53,6 +55,7 @@ const HuiNavBar: React.FC<HuiNavBarProps> = (props) => {
     style,
     className = '',
     theme,
+    titleStyle,
     homepagePath = DEFAULT_HOME_PAGE_PATH,
     beforeNavBack,
     beforeBackToHome,
@@ -135,7 +138,10 @@ const HuiNavBar: React.FC<HuiNavBarProps> = (props) => {
           </View>
         )}
         {title && (
-          <View className='hui-nav-bar-title' style={{ color: fontColor }}>
+          <View
+            className='hui-nav-bar-title'
+            style={{ color: fontColor, ...titleStyle }}
+          >
             {title}
           </View>
         )}
