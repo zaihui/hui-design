@@ -63,7 +63,6 @@ const Popup: React.FC<HuiPopupProps> = (props) => {
       )}
     >
       <View
-        catchMove
         className='popup-mask'
         style={maskStyle}
         onTouchMove={handleTouchMove}
