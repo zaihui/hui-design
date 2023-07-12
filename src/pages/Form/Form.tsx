@@ -60,6 +60,7 @@ const open1Columns: HuiPickerColumn<string>[][] = [
 
 const InputPage: React.FC = () => {
   const [localData, setLocalData] = useState({
+    sync: false,
     account: '',
     password: '',
     gender: '男',
@@ -67,7 +68,18 @@ const InputPage: React.FC = () => {
     description: '',
   })
 
+  const [localData2, setLocalData2] = useState({
+    sync: false,
+  })
+
   const [form] = useForm()
+
+  const [form2] = useForm()
+
+  useEffect(() => {
+    form.setFieldsValue(localData)
+    form2.setFieldsValue(localData2)
+  }, [])
 
   const [open1, setOpen1] = useState(false)
   const handleOpen1Confirm = (value) => {
@@ -80,8 +92,12 @@ const InputPage: React.FC = () => {
     form.setFieldsValue(localData)
   }, [])
 
-  const handleChange = useCallback((_cur, formData) => {
+  const handleChange1 = useCallback((_cur, formData) => {
     setLocalData({ ...formData })
+  }, [])
+
+  const handleChange2 = useCallback((_cur, formData) => {
+    setLocalData2({ ...formData })
   }, [])
 
   const handleFinish = useCallback((data) => {
@@ -91,10 +107,10 @@ const InputPage: React.FC = () => {
     })
   }, [])
 
-  const handleReset = useCallback(() => {
+  const handleReset = useCallback((f) => {
     Taro.showModal({
       title: '重置',
-      content: `重置成功：'${JSON.stringify(form.getFieldsValue())}`,
+      content: `重置成功：'${JSON.stringify(f.getFieldsValue())}`,
     })
   }, [])
 
@@ -111,10 +127,10 @@ const InputPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='基础用法'>
           <HuiForm
-            onValuesChange={handleChange}
+            onValuesChange={handleChange1}
             form={form}
             onFinish={handleFinish}
-            onReset={handleReset}
+            onReset={() => handleReset(form)}
           >
             <HuiFormItem
               rule={[
@@ -186,6 +202,43 @@ const InputPage: React.FC = () => {
                 }
               ></HuiTextArea>
             </HuiFormItem>
+
+            <HuiButton formType='submit' block style={buttonStyle}>
+              提交表单
+            </HuiButton>
+            <HuiButton formType='reset' block style={buttonStyle}>
+              重置表单
+            </HuiButton>
+          </HuiForm>
+        </GroupSection>
+
+        <GroupSection title='动态变更表单'>
+          <HuiForm
+            onValuesChange={handleChange2}
+            form={form2}
+            onFinish={handleFinish}
+            onReset={() => handleReset(form2)}
+          >
+            <HuiFormItem
+              rule={[{ require: true }]}
+              label='是否同步信息'
+              name='sync'
+            >
+              <BooleanRadioGroup />
+            </HuiFormItem>
+
+            {localData2.sync && (
+              <HuiFormItem
+                rule={[{ require: true }]}
+                label='信息内容'
+                name='text'
+              >
+                <HuiInput
+                  divider={false}
+                  onInput={(e) => form2.setFieldValue('text', e.detail.value)}
+                ></HuiInput>
+              </HuiFormItem>
+            )}
 
             <HuiButton formType='submit' block style={buttonStyle}>
               提交表单
