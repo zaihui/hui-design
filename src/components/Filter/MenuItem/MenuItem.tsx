@@ -1,16 +1,14 @@
 import { ITouchEvent, View } from '@tarojs/components'
+import { usePageScroll } from '@tarojs/taro'
 import cx from 'classnames'
 import React, {
   CSSProperties,
   ReactNode,
-  useContext,
   useImperativeHandle,
   useMemo,
 } from 'react'
-import { useBoundingClientRect } from '../../../utils/hooks'
 import Popup from '../../Popup'
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
-import FilterContext from '../context'
 
 export interface MenuItemOption {
   value: string | number
@@ -60,20 +58,21 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     footer,
     onMaskClose,
   } = props as any
-  const context = useContext(FilterContext)
 
-  const info = useBoundingClientRect(parent.menuRef)
   const position = useMemo(() => {
-    if (info) {
-      const top = context.isFixed ? 0 : info.top - context.scrollTop
+    if (parent.filterTop) {
       return {
-        top: info.height + top,
+        top: parent.filterTop,
       }
     }
     return {}
-  }, [context.isFixed, context.scrollTop, info])
+  }, [parent])
 
   useImperativeHandle(ref, () => ({ hideMenu }))
+
+  usePageScroll(() => {
+    if (parent.show) hideMenu()
+  })
 
   const hideMenu = () => {
     parent.hideMenuItem(parent.index)
