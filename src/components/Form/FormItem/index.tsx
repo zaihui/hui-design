@@ -5,6 +5,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 
@@ -31,13 +32,19 @@ import { toArray } from '../util'
  */
 const Item: React.FC<HuiFormItemProps> = (props) => {
   const context = useContext<FieldContext>(Context)
-  const { registerWatch, getFieldValue, setFieldValue } = context
+  const { registerWatch, getFieldValue, setFieldValue, removeFieldValue } =
+    context
   const listContext = useContext<FormListContextProps>(FormListContext)
   const [renderType, setRenderType] = useState<keyof ItemType>('other')
   const [, update] = useState({})
   const [submitTotal, setSubmitTotal] = useState(0)
   const [ruleCss, setRuleCss] = useState<string>(NormalCss)
   const [ruleText, setRuleText] = useState<string>()
+
+  const newProps = useRef<{
+    onChange?: (event: any) => void
+    value?: string
+  }>({})
 
   const {
     name,
@@ -103,21 +110,28 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     [tipsText],
   )
 
+  const localValue = getFieldValue(path)
+
+  const onChange = useCallback(
+    (event) => {
+      setFieldValue(path, event?.detail?.value ?? event)
+    },
+    [path, setFieldValue],
+  )
+
   const copyChildren = () => {
     if (React.isValidElement(children)) {
-      const newProps: {
-        onChange?: (event: any) => void
-        value?: string
-      } = {}
       if (!children.props.onChange) {
-        newProps.onChange = (event) => {
-          setFieldValue(path, event?.detail?.value ?? event)
-        }
+        newProps.current.onChange = onChange
+      } else {
+        delete newProps.current.onChange
       }
       if (children.props.value === undefined) {
-        newProps.value = getFieldValue(path)
+        newProps.current.value = localValue
+      } else {
+        delete newProps.current.value
       }
-      return children && React.cloneElement(children as any, newProps)
+      return children && React.cloneElement(children as any, newProps.current)
     }
     return children
   }
@@ -127,32 +141,24 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     !!ruleText,
   )
 
-  const validatorRules = useCallback(
-    async (value: string) => {
-      try {
-        const [css, text] = validatorField(
-          rule,
-          value,
-          renderType,
-          getFieldValue,
-        )
+  const validatorRules = async (value: string) => {
+    try {
+      const [css, text] = validatorField(rule, value, renderType, getFieldValue)
 
-        setRuleCss(css)
-        setRuleText(text)
-        return {
-          state: !text,
-          name: path,
-        }
-      } catch (error) {
-        throw new Error(error)
+      setRuleCss(css)
+      setRuleText(text)
+      return {
+        state: !text,
+        name: path,
       }
-    },
-    [rule, renderType, path, getFieldValue],
-  )
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
 
   useEffect(() => {
-    validatorRules(getFieldValue(path))
-  }, [getFieldValue, path, validatorRules])
+    validatorRules(localValue)
+  }, [localValue])
 
   useEffect(() => {
     const unMount = registerWatch({
@@ -162,9 +168,10 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
       onStoreChange: () => update({}),
     } as any)
     return () => {
+      removeFieldValue(path)
       unMount()
     }
-  }, [renderType, path, rule, registerWatch, validatorRules])
+  }, [path, registerWatch])
 
   useEffect(() => {
     if (submitTotal) implementAnimation()

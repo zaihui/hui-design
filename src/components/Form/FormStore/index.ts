@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 import set from 'lodash/set'
+import unset from 'lodash/unset'
 
 import { toArray, getErrorTarget, toString } from '../util'
 import { FieldContext, registerWatchType } from '../constants'
@@ -45,18 +46,27 @@ class FormStore {
     }
   }
 
-  getFieldValue(name: string | string[]): string {
+  getFieldValue(name: string | string[]): any {
     // undefined来区分首次
     return get(this.store, toArray(name), undefined)
+  }
+
+  removeFieldValue(name: string | string[]): void {
+    unset(this.store, toArray(name))
+    const { onValuesChange } = this.callbacks
+    onValuesChange?.({ name, value: undefined }, this.store)
+    this.notifywatchList(name)
   }
 
   getFieldsValue = (): any => this.store
 
   setFieldValue<T>(name: string | string[], value: T): void {
-    set(this.store, toArray(name), value)
-    const { onValuesChange } = this.callbacks
-    onValuesChange?.({ name, value }, this.store)
-    this.notifywatchList(name)
+    if (this.getFieldValue(name) !== value) {
+      set(this.store, toArray(name), value)
+      const { onValuesChange } = this.callbacks
+      onValuesChange?.({ name, value }, this.store)
+      this.notifywatchList(name)
+    }
   }
 
   setFieldsValue(newStore: Store): void {
@@ -156,6 +166,7 @@ class FormStore {
 
   getForm(): FieldContext {
     return {
+      removeFieldValue: this.removeFieldValue.bind(this),
       getFieldValue: this.getFieldValue.bind(this),
       getFieldsValue: this.getFieldsValue.bind(this),
       setFieldsValue: this.setFieldsValue.bind(this),

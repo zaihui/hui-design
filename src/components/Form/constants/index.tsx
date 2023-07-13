@@ -12,13 +12,15 @@ export interface registerWatchType {
 
 export interface FieldContext {
   /** 获取单个表单数据 */
+  removeFieldValue: (name: string | string[]) => void
+  /** 获取单个表单数据 */
   getFieldValue: (name: string | string[]) => any
   /** 获取所有表单数据 */
   getFieldsValue: () => any
   /** 设置所有表单数据 */
   setFieldsValue: (sotre: any) => any
   /** 设置单个表单数据 */
-  setFieldValue: (name: string | string[], value: any) => any
+  setFieldValue: (name: string | string[], value: any) => void
   /** 验证表单 */
   validatorFields: () => any
   /** 注册监听 */
@@ -34,6 +36,7 @@ export interface FieldContext {
 const warningFunc = () => {}
 
 const Context = React.createContext<FieldContext>({
+  removeFieldValue: warningFunc,
   getFieldValue: warningFunc,
   getFieldsValue: warningFunc,
   setFieldsValue: warningFunc,

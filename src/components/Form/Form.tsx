@@ -22,6 +22,8 @@ export interface HuiFormProps {
   form: FieldContext
 }
 
+const { Provider } = Context
+
 const HuiForm = (props: HuiFormProps, ref) => {
   const {
     onFinish = defaultFunc,
@@ -35,8 +37,6 @@ const HuiForm = (props: HuiFormProps, ref) => {
 
   const formInstance = useForm(form)[0] as FieldContext
   const { setCallbacks, submit, reset } = formInstance
-
-  const { Provider } = Context
 
   const handleSubmit = (event) => {
     event.preventDefault()
