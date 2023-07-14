@@ -108,15 +108,12 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
       const tabsItemEle = tabsRef.current?.childNodes
       const temp: Taro.NodesRef.BoundingClientRectCallbackResult[] = []
       for (let i = 0; tabsItemEle && i < tabsItemEle.length; i++) {
-        if (
-          tabsItemEle[i].childNodes[0] &&
-          tabsItemEle[i].childNodes[0].childNodes[0]
-        ) {
+        if (tabsItemEle[i]?.childNodes[0]?.childNodes[0]) {
           const childNode = tabsItemEle[i].childNodes[0].childNodes[0]
           const childNodeId =
-            hasSubTitle && childNode?.childNodes?.[0].uid
-              ? childNode.childNodes[0].uid
-              : childNode.uid
+            hasSubTitle && childNode?.childNodes?.[0]?.uid
+              ? childNode.childNodes[0]?.uid
+              : childNode?.uid
           const res = await selectorQueryClientRect(`#${childNodeId}`)
           temp.push(res)
         }
