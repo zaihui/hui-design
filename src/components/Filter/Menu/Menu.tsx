@@ -6,6 +6,7 @@ import React, {
   useImperativeHandle,
   forwardRef,
   useContext,
+  useMemo,
 } from 'react'
 import { View, ITouchEvent } from '@tarojs/components'
 import cx from 'classnames'
@@ -116,22 +117,33 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
       return null
     })
 
-  const renderMenuItem = () =>
-    React.Children.map(children, (child, index) => {
-      if (React.isValidElement(child)) {
-        return React.cloneElement(child, {
-          parent: {
-            index,
-            show: activatedList[index],
-            menuRef,
-            hideMenuItem,
-            updateMenuItemTitle,
-            menuOnChange,
-          },
-        } as any)
-      }
-      return null
-    })
+  const renderMenuItem = useMemo(
+    () =>
+      React.Children.map(children, (child, index) => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, {
+            parent: {
+              index,
+              show: activatedList[index],
+              menuRef,
+              hideMenuItem,
+              updateMenuItemTitle,
+              menuOnChange,
+              filterTop: context.filterTop,
+            },
+          } as any)
+        }
+        return null
+      }),
+    [
+      activatedList,
+      menuRef,
+      hideMenuItem,
+      updateMenuItemTitle,
+      menuOnChange,
+      context.filterTop,
+    ],
+  )
 
   return (
     <View
@@ -140,7 +152,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
       ref={menuRef}
     >
       <View className='hui-filter-menu-bar'>{renderMenuTitle()}</View>
-      {renderMenuItem()}
+      {renderMenuItem}
     </View>
   )
 })

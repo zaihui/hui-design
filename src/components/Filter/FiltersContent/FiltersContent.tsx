@@ -1,12 +1,9 @@
 import { View } from '@tarojs/components'
 import cx from 'classnames'
-import React, { useContext, useMemo } from 'react'
-import { useBoundingClientRect } from '../../../utils/hooks'
+import React, { useMemo } from 'react'
 import HuiPopup, { HuiPopupProps } from '../../Popup'
 
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
-
-import FilterContext from '../context'
 
 export interface FiltersContentProps
   extends HuiPopupProps,
@@ -37,17 +34,15 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
     parent,
     ...rest
   } = props as any
-  const context = useContext(FilterContext)
-  const info = useBoundingClientRect(parent.filterRef)
+
   const positionStyle = useMemo(() => {
-    if (info && position === 'top') {
-      const top = context.isFixed ? 0 : info.top - context.scrollTop
+    if (position === 'top' && parent) {
       return {
-        top: info.height + top,
+        top: parent.filterTop,
       }
     }
     return {}
-  }, [info, position, context.isFixed, context.scrollTop, visible])
+  }, [parent, position, visible])
 
   const actionButtonProps: ActionFooterProps = {
     confirmButtonProps: props.confirmButtonProps,

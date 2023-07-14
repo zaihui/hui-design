@@ -9,8 +9,12 @@ interface FilterContext {
   hideMenu: () => void
   /** 隐藏右侧filter组件的popup */
   hideFilter: () => void
+  /** filter距离顶部的top  */
+  filterTop: number
 }
 
-const FilterContext = React.createContext<FilterContext | Record<string, any>>({})
+const FilterContext = React.createContext<FilterContext | Record<string, any>>(
+  {},
+)
 
 export default FilterContext

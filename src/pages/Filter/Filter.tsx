@@ -101,7 +101,12 @@ const MenuPage: React.FC = () => {
               sticky
               menuConfig={{
                 className: 'hui-menu-xxx',
-                menuItems: [{ value: '1', options }],
+                menuItems: [
+                  {
+                    value: '1',
+                    options,
+                  },
+                ],
               }}
             />
             <HuiFilter
@@ -252,7 +257,7 @@ const MenuPage: React.FC = () => {
             />
           </View>
         </GroupSection>
-        <View style={{ height: 300 }}></View>
+        <View style={{ height: 1500 }}></View>
       </View>
     </View>
   )
