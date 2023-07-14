@@ -116,6 +116,22 @@ const InputPage: React.FC = () => {
 
   const buttonStyle = useMemo(() => ({ width: '50%', margin: '30px auto' }), [])
 
+  const handleMessage = (value: string): string => {
+    if (!value) {
+      return '请填写您的密码'
+    }
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(value)) {
+      return '密码必须包含特殊字符'
+    }
+    if (!/^[A-Za-z]/.test(value)) {
+      return '密码首位必须是英文开头'
+    }
+    if (value.length < 6 || value.length > 10) {
+      return '密码必须大于6位，小于10位数'
+    }
+    return ''
+  }
+
   const HuiFormItem = HuiForm.Item
   return (
     <View className='form-demo-page'>
@@ -153,9 +169,9 @@ const InputPage: React.FC = () => {
               rule={[
                 {
                   require: true,
-                  message: '密码格式校验失败',
+                  message: handleMessage(form.getFieldValue('password')),
                 },
-                (value) => value.length >= 6 && value.length <= 10,
+                (value) => !handleMessage(value),
               ]}
               tipsText='密码必须为6-10个字符之间'
             >
