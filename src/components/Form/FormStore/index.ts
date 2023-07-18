@@ -54,6 +54,11 @@ class FormStore {
     }
   }
 
+  async handleChange(change?: object): Promise<void> {
+    await Promise.resolve()
+    this.callbacks?.onValuesChange?.(change ?? {}, this.store)
+  }
+
   getFieldValue(name: string | string[]): any {
     // undefined来区分首次
     return get(this.store, toArray(name), undefined)
@@ -68,8 +73,7 @@ class FormStore {
         unset(this.store, cur)
         this.notifywatchList(cur)
       }
-      const { onValuesChange } = this.callbacks
-      onValuesChange?.({}, this.store)
+      this.handleChange()
     }, 30)
   }
 
@@ -78,8 +82,7 @@ class FormStore {
   setFieldValue<T>(name: string | string[], value: T): void {
     if (this.getFieldValue(name) !== value) {
       set(this.store, toArray(name), value)
-      const { onValuesChange } = this.callbacks
-      onValuesChange?.({ name, value }, this.store)
+      this.handleChange({ name, value })
       this.notifywatchList(name)
     }
   }
@@ -90,8 +93,7 @@ class FormStore {
       ...newStore,
     }
     this.updateStore(newStoreTarget)
-    const { onValuesChange } = this.callbacks
-    onValuesChange?.({}, newStoreTarget)
+    this.handleChange()
     this.notifywatchList()
   }
 
