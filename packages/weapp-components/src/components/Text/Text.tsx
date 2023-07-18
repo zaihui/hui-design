@@ -3,7 +3,7 @@ import React from 'react'
 import cx from 'classnames'
 import { Text } from '@tarojs/components'
 
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 
 export enum TextLevel {
   One = 'one',

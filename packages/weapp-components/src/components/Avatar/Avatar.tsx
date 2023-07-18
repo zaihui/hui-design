@@ -1,6 +1,6 @@
 import React from 'react'
 import { View } from '@tarojs/components'
-import { pxTransform } from '@shared/utils/index'
+import { pxTransform } from '../../utils'
 import HuiImage from '../Image/Image'
 import { AvatarType, AvatarSize } from './constants'
 

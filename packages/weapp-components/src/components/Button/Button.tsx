@@ -4,7 +4,7 @@ import { BaseEventOrig, ITouchEvent } from '@tarojs/components/types/common'
 import cx from 'classnames'
 import React from 'react'
 
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 import HuiIcon from '../Icon/Icon'
 import { HIconType } from '../Icon/type'
 

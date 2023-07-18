@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from '@tarojs/components'
 
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 
 interface HuiSkeletonProps {
   type?: 'vertical' | 'horizontal'

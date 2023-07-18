@@ -20,10 +20,6 @@
   },
   "homepage": "https://github.com/zaihui/hui-design",
   "license": "ISC",
-  "dependencies": {
-    "@shared/utils": "workspace:*",
-    "@shared/styles": "workspace:*"
-  },
   "devDependencies": {
     "lodash": "^4.17.21",
     "glob": "^10.3.3"

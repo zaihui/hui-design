@@ -3,7 +3,7 @@ import { View } from '@tarojs/components'
 import cx from 'classnames'
 import { ViewProps } from '@tarojs/components/types/View'
 
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 import RadioGroupContext from './context'
 
 const DEFAULT_ICON_SIZE = 20

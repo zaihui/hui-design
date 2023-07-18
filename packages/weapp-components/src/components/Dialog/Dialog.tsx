@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Image } from '@tarojs/components'
 
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 
 import HuiIcon from '../Icon/Icon'
 

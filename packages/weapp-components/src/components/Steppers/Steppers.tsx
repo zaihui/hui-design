@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import cx from 'classnames'
 
-import { isNumber, warning } from '@shared/utils/src/common'
+import { isNumber, warning } from '../../utils/common'
 
 import {
   HuiSteppersProps,

@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
-import { formatValue } from '@shared/utils'
+import { formatValue } from '../../utils'
 
 export interface HuiBadgeProps {
   /** 当数值为0时，是否展示Badge, 默认不展示 */

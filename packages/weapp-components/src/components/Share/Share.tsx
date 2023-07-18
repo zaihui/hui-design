@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { View, Block, Image } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 import HuiPopup from '../Popup'
 import HuiIcon from '../Icon'
 import HuiButton from '../Button'

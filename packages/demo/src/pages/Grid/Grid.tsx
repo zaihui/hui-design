@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Swiper, SwiperItem, View } from '@tarojs/components'
 
 import HuiGrid from '@zaihui/hui-design/src/components/Grid'
-import { selectorQueryClientRect } from '@shared/utils'
+import { selectorQueryClientRect } from '@zaihui/hui-design/src/utils'
 import HuiSwiperIndicator from '@zaihui/hui-design/src/components/SwiperIndicator/SwiperIndicator'
 import PageHeader from '@/demoComponents/PageHeader'
 import GroupSection from '@/demoComponents/GroupSection'

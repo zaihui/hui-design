@@ -2,7 +2,7 @@ import React, { useContext, forwardRef, useImperativeHandle } from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 
 import CheckboxGroupContext, { CheckboxValue } from './context'
 import HuiIcon from '../Icon/Icon'

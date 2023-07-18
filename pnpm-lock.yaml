@@ -190,8 +190,6 @@ importers:
 
   packages/demo:
     specifiers:
-      '@shared/styles': workspace:*
-      '@shared/utils': workspace:*
       '@zaihui/hui-design': workspace:*
       classnames: ^2.2.6
       dayjs: ^1.10.6
@@ -202,8 +200,6 @@ importers:
       classnames: registry.npmjs.org/classnames/2.2.6
       dayjs: registry.npmjs.org/dayjs/1.10.6
     devDependencies:
-      '@shared/styles': link:../../shared/styles
-      '@shared/utils': link:../../shared/utils
       '@zaihui/hui-design': link:../weapp-components
       mini-css-extract-plugin: registry.npmjs.org/mini-css-extract-plugin/2.7.2
       mobx: registry.npmjs.org/mobx/6.9.0
@@ -211,22 +207,11 @@ importers:
 
   packages/weapp-components:
     specifiers:
-      '@shared/styles': workspace:*
-      '@shared/utils': workspace:*
       glob: ^10.3.3
       lodash: ^4.17.21
-    dependencies:
-      '@shared/styles': link:../../shared/styles
-      '@shared/utils': link:../../shared/utils
     devDependencies:
       glob: registry.npmjs.org/glob/10.3.3
       lodash: registry.npmjs.org/lodash/4.17.21
-
-  shared/styles:
-    specifiers: {}
-
-  shared/utils:
-    specifiers: {}
 
 packages:
   registry.npmjs.org/@ampproject/remapping/2.2.0:

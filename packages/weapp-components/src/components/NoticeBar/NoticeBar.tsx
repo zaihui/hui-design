@@ -1,9 +1,9 @@
 import { View } from '@tarojs/components'
-import { addOpacityToHexColor } from '@shared/utils'
 import cx from 'classnames'
 import React, { useState, useEffect } from 'react'
 import Taro from '@tarojs/taro'
 import { ITouchEvent } from '@tarojs/components/types/common'
+import { addOpacityToHexColor } from '../../utils'
 import HuiIcon from '../Icon/Icon'
 
 const FONT_SIZE = 14

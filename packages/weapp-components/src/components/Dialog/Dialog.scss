@@ -1,5 +1,6 @@
 /* stylelint-disable csstree/validator */
-@import '@shared/styles/index.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/colors.scss';
 
 .hui-dialog {
   position: fixed;

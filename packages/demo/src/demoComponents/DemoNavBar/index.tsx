@@ -4,7 +4,7 @@ import { BaseEventOrig, View, Image } from '@tarojs/components'
 import { ScrollViewProps } from '@tarojs/components/types/ScrollView'
 import cx from 'classnames'
 
-import { addOpacityToHexColor, pxTransform } from '@shared/utils'
+import { addOpacityToHexColor, pxTransform } from '@zaihui/hui-design/src/utils'
 import HuiIcon from '@zaihui/hui-design/src/components/Icon'
 
 import './style.scss'

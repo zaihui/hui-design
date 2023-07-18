@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
 
-import { useBoundingClientRect } from '@shared/utils/src/hooks'
+import { useBoundingClientRect } from '../../utils/hooks'
 
 export interface HuiStickyProps {
   /** 吸顶时与顶部的距离，单位px */

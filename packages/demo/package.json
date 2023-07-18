@@ -22,8 +22,6 @@
     "dayjs": "^1.10.6"
   },
   "devDependencies": {
-    "@shared/styles": "workspace:*",
-    "@shared/utils": "workspace:*",
     "@zaihui/hui-design": "workspace:*",
     "mini-css-extract-plugin": "^2.7.2",
     "mobx": "^6.7.0",

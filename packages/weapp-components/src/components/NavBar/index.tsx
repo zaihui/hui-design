@@ -4,7 +4,7 @@ import { BaseEventOrig, View } from '@tarojs/components'
 import { ScrollViewProps } from '@tarojs/components/types/ScrollView'
 import cx from 'classnames'
 
-import { addOpacityToHexColor, pxTransform } from '@shared/utils'
+import { addOpacityToHexColor, pxTransform } from '../../utils'
 import HuiIcon from '../Icon'
 
 const DEFAULT_ICON_SIZE = 18

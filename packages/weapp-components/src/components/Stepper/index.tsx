@@ -7,7 +7,7 @@ import {
   CommonEventFunction,
   ITouchEvent,
 } from '@tarojs/components/types/common'
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 import Icon from '../Icon/Icon'
 
 export interface InputError {
@@ -96,8 +96,8 @@ export interface HuiStepperProps extends ViewProps {
 }
 
 function addNum(num1: number, num2: number): number {
-  let sq1: number; let
-    sq2: number
+  let sq1: number
+  let sq2: number
   try {
     sq1 = num1.toString().split('.')[1].length
   } catch (e) {

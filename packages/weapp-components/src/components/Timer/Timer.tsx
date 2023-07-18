@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { parseDurationToTime, getTimerFormatSeparator } from '@shared/utils'
 import { View, Block } from '@tarojs/components'
 import dayjs from 'dayjs'
 import cx from 'classnames'
+import { parseDurationToTime, getTimerFormatSeparator } from '../../utils'
 
 import TimerItem from './item'
 

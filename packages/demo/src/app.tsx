@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { PropsWithChildren, useEffect } from 'react'
-import { DESIGN_WIDTH } from '@shared/utils/src/constant'
+import { DESIGN_WIDTH } from '@zaihui/hui-design/src/utils/constant'
 import Taro from '@tarojs/taro'
 import { Provider } from 'mobx-react'
 import dayjs from 'dayjs'

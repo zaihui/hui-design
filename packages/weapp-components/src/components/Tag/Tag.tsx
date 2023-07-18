@@ -3,7 +3,7 @@ import cx from 'classnames'
 import { View } from '@tarojs/components'
 import { ITouchEvent } from '@tarojs/components/types/common'
 
-import { pxTransform, addOpacityToHexColor } from '@shared/utils'
+import { pxTransform, addOpacityToHexColor } from '../../utils'
 
 export interface HuiTagProps {
   /** 标签尺寸 */

@@ -1,9 +1,7 @@
 import Taro, { NodesRef } from '@tarojs/taro'
 import dayjs from 'dayjs'
 import 'dayjs/plugin/duration'
-// eslint-disable-next-line
-/* @ts-ignore */
-import { DESIGN_WIDTH } from './src/constant'
+import { DESIGN_WIDTH } from './constant'
 
 export const pxTransform = (size: number): string =>
   Taro.pxTransform(size, DESIGN_WIDTH)

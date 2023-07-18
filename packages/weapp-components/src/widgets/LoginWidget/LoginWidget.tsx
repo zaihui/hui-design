@@ -3,8 +3,8 @@ import { Button, Block } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 import { ButtonProps } from '@tarojs/components/types/Button'
 import { BaseEventOrig } from '@tarojs/components/types/common'
-import errorParser, { ErrorLike } from '@shared/utils/src/errorParser'
-import SimpleHint from '@shared/utils/src/simpleHint'
+import errorParser, { ErrorLike } from '../../utils/errorParser'
+import SimpleHint from '../../utils/simpleHint'
 
 import './LoginWidget.scss'
 

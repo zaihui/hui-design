@@ -5,9 +5,7 @@ import Taro from '@tarojs/taro'
 import { ScrollView, View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
 
-import {
-  selectorQueryClientRect,
-} from '@shared/utils'
+import { selectorQueryClientRect } from '../../utils'
 import HuiIcon from '../Icon/Icon'
 import HuiSticky from '../Sticky/Sticky'
 
@@ -142,12 +140,13 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
   }
 
   const getChildren = () => {
-    const fn = (child, index) => React.cloneElement(child, {
-      updateParent: handleUpdateParent(index),
-      name: child.props.name || index,
-      active,
-      animated,
-    })
+    const fn = (child, index) =>
+      React.cloneElement(child, {
+        updateParent: handleUpdateParent(index),
+        name: child.props.name || index,
+        active,
+        animated,
+      })
     return (children && React.Children.map(children, fn)) || null
   }
 
@@ -164,7 +163,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
       >
         <HuiIcon name='010-choose' size={18} />
       </View>
-  ) : (
+    ) : (
       <View
         className='tabs-indicator'
         style={{
@@ -191,7 +190,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
           {tab.subTitle}
         </View>
       </View>
-  ) : (
+    ) : (
       <View
         className={cx('tabs-title', {
           [`tabs-title-smile`]: smile,

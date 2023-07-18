@@ -9,7 +9,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import { useBoundingClientRect } from '@shared/utils/src/hooks'
+import { useBoundingClientRect } from '../../utils/hooks'
 import HuiIcon from '../Icon'
 import FiltersContent, { FiltersContentProps } from './FiltersContent'
 import Menu, { MenuProps } from './Menu/Menu'

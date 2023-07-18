@@ -1,6 +1,6 @@
 import { Block, Swiper, SwiperItem, View } from '@tarojs/components'
 import React, { FunctionComponent, useState } from 'react'
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 
 import HIcon from '../Icon'
 import HImage from '../Image'

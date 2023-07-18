@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components'
 import React from 'react'
 
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 import HuiDivider from '../Divider'
 import HuiIcon from '../Icon'
 import HuiPopup, { HuiPopupProps } from '../Popup'

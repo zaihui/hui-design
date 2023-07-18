@@ -1,7 +1,7 @@
 import { View } from '@tarojs/components'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
-import { countCommonStrings } from '@shared/utils/src/common'
+import { countCommonStrings } from '../../utils/common'
 import HuiButton from '../Button/Button'
 import Modal from '../Modal'
 import SelectBody, {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ITouchEvent, View } from '@tarojs/components'
-import { pxTransform } from '@shared/utils'
+import { pxTransform } from '../../utils'
 
 import { HIconType } from './type'
 import './Icon.scss'
