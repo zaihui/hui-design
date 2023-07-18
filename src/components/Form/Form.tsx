@@ -1,5 +1,10 @@
 import { Form } from '@tarojs/components'
-import React, { ReactNode, useImperativeHandle } from 'react'
+import React, {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+} from 'react'
 import classNames from 'classnames'
 
 import Context, { FieldContext } from './constants'
@@ -38,24 +43,39 @@ const HuiForm = (props: HuiFormProps, ref) => {
   const formInstance = useForm(form)[0] as FieldContext
   const { setCallbacks, submit, reset } = formInstance
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-    submit()
-  }
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+      submit()
+    },
+    [submit],
+  )
 
-  const handleReset = (event) => {
-    event.preventDefault()
-    event.stopPropagation()
-    reset()
-  }
+  const handleReset = useCallback(
+    (event) => {
+      event.preventDefault()
+      event.stopPropagation()
+      reset()
+    },
+    [reset],
+  )
 
-  setCallbacks({
-    onFinish,
-    onFinishFailed,
-    onValuesChange,
-    onReset,
-  })
+  useEffect(() => {
+    setCallbacks({
+      onFinish,
+      onFinishFailed,
+      onValuesChange,
+      onReset,
+    })
+    return () =>
+      setCallbacks({
+        onFinish: defaultFunc,
+        onFinishFailed: defaultFunc,
+        onValuesChange: defaultFunc,
+        onReset: defaultFunc,
+      })
+  }, [onFinish, onFinishFailed, onReset, onValuesChange, setCallbacks])
 
   useImperativeHandle(ref, () => formInstance, [])
 

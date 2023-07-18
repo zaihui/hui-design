@@ -21,6 +21,10 @@ class FormStore {
 
   callbacks: Callbacks
 
+  pendingUnset: string[][]
+
+  timer: number | undefined
+
   constructor() {
     this.store = {}
 
@@ -37,6 +41,10 @@ class FormStore {
       onValuesChange() {},
       onReset() {},
     }
+
+    this.pendingUnset = []
+
+    this.timer = undefined
   }
 
   registerWatch(field: registerWatchType): () => void {
@@ -52,10 +60,17 @@ class FormStore {
   }
 
   removeFieldValue(name: string | string[]): void {
-    unset(this.store, toArray(name))
-    const { onValuesChange } = this.callbacks
-    onValuesChange?.({ name, value: undefined }, this.store)
-    this.notifywatchList(name)
+    this.pendingUnset.push(toArray(name))
+    window.clearTimeout(this.timer)
+    this.timer = window.setTimeout(() => {
+      while (this.pendingUnset.length) {
+        const cur = this.pendingUnset.pop() as string[]
+        unset(this.store, cur)
+        this.notifywatchList(cur)
+      }
+      const { onValuesChange } = this.callbacks
+      onValuesChange?.({}, this.store)
+    }, 30)
   }
 
   getFieldsValue = (): any => this.store
