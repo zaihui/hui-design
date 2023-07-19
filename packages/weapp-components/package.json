@@ -1,7 +1,7 @@
 {
   "name": "@zaihui/hui-design",
   "version": "0.0.1-beta.43",
-  "description": "小程序组件库",
+  "description": "再惠组件库",
   "files": [
     "lib/*"
   ],
@@ -22,10 +22,22 @@
   "license": "ISC",
   "devDependencies": {
     "lodash": "^4.17.21",
+    "node-fetch": "^2.6.0",
+    "commander": "^10.0.1",
+    "rimraf": "^3.0.2",
     "glob": "^10.3.3"
   },
   "peerDependencies": {
     "react": ">=18.2.0",
-    "react-dom": ">=18.2.0"
+    "react-dom": ">=18.2.0",
+    "@tarojs/cli": ">=3.0.1",
+    "@tarojs/components": ">=3.0.1",
+    "@tarojs/mini-runner": ">=3.0.1",
+    "@tarojs/plugin-framework-react": ">=3.0.1",
+    "@tarojs/react": ">=3.0.1",
+    "@tarojs/runtime": ">=3.0.1",
+    "@tarojs/taro": ">=3.0.1",
+    "@tarojs/taro-h5": ">=3.0.1",
+    "@tarojs/webpack-runner": ">=3.0.1"
   }
 }

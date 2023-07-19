@@ -35,12 +35,12 @@ cd packages/weapp-components
 // ...do something
 ```
 
-启动demo小程序
+启动 demo 小程序
 
 ```bash
 cd packages/demo
 
-pnpm run dev:weapp
+pnpm run dev
 ```
 
 ### commit
