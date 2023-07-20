@@ -26,5 +26,6 @@
     "skipLibCheck": true,
     "typeRoots": ["node_modules/@types", "global.d.ts"]
   },
+  "exclude": ["node_modules"],
   "compileOnSave": false
 }

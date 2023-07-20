@@ -140,7 +140,6 @@ module.exports = {
         'import/no-commonjs': 'off',
         '@typescript-eslint/no-var-requires': 'off',
         'no-console': 'off',
-        'import/no-unresolved': 'off',
       },
     },
     {

@@ -1,6 +1,6 @@
 {
   "name": "hui-design",
-  "version": "0.0.1-beta.43",
+  "version": "0.0.2",
   "description": "再惠组件库",
   "scripts": {
     "setup": "pnpm i",
