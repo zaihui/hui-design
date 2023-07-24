@@ -28,7 +28,14 @@ const InputPage: React.FC = () => {
             placeholder='请输入身份证号码'
           />
           <HuiInput label='兑换人民币' placeholder='请输入金额' unit='元' />
-          <HuiInput placeholder='无标题输入框样式' divider={false} />
+          <HuiInput placeholder='无标题输入框样式' divider={false} arrow />
+          <HuiInput
+            label='可清除'
+            placeholder='请输入'
+            divider={false}
+            clearable
+            unit='元'
+          />
         </GroupSection>
         <GroupSection title='可以调整文本对齐方式'>
           <HuiInput
