@@ -78,6 +78,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     className = '',
     style,
     onClick,
+    onInput = () => {},
     align = 'left',
     required = true,
     labelIcon,
@@ -88,10 +89,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
 
   const mergedOnInput = (e) => {
     setInnerValue(e.detail.value)
-    if (props.onInput) {
-      return props.onInput
-    }
-    return () => {}
+    onInput(e)
   }
 
   const labelDom = label ? (
