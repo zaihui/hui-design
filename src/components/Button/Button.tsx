@@ -90,12 +90,6 @@ const HuiButton: React.FC<HuiButtonProps> = (props) => {
     ...style,
   }
 
-  const handleClick = (e: ITouchEvent) => {
-    if (!disabled && onClick) {
-      onClick(e)
-    }
-  }
-
   const iconSizeMap = {
     small: 13,
     medium: 14,
@@ -103,6 +97,12 @@ const HuiButton: React.FC<HuiButtonProps> = (props) => {
   }
 
   const buttonDisabled = disabled || loading
+
+  const handleClick = (e: ITouchEvent) => {
+    if (!buttonDisabled && onClick) {
+      onClick(e)
+    }
+  }
 
   const buttonContent = (
     <Block>
