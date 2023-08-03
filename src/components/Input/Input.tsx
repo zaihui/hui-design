@@ -160,7 +160,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
       style={{ marginLeft: '10px' }}
       onClick={(e) => {
         e.preventDefault()
-        setInnerValue('')
+        mergedOnInput({ detail: { value: '' } })
         props.onClear?.(e)
       }}
     >
