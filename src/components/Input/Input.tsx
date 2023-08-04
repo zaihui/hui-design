@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
 import {
@@ -86,6 +86,10 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
   } = props
 
   const [innerValue, setInnerValue] = useState(value)
+
+  useEffect(() => {
+    setInnerValue(value)
+  }, [value])
 
   const mergedOnInput = (e) => {
     setInnerValue(e.detail.value)
