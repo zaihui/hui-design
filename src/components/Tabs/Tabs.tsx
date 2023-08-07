@@ -118,7 +118,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
           temp.push(res)
         }
       }
-      const res = await selectorQueryClientRect(`#${tabsRef.current.uid}`)
+      const res = await selectorQueryClientRect(`#${tabsRef?.current?.uid}`)
       setTabsInfos(temp)
       setTabsWidth(res?.width)
     })
