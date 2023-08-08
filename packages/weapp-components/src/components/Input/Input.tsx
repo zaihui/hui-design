@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
 import {
@@ -24,6 +24,8 @@ export interface HuiInputProps extends ViewProps {
   placeholder?: string
   /** 右侧箭头 */
   arrow?: boolean
+  /** 清除按钮 */
+  clearable?: boolean
   // withArray?: boolean
   /** 报错信息 */
   errorMsg?: React.ReactNode
@@ -48,6 +50,8 @@ export interface HuiInputProps extends ViewProps {
   className?: string
   /** 点击事件 */
   onClick?: (event: ITouchEvent) => void
+  /** 清除事件 */
+  onClear?: CommonEventFunction<InputProps.inputForceEventDetail>
   /** onInput事件 */
   onInput?: CommonEventFunction<InputProps.inputEventDetail>
   /** 输入框失获取焦点时触发 */
@@ -74,10 +78,23 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     className = '',
     style,
     onClick,
+    onInput = () => {},
     align = 'left',
     required = true,
     labelIcon,
+    clearable,
   } = props
+
+  const [innerValue, setInnerValue] = useState(value)
+
+  useEffect(() => {
+    setInnerValue(value)
+  }, [value])
+
+  const mergedOnInput = (e) => {
+    setInnerValue(e.detail.value)
+    onInput(e)
+  }
 
   const labelDom = label ? (
     <View className='label'>
@@ -100,15 +117,15 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
       <View
         className={cx(
           'display-area',
-          { 'none-value': !value },
+          { 'none-value': !innerValue },
           { 'right-align': label && align === 'right' },
         )}
       >
-        {value || placeholder}
+        {innerValue || placeholder}
       </View>
     ) : (
       <Input
-        value={value}
+        value={innerValue}
         className={cx('input', { 'right-align': label && align === 'right' })}
         type={type}
         placeholder={placeholder}
@@ -118,7 +135,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
         adjustPosition={props.adjustPosition}
         confirmType={props.confirmType || 'done'}
         maxlength={props.maxLength || 140}
-        onInput={props.onInput || (() => {})}
+        onInput={mergedOnInput}
         onBlur={props.onBlur || (() => {})}
         onFocus={props.onFocus || (() => {})}
         onConfirm={props.onConfirm || (() => {})}
@@ -134,6 +151,30 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
         marginLeft: '10px',
       }}
     />
+  ) : null
+
+  const showClear = useMemo(
+    () => clearable && !!innerValue,
+    [clearable, innerValue],
+  )
+
+  // input右侧清除按钮是否展示
+  const inputClearDom = showClear ? (
+    <View
+      style={{ marginLeft: '10px' }}
+      onClick={(e) => {
+        e.preventDefault()
+        mergedOnInput({ detail: { value: '' } })
+        props.onClear?.(e)
+      }}
+    >
+      <HuiIcon
+        name='005-close2'
+        style={{
+          color: '#c5c5c5',
+        }}
+      />
+    </View>
   ) : null
 
   // 分割线是否展示 & 分割线颜色
@@ -169,6 +210,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
           {labelDom}
           <View className='input-content'>
             {inputDom}
+            {inputClearDom}
             {props.unit ? <View className='unit'>{props.unit}</View> : null}
           </View>
           {inputArrayDom}

@@ -35,7 +35,7 @@ const HuiTag: React.FC<HuiTagProps> = (props) => {
 
   const getTagBackground = () => {
     if (type === 'semitransparent') {
-      return addOpacityToHexColor(color, 0.2)
+      return addOpacityToHexColor(color, 0.1)
     } else if (type === 'solid') {
       return color
     }
