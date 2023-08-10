@@ -1,0 +1,19 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+
+.notice-bar-page {
+  > .content {
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+
+    .group-section {
+      > .title {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+.login {
+  display: block;
+
+  .login-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 3rem;
+  }
+}

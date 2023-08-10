@@ -1,0 +1,20 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+
+.page-header {
+  padding: 30px 16px 24px 16px;
+  background-color: $hui-color-grey-7;
+
+  .title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+    font-size: 24px;
+    color: $hui-font-color-base;
+  }
+
+  .desc {
+    font-size: $hui-font-caption-m;
+    color: $hui-font-color-base-50;
+  }
+}

@@ -1,0 +1,55 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+.icon-page {
+  > .content {
+    padding-bottom: 100px;
+    padding-bottom: calc(env(safe-area-inset-bottom) + 100px);
+
+    .hui-tabs .hui-tabs-bar .hui-tabs-wrapper.normal {
+      background: none;
+    }
+
+    .tab-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 12px 0;
+      margin: 20px 16px;
+      background: $hui-color-grey-8;
+      border-radius: 8px;
+      box-shadow: 1px 4px 6px 0 #f4f4f4;
+
+      &.no-flex {
+        display: block;
+        padding: 24px;
+      }
+
+      .sub-group-section {
+        > .sgs-title {
+          padding-right: 0;
+          padding-left: 0;
+        }
+      }
+    }
+
+    .inline-item {
+      display: inline-block;
+      margin-right: 36px;
+    }
+  }
+
+  .icon-sample {
+    box-sizing: border-box;
+    display: inline-block;
+    width: 25%;
+    height: 100px;
+    padding: 16px 0;
+    text-align: center;
+
+    > .title {
+      font-size: $hui-font-caption-m;
+      color: $hui-color-grey-2;
+    }
+  }
+}

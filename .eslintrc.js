@@ -2,13 +2,6 @@ const isInVsCode = process.env.NODE_ENV === undefined
 
 module.exports = {
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    useJSXTextNode: true,
-    project: './tsconfig.json',
-  },
   extends: [
     'airbnb-base',
     '@zaihui/base',
@@ -23,6 +16,13 @@ module.exports = {
   env: {
     node: false,
     browser: false,
+  },
+  settings: {
+    'import/resolver': {
+      typescript: {
+        project: ['packages/**/tsconfig.json'],
+      },
+    },
   },
   globals: {
     // 小程序本质不是运行在浏览器下，所以不能启用browser的env
@@ -49,12 +49,14 @@ module.exports = {
     'no-debugger': isInVsCode ? 'warn' : 'error',
     'no-console': isInVsCode ? 'warn' : 'error',
     // 禁止一行以上的连续空行
+    'react/no-find-dom-node': 'off',
     'no-multiple-empty-lines': [
       'error',
       {
         max: 1,
       },
     ],
+    'import/no-unresolved': 'off',
     // 关闭对象花括号换行一致性规则
     'object-curly-newline': 'off',
     // 关闭禁止在else前有return规则

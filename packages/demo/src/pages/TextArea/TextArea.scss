@@ -1,0 +1,18 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+
+.textarea-page {
+  > .content {
+    .group-section {
+      > .title {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .input-status-group-section {
+    padding: 24px 12px 0;
+    background: #fff;
+  }
+}

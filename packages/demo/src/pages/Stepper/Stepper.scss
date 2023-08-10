@@ -1,0 +1,21 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+.stepper-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .stepper-sample {
+    display: inline-block;
+    width: 33%;
+    text-align: left;
+
+    > .title {
+      margin-bottom: 16px;
+      font-size: $hui-font-caption-m;
+      color: $hui-font-color-base-35;
+    }
+  }
+}

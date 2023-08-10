@@ -1,0 +1,14 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+.search-page {
+  > .content {
+    .group-section {
+      > .title {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+  }
+}

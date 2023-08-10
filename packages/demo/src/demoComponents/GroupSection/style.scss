@@ -1,0 +1,13 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+
+.group-section {
+  padding-bottom: 56px;
+
+  > .title {
+    padding-bottom: 16px;
+    font-size: $hui-font-body-m;
+    font-weight: $hui-font-weight-medium;
+    color: $hui-font-color-base;
+  }
+}

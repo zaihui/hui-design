@@ -34,13 +34,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-
+      - name: install
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7
       # Bootstrap project
       - name: deps-init
-        run: npm run setup
+        run: pnpm run setup
       - name: lint
-        run: npm run lint
+        run: pnpm run lint
       - name: build-ci
-        run: npm run build:ci
+        run: pnpm run build:ci
         env:
           CI: true

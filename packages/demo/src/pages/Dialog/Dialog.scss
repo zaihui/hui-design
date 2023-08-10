@@ -1,0 +1,23 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+$desc-font-color: #8e8e8e;
+
+.dialog-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  .btn {
+    &:first-child {
+      margin-bottom: 16px;
+    }
+  }
+}

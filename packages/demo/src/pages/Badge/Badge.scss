@@ -1,0 +1,33 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+.badge-page {
+  > .content {
+    @include content-padding;
+
+    .item {
+      &:not(:last-child) {
+        margin-right: 28px;
+      }
+    }
+  }
+
+  .sample-item {
+    display: inline-flex;
+    flex-direction: column;
+    width: 50%;
+
+    > .si-title {
+      margin-bottom: 16px;
+      font-size: $hui-font-caption-m;
+      color: $hui-font-color-base-35;
+    }
+
+    > .si-content {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+    }
+  }
+}

@@ -29,7 +29,10 @@ const navBar = [
 
 module.exports = {
   title: 'hui-design-文档',
-  base: process.env.BUILD_ENV === 'prod' ? '/docs/hui-design/' : '/docs/hui-design-alpha/',
+  base:
+    process.env.BUILD_ENV === 'prod'
+      ? '/docs/hui-design/'
+      : '/docs/hui-design-alpha/',
   description: 'hui-design文档系统',
   // dev时使用的端口
   port: '8088',

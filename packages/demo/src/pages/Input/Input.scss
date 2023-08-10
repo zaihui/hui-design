@@ -1,0 +1,17 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+
+.input-page {
+  > .content {
+    .group-section {
+      > .title {
+        padding-right: 16px;
+        padding-left: 16px;
+      }
+    }
+  }
+
+  .disabled-input-status-group {
+    background-color: $hui-disabled-background-color;
+  }
+}

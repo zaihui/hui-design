@@ -1,0 +1,15 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+.share-page {
+  > .content {
+    @include content-padding;
+  }
+
+  .item {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+@import '@zaihui/hui-design/src/styles/demo-mixins.scss';
+
+.tooltip-page {
+  > .content {
+    @include content-padding;
+  }
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  .hui-button {
+    margin: 0;
+  }
+}

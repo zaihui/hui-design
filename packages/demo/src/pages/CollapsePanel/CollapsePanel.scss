@@ -1,0 +1,12 @@
+@import '@zaihui/hui-design/src/styles/variables.scss';
+@import '@zaihui/hui-design/src/styles/colors.scss';
+
+.collapse-panel-page {
+  > .content {
+    padding: 0 16px 50px 16px;
+
+    .group-section {
+      padding-bottom: 50px;
+    }
+  }
+}

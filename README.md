@@ -22,6 +22,27 @@ npm install @zaihui/hui-design
 
 hui-design 使用 conventional-commit 生态对 commit 规范化并基于此自动生成 changelog。
 
+```bash
+// node version 大于14
+pnpm i
+```
+
+开发组件
+
+```bash
+cd packages/weapp-components
+
+// ...do something
+```
+
+启动 demo 小程序
+
+```bash
+cd packages/demo
+
+pnpm run dev
+```
+
 ### commit
 
 commit 需遵循[@commitlint/config-conventional](https://www.npmjs.com/package/@commitlint/config-conventional)规范，也可以通过`npm run commit`在交互式界面完成 commit，这一功能由[commitizen](https://github.com/commitizen/cz-cli)提供。
