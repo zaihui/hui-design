@@ -1,6 +1,6 @@
 import { ITouchEvent, View } from '@tarojs/components'
 import cx from 'classnames'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { ViewProps } from '@tarojs/components/types/View'
 import HuiInput, { HuiInputProps } from '../Input'
 import HuiIcon from '../Icon'
@@ -30,6 +30,7 @@ const prefix = 'hui-search'
 const empty = () => {}
 const Search: React.FC<HuiSearchProps> = (props) => {
   const {
+    value,
     searchText,
     searchIcon = true,
     clearIcon = true,
@@ -42,7 +43,6 @@ const Search: React.FC<HuiSearchProps> = (props) => {
     onSearch,
     theme = 'light',
   } = props
-  const [val, setVal] = useState('')
   const allowClear = useMemo(
     () => clearIcon && props.value,
     [clearIcon, props.value],
@@ -57,10 +57,6 @@ const Search: React.FC<HuiSearchProps> = (props) => {
 
     return { backgroundColor: bgColor }
   }, [theme])
-
-  useEffect(() => {
-    setVal(props.value || '')
-  }, [props.value])
 
   return (
     <View
@@ -92,9 +88,9 @@ const Search: React.FC<HuiSearchProps> = (props) => {
           <HuiInput
             {...props}
             style={{ padding: 0, height: '100%', background: 'transparent' }}
-            value={val}
-            onInput={({ detail: { value } }) => {
-              onInput(value)
+            value={value}
+            onInput={({ detail: { value: newValue } }) => {
+              onInput(newValue)
             }}
             divider={false}
           />
@@ -124,7 +120,7 @@ const Search: React.FC<HuiSearchProps> = (props) => {
           className={cx(`${prefix}-search-text`)}
           onClick={(e) => {
             if (onSearch) {
-              onSearch(val, e)
+              onSearch(value ?? '', e)
             }
           }}
         >
