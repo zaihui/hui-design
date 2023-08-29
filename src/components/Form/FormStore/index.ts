@@ -155,18 +155,30 @@ class FormStore {
     this.store = nextStore
   }
 
-  async submit(): Promise<void> {
+  async submit(): Promise<any> {
     const { onFinish, onFinishFailed } = this.callbacks
-    this.validatorFields()
-      .then((res) => onFinish(res))
+    let result
+    await this.validatorFields()
+      .then((res) => {
+        result = {
+          type: 'success',
+          data: res,
+        }
+        onFinish(res)
+      })
       .catch((err) => {
         const valiadtorErroTarget = getErrorTarget(err)
+        result = {
+          type: 'fail',
+          data: valiadtorErroTarget,
+        }
         onFinishFailed(valiadtorErroTarget || {})
         this.watchList.forEach(
           ({ setSubmitTotal }) =>
             setSubmitTotal && setSubmitTotal((pre) => pre + 1),
         )
       })
+    return result
   }
 
   async reset(): Promise<void> {

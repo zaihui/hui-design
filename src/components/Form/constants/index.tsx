@@ -28,7 +28,7 @@ export interface FieldContext {
   /** 设置回调函数 */
   setCallbacks: (callbacks: any) => any
   /** 提交表单 */
-  submit: () => Promise<void>
+  submit: () => Promise<{ type: 'success' | 'fail'; data: any }>
   /** 重制表单 */
   reset: () => Promise<void>
 }
@@ -44,7 +44,7 @@ const Context = React.createContext<FieldContext>({
   validatorFields: warningFunc,
   registerWatch: warningFunc,
   setCallbacks: warningFunc,
-  submit: () => Promise.resolve().then(warningFunc),
+  submit: () => Promise.resolve().then(warningFunc as any),
   reset: () => Promise.resolve().then(warningFunc),
 })
 
