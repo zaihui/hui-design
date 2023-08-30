@@ -18,15 +18,14 @@ const HighlightText: React.FC<HighlightTextProps> = ({
 }) => {
   const highLightText = useCallback(
     (text: string) => {
-      const reg = new RegExp(keyword, 'g')
-      const keywordSplitText = text.split(reg)
-      const matchText = text.match(reg)
+      if (typeof keyword !== 'string') return text
+      const keywordSplitText = text.split(keyword)
       return keywordSplitText.map((item, index) => (
         <React.Fragment key={index}>
           {item}
           {index !== keywordSplitText.length - 1 && (
             <Text style={keywordStyle ?? { color: defaultHighLightTextColor }}>
-              {matchText?.[index]}
+              {keyword}
             </Text>
           )}
         </React.Fragment>
@@ -57,7 +56,11 @@ const HighlightText: React.FC<HighlightTextProps> = ({
     return HightLightStyleToKeyword(children)
   }, [children, highLightText])
 
-  return <View className={`${className ?? ''}`}>{highlightTextNode}</View>
+  return (
+    <View className={`${className ?? ''}`}>
+      {typeof keyword !== 'string' ? children : highlightTextNode}
+    </View>
+  )
 }
 
 export default HighlightText
