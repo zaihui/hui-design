@@ -121,12 +121,12 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
 
   const copyChildren = () => {
     if (React.isValidElement(children)) {
-      if (!children.props.onChange) {
+      if (!children.props.hasOwnProperty('onChange')) {
         newProps.current.onChange = onChange
       } else {
         delete newProps.current.onChange
       }
-      if (children.props.value === undefined) {
+      if (!children.props.hasOwnProperty('value')) {
         newProps.current.value = localValue
       } else {
         delete newProps.current.value
