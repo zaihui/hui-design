@@ -9,6 +9,7 @@ import HuiIcon from '../Icon/Icon'
 import { HIconType } from '../Icon/type'
 
 export interface HuiButtonProps {
+  id?: string
   /** 按钮宽度 */
   width?: number
   /** 按钮类型: 主要按钮、次要按钮（幽灵按钮）、文字按钮 */
@@ -52,11 +53,13 @@ export interface HuiButtonProps {
   onOpenSetting?: (
     e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>,
   ) => void
+  onAgreePrivacyAuthorization?: (e: BaseEventOrig<any>) => void
   children?: React.ReactNode
 }
 
 const HuiButton: React.FC<HuiButtonProps> = (props) => {
   const {
+    id,
     size = 'medium',
     type = 'primary',
     color = '',
@@ -80,6 +83,7 @@ const HuiButton: React.FC<HuiButtonProps> = (props) => {
     onContact,
     onOpenSetting,
     onChooseAvatar,
+    onAgreePrivacyAuthorization,
   } = props
 
   const buttonStyle = {
@@ -129,19 +133,23 @@ const HuiButton: React.FC<HuiButtonProps> = (props) => {
 
   return (
     <Button
+      id={id}
+      hoverClass='hover'
       formType={formType}
       openType={openType}
-      onGetPhoneNumber={onGetPhoneNumber}
-      onGetUserInfo={onGetUserInfo}
+      style={buttonStyle}
+      disabled={buttonDisabled}
+      onClick={handleClick}
       onContact={onContact}
+      onGetUserInfo={onGetUserInfo}
       onOpenSetting={onOpenSetting}
+      onGetPhoneNumber={onGetPhoneNumber}
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       onChooseAvatar={onChooseAvatar}
-      style={buttonStyle}
-      hoverClass='hover'
-      disabled={buttonDisabled}
-      onClick={handleClick}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      onAgreePrivacyAuthorization={onAgreePrivacyAuthorization}
       className={cx(
         `hui-button ${size} ${type} radius-${radiusType} ${className}`,
         { disabled: buttonDisabled },
