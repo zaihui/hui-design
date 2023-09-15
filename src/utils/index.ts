@@ -8,12 +8,16 @@ export const pxTransform = (size: number): string =>
 
 export const selectorQueryClientRect = (
   selector: string,
-): Promise<NodesRef.BoundingClientRectCallbackResult> =>
+): Promise<NodesRef.BoundingClientRectCallbackResult | any> =>
   new Promise((resolve) => {
     const query = Taro.createSelectorQuery()
+    const timer = setTimeout(() => {
+      resolve({})
+    }, 2000)
     query
       .select(selector)
       .boundingClientRect((res: NodesRef.BoundingClientRectCallbackResult) => {
+        clearTimeout(timer)
         resolve(res)
       })
       .exec()
@@ -21,12 +25,16 @@ export const selectorQueryClientRect = (
 
 export const selectorQueryScrollOffset = (
   selector: string,
-): Promise<NodesRef.ScrollOffsetCallbackResult> =>
+): Promise<NodesRef.ScrollOffsetCallbackResult | any> =>
   new Promise((resolve) => {
     const query = Taro.createSelectorQuery()
+    const timer = setTimeout(() => {
+      resolve({})
+    }, 1000)
     query
       .select(selector)
       .scrollOffset((res: NodesRef.ScrollOffsetCallbackResult) => {
+        clearTimeout(timer)
         resolve(res)
       })
       .exec()

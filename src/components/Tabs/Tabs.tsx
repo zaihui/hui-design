@@ -30,6 +30,8 @@ export interface HuiTabsProps extends ViewProps {
   sticky?: boolean
   /** 吸顶效果下的offsetTop */
   offsetTop?: number
+  /** 自动滚动开启 小程序上可能会有白屏bug 慎用！ */
+  autoScroll?: boolean
   style?: React.CSSProperties
   className?: string
   /** 点击标签时触发 */
@@ -61,6 +63,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     children,
     style = {},
     className = '',
+    autoScroll = false,
     ...rest
   } = props
 
@@ -101,27 +104,29 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
   }, [active, defaultTabInfo, scroll, tabs, tabsInfos, tabsWidth])
 
   useEffect(() => {
-    Taro.nextTick(async () => {
-      if (tabs.length <= 0 || !tabsRef.current) {
-        return
-      }
-      const tabsItemEle = tabsRef.current?.childNodes
-      const temp: Taro.NodesRef.BoundingClientRectCallbackResult[] = []
-      for (let i = 0; tabsItemEle && i < tabsItemEle.length; i++) {
-        if (tabsItemEle[i]?.childNodes[0]?.childNodes[0]) {
-          const childNode = tabsItemEle[i].childNodes[0].childNodes[0]
-          const childNodeId =
-            hasSubTitle && childNode?.childNodes?.[0]?.uid
-              ? childNode.childNodes[0]?.uid
-              : childNode?.uid
-          const res = await selectorQueryClientRect(`#${childNodeId}`)
-          temp.push(res)
+    if (autoScroll) {
+      Taro.nextTick(async () => {
+        if (tabs.length <= 0 || !tabsRef.current) {
+          return
         }
-      }
-      const res = await selectorQueryClientRect(`#${tabsRef?.current?.uid}`)
-      setTabsInfos(temp)
-      setTabsWidth(res?.width)
-    })
+        const tabsItemEle = tabsRef.current?.childNodes
+        const temp: Taro.NodesRef.BoundingClientRectCallbackResult[] = []
+        for (let i = 0; tabsItemEle && i < tabsItemEle.length; i++) {
+          if (tabsItemEle[i]?.childNodes[0]?.childNodes[0]) {
+            const childNode = tabsItemEle[i].childNodes[0].childNodes[0]
+            const childNodeId =
+              hasSubTitle && childNode?.childNodes?.[0]?.uid
+                ? childNode.childNodes[0]?.uid
+                : childNode?.uid
+            const res = await selectorQueryClientRect(`#${childNodeId}`)
+            temp.push(res)
+          }
+        }
+        const res = await selectorQueryClientRect(`#${tabsRef?.current?.uid}`)
+        setTabsInfos(temp)
+        setTabsWidth(res?.width)
+      })
+    }
   }, [tabs, hasSubTitle])
 
   const handleUpdateParent = (i: number) => (tabValue) => {
@@ -157,7 +162,6 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
       <View
         className='tabs-indicator-smile'
         style={{
-          left: activeTabInfo.left + activeTabInfo.width / 2,
           color: indicatorColor,
         }}
       >
@@ -167,8 +171,6 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
       <View
         className='tabs-indicator'
         style={{
-          width: activeTabInfo.width,
-          left: activeTabInfo.left,
           background: indicatorColor,
         }}
       ></View>
@@ -220,10 +222,10 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
             className={cx('tabs-item-wrapper', { active: active === tab.name })}
           >
             {getTabsItem(tab)}
+            {getTabsIndicator()}
           </View>
         </View>
       ))}
-      {getTabsIndicator()}
     </View>
   )
 

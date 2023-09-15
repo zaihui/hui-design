@@ -50,6 +50,7 @@
           }
 
           .tabs-item-wrapper {
+            position: relative;
             display: inline-block;
             overflow: hidden;
           }
@@ -65,18 +66,17 @@
           &:not(:first-child) {
             margin-left: px(32);
           }
-
-          &:nth-last-child(2) {
-            .tabs-item-wrapper {
-              padding-right: px(16);
-            }
-          }
         }
 
         .tabs-indicator-smile {
           position: absolute;
           bottom: 0;
+          left: 50%;
+          display: flex;
+          justify-content: center;
+          width: 0;
           margin-bottom: px(2);
+          overflow: hidden;
           color: $hui-tabs-indicator-bg-color;
           transition: width 0.3s, left 0.3s;
           transform: translateX(-50%);
@@ -85,6 +85,7 @@
 
       .tabs-item {
         .tabs-item-wrapper {
+          position: relative;
           overflow: hidden;
 
           .tabs-title-twin {
@@ -131,6 +132,14 @@
                 color: $hui-font-color-base-75;
               }
             }
+
+            .tabs-indicator {
+              width: 80% !important;
+
+              &-smile {
+                width: 80% !important;
+              }
+            }
           }
 
           .tabs-title {
@@ -152,10 +161,13 @@
       .tabs-indicator {
         position: absolute;
         bottom: 0;
+        left: 50%;
+        width: 0;
         height: px(3);
         margin-bottom: px(6);
         background: $hui-tabs-indicator-bg-color;
         transition: width 0.3s, left 0.3s;
+        transform: translateX(-50%);
       }
     }
   }
