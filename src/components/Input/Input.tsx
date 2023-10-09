@@ -35,6 +35,8 @@ export interface HuiInputProps extends ViewProps {
   focus?: boolean
   /** 键盘弹起时，是否自动上推页面 */
   adjustPosition?: boolean
+  /** 指定光标与键盘的距离，默认为 0  */
+  cursorSpacing?: number
   /** 最大输入长度，设置为 -1 的时候不限制最大长度 */
   maxLength?: number
   /** 默认信息 */
@@ -83,6 +85,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     required = true,
     labelIcon,
     clearable,
+    cursorSpacing = 0,
   } = props
 
   const [innerValue, setInnerValue] = useState(value)
@@ -133,6 +136,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
         focus={props.focus}
         disabled={disabled}
         adjustPosition={props.adjustPosition}
+        cursorSpacing={cursorSpacing}
         confirmType={props.confirmType || 'done'}
         maxlength={props.maxLength || 140}
         onInput={mergedOnInput}
