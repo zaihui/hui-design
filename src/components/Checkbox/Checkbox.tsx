@@ -1,4 +1,9 @@
-import React, { useContext, forwardRef, useImperativeHandle } from 'react'
+import React, {
+  useContext,
+  forwardRef,
+  useImperativeHandle,
+  useMemo,
+} from 'react'
 import cx from 'classnames'
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
@@ -50,6 +55,11 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
 
   const hasChildren = !!children
   const finalDisabled = context?.disabled || disabled
+
+  // 由于未选中情况下增加了 1px 的边框导致看起来比选中的大一圈
+  // 样式里给了 border-box 但是无效，因此这里使用这种方式
+  const calcSize = useMemo(() => size - (checked ? 0 : 1), [size, checked])
+
   const toggle = () => {
     const beforeCheckedList = context?.checkedList ?? []
     const afterCheckedList = checked
@@ -83,13 +93,13 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
       <View
         className={cx(`${prefix}-icon`, { unchecked: !checked })}
         style={{
-          width: pxTransform(size),
-          height: pxTransform(size),
+          width: pxTransform(calcSize),
+          height: pxTransform(calcSize),
         }}
       >
         <HuiIcon
           name='009-checkbox'
-          size={size}
+          size={calcSize}
           color={checked ? color : 'transparent'}
         />
       </View>
