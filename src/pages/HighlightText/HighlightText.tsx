@@ -40,6 +40,11 @@ const FooterDemoPage: React.FC = () => (
           <View>再惠提供技术支持</View>
         </HighlightText>
       </GroupSection>
+      <GroupSection title='忽略字母大小写'>
+        <HighlightText keyword='ab' ignoreCase>
+          你看这一行有ab还有aB甚至还有Ab和AB呢。
+        </HighlightText>
+      </GroupSection>
     </View>
   </View>
 )

@@ -87,7 +87,7 @@ const NAV_LIST: {
       { title: '页面层级Layer', url: router.Layer.url },
       { title: '弹出层Popup', url: router.Popup.url },
       { title: '悬浮按钮FAB', url: router.FloatingActionButton.url },
-      { title: '高亮文本', url: router.HightLightText.url },
+      { title: '高亮文本 HighlightText', url: router.HightLightText.url },
     ],
   },
   {

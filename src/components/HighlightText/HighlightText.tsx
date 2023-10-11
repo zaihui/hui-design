@@ -4,10 +4,11 @@ import React, { Children, CSSProperties, useCallback, useMemo } from 'react'
 export interface HighlightTextProps {
   className?: string
   keyword: string
+  /** 是否忽略大小写，默认为 false */
+  ignoreCase?: boolean
   keywordStyle?: CSSProperties
   children: React.ReactNode
 }
-
 const defaultHighLightTextColor = '#1577FC'
 
 const HighlightText: React.FC<HighlightTextProps> = ({
@@ -15,23 +16,28 @@ const HighlightText: React.FC<HighlightTextProps> = ({
   children,
   keyword,
   keywordStyle,
+  ignoreCase = false,
 }) => {
   const highLightText = useCallback(
     (text: string) => {
       if (typeof keyword !== 'string') return text
-      const keywordSplitText = text.split(keyword)
+      const regexKeyWord = new RegExp(keyword, ignoreCase ? 'ig' : '')
+
+      const keywordSplitText = text.split(regexKeyWord)
+      const keywordList = text.match(regexKeyWord)
+
       return keywordSplitText.map((item, index) => (
         <React.Fragment key={index}>
           {item}
-          {index !== keywordSplitText.length - 1 && (
+          {index !== keywordSplitText.length - 1 && keywordList && (
             <Text style={keywordStyle ?? { color: defaultHighLightTextColor }}>
-              {keyword}
+              {keywordList?.[index]}
             </Text>
           )}
         </React.Fragment>
       ))
     },
-    [keyword, keywordStyle],
+    [ignoreCase, keyword, keywordStyle],
   )
 
   const highlightTextNode = useMemo(() => {
