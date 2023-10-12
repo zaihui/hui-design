@@ -11,8 +11,10 @@ import { ViewProps } from '@tarojs/components/types/View'
 import CheckboxGroupContext, { CheckboxValue } from './context'
 import HuiIcon from '../Icon/Icon'
 import { pxTransform } from '../../utils'
+import { HIconType } from '../Icon/type'
 
 const DEFAULT_ICON_COLOR = '#ed3737'
+const DEFAULT_ICON_UNCHECK_COLOR = 'rgba(30, 30, 30, 0.25)'
 const DEFAULT_ICON_SIZE = 20
 
 export interface HuiCheckboxProps extends ViewProps {
@@ -56,9 +58,14 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
   const hasChildren = !!children
   const finalDisabled = context?.disabled || disabled
 
-  // 由于未选中情况下增加了 1px 的边框导致看起来比选中的大一圈
-  // 样式里给了 border-box 但是无效，因此这里使用这种方式
-  const calcSize = useMemo(() => size - (checked ? 0 : 1), [size, checked])
+  // Icon 的配置
+  const [iconName, iconColor]: [HIconType, string] = useMemo(
+    () => [
+      checked ? '009-checkbox' : 'h124-uncheck',
+      checked ? color : DEFAULT_ICON_UNCHECK_COLOR,
+    ],
+    [checked, color],
+  )
 
   const toggle = () => {
     const beforeCheckedList = context?.checkedList ?? []
@@ -93,15 +100,11 @@ const HuiCheckbox: React.ForwardRefRenderFunction<
       <View
         className={cx(`${prefix}-icon`, { unchecked: !checked })}
         style={{
-          width: pxTransform(calcSize),
-          height: pxTransform(calcSize),
+          width: pxTransform(size),
+          height: pxTransform(size),
         }}
       >
-        <HuiIcon
-          name='009-checkbox'
-          size={calcSize}
-          color={checked ? color : 'transparent'}
-        />
+        <HuiIcon name={iconName} size={size} color={iconColor} />
       </View>
       {hasChildren && (
         <View onClick={handleClick} className={`${prefix}-content`}>

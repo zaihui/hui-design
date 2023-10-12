@@ -13,10 +13,6 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-
-    &.unchecked {
-      border: $hui-checkbox-icon-border;
-    }
   }
 
   &-content {
@@ -42,6 +38,10 @@
     .hui-checkbox-icon {
       &.unchecked {
         background-color: $hui-checkbox-icon-disabled-uncheck-bg-color;
+
+        & > .hui-icons {
+          color: transparent !important;
+        }
       }
     }
   }
