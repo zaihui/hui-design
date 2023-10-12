@@ -63,5 +63,7 @@ export type HIconType =
   | 'h025-phone'
   | 'h109-filter'
   | 'h110-upwards'
+  | 'h116-check'
+  | 'h124-uncheck'
   | 'h188-workcirde'
   | 'h203-takingpicturesfill'
