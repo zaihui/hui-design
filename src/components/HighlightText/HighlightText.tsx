@@ -21,17 +21,41 @@ const HighlightText: React.FC<HighlightTextProps> = ({
   const highLightText = useCallback(
     (text: string) => {
       if (typeof keyword !== 'string') return text
-      const regexKeyWord = new RegExp(keyword, ignoreCase ? 'ig' : '')
+      let unmatchText: string[] = []
+      const matchText: string[] = []
+      if (ignoreCase) {
+        const lowerText = text.toLowerCase()
+        const lowerKeyword = keyword.toLowerCase()
 
-      const keywordSplitText = text.split(regexKeyWord)
-      const keywordList = text.match(regexKeyWord)
+        let startIndex = 0
 
-      return keywordSplitText.map((item, index) => (
+        for (let i = 0; i < lowerText.length; i++) {
+          if (
+            lowerText.substring(i, i + lowerKeyword.length) === lowerKeyword
+          ) {
+            if (i > startIndex) {
+              unmatchText.push(text.substring(startIndex, i))
+            }
+
+            matchText.push(text.substring(i, i + lowerKeyword.length))
+
+            startIndex = i + lowerKeyword.length
+          }
+        }
+
+        if (startIndex < text.length) {
+          unmatchText.push(text.substring(startIndex))
+        }
+      } else {
+        unmatchText = text.split(keyword)
+      }
+
+      return unmatchText.map((item, index) => (
         <React.Fragment key={index}>
           {item}
-          {index !== keywordSplitText.length - 1 && keywordList && (
+          {index !== unmatchText.length - 1 && (
             <Text style={keywordStyle ?? { color: defaultHighLightTextColor }}>
-              {keywordList?.[index]}
+              {ignoreCase ? matchText[index] : keyword}
             </Text>
           )}
         </React.Fragment>
