@@ -21,17 +21,44 @@ const HighlightText: React.FC<HighlightTextProps> = ({
   const highLightText = useCallback(
     (text: string) => {
       if (typeof keyword !== 'string') return text
-      const regexKeyWord = new RegExp(keyword, ignoreCase ? 'ig' : '')
+      let unmatchText: string[] = []
+      const matchText: string[] = []
+      if (ignoreCase) {
+        const lowerText = text.toLowerCase()
+        const lowerKeyword = keyword.toLowerCase()
+        const list = lowerText.split(lowerKeyword)
 
-      const keywordSplitText = text.split(regexKeyWord)
-      const keywordList = text.match(regexKeyWord)
+        /**
+         * 思路
+         * 因为将关键字、匹配文本全部转小写了，因此这里需要在原本的匹配文本上进行截取
+         */
+        for (let i = 0; i < list.length; i++) {
+          const currLen = list[i].length
+          const currIndex =
+            matchText.length * keyword.length + unmatchText.join('').length
+          const nextIndex = currIndex + currLen
 
-      return keywordSplitText.map((item, index) => (
+          if (list[i]) {
+            unmatchText.push(text.substring(currIndex, nextIndex))
+            matchText.push(
+              text.substring(nextIndex, nextIndex + keyword.length),
+            )
+          } else {
+            matchText.push(
+              text.substring(currIndex, currIndex + keyword.length),
+            )
+          }
+        }
+      } else {
+        unmatchText = text.split(keyword)
+      }
+
+      return unmatchText.map((item, index) => (
         <React.Fragment key={index}>
           {item}
-          {index !== keywordSplitText.length - 1 && keywordList && (
+          {index !== unmatchText.length - 1 && (
             <Text style={keywordStyle ?? { color: defaultHighLightTextColor }}>
-              {keywordList?.[index]}
+              {ignoreCase ? matchText[index] : keyword}
             </Text>
           )}
         </React.Fragment>
