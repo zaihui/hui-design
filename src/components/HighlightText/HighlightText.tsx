@@ -26,28 +26,25 @@ const HighlightText: React.FC<HighlightTextProps> = ({
       if (ignoreCase) {
         const lowerText = text.toLowerCase()
         const lowerKeyword = keyword.toLowerCase()
-        const list = lowerText.split(lowerKeyword)
 
-        /**
-         * 思路
-         * 因为将关键字、匹配文本全部转小写了，因此这里需要在原本的匹配文本上进行截取
-         */
-        for (let i = 0; i < list.length; i++) {
-          const currLen = list[i].length
-          const currIndex =
-            matchText.length * keyword.length + unmatchText.join('').length
-          const nextIndex = currIndex + currLen
+        let startIndex = 0
 
-          if (list[i]) {
-            unmatchText.push(text.substring(currIndex, nextIndex))
-            matchText.push(
-              text.substring(nextIndex, nextIndex + keyword.length),
-            )
-          } else {
-            matchText.push(
-              text.substring(currIndex, currIndex + keyword.length),
-            )
+        for (let i = 0; i < lowerText.length; i++) {
+          if (
+            lowerText.substring(i, i + lowerKeyword.length) === lowerKeyword
+          ) {
+            if (i > startIndex) {
+              unmatchText.push(text.substring(startIndex, i))
+            }
+
+            matchText.push(text.substring(i, i + lowerKeyword.length))
+
+            startIndex = i + lowerKeyword.length
           }
+        }
+
+        if (startIndex < text.length) {
+          unmatchText.push(text.substring(startIndex))
         }
       } else {
         unmatchText = text.split(keyword)
