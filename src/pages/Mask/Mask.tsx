@@ -23,33 +23,21 @@ const MaskPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='基础用法'>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV1(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV1(true)}>
               显示遮罩
             </HuiButton>
           </View>
         </GroupSection>
         <GroupSection title='自定义样式'>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV2(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV2(true)}>
               显示自定义样式遮罩
             </HuiButton>
           </View>
         </GroupSection>
         <GroupSection title='自定义内容'>
           <View className='row'>
-            <HuiButton
-              type='secondary'
-              block
-              onClick={() => setV3(true)}
-            >
+            <HuiButton type='secondary' block onClick={() => setV3(true)}>
               显示自定义内容遮罩
             </HuiButton>
           </View>
@@ -58,12 +46,16 @@ const MaskPage: React.FC = () => {
 
       <HuiMask visible={V1} onClose={() => setV1(false)} />
 
-      <HuiMask visible={V2} onClose={() => setV2(false)} zIndex={999} duration={0.3} style={{ backgroundColor: 'rgba(0,0,0,0.8)' }} />
+      <HuiMask
+        visible={V2}
+        onClose={() => setV2(false)}
+        zIndex={999}
+        duration={0.3}
+        style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}
+      />
 
       <HuiMask visible={V3} onClose={() => setV3(false)}>
-        <View className='custom-content'>
-          自定义内容
-        </View>
+        <View className='custom-content'>自定义内容</View>
       </HuiMask>
     </View>
   )

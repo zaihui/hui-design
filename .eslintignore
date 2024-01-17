@@ -2,6 +2,7 @@ node_modules/
 lib
 dist
 public
+es
 
 # eslint不会lint .开头的文件和文件夹
 # 参考：https://github.com/eslint/eslint/issues/8429

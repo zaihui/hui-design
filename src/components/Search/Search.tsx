@@ -1,6 +1,6 @@
 import { ITouchEvent, View } from '@tarojs/components'
 import cx from 'classnames'
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { ViewProps } from '@tarojs/components/types/View'
 import HuiInput, { HuiInputProps } from '../Input'
 import HuiIcon from '../Icon'
@@ -8,7 +8,9 @@ import HuiButton from '../Button/Button'
 
 import './Search.scss'
 
-export interface HuiSearchProps extends ViewProps, Omit<HuiInputProps, 'onInput'> {
+export interface HuiSearchProps
+  extends ViewProps,
+    Omit<HuiInputProps, 'onInput'> {
   searchText?: string
   /** 是否显示搜索icon */
   searchIcon?: boolean
@@ -26,8 +28,9 @@ export interface HuiSearchProps extends ViewProps, Omit<HuiInputProps, 'onInput'
 const prefix = 'hui-search'
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const empty = () => {}
-const Search: React.FC<HuiSearchProps> = props => {
+const Search: React.FC<HuiSearchProps> = (props) => {
   const {
+    value,
     searchText,
     searchIcon = true,
     clearIcon = true,
@@ -40,8 +43,10 @@ const Search: React.FC<HuiSearchProps> = props => {
     onSearch,
     theme = 'light',
   } = props
-  const [val, setVal] = useState('')
-  const allowClear = useMemo(() => clearIcon && props.value, [clearIcon, props.value])
+  const allowClear = useMemo(
+    () => clearIcon && props.value,
+    [clearIcon, props.value],
+  )
 
   const searchBg = useMemo<React.CSSProperties>(() => {
     let bgColor = '#fff'
@@ -53,15 +58,11 @@ const Search: React.FC<HuiSearchProps> = props => {
     return { backgroundColor: bgColor }
   }, [theme])
 
-  useEffect(() => {
-    setVal(props.value || '')
-  }, [props.value])
-
   return (
     <View
       style={style}
       className={`${prefix} ${className}`}
-      onClick={e => {
+      onClick={(e) => {
         if (onlyClick && onClick) {
           onClick(e)
         }
@@ -70,51 +71,62 @@ const Search: React.FC<HuiSearchProps> = props => {
       <View className={cx(`${prefix}-content`)} style={searchBg}>
         {searchIcon ? (
           <View className={cx(`${prefix}-search-icon search`)}>
-            <HuiIcon name='015-searchcircle' color='#a4a4a4ff' size={16} style={{ display: 'block' }} />
+            <HuiIcon
+              name='015-searchcircle'
+              color='#a4a4a4ff'
+              size={16}
+              style={{ display: 'block' }}
+            />
           </View>
         ) : null}
-        <View className={cx(`${prefix}-input-box`, { 'small-gap': allowClear, 'search-icon': searchIcon })}>
+        <View
+          className={cx(`${prefix}-input-box`, {
+            'small-gap': allowClear,
+            'search-icon': searchIcon,
+          })}
+        >
           <HuiInput
             {...props}
             style={{ padding: 0, height: '100%', background: 'transparent' }}
-            value={val}
-            onInput={({
-              detail: {
-                value,
-              },
-            }) => {
-              onInput(value)
+            value={value}
+            onInput={({ detail: { value: newValue } }) => {
+              onInput(newValue)
             }}
+            divider={false}
           />
         </View>
         {allowClear ? (
           <View
             className={cx(`${prefix}-search-icon clear`)}
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation()
               onInput('')
               if (onClear) {
                 onClear()
               }
             }}
           >
-            <HuiIcon name='005-close2' color='#1e1e1e40' size={16} style={{ display: 'block' }} />
+            <HuiIcon
+              name='005-close2'
+              color='#1e1e1e40'
+              size={16}
+              style={{ display: 'block' }}
+            />
           </View>
         ) : null}
       </View>
       {searchText ? (
         <View
           className={cx(`${prefix}-search-text`)}
-          onClick={e => {
+          onClick={(e) => {
             if (onSearch) {
-              onSearch(val, e)
+              onSearch(value ?? '', e)
             }
           }}
         >
-          <HuiButton
-            type='text'
-            size='small'
-            radiusType='square'
-          >{searchText}</HuiButton>
+          <HuiButton type='text' size='small' radiusType='square'>
+            {searchText}
+          </HuiButton>
         </View>
       ) : null}
     </View>

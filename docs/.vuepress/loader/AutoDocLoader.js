@@ -3,7 +3,7 @@
  */
 const reactDocs = require('react-docgen-typescript')
 
-const createResult = result => `module.exports = ${JSON.stringify(result)}`
+const createResult = (result) => `module.exports = ${JSON.stringify(result)}`
 
 module.exports = function () {
   const { resourcePath } = this
@@ -16,7 +16,9 @@ module.exports = function () {
    * 参考：https://webpack.js.org/api/loaders/#thisresourcepath
    */
   if (resourcePath.endsWith('.tsx')) {
-    const docs = reactDocs.withCustomConfig(`${__dirname}/../../../tsconfig.json`).parse(resourcePath)[0]
+    const docs = reactDocs
+      .withCustomConfig(`${__dirname}/../../../tsconfig.json`)
+      .parse(resourcePath)[0]
 
     return createResult(docs || '')
   }

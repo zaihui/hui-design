@@ -33,22 +33,43 @@ const CheckboxPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='复选框大小'>
           <CheckboxSample title=''>
-            <Checkbox checked={demo1Checked} value='demo1' size={32} onClick={() => setDemo1Checked(!demo1Checked)} />
+            <Checkbox
+              checked={demo1Checked}
+              value='demo1'
+              size={32}
+              onClick={() => setDemo1Checked(!demo1Checked)}
+            >
+              <View>苹果</View>
+            </Checkbox>
           </CheckboxSample>
           <CheckboxSample title=''>
-            <Checkbox checked={demo2Checked} value='demo2' onClick={() => setDemo2Checked(!demo2Checked)} />
+            <Checkbox
+              checked={demo2Checked}
+              value='demo2'
+              onClick={() => setDemo2Checked(!demo2Checked)}
+            >
+              <View>桃子</View>
+            </Checkbox>
           </CheckboxSample>
         </GroupSection>
 
         <GroupSection title='复选框状态'>
           <CheckboxSample title='选中'>
-            <Checkbox checked={demo3Checked} value='demo3' onClick={() => setDemo3Checked(!demo3Checked)} />
+            <Checkbox
+              checked={demo3Checked}
+              value='demo3'
+              onClick={() => setDemo3Checked(!demo3Checked)}
+            />
           </CheckboxSample>
           <CheckboxSample title='选中不可点击'>
             <Checkbox checked disabled value='demo4' />
           </CheckboxSample>
           <CheckboxSample title='未选中'>
-            <Checkbox checked={demo5Checked} value='demo5' onClick={() => setDemo5Checked(!demo5Checked)} />
+            <Checkbox
+              checked={demo5Checked}
+              value='demo5'
+              onClick={() => setDemo5Checked(!demo5Checked)}
+            />
           </CheckboxSample>
           <CheckboxSample title='未选中不可点击'>
             <Checkbox checked={false} disabled value='demo6' />

@@ -1,8 +1,8 @@
-# Picker组件
+# Picker 组件
 
 ## 介绍
 
-类似微信的picker组件，但使用picker-view重写了样式与用法
+类似微信的 picker 组件，但使用 picker-view 重写了样式与用法
 
 ## 使用指南
 
@@ -40,6 +40,7 @@ export default Demo
 ## 参数
 
 ### Picker
+
 <auto-doc path="components/Picker/Picker.tsx" />
 
 <demo-phone page="/pages/Picker/Picker" />

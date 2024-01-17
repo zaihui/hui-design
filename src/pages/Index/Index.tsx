@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
 import Taro, { useShareAppMessage } from '@tarojs/taro'
+import React, { useState } from 'react'
 
 import { View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
@@ -21,12 +21,12 @@ interface NavCard extends ViewProps {
   }[]
 }
 
-const NavCard: React.FC<NavCard> = props => {
+const NavCard: React.FC<NavCard> = (props) => {
   const { title, desc, icon, items } = props
 
   const [expand, setExpand] = useState(false)
 
-  const handleClickSubItem = subItem => {
+  const handleClickSubItem = (subItem) => {
     Taro.navigateTo({
       url: subItem.url,
     })
@@ -34,20 +34,27 @@ const NavCard: React.FC<NavCard> = props => {
 
   return (
     <View className='nav-card'>
-      <View className={cls('main-content', { 'with-border': expand })} onClick={() => setExpand(!expand)}>
-        <View className='left'><HuiIcon name={icon} size={32} /></View>
+      <View
+        className={cls('main-content', { 'with-border': expand })}
+        onClick={() => setExpand(!expand)}
+      >
+        <View className='left'>
+          <HuiIcon name={icon} size={32} />
+        </View>
         <View className='right'>
-          <View className='title'>
-            {title}
-          </View>
+          <View className='title'>{title}</View>
           <View className='desc'>{desc}</View>
         </View>
       </View>
       <View className={cls('sub-items', { visible: expand })}>
         {items.length > 0 && (
           <View className='sub-items-content'>
-            {items.map(item => (
-              <View key={item.url} className='sub-item' onClick={() => handleClickSubItem(item)}>
+            {items.map((item) => (
+              <View
+                key={item.url}
+                className='sub-item'
+                onClick={() => handleClickSubItem(item)}
+              >
                 <View className='sub-title'>{item.title}</View>
                 <HuiIcon name='012-arrowright' color='#b1b1b1' />
               </View>
@@ -74,12 +81,13 @@ const NAV_LIST: {
     icon: '182-basiscirde',
     items: [
       { title: '颜色Color', url: router.Color.url },
-      { title: '文字Font', url: router.Font.url },
+      { title: 'Typography 文字', url: router.Text.url },
       { title: '图标Icon', url: router.Icon.url },
       { title: '按钮Button', url: router.Button.url },
       { title: '页面层级Layer', url: router.Layer.url },
       { title: '弹出层Popup', url: router.Popup.url },
       { title: '悬浮按钮FAB', url: router.FloatingActionButton.url },
+      { title: '高亮文本 HighlightText', url: router.HightLightText.url },
     ],
   },
   {
@@ -95,6 +103,7 @@ const NAV_LIST: {
       { title: '步进器Stepper', url: router.Stepper.url },
       { title: '搜索Search', url: router.Search.url },
       { title: '选择器Select', url: router.Select.url },
+      { title: '表单Form', url: router.Form.url },
     ],
   },
   {
@@ -106,6 +115,7 @@ const NAV_LIST: {
       { title: '空状态Default Page', url: router.DefaultPage.url },
       { title: '标签Tag', url: router.Tag.url },
       { title: '列表List', url: router.List.url },
+      { title: '内容列表', url: router.ContentList.url },
       { title: '徽标Badge', url: router.Badge.url },
       { title: '通知Notice Bar', url: router.NoticeBar.url },
       { title: '头像Avatar', url: router.Avatar.url },
@@ -115,6 +125,9 @@ const NAV_LIST: {
       { title: '计时器Timer', url: router.Timer.url },
       { title: '页脚Footer', url: router.Footer.url },
       { title: '骨架屏Skeleton', url: router.Skeleton.url },
+      { title: '标题栏Title', url: router.Title.url },
+      { title: '卡片Card', url: router.Card.url },
+      { title: '折叠面板CollapsePanel', url: router.CollapsePanel.url },
     ],
   },
   {
@@ -122,8 +135,10 @@ const NAV_LIST: {
     desc: '包含Tab等',
     icon: '186-tabcirde',
     items: [
+      { title: '筛选栏Filter', url: router.Filter.url },
       { title: '标签式分段控制器Tab', url: router.Tabs.url },
       { title: '宫格导航Grid', url: router.Grid.url },
+      { title: '步骤条Steppers', url: router.Steppers.url },
     ],
   },
   {
@@ -150,7 +165,8 @@ const NAV_LIST: {
   },
 ]
 
-const ZAIHUI_LOGO_URL = 'https://r.kezaihui.com/default/zaihui-logo-20201120001.png'
+const ZAIHUI_LOGO_URL =
+  'https://r.kezaihui.com/default/zaihui-logo-20201120001.png'
 
 const IndexPage: React.FC = () => {
   useShareAppMessage(() => ({
@@ -161,11 +177,14 @@ const IndexPage: React.FC = () => {
     <View className='index-page'>
       <View className='header'>
         <View className='title'>HUI DESIGN</View>
-        <View className='desc'>HUI DESIGN是为再惠小程序、H5提供丰富的基础 UI 组件，使在实际业务中快速集成，开箱即用</View>
+        <View className='desc'>
+          HUI DESIGN是为再惠小程序、H5提供丰富的基础 UI
+          组件，使在实际业务中快速集成，开箱即用
+        </View>
       </View>
 
       <View className='content'>
-        {NAV_LIST.map(navData => (
+        {NAV_LIST.map((navData) => (
           <NavCard
             key={navData.title}
             title={navData.title}
@@ -181,7 +200,10 @@ const IndexPage: React.FC = () => {
           router.Team.navigateTo()
         }}
       >
-        <View>我们团队<HuiIcon name='012-right' size={12} /></View>
+        <View>
+          我们团队
+          <HuiIcon name='012-right' size={12} />
+        </View>
       </View>
     </View>
   )

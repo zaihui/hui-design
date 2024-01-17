@@ -15,10 +15,18 @@ import { View } from '@tarojs/components'
 
 const Demo: React.FC = () => (
   <>
-    <HuiBadge dot><View>内容</View></HuiBadge>
-    <HuiBadge value={3}><View>内容</View></HuiBadge>
-    <HuiBadge value='热门售卖'><View>内容</View></HuiBadge>
-    <HuiBadge value='NEW' type='hollow'><View>内容</View></HuiBadge>
+    <HuiBadge dot>
+      <View>内容</View>
+    </HuiBadge>
+    <HuiBadge value={3}>
+      <View>内容</View>
+    </HuiBadge>
+    <HuiBadge value='热门售卖'>
+      <View>内容</View>
+    </HuiBadge>
+    <HuiBadge value='NEW' type='hollow'>
+      <View>内容</View>
+    </HuiBadge>
   </>
 )
 

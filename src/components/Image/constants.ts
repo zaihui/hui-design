@@ -21,5 +21,5 @@ export enum ImageSize {
   /** 加载状态仅展示文字 */
   MEDIUM = 'medium',
   /** 加载状态展示图文 */
-  LARGE = 'large'
+  LARGE = 'large',
 }

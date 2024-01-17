@@ -1,0 +1,7 @@
+@import '@/styles/demo-mixins.scss';
+
+.hight-light-text-demo-page {
+  > .content {
+    @include content-padding;
+  }
+}

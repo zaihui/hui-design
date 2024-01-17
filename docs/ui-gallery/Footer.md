@@ -1,8 +1,8 @@
 # Footer 页脚
 
 ## 介绍
-页脚
 
+页脚
 
 ## 使用指南
 
@@ -13,7 +13,7 @@ import { HuiFooter } from '@zaihui/hui-design'
 
 const Demo: React.FC = () => (
   <View>
-    <HuiFooter content="再惠提供技术支持" />
+    <HuiFooter content='再惠提供技术支持' />
   </View>
 )
 
@@ -27,6 +27,7 @@ export default Demo
 ## 参数
 
 ### Footer
+
 <auto-doc path="components/Footer/Footer.tsx" />
 
 <demo-phone page="/pages/Footer/Footer" />

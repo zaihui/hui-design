@@ -1,0 +1,30 @@
+@import '@/styles/demo-mixins.scss';
+@import '@/styles/variables.scss';
+
+.filter-page {
+  height: 100%;
+
+  > .content {
+    .title {
+      padding: 10px 20px;
+    }
+
+    .gap {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .tags-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: px(10);
+      }
+    }
+
+    .row {
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}

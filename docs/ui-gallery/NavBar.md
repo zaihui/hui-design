@@ -6,12 +6,11 @@
 
 ## 使用指南
 
-文件中引入组件
-页面必须开启自定义导航配置
+文件中引入组件页面必须开启自定义导航配置
 
 navigationBarStyle: 'custom'
 
-NavBar的theme属性要和页面的navigationBarTextStyle保持一致
+NavBar 的 theme 属性要和页面的 navigationBarTextStyle 保持一致
 
 ```jsx
 import React from 'react'
@@ -20,9 +19,7 @@ import { HuiNavBar } from '@zaihui/hui-design'
 const Demo: React.FC = () => (
   <View className='page'>
     <HuiNavBar showHome title='自定义导航' />
-    <View className='page-content'>
-      页面内容
-    </View>
+    <View className='page-content'>页面内容</View>
   </View>
 )
 

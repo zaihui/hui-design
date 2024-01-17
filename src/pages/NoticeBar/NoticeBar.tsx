@@ -10,7 +10,8 @@ import SubGroupSection from '@/demoComponents/SubGroupSection'
 import './NoticeBar.scss'
 
 const singleText = '雨巷--戴望舒'
-const multiText = '撑着油纸伞，独自彷徨在悠长、悠长又寂寥的雨巷 我希望逢着一个丁香一样的 结着愁怨的姑娘 她是有 丁香一样的颜色 丁香一样的芬芳 丁香一样的忧愁 在雨中哀怨 哀怨又彷徨'
+const multiText =
+  '撑着油纸伞，独自彷徨在悠长、悠长又寂寥的雨巷 我希望逢着一个丁香一样的 结着愁怨的姑娘 她是有 丁香一样的颜色 丁香一样的芬芳 丁香一样的忧愁 在雨中哀怨 哀怨又彷徨'
 
 const NoticeBarPage: React.FC = () => {
   const [visible, setVisible] = useState(true)
@@ -42,7 +43,9 @@ const NoticeBarPage: React.FC = () => {
               <NoticeBar type='marquee'>{singleText}</NoticeBar>
             </View>
             <View className='row'>
-              <NoticeBar hasIcon type='marquee'>{multiText}</NoticeBar>
+              <NoticeBar hasIcon type='marquee'>
+                {multiText}
+              </NoticeBar>
             </View>
           </SubGroupSection>
           <SubGroupSection title='手动关闭类型'>
@@ -55,8 +58,7 @@ const NoticeBarPage: React.FC = () => {
                   Taro.showToast({
                     title: '关闭',
                   })
-                }
-                }
+                }}
               >
                 {singleText}
               </NoticeBar>

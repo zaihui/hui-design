@@ -4,7 +4,8 @@ import HuiCheckboxGroup from './Group'
 import type { HuiCheckboxProps, HuiCheckboxRef } from './Checkbox'
 import type { HuiCheckboxGroupProps } from './Group'
 
-interface CompundedComponent extends React.ForwardRefExoticComponent<HuiCheckboxProps> {
+interface CompundedComponent
+  extends React.ForwardRefExoticComponent<HuiCheckboxProps> {
   Group: typeof HuiCheckboxGroup
 }
 

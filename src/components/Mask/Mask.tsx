@@ -20,8 +20,16 @@ export interface HuiMaskProps {
   onClose?: () => void
 }
 
-const HuiMask: React.FC<HuiMaskProps> = props => {
-  const { visible, zIndex, closeble = true, duration, style, onClose, children } = props
+const HuiMask: React.FC<HuiMaskProps> = (props) => {
+  const {
+    visible,
+    zIndex,
+    closeble = true,
+    duration,
+    style,
+    onClose,
+    children,
+  } = props
 
   const handleClick = () => {
     if (!closeble || !onClose) {
@@ -34,7 +42,12 @@ const HuiMask: React.FC<HuiMaskProps> = props => {
     <View
       onClick={handleClick}
       className={cx('.hui-mask', { '.hui-mask-visible': visible })}
-      style={{ zIndex, transitionDuration: typeof (duration) === 'number' ? `${duration}s` : duration, ...style }}
+      style={{
+        zIndex,
+        transitionDuration:
+          typeof duration === 'number' ? `${duration}s` : duration,
+        ...style,
+      }}
     >
       {visible ? children : ''}
     </View>

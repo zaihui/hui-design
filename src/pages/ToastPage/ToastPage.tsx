@@ -14,7 +14,7 @@ enum ToastTypeEnum {
   FAIL = 'fail',
   WARNING = 'warning',
   TEXT = 'text',
-  CUSTOM = 'custom'
+  CUSTOM = 'custom',
 }
 interface ToastData {
   title: string
@@ -54,12 +54,14 @@ const ToastPage: React.FC = () => {
             <HuiButton
               block
               type='secondary'
-              onClick={() => handleShowToast({
-                title: '单行纯文本',
-                mask: false,
-                visible: true,
-                type: ToastTypeEnum.TEXT,
-              })}
+              onClick={() =>
+                handleShowToast({
+                  title: '单行纯文本',
+                  mask: false,
+                  visible: true,
+                  type: ToastTypeEnum.TEXT,
+                })
+              }
             >
               单行纯文本提示
             </HuiButton>
@@ -68,26 +70,30 @@ const ToastPage: React.FC = () => {
             <HuiButton
               block
               type='secondary'
-              onClick={() => handleShowToast({
-                title: '最多十四个字最多十四个字最多是',
-                mask: false,
-                visible: true,
-                type: ToastTypeEnum.TEXT,
-              })}
+              onClick={() =>
+                handleShowToast({
+                  title: '最多十四个字最多十四个字最多是',
+                  mask: false,
+                  visible: true,
+                  type: ToastTypeEnum.TEXT,
+                })
+              }
             >
               多行纯文本提示
             </HuiButton>
-            </View>
+          </View>
           <View className='row'>
             <HuiButton
               block
               type='secondary'
-              onClick={() => handleShowToast({
-                title: '成功提示',
-                mask: false,
-                visible: true,
-                type: ToastTypeEnum.SUCCESS,
-              })}
+              onClick={() =>
+                handleShowToast({
+                  title: '成功提示',
+                  mask: false,
+                  visible: true,
+                  type: ToastTypeEnum.SUCCESS,
+                })
+              }
             >
               成功提示
             </HuiButton>
@@ -96,12 +102,14 @@ const ToastPage: React.FC = () => {
             <HuiButton
               block
               type='secondary'
-              onClick={() => handleShowToast({
-                title: '警示信息',
-                mask: false,
-                visible: true,
-                type: ToastTypeEnum.WARNING,
-              })}
+              onClick={() =>
+                handleShowToast({
+                  title: '警示信息',
+                  mask: false,
+                  visible: true,
+                  type: ToastTypeEnum.WARNING,
+                })
+              }
             >
               警示信息
             </HuiButton>
@@ -110,12 +118,14 @@ const ToastPage: React.FC = () => {
             <HuiButton
               block
               type='secondary'
-              onClick={() => handleShowToast({
-                title: '失败提示',
-                mask: false,
-                visible: true,
-                type: ToastTypeEnum.FAIL,
-              })}
+              onClick={() =>
+                handleShowToast({
+                  title: '失败提示',
+                  mask: false,
+                  visible: true,
+                  type: ToastTypeEnum.FAIL,
+                })
+              }
             >
               失败提示
             </HuiButton>
@@ -124,13 +134,15 @@ const ToastPage: React.FC = () => {
             <HuiButton
               block
               type='secondary'
-              onClick={() => handleShowToast({
-                title: '自定义提示',
-                mask: false,
-                visible: true,
-                type: ToastTypeEnum.CUSTOM,
-                icon: '008-likecircle',
-              })}
+              onClick={() =>
+                handleShowToast({
+                  title: '自定义提示',
+                  mask: false,
+                  visible: true,
+                  type: ToastTypeEnum.CUSTOM,
+                  icon: '008-likecircle',
+                })
+              }
             >
               自定义提示
             </HuiButton>

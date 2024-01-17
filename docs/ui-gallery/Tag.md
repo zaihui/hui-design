@@ -10,8 +10,7 @@
 
 ```jsx
 import { HuiTag } from 'hui-design'
-
-<HuiTag>标签文字</HuiTag>
+;<HuiTag>标签文字</HuiTag>
 ```
 
 代码示例

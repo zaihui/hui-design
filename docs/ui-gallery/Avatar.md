@@ -1,8 +1,8 @@
-# Image组件
+# Image 组件
 
 ## 介绍
 
-基于Image组件，针对头像场景进行再次封装的组件
+基于 Image 组件，针对头像场景进行再次封装的组件
 
 ## 使用指南
 
@@ -13,7 +13,7 @@ import React from 'react'
 import { HuiAvatar } from '@zaihui/hui-design'
 
 const imgUrl = ''
-const Demo: React.FC = () =>  (
+const Demo: React.FC = () => (
   <HuiAvatar src={imgUrl} size='medium' borderColor='#ddd' type='circle' />
 )
 

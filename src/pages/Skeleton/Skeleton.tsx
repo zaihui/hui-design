@@ -36,7 +36,9 @@ const SkeletonDemo: React.FC = () => (
           <Skeleton avatar={{ size: 40 }} />
         </SubGroupSection>
         <SubGroupSection title='自定义行数和宽度'>
-          <Skeleton paragraph={{ rows: 5, width: ['30%', '20%', '80%', '100%', '50%'] }} />
+          <Skeleton
+            paragraph={{ rows: 5, width: ['30%', '20%', '80%', '100%', '50%'] }}
+          />
         </SubGroupSection>
       </GroupSection>
     </View>

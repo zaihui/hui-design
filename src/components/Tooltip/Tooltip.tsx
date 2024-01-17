@@ -22,7 +22,8 @@ export interface HuiTooltipProps {
   /** 关闭提示的方法 */
   onClose: () => void
   /** 气泡位置，默认top */
-  placement?: | 'top'
+  placement?:
+    | 'top'
     | 'topRight'
     | 'topLeft'
     | 'bottom'
@@ -109,15 +110,25 @@ export default class Tooltip extends React.Component<HuiTooltipProps> {
     } = this.props
 
     return (
-      <View className={`hui-tooltip-container ${className}`} style={containerStyle}>
+      <View
+        className={`hui-tooltip-container ${className}`}
+        style={containerStyle}
+      >
         {children}
-        {visible && <View className={`hui-tooltip ${placementCls[placement]}`} style={popStyle}>
-          <View className='hui-tooltip-content'>{content}</View>
-          <View className='hui-tooltip-arrow'></View>
-          {closable && <View className='hui-tooltip-close' onClick={this.handleClose}>
-            <HuiIcon name='006-close3' color='#fff' size={10} />
-          </View>}
-        </View>}
+        {visible && (
+          <View
+            className={`hui-tooltip ${placementCls[placement]}`}
+            style={popStyle}
+          >
+            <View className='hui-tooltip-content'>{content}</View>
+            <View className='hui-tooltip-arrow'></View>
+            {closable && (
+              <View className='hui-tooltip-close' onClick={this.handleClose}>
+                <HuiIcon name='006-close3' color='#fff' size={10} />
+              </View>
+            )}
+          </View>
+        )}
       </View>
     )
   }

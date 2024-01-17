@@ -29,7 +29,7 @@ export interface HuiShareProps {
   onRefuseWritePhotosAlbum?: () => void
 }
 
-const HuiShare: React.FC<HuiShareProps> = props => {
+const HuiShare: React.FC<HuiShareProps> = (props) => {
   const {
     url,
     loading,
@@ -108,14 +108,17 @@ const HuiShare: React.FC<HuiShareProps> = props => {
           width={260}
           height={360}
         />
-     )}
+      )}
     </View>
   )
 
   const renderMultipleContent = () => (
     <View className='hui-share-multiple-content'>
-      {visible && !!url && !!url.filter(v => !!v).length && (
-        <ShareSwiper urlList={url} handleChange={index => setCurrentPostIndex(index)} />
+      {visible && !!url && !!url.filter((v) => !!v).length && (
+        <ShareSwiper
+          urlList={url}
+          handleChange={(index) => setCurrentPostIndex(index)}
+        />
       )}
     </View>
   )
@@ -126,7 +129,11 @@ const HuiShare: React.FC<HuiShareProps> = props => {
         position='bottom'
         visible={visible}
         className={className}
-        style={{ borderRadius: `${pxTransform(24)} ${pxTransform(24)} 0 0`, overflow: 'hidden', ...style }}
+        style={{
+          borderRadius: `${pxTransform(24)} ${pxTransform(24)} 0 0`,
+          overflow: 'hidden',
+          ...style,
+        }}
         onClose={onClose}
       >
         <View className='hui-share'>

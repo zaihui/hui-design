@@ -2,10 +2,11 @@
 @import '../../styles/variables.scss';
 
 .hui-radio {
+  position: relative;
   display: inline-flex;
   align-items: center;
 
-  .hui-radio-icon {
+  &-icon {
     box-sizing: border-box;
     display: inline-flex;
     flex-shrink: 0;
@@ -32,7 +33,17 @@
     }
   }
 
-  .hui-radio-content {
+  &-mask {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+  }
+
+  &-content {
+    position: relative;
+    z-index: 1;
     padding-left: $hui-radio-content-padding-left;
     font-size: $hui-font-body-m;
   }
@@ -40,11 +51,11 @@
   &.disabled {
     .hui-radio-icon {
       background-color: $hui-radio-icon-disabled-bg-color;
-      opacity: .35;
+      opacity: 0.35;
     }
 
     .hui-radio-content {
-      opacity: .35;
+      opacity: 0.35;
     }
   }
 }

@@ -1,8 +1,8 @@
 # Divider 分割线
 
 ## 介绍
-分割线
 
+分割线
 
 ## 使用指南
 
@@ -10,8 +10,7 @@
 
 ```jsx
 import { Divider } from '@zaihui/hui-design'
-
-<Divider />
+;<Divider />
 ```
 
 代码示例
@@ -21,6 +20,7 @@ import { Divider } from '@zaihui/hui-design'
 ## 参数
 
 ### Divider
+
 <auto-doc path="components/Divider/Divider.tsx" />
 
 <demo-phone page="/pages/Divider/Divider" />

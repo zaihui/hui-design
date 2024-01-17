@@ -23,8 +23,8 @@ const Demo: React.FC = () => {
 
   return (
     <View>
-      <HuiCheckboxGroup onChange={values => setCheckedList(values)}>
-        {OPTIONS.map(option => (
+      <HuiCheckboxGroup onChange={(values) => setCheckedList(values)}>
+        {OPTIONS.map((option) => (
           <HuiCheckbox value={options.label}>{options.label}</HuiCheckbox>
         ))}
       </HuiCheckboxGroup>

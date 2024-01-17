@@ -23,7 +23,7 @@ const handleTouchMove = (e: CommonEvent) => {
 }
 
 const prefix = 'hui-action-sheet'
-const HuiActionSheet: React.FC<HuiActionSheetProps> = props => {
+const HuiActionSheet: React.FC<HuiActionSheetProps> = (props) => {
   const {
     className = '',
     style,
@@ -40,7 +40,7 @@ const HuiActionSheet: React.FC<HuiActionSheetProps> = props => {
     if (!visible) {
       doClose()
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible])
 
   const rootClass = cx(className, prefix, {
@@ -53,17 +53,13 @@ const HuiActionSheet: React.FC<HuiActionSheetProps> = props => {
     }
   }
 
-  const handleClose = e => {
+  const handleClose = (e) => {
     setIsOpened(false)
     doClose(e)
   }
 
   return (
-    <View
-      className={rootClass}
-      style={style}
-      onTouchMove={handleTouchMove}
-    >
+    <View className={rootClass} style={style} onTouchMove={handleTouchMove}>
       <View onClick={handleClose} className={`${prefix}-mask`} />
       <View className={`${prefix}-container`}>
         <View className={`${prefix}-content`}>

@@ -10,7 +10,7 @@ interface PageHeaderProps {
   desc: string
 }
 
-const PageHeader: React.FC<PageHeaderProps> = props => {
+const PageHeader: React.FC<PageHeaderProps> = (props) => {
   const { image, title, desc } = props
 
   return (
@@ -18,7 +18,10 @@ const PageHeader: React.FC<PageHeaderProps> = props => {
       <View className='title'>
         {image && (
           <Image
-            style={{ width: Taro.pxTransform(33), height: Taro.pxTransform(33) }}
+            style={{
+              width: Taro.pxTransform(33),
+              height: Taro.pxTransform(33),
+            }}
             src={image}
           />
         )}

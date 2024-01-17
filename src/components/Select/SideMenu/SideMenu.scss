@@ -1,5 +1,5 @@
-@import "../../../styles/variables.scss";
-@import "../../../styles/colors.scss";
+@import '../../../styles/variables.scss';
+@import '../../../styles/colors.scss';
 
 $hui-select-side-menu-background: #f2f3f5;
 $hui-select-side-menu-item-active-color: $hui-theme-color-background;
@@ -27,7 +27,7 @@ $hui-select-side-menu-item-active-color: $hui-theme-color-background;
         left: 0;
         width: px(4);
         height: px(16);
-        content: "";
+        content: '';
         background: $hui-theme-color-primary;
         transform: translateY(-50%);
       }

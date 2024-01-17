@@ -106,9 +106,9 @@ npm run icon:sync //at.alicdn.com/t/font_xxxxxx.css
 
 ```scss
 @font-face {
-  font-family: "hui-design-iconfont";
+  font-family: 'hui-design-iconfont';
   /* stylelint-disable-next-line scss/operator-no-unspaced */
-  src: url(data:application/font-woff2;charset=utf-8;base64,xxxxxx==) format("woff2");
+  src: url(data:application/font-woff2;charset=utf-8;base64,xxxxxx==) format('woff2');
   font-style: normal;
   font-weight: normal;
 }
@@ -120,7 +120,7 @@ npm run icon:sync //at.alicdn.com/t/font_xxxxxx.css
 }
 
 .hui-icon-001-success::before {
-  content: "\ea14";
+  content: '\ea14';
 }
 ```
 

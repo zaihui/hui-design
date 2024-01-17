@@ -2,22 +2,19 @@ const fs = require('fs')
 const path = require('path')
 
 // 获取目录下的全部文件
-const getFiles = dir =>
-  fs.readdirSync(dir)
-    .filter(
-      sub => fs.statSync(path.join(dir, sub)).isFile(),
-    )
+const getFiles = (dir) =>
+  fs.readdirSync(dir).filter((sub) => fs.statSync(path.join(dir, sub)).isFile())
 
 // 获取目录对应的sidebar
-const getSidebarOfDir = dir =>
+const getSidebarOfDir = (dir) =>
   // 注意这里的获取文件目录与代码所在的文件路径有关
   getFiles(path.resolve(__dirname, '../', dir))
     // 只取md文件
-    .filter(name => name.endsWith('.md'))
+    .filter((name) => name.endsWith('.md'))
     // 去掉文件的扩展名
-    .map(name => name.replace(/\.md$/g, ''))
+    .map((name) => name.replace(/\.md$/g, ''))
     // 忽略掉readme文件
-    .filter(name => name.toLowerCase() !== 'readme')
+    .filter((name) => name.toLowerCase() !== 'readme')
 
 /**
  * vuepress默认的主体配置可以为文档页面生成侧边栏
@@ -38,8 +35,8 @@ const getSidebarOfDir = dir =>
  * https://github.com/vuejs/vuepress/blob/master/packages/docs/docs/.vuepress/config.js
  */
 
-module.exports = navList => navList
-  .reduce((result, nav) => {
+module.exports = (navList) =>
+  navList.reduce((result, nav) => {
     const { link } = nav
     return {
       ...result,

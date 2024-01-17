@@ -1,6 +1,6 @@
 /* stylelint-disable csstree/validator */
-@import "../../styles/colors.scss";
-@import "../../styles/variables.scss";
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
 
 @mixin loading-size($size) {
   width: px($size);
@@ -49,7 +49,7 @@
       color: $hui-button-default-color;
       background: $hui-theme-color-primary;
       border: px(1) solid $hui-theme-color-primary;
-      opacity: .3;
+      opacity: 0.3;
     }
   }
 
@@ -62,7 +62,7 @@
       color: $hui-theme-color-primary;
       background: transparent;
       border: px(1) solid $hui-theme-color-primary;
-      opacity: .3;
+      opacity: 0.3;
     }
   }
 
@@ -79,7 +79,7 @@
       padding: $hui-button-type-text-padding !important;
       color: $hui-theme-color-primary;
       background: transparent !important;
-      opacity: .3;
+      opacity: 0.3;
     }
 
     .loading-area {
@@ -102,7 +102,7 @@
     font-size: $hui-button-font-size-s;
 
     .loading-area {
-      scale: (.6);
+      scale: (0.6);
     }
   }
 
@@ -112,7 +112,7 @@
     font-size: $hui-button-font-size-m;
 
     .loading-area {
-      scale: (.8);
+      scale: (0.8);
     }
   }
 
@@ -141,7 +141,7 @@
   }
 
   &.hover {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &::after {

@@ -1,14 +1,15 @@
-import React from 'react'
-import cx from 'classnames'
-import { View, Button, Block } from '@tarojs/components'
-import { ITouchEvent, BaseEventOrig } from '@tarojs/components/types/common'
+import { Block, Button, View } from '@tarojs/components'
 import { ButtonProps } from '@tarojs/components/types/Button'
+import { BaseEventOrig, ITouchEvent } from '@tarojs/components/types/common'
+import cx from 'classnames'
+import React from 'react'
 
 import { pxTransform } from '../../utils'
 import HuiIcon from '../Icon/Icon'
 import { HIconType } from '../Icon/type'
 
 export interface HuiButtonProps {
+  id?: string
   /** 按钮宽度 */
   width?: number
   /** 按钮类型: 主要按钮、次要按钮（幽灵按钮）、文字按钮 */
@@ -35,28 +36,30 @@ export interface HuiButtonProps {
   /** 按钮辅助文字，仅在large为large时可用 */
   extra?: string
   className?: string
+  /** 表单事件 */
+  formType?: keyof ButtonProps.FormType
   /** 点击事件 */
   onClick?: (e: ITouchEvent) => void
   /** 微信开放能力 */
   openType?: ButtonProps.OpenType
   onGetUserInfo?: (
-    e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>
+    e: BaseEventOrig<ButtonProps.onGetUserInfoEventDetail>,
   ) => void
   onGetPhoneNumber?: (
-    e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>
+    e: BaseEventOrig<ButtonProps.onGetPhoneNumberEventDetail>,
   ) => void
-  onChooseAvatar?: <T>(
-    e: BaseEventOrig<T>
-  ) => void
+  onChooseAvatar?: <T>(e: BaseEventOrig<T>) => void
   onContact?: (e: BaseEventOrig<ButtonProps.onContactEventDetail>) => void
   onOpenSetting?: (
-    e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>
+    e: BaseEventOrig<ButtonProps.onOpenSettingEventDetail>,
   ) => void
+  onAgreePrivacyAuthorization?: (e: BaseEventOrig<any>) => void
   children?: React.ReactNode
 }
 
-const HuiButton: React.FC<HuiButtonProps> = props => {
+const HuiButton: React.FC<HuiButtonProps> = (props) => {
   const {
+    id,
     size = 'medium',
     type = 'primary',
     color = '',
@@ -74,11 +77,13 @@ const HuiButton: React.FC<HuiButtonProps> = props => {
     openType,
     children,
     className = '',
+    formType,
     onGetUserInfo,
     onGetPhoneNumber,
     onContact,
     onOpenSetting,
     onChooseAvatar,
+    onAgreePrivacyAuthorization,
   } = props
 
   const buttonStyle = {
@@ -89,55 +94,62 @@ const HuiButton: React.FC<HuiButtonProps> = props => {
     ...style,
   }
 
-  const handleClick = (e: ITouchEvent) => {
-    if (!disabled && onClick) {
-      onClick(e)
-    }
-  }
-
   const iconSizeMap = {
-    'small': 13,
-    'medium': 14,
-    'large': 16,
+    small: 13,
+    medium: 14,
+    large: 16,
   }
 
   const buttonDisabled = disabled || loading
 
-  const buttonContent = <Block>{
-    prefixIcon
-    && <HuiIcon
-      name={prefixIcon}
-      style={{ marginRight: pxTransform(8) }}
-      size={iconSizeMap[size]}
-    />
+  const handleClick = (e: ITouchEvent) => {
+    if (!buttonDisabled && onClick) {
+      onClick(e)
+    }
   }
-    <View className={cx('content-wrapper', { hidden: loading })} >
-      <View className='button-text'>{children}</View>
-      {extra && <View className='extra'>{extra}</View>}
-    </View>
-    {
-      suffixIcon
-      && <HuiIcon
-        name={suffixIcon}
-        style={{ marginLeft: pxTransform(8) }}
-        size={iconSizeMap[size]}
-      />
-    }</Block >
+
+  const buttonContent = (
+    <Block>
+      {prefixIcon && (
+        <HuiIcon
+          name={prefixIcon}
+          style={{ marginRight: pxTransform(8) }}
+          size={iconSizeMap[size]}
+        />
+      )}
+      <View className={cx('content-wrapper', { hidden: loading })}>
+        <View className='button-text'>{children}</View>
+        {extra && <View className='extra'>{extra}</View>}
+      </View>
+      {suffixIcon && (
+        <HuiIcon
+          name={suffixIcon}
+          style={{ marginLeft: pxTransform(8) }}
+          size={iconSizeMap[size]}
+        />
+      )}
+    </Block>
+  )
 
   return (
     <Button
+      id={id}
+      hoverClass='hover'
+      formType={formType}
       openType={openType}
-      onGetPhoneNumber={onGetPhoneNumber}
-      onGetUserInfo={onGetUserInfo}
+      style={buttonStyle}
+      disabled={buttonDisabled}
+      onClick={handleClick}
       onContact={onContact}
+      onGetUserInfo={onGetUserInfo}
       onOpenSetting={onOpenSetting}
+      onGetPhoneNumber={onGetPhoneNumber}
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       onChooseAvatar={onChooseAvatar}
-      style={buttonStyle}
-      hoverClass='hover'
-      disabled={buttonDisabled}
-      onClick={handleClick}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      onAgreePrivacyAuthorization={onAgreePrivacyAuthorization}
       className={cx(
         `hui-button ${size} ${type} radius-${radiusType} ${className}`,
         { disabled: buttonDisabled },

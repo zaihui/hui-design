@@ -2,12 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import fetch from 'node-fetch'
 
-export const getIconFileContent = (
-  base64String,
-  fontFamily,
-  className,
-  sortedIcons,
-) => {
+export const getIconFileContent = (base64String, fontFamily, className, sortedIcons) => {
   const fontFaceString = `@font-face {
   font-family: "${fontFamily}";
   /* stylelint-disable-next-line scss/operator-no-unspaced */
@@ -25,24 +20,24 @@ export const getIconFileContent = (
 }
 
 export const getInvalidNameIcons = (icons, classPattern) =>
-  icons
-    .filter(item => !classPattern.test(item))
-    .map(item => item.split('::')[0])
+  icons.filter((item) => !classPattern.test(item)).map((item) => item.split('::')[0])
 
-export const getFormatIcons = origin => origin
-  .replace(/(^[\r\n]*)|([\r\n]*$)/g, '')
-  .split('\n\n').slice(2)
-  .map(item => item.replace(/:before/g, '::before'))
-  .sort((a, b) => (a === b ? 0 : (a > b ? 1 : -1)))
+export const getFormatIcons = (origin) =>
+  origin
+    .replace(/(^[\r\n]*)|([\r\n]*$)/g, '')
+    .split('\n\n')
+    .slice(2)
+    .map((item) => item.replace(/:before/g, '::before'))
+    .sort((a, b) => (a === b ? 0 : a > b ? 1 : -1))
 
 export const getIconNames = (origin, prefix) =>
   getFormatIcons(origin)
-    .filter(icon => icon.indexOf('::') !== -1)
-    .map(icon => icon.split('::')[0].slice(1))
-    .map(icon => icon.replace(new RegExp(`^${prefix}`), ''))
+    .filter((icon) => icon.indexOf('::') !== -1)
+    .map((icon) => icon.split('::')[0].slice(1))
+    .map((icon) => icon.replace(new RegExp(`^${prefix}`), ''))
 
-export const getTypesFileContent = icons => {
-  const typeString = icons.map(icon => `'${icon}'`).join('\n  | ')
+export const getTypesFileContent = (icons) => {
+  const typeString = icons.map((icon) => `'${icon}'`).join('\n  | ')
 
   return `/**
  * 此文件不要手动改，用iconSync脚本同步
@@ -53,7 +48,7 @@ export type HIconType =
 `
 }
 
-const iconSync = async({
+const iconSync = async ({
   iconName,
   /** iconfont中设置的FontClass/Symbol前缀，用来去掉前缀生成类型名 */
   iconNamePrefix,
@@ -65,11 +60,13 @@ const iconSync = async({
   /** 生成的类型文件目标地址, 没有这个参数表示不生成类型文件 */
   outputTypePath,
 }) => {
-  const [,, url] = process.argv
+  const [, , url] = process.argv
   if (/\/(font.*)\.css/.test(url)) {
     // fetch 字体相关文件
     const iconsScss = await (await (await fetch(`http:${url}`)).buffer()).toString('utf-8')
-    const woff2 = await (await (await fetch(`http:${url.replace(/\.css$/, '.woff2')}`)).buffer()).toString('base64')
+    const woff2 = await (
+      await (await fetch(`http:${url.replace(/\.css$/, '.woff2')}`)).buffer()
+    ).toString('base64')
 
     // 获取格式化后的icon数组
     const sortedIcons = getFormatIcons(iconsScss)

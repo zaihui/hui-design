@@ -1,13 +1,12 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import cx from 'classnames'
 import Taro from '@tarojs/taro'
 
 import { ScrollView, View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
+import isEqual from 'lodash/isEqual'
 
-import {
-  selectorQueryClientRect,
-} from '../../utils'
+import { selectorQueryClientRect } from '../../utils'
 import HuiIcon from '../Icon/Icon'
 import HuiSticky from '../Sticky/Sticky'
 
@@ -20,8 +19,10 @@ export interface HuiTabsProps extends ViewProps {
   scroll?: boolean
   /** 是否使用动画切换Tab，使用后，Tab容器的高度将保持不变 */
   animated?: boolean
-  /** 是否使用微笑样式（双行标题） */
+  /** 是否使用微笑样式 */
   smile?: boolean
+  /** 是否使用双行标题, 默认为 false */
+  hasSubTitle?: boolean
   /** 是否开启阴影，默认开启 */
   shadow?: boolean
   /** 指示器颜色、微笑样式下高亮标签颜色 */
@@ -30,6 +31,8 @@ export interface HuiTabsProps extends ViewProps {
   sticky?: boolean
   /** 吸顶效果下的offsetTop */
   offsetTop?: number
+  /** 自动滚动开启 小程序上可能会有白屏bug 慎用！ */
+  autoScroll?: boolean
   style?: React.CSSProperties
   className?: string
   /** 点击标签时触发 */
@@ -46,83 +49,99 @@ interface ITab {
   name: number | string
 }
 
-const HuiTabs: React.FC<HuiTabsProps> = props => {
+const HuiTabs: React.FC<HuiTabsProps> = (props) => {
   const {
     active,
     scroll = false,
     animated = false,
     smile = false,
+    hasSubTitle = false,
     shadow = true,
     onChange = defaultProps.onChange,
     indicatorColor = '',
     sticky = false,
     offsetTop = 0,
     children,
-    style,
+    style = {},
     className = '',
+    autoScroll = false,
     ...rest
   } = props
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const tabsRef = useRef<any>()
-  const tabsInfos = useRef<Taro.NodesRef.BoundingClientRectCallbackResult[]>([])
-  const tabsWidth = useRef<number>(0)
+  const [tabsInfos, setTabsInfos] = useState<
+    Taro.NodesRef.BoundingClientRectCallbackResult[]
+  >([])
+  const [tabsWidth, setTabsWidth] = useState<number>(0)
   const [tabs, setTabs] = useState<ITab[]>([])
 
-  const [activeTabInfo, setActiveTabInfo] = useState<{
-    width: number
-    left: number
-  }>({ width: 0, left: 0 })
-  const [tabsWrapperScrollLeft, setTabsWrapperScrollLeft] = useState<number>(0)
+  const [defaultTabInfo] = useState({
+    width: 0,
+    left: 0,
+    tabsWrapperScrollLeft: 0,
+  })
 
   useEffect(() => {
-    Taro.nextTick(async () => {
-      if (tabs.length <= 0 || !tabsRef.current) { return }
-      const tabsItemEle = tabsRef.current?.childNodes
-      tabsInfos.current = []
-      for (let i = 0; tabsItemEle && i < tabsItemEle.length; i++) {
-        if (tabsItemEle[i].childNodes[0] && tabsItemEle[i].childNodes[0].childNodes[0]) {
-          const res = await selectorQueryClientRect(`#${tabsItemEle[i].childNodes[0].childNodes[0].uid}`)
-          tabsInfos.current.push(res)
-        }
-      }
-      const res = await selectorQueryClientRect(`#${tabsRef.current.uid}`)
-      tabsWidth.current = res.width
-      updateActiveTabInfo()
-    })
-  }, [tabs])
+    if (!children || !Array.isArray(children)) {
+      setTabs([])
+      return
+    }
+    const newTabs = React.Children.map(children, (item, index) => ({
+      title: item?.props?.title,
+      subTitle: item?.props?.subTitle,
+      name: item?.props?.name ?? index,
+    }))
+    setTabs((prev) => (isEqual(prev, newTabs) ? prev : newTabs))
+  }, [children])
 
-  const updateActiveTabInfo = useCallback(() => {
-    if (!tabs) { return }
+  const activeTabInfo = useMemo(() => {
+    if (!tabs) {
+      return defaultTabInfo
+    }
     let index = active
     if (typeof active === 'string') {
-      index = tabs.findIndex(t => t.name === active)
+      index = tabs.findIndex((t) => t.name === active)
     }
-    const activeRes = tabsInfos.current[index]
-    if (!activeRes) { return }
-    setActiveTabInfo({
+    const activeRes = tabsInfos[index]
+    if (!activeRes) {
+      return defaultTabInfo
+    }
+    return {
       left: activeRes.left,
       width: activeRes.width,
-    })
-    if (scroll) {
-      setTabsWrapperScrollLeft(activeRes.left + activeRes.width / 2 - tabsWidth.current / 2)
+      tabsWrapperScrollLeft:
+        scroll && activeRes.left && activeRes.width && tabsWidth
+          ? activeRes.left + activeRes.width / 2 - tabsWidth / 2
+          : 0,
     }
-  }, [active, scroll, tabs])
+  }, [active, defaultTabInfo, scroll, tabs, tabsInfos, tabsWidth])
 
   useEffect(() => {
-    updateActiveTabInfo()
-  }, [updateActiveTabInfo])
-
-  const handleUpdateParent = (i: number) => tabValue => {
-    setTabs(t => {
-      const newTab = t.slice()
-      newTab[i] = tabValue
-      if (!newTab[i].name) {
-        newTab[i].name = i
-      }
-      return newTab
-    })
-  }
+    if (autoScroll) {
+      Taro.nextTick(async () => {
+        if (tabs.length <= 0 || !tabsRef.current) {
+          return
+        }
+        const tabsItemEle = tabsRef.current?.childNodes
+        const temp: Taro.NodesRef.BoundingClientRectCallbackResult[] = []
+        for (let i = 0; tabsItemEle && i < tabsItemEle.length; i++) {
+          if (tabsItemEle[i]?.childNodes[0]?.childNodes[0]) {
+            const childNode = tabsItemEle[i].childNodes[0].childNodes[0]
+            const childNodeId =
+              hasSubTitle && childNode?.childNodes?.[0]?.uid
+                ? childNode.childNodes[0]?.uid
+                : childNode?.uid
+            const res = await selectorQueryClientRect(`#${childNodeId}`)
+            temp.push(res)
+          }
+        }
+        const res = await selectorQueryClientRect(`#${tabsRef?.current?.uid}`)
+        setTabsInfos(temp)
+        setTabsWidth(res?.width)
+      })
+    }
+  }, [tabs, hasSubTitle])
 
   const handleClickTabs = (name: number | string) => {
     onChange(name)
@@ -131,22 +150,25 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
   const getChildren = () => {
     const fn = (child, index) =>
       React.cloneElement(child, {
-        updateParent: handleUpdateParent(index),
-        name: child.props.name || index,
+        name: child?.props?.name || index,
         active,
         animated,
       })
-    return (children && React.Children.map(children, fn)) || null
+    return (
+      (children &&
+        Array.isArray(children) &&
+        React.Children.map(children, fn)) ||
+      null
+    )
   }
 
   const tabsSize = React.Children.count(children)
 
   const getTabsIndicator = () =>
-    (smile ? (
+    smile ? (
       <View
         className='tabs-indicator-smile'
         style={{
-          left: activeTabInfo.left + activeTabInfo.width / 2,
           color: indicatorColor,
         }}
       >
@@ -156,18 +178,14 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
       <View
         className='tabs-indicator'
         style={{
-          width: activeTabInfo.width,
-          left: activeTabInfo.left,
           background: indicatorColor,
         }}
       ></View>
-    ))
+    )
 
   const getTabsItem = (tab: ITab) =>
-    (smile ? (
-      <View
-        className='tabs-title-smile'
-      >
+    hasSubTitle ? (
+      <View className='tabs-title-twin'>
         <View
           className='title'
           style={{ color: tab.name === active ? indicatorColor : '' }}
@@ -183,11 +201,13 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
       </View>
     ) : (
       <View
-        className='tabs-title'
+        className={cx('tabs-title', {
+          [`tabs-title-smile`]: smile,
+        })}
       >
         {tab.title}
       </View>
-    ))
+    )
 
   const tabsContent = (
     <View
@@ -199,7 +219,7 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
         { 'no-shadow': !shadow },
       )}
     >
-      {tabs.map(tab => (
+      {tabs.map((tab) => (
         <View
           key={`${tab.name}`}
           className={`tabs-item length-${tabsSize}`}
@@ -209,14 +229,14 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
             className={cx('tabs-item-wrapper', { active: active === tab.name })}
           >
             {getTabsItem(tab)}
+            {getTabsIndicator()}
           </View>
         </View>
       ))}
-      {getTabsIndicator()}
     </View>
   )
 
-  const activeTabIndex = tabs.findIndex(t => t.name === active)
+  const activeTabIndex = tabs.findIndex((t) => t.name === active)
 
   const huiTabsBar = (
     <View {...rest} className={cx('hui-tabs-bar', { 'no-shadow': !shadow })}>
@@ -225,7 +245,7 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
           enhanced
           showScrollbar={false}
           scrollX={scroll}
-          scrollLeft={tabsWrapperScrollLeft}
+          scrollLeft={activeTabInfo.tabsWrapperScrollLeft}
           scrollWithAnimation
           className='scrollable-tabs-wrapper'
         >
@@ -245,9 +265,13 @@ const HuiTabs: React.FC<HuiTabsProps> = props => {
       )}
       <View className='hui-tabs-panel-wrapper'>
         <View
-          className={cx('hui-tabs-panel', { 'switch-with-animation': animated })}
+          className={cx('hui-tabs-panel', {
+            'switch-with-animation': animated,
+          })}
           style={
-            animated ? { transform: `translateX(-${100 * activeTabIndex}%)` } : {}
+            animated
+              ? { transform: `translateX(-${100 * activeTabIndex}%)` }
+              : {}
           }
         >
           {getChildren()}

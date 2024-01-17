@@ -4,9 +4,9 @@ const webpack = require('webpack')
 const sidebarCreator = require('./sidebarCreator')
 const { homepage } = require('../../package.json')
 
-const projectRootResolve = dir => path.join(__dirname, '../../', dir)
+const projectRootResolve = (dir) => path.join(__dirname, '../../', dir)
 
-const loaderResolve = file => path.join(__dirname, './loader', file)
+const loaderResolve = (file) => path.join(__dirname, './loader', file)
 
 const navBar = [
   {
@@ -45,9 +45,7 @@ module.exports = {
     editLinks: true,
     editLinkText: '给这篇文档提PR！',
     logo: 'https://pasta.zaihui.com.cn/fe/extension/pangu-ext/-/avatar',
-    nav: [
-      ...navBar,
-    ],
+    nav: [...navBar],
     sidebar: sidebarCreator(navBar),
     // 配置侧边栏是否展示当前文档的标题链接
     displayAllHeaders: true,
@@ -82,9 +80,10 @@ module.exports = {
       new webpack.DefinePlugin({
         'process.env': {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-          H5_BASE_URL: process.env.BUILD_ENV === 'prod'
-            ? JSON.stringify('/docs/hui-design-h5/#')
-            : JSON.stringify('/docs/hui-design-h5-alpha/#'),
+          H5_BASE_URL:
+            process.env.BUILD_ENV === 'prod'
+              ? JSON.stringify('/docs/hui-design-h5/#')
+              : JSON.stringify('/docs/hui-design-h5-alpha/#'),
         },
       }),
     ],

@@ -14,9 +14,18 @@ import { HuiGrid } from '@zaihui/hui-design'
 
 const Demo: React.FC = () => (
   <HuiGrid>
-    <HuiGridItem image='https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1' text='天猫新品' />
-    <HuiGridItem image='https://gw.alicdn.com/tfs/TB1LvIxVAvoK1RjSZFDXXXY3pXa-183-144.png?getAvatar=1' text='今日爆款' />
-    <HuiGridItem image='https://gw.alicdn.com/tfs/TB19uWKXkCy2eVjSZPfXXbdgpXa-183-144.png?getAvatar=1' text='天猫国际' />
+    <HuiGridItem
+      image='https://gw.alicdn.com/tfs/TB1OIxTcLc3T1VjSZLeXXbZsVXa-183-144.png?getAvatar=1'
+      text='天猫新品'
+    />
+    <HuiGridItem
+      image='https://gw.alicdn.com/tfs/TB1LvIxVAvoK1RjSZFDXXXY3pXa-183-144.png?getAvatar=1'
+      text='今日爆款'
+    />
+    <HuiGridItem
+      image='https://gw.alicdn.com/tfs/TB19uWKXkCy2eVjSZPfXXbdgpXa-183-144.png?getAvatar=1'
+      text='天猫国际'
+    />
   </HuiGrid>
 )
 

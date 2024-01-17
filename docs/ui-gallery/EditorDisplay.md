@@ -1,4 +1,4 @@
-# EditorDisplay组件
+# EditorDisplay 组件
 
 ## 介绍
 
@@ -14,15 +14,14 @@ import { EditorDisplay } from '@zaihui/hui-design'
 
 const Demo: React.FC = () => (
   <>
-    <EditorDisplay type='noContent' image=''>demo1</EditorDisplay>
-    <EditorDisplay type='withContent' image=''>demo2</EditorDisplay>
+    <EditorDisplay type='noContent' image=''>
+      demo1
+    </EditorDisplay>
+    <EditorDisplay type='withContent' image=''>
+      demo2
+    </EditorDisplay>
     // 支持自定义内部样式
-    <EditorDisplay
-      image=''
-      type=''
-      headerContent=''
-      footerContent=''
-    >
+    <EditorDisplay image='' type='' headerContent='' footerContent=''>
       demo3
     </EditorDisplay>
   </>
@@ -38,6 +37,7 @@ export default Demo
 ## 参数
 
 ### EditorDisplay
+
 <auto-doc path="components/EditorDisplay/EditorDisplay.tsx" />
 
 <demo-phone page="/pages/EditorDisplay/EditorDisplay" />

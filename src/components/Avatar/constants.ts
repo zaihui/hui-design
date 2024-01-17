@@ -10,5 +10,5 @@ export type AvatarType = 'circle' | 'square'
  * small 40
  * medium 60
  * large 80
-*/
+ */
 export type AvatarSize = 'small' | 'medium' | 'large'

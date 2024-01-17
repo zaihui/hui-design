@@ -15,7 +15,7 @@ export interface HuiActionSheetItemProps {
 }
 
 const prefix = 'hui-action-sheet'
-const Item: React.FC<HuiActionSheetItemProps> = props => {
+const Item: React.FC<HuiActionSheetItemProps> = (props) => {
   const {
     onClick,
     className,
@@ -25,27 +25,19 @@ const Item: React.FC<HuiActionSheetItemProps> = props => {
     children,
   } = props
 
-  const rootClass = cx(
-    `${prefix}-item`,
-    className,
-    {
-      [`${prefix}-item-has-active`]: hasActive && !disabled,
-      [`${prefix}-item-disabled`]: disabled,
-    },
-  )
+  const rootClass = cx(`${prefix}-item`, className, {
+    [`${prefix}-item-has-active`]: hasActive && !disabled,
+    [`${prefix}-item-disabled`]: disabled,
+  })
 
-  const handleClick = e => {
+  const handleClick = (e) => {
     if (typeof onClick === 'function' && !disabled) {
       onClick(e)
     }
   }
 
   return (
-    <View
-      onClick={handleClick}
-      className={rootClass}
-      style={style}
-    >
+    <View onClick={handleClick} className={rootClass} style={style}>
       {children}
     </View>
   )

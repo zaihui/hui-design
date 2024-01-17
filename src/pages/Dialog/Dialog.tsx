@@ -9,15 +9,18 @@ import GroupSection from '@/demoComponents/GroupSection'
 
 import './Dialog.scss'
 
-const MOCK_IMAGE = 'https://s3.cn-north-1.amazonaws.com.cn/media.zaihuiba.com/campaign_pics/003f28c06d9d47ac82b4723e69e7e8f8.jpeg'
+const MOCK_IMAGE =
+  'https://s3.cn-north-1.amazonaws.com.cn/media.zaihuiba.com/campaign_pics/003f28c06d9d47ac82b4723e69e7e8f8.jpeg'
 
 const DialogDemoPage: React.FC = () => {
   const [simpleDialogVisible, setSimpleDialogVisible] = useState(false)
   const [imageDialogVisible, setImageDialogVisible] = useState(false)
-  const [bottomCloseDialogVisible, setBottomCloseDialogVisible] = useState(false)
+  const [bottomCloseDialogVisible, setBottomCloseDialogVisible] =
+    useState(false)
   const [maxHeightDialogVisible, setMaxHeightDialogVisble] = useState(false)
   const [iconDialogVisible, setIconDialogVisible] = useState(false)
-  const [defaultBtnWithDescDialogVisible, setDefaultBtnWithDescDialogVisible] = useState(false)
+  const [defaultBtnWithDescDialogVisible, setDefaultBtnWithDescDialogVisible] =
+    useState(false)
 
   return (
     <View className='dialog-page'>
@@ -29,22 +32,59 @@ const DialogDemoPage: React.FC = () => {
       <View className='content'>
         <GroupSection title='对话框类型'>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setSimpleDialogVisible(true)}>基本用法</HuiButton>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setSimpleDialogVisible(true)}
+            >
+              基本用法
+            </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setMaxHeightDialogVisble(true)}>内容溢出对话框</HuiButton>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setMaxHeightDialogVisble(true)}
+            >
+              内容溢出对话框
+            </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setBottomCloseDialogVisible(true)}>关闭在下方的对话框</HuiButton>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setBottomCloseDialogVisible(true)}
+            >
+              关闭在下方的对话框
+            </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setIconDialogVisible(true)}>有icon的对话框</HuiButton>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setIconDialogVisible(true)}
+            >
+              有icon的对话框
+            </HuiButton>
           </View>
           <View className='item'>
-            <HuiButton block type='secondary' onClick={() => setImageDialogVisible(true)}>有图片的对话框</HuiButton>
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setImageDialogVisible(true)}
+            >
+              有图片的对话框
+            </HuiButton>
           </View>
-          <View className='item' onClick={() => setDefaultBtnWithDescDialogVisible(true)}>
-            <HuiButton block type='secondary' onClick={() => setDefaultBtnWithDescDialogVisible(true)}>
+          <View
+            className='item'
+            onClick={() => setDefaultBtnWithDescDialogVisible(true)}
+          >
+            <HuiButton
+              block
+              type='secondary'
+              onClick={() => setDefaultBtnWithDescDialogVisible(true)}
+            >
               两个按钮带描述文案的对话框
             </HuiButton>
           </View>
@@ -56,16 +96,29 @@ const DialogDemoPage: React.FC = () => {
         title='基本用法'
         content='顾客消费的时候，如果已经消费较多金额，此时可按设定给顾客推荐一个储值活动，一来便于商户资金回流，二来没用完的储值还可以让顾客回头消费。'
         onClose={() => setSimpleDialogVisible(false)}
-        renderFooter={(
+        renderFooter={
           <Block>
             <View className='btn'>
-              <HuiButton size='large' block onClick={() => setSimpleDialogVisible(false)}>确定</HuiButton>
+              <HuiButton
+                size='large'
+                block
+                onClick={() => setSimpleDialogVisible(false)}
+              >
+                确定
+              </HuiButton>
             </View>
             <View className='btn'>
-              <HuiButton size='large' block type='secondary' onClick={() => setSimpleDialogVisible(false)}>取消</HuiButton>
+              <HuiButton
+                size='large'
+                block
+                type='secondary'
+                onClick={() => setSimpleDialogVisible(false)}
+              >
+                取消
+              </HuiButton>
             </View>
           </Block>
-        )}
+        }
       />
 
       <HuiDialog
@@ -74,7 +127,15 @@ const DialogDemoPage: React.FC = () => {
         content='这一条的内容很简短'
         image={MOCK_IMAGE}
         closable={false}
-        renderFooter={<HuiButton size='large' block onClick={() => setImageDialogVisible(false)}>好的</HuiButton>}
+        renderFooter={
+          <HuiButton
+            size='large'
+            block
+            onClick={() => setImageDialogVisible(false)}
+          >
+            好的
+          </HuiButton>
+        }
         onClose={() => setImageDialogVisible(false)}
       />
 
@@ -100,9 +161,15 @@ const DialogDemoPage: React.FC = () => {
         一前一后的走。有时也遇到几只狗，可是一只也没有叫。天气比屋子里冷得多了;老栓倒觉爽快，仿佛一旦变了少年，得了神通，
         有给人生命的本领似的，跨步格外高远。而且路也愈走愈分明，天也愈走愈亮了。
         老栓正在专心走路，忽然吃了一惊，远远里看见一条丁字街，明明白白横着。他便退了几步，寻到一家关着门的铺子，蹩进檐下，靠门立住了。好一会，身上觉得有些发冷。'
-        renderFooter={(
-          <HuiButton size='large' block onClick={() => setMaxHeightDialogVisble(false)}>知道了</HuiButton>
-        )}
+        renderFooter={
+          <HuiButton
+            size='large'
+            block
+            onClick={() => setMaxHeightDialogVisble(false)}
+          >
+            知道了
+          </HuiButton>
+        }
         onClose={() => setMaxHeightDialogVisble(false)}
       />
 
@@ -119,21 +186,30 @@ const DialogDemoPage: React.FC = () => {
         title='默认双按钮带描述文字'
         content='我的内容呢，刚才还有呢'
         onClose={() => setDefaultBtnWithDescDialogVisible(false)}
-        renderFooter={(
+        renderFooter={
           <Block>
             <View className='btn'>
-              <HuiButton size='large' block onClick={() => setDefaultBtnWithDescDialogVisible(false)}>
+              <HuiButton
+                size='large'
+                block
+                onClick={() => setDefaultBtnWithDescDialogVisible(false)}
+              >
                 确定
               </HuiButton>
             </View>
             <View className='btn'>
-              <HuiButton size='large' block type='secondary' onClick={() => setDefaultBtnWithDescDialogVisible(false)}>
+              <HuiButton
+                size='large'
+                block
+                type='secondary'
+                onClick={() => setDefaultBtnWithDescDialogVisible(false)}
+              >
                 取消
               </HuiButton>
             </View>
             <View className='desc'>简单的描述文字</View>
           </Block>
-        )}
+        }
       />
     </View>
   )

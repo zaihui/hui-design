@@ -40,7 +40,7 @@ const Stepper: React.FC = () => {
           <HuiStepper
             type='number'
             value={valState.val1}
-            onChange={val => {
+            onChange={(val) => {
               setValState({
                 ...valState,
                 val1: val,
@@ -57,7 +57,7 @@ const Stepper: React.FC = () => {
                 min={0}
                 disabledInput
                 hideMinus
-                onChange={val => {
+                onChange={(val) => {
                   setValState({
                     ...valState,
                     val2: val,
@@ -72,7 +72,7 @@ const Stepper: React.FC = () => {
                 min={0}
                 disabledInput
                 hideMinus
-                onChange={val => {
+                onChange={(val) => {
                   setValState({
                     ...valState,
                     val3: val,
@@ -90,7 +90,7 @@ const Stepper: React.FC = () => {
                 max={9999}
                 disabledInput
                 disabled
-                onChange={val => {
+                onChange={(val) => {
                   setValState({
                     ...valState,
                     val4: val,
@@ -105,7 +105,7 @@ const Stepper: React.FC = () => {
                 min={0}
                 max={9999}
                 disabledInput
-                onChange={val => {
+                onChange={(val) => {
                   setValState({
                     ...valState,
                     val5: val,
@@ -120,7 +120,7 @@ const Stepper: React.FC = () => {
                 min={99}
                 max={9999}
                 disabledInput
-                onChange={val => {
+                onChange={(val) => {
                   setValState({
                     ...valState,
                     val6: val,

@@ -22,6 +22,11 @@ $hui-design-width: 375 !default; // 默认使用设计稿尺寸
   overflow: hidden;
 }
 
+@mixin flex-between() {
+  display: flex;
+  justify-content: space-between;
+}
+
 /** 通用字号 **/
 $hui-font-heading-l: px(20) !default; // 标题
 $hui-font-heading-m: px(18) !default; // 标题
@@ -34,6 +39,7 @@ $hui-font-caption-s: px(9) !default; // 辅助文字
 /** 字重 **/
 $hui-font-weight-regular: 400 !default;
 $hui-font-weight-medium: 500 !default;
+$hui-font-weight-semibold: 600 !default;
 $hui-font-weight-bold: 700 !default;
 
 /** 页边距 **/
@@ -63,15 +69,14 @@ $hui-toast-font-size: px(14) !default;
 /** input */
 $input-space-v: px(14) !default;
 $input-min-height: px(20);
-$input-label-width: px(70);
+$input-label-width: px(140);
 $input-label-space: px(16);
 $input-error-msg-left-space: px(86);
 $input-label-array-width: px(8);
 $input-label-array-width-half: px(4);
-$input-label-error-top: $input-label-array-width;
-$input-label-error-bottom: $input-label-space;
-$input-triangle-color: transparent transparent transparent $hui-font-color-base-50;
-$input-unit-pad: px(16);
+$input-triangle-color: transparent transparent transparent
+  $hui-font-color-base-50;
+$input-unit-pad: px(8);
 $input-background-color: #fff !default;
 
 /** button */
@@ -109,31 +114,31 @@ $hui-switch-width: px(39);
 $hui-switch-dot-height: px(22);
 $hui-switch-dot-width: px(22);
 $hui-switch-border-radius: px(14);
-$hui-switch-dot-box-shadow: 0 px(1) px(2) 0 rgba(0, 0, 0, .3), rgba(0, 0, 0, .1);
+$hui-switch-dot-box-shadow: 0 px(1) px(2) 0 rgba(0, 0, 0, 0.3),
+  rgba(0, 0, 0, 0.1);
 $hui-switch-border-width: px(1);
 $hui-switch-border: $hui-switch-border-width solid #e5e5e5;
-$hui-switch-disabled-background-color: rgba(#1e1e1e, .05);
+$hui-switch-disabled-background-color: rgba(#1e1e1e, 0.05);
 $hui-switch-default-background-color: $hui-theme-color-primary;
 $hui-switch-default-disabled-background-color: #f5bfbf;
 
 /** Checkbox */
-$hui-checkbox-icon-border: px(1) solid rgba(#1e1e1e, .25);
-$hui-checkbox-icon-disabled-uncheck-bg-color: rgba(#1e1e1e, .1);
+$hui-checkbox-icon-disabled-uncheck-bg-color: rgba(#1e1e1e, 0.1);
 $hui-checkbox-icon-content-padding-left: px(8);
 $hui-checkbox-padding: px(16) 0;
 $hui-checkbox-border: px(1) solid $hui-border-color;
 
 /** Radio **/
 $hui-radio-content-padding-left: px(8);
-$hui-radio-icon-disabled-bg-color: rgba(#1e1e1e, .25);
-$hui-radio-icon-border: px(1) solid rgba(#1e1e1e, .25);
+$hui-radio-icon-disabled-bg-color: rgba(#1e1e1e, 0.25);
+$hui-radio-icon-border: px(1) solid rgba(#1e1e1e, 0.25);
 $hui-radio-border-bottom: px(1) solid $hui-border-color;
 
 /** Tabs **/
 $hui-tabs-bg-color: #fff !default;
 $hui-tabs-indicator-bg-color: $hui-theme-color-primary !default;
 $hui-tabs-panel-bg-color: #fbfbfc !default;
-$hui-tabs-smile-title-color: $hui-theme-color-primary !default;
+$hui-tabs-twin-title-color: $hui-theme-color-primary !default;
 
 /** Tag **/
 $hui-tag-height-m: px(18) !default;
@@ -146,8 +151,8 @@ $hui-tag-padding-m: px(11) !default;
 $hui-tag-padding-l: px(11) !default;
 
 $hui-tag-default-color: #fff !default;
-$hui-tag-semitransparent-background-color: rgba($hui-theme-color-primary, .2);
-$hui-tag-hollow-border-color: rgba($hui-theme-color-primary, .3);
+$hui-tag-semitransparent-background-color: rgba($hui-theme-color-primary, 0.2);
+$hui-tag-hollow-border-color: rgba($hui-theme-color-primary, 0.3);
 
 /** List **/
 $hui-list-item-tips-font-color: #8e8e8e;
@@ -165,7 +170,7 @@ $stepper-btn-w: px(20);
 $hui-tooltip-tip-translate: px(20) !default; // 箭头中线离长方形气泡最近的距离
 $hui-tooltip-arrow-width: px(6) !default; // 箭头宽度
 $hui-tooltip-arrow-translate: px(14) !default; // 箭头相对于长方形气泡的偏移
-$hui-tooltip-tip-bg: rgba(0, 0, 0, .7) !default; // 气泡背景色
+$hui-tooltip-tip-bg: rgba(0, 0, 0, 0.7) !default; // 气泡背景色
 $hui-tooltip-tip-margin: px(-9) !default; // 气泡离内容的距离
 
 /** SwiperIndicator **/
@@ -179,16 +184,16 @@ $hui-badge-string-font-size: px(9);
 
 /** NoticeBar **/
 $hui-noticebar-default-color: #ff6c00;
-$hui-noticebar-bg-color: rgba($hui-noticebar-default-color, .1);
+$hui-noticebar-bg-color: rgba($hui-noticebar-default-color, 0.1);
 
 /** HuiPicker **/
 $hui-picker-duration: 300ms;
-$timing-func: cubic-bezier(.36, .66, .04, 1);
+$timing-func: cubic-bezier(0.36, 0.66, 0.04, 1);
 
 /** Image **/
 $hui-image-placeholder-bg: #eee;
 $hui-image-placeholder-font-color: #c7c7c7;
-$hui-image-placeholder-light-color: rgba(#fff, .35);
+$hui-image-placeholder-light-color: rgba(#fff, 0.35);
 $hui-image-placeholder-font-size: px(12);
 
 /** Avatar */
@@ -196,7 +201,7 @@ $hui-avatar-square-border-radius: px(4);
 $hui-avatar-circle-border-radius: 50%;
 
 /** Popup **/
-$hui-popup-timing-function: cubic-bezier(.36, .66, .04, 1) !default;
+$hui-popup-timing-function: cubic-bezier(0.36, 0.66, 0.04, 1) !default;
 $hui-popup-duration: 300ms !default;
 $hui-popup-mask-background: $hui-mask-color;
 
@@ -204,11 +209,11 @@ $hui-popup-mask-background: $hui-mask-color;
 $hui-modal-title-font-size: $hui-font-heading-m !default;
 
 /** Share **/
-$hui-share-tip-color: rgba(#1e1e1e, .75);
-$hui-share-content-box-shadow: px(1) px(4) px(6) 0  rgba(#000, .05);
+$hui-share-tip-color: rgba(#1e1e1e, 0.75);
+$hui-share-content-box-shadow: px(1) px(4) px(6) 0 rgba(#000, 0.05);
 
 /** Timer **/
-$hui-timer-card-box-shadow: px(1) px(2) px(4) 0 rgba(#1e1e1e, .05);
+$hui-timer-card-box-shadow: px(1) px(2) px(4) 0 rgba(#1e1e1e, 0.05);
 
 /** Footer **/
 $hui-footer-font-color: $hui-color-grey-4;
@@ -218,3 +223,59 @@ $hui-footer-padding: px(24) 0;
 /** NavBar **/
 $hui-nav-bar-title-size: $hui-font-heading-m;
 $hui-nav-bar-z-index: $hui-z-index-l + 10;
+
+/** Form */
+$hui-form-text: #767676;
+$hui-form-text-primary: rgb(0 0 0 / 85%);
+$hui-form-line-height: px(20);
+
+/** Card **/
+$hui-card-title-color: #111;
+$hui-card-body-color: #666;
+$hui-card-detail-color: #333;
+$hui-card-button-border-color: #ddd;
+$hui-card-primary-button-color: #1577fc;
+$hui-card-check-color: #ff7d00;
+$hui-card-check-background-color: #fff7e8;
+$hui-card-logo-background-color: #d8d8d8;
+$hui-card-assist-color: #999;
+
+/** Filter **/
+$hui-menu-scroll-fixed-top: px(0) !default;
+$hui-menu-scroll-fixed-z-index: $hui-z-index-m !default;
+$hui-filter-bg-color: #fff !default;
+$hui-filter-box-shadow: inset px(-4) 0 px(8) px(-8) rgba(0, 0, 0, 0.3) !default;
+$hui-filter-menu-bar-padding-y: px(15) !default;
+$hui-filter-menu-bar-padding-x: px(16) !default;
+$hui-filter-menu-text-color: #444 !default;
+$hui-filter-menu-active-text-color: #1569ee !default;
+$hui-filter-menu-text-font-size: px(14) !default;
+$hui-filter-menu-item-text-padding-x: px(4) !default;
+$hui-filter-menu-bg-color: #fff !default;
+$hui-filter-menu-item-wrap-bg-color: #fff !default;
+$hui-filter-menu-item-content-max-height: px(410) !default;
+$hui-filter-menu-item-content-padding-y: px(20) !default;
+$hui-filter-menu-item-content-padding-x: px(16) !default;
+$hui-filter-menu-item-content-padding-bottom-is-footer: px(10) !default;
+$hui-filter-action-footer-clear-btn-text-color: #111 !default;
+$hui-filter-action-footer-clear-btn-border-color: #ddd !default;
+$hui-filter-action-footer-confirm-btn-text-color: #fff !default;
+$hui-filter-action-footer-confirm-btn-border-color: #1569ee !default;
+$hui-filter-action-footer-confirm-btn-bg-color: #1569ee !default;
+
+/** FiltersContent **/
+$filters-content-popup-top-content-max-height: px(410) !default;
+$filters-content-popup-default-padding: px(24) px(16) !default;
+$filters-content-popup-left-right-width: px(300) !default;
+$filters-content-button-container-height: px(64) !default;
+$filters-content-button-container-padding: px(10) px(16) !default;
+$filters-content-button-full-width: px(163) !default;
+$filters-content-button-side-width: px(126) !default;
+
+/** Steppers */
+$hui-steppers-step-desc-color: #999;
+$hui-steppers-step-active-color: #1569ee;
+$hui-steppers-step-active-title-color: #333;
+$hui-steppers-step-live-title-color: #111;
+$hui-steppers-step-normal-color: #979797;
+$hui-steppers-step-normal-title-color: #3d3d3d;

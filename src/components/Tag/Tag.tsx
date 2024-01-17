@@ -21,7 +21,7 @@ export interface HuiTagProps {
   className?: string
 }
 
-const HuiTag: React.FC<HuiTagProps> = props => {
+const HuiTag: React.FC<HuiTagProps> = (props) => {
   const {
     size = 'medium',
     type = 'solid',
@@ -35,7 +35,7 @@ const HuiTag: React.FC<HuiTagProps> = props => {
 
   const getTagBackground = () => {
     if (type === 'semitransparent') {
-      return addOpacityToHexColor(color, 0.2)
+      return addOpacityToHexColor(color, 0.1)
     } else if (type === 'solid') {
       return color
     }
@@ -71,11 +71,7 @@ const HuiTag: React.FC<HuiTagProps> = props => {
       style={tagStyle}
       onClick={handleClick}
     >
-      <View
-        className={cx(`tag-text ${size}-text`)}
-      >
-        {children}
-      </View>
+      <View className={cx(`tag-text ${size}-text`)}>{children}</View>
     </View>
   )
 }

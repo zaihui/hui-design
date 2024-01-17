@@ -26,12 +26,8 @@ export const getErrorTip = (error: ErrorLike): unknown => {
    * e.message
    * e.config
    * e.status
-    */
-  const {
-    errMsg,
-    message,
-    response,
-  } = error
+   */
+  const { errMsg, message, response } = error
 
   // 有errMsg大概率是微信的错误，如支付返回requestPayment:fail等等
   if (errMsg) {
@@ -55,7 +51,7 @@ export const getErrorTip = (error: ErrorLike): unknown => {
   if (response) {
     const { data } = response
     // 子岳说：普通400会在message里放颜文字
-    return data ? (data.message || data.detail || data) : data
+    return data ? data.message || data.detail || data : data
   }
 
   return message
@@ -69,7 +65,9 @@ export const tipToString = (tip: unknown): string => {
     if (Array.isArray(tip)) {
       return tip.join(', ')
     }
-    return Object.entries(tip as []).map(([key, value]) => `${key}: ${value}`).join('; ')
+    return Object.entries(tip as [])
+      .map(([key, value]) => `${key}: ${value}`)
+      .join('; ')
   }
   return tip as string
 }

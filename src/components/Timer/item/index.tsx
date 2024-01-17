@@ -8,7 +8,7 @@ interface TimerItemProps {
   separator: string | React.ReactElement
 }
 
-const TimerItem: React.FC<TimerItemProps> = props => {
+const TimerItem: React.FC<TimerItemProps> = (props) => {
   const { num = 0, separator = '' } = props
 
   return (

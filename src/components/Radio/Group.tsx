@@ -15,7 +15,7 @@ const defaultProps = {
   onChange: () => undefined,
 }
 
-const HuiRadioGroup: React.FC<HuiRadioGroupProps> = props => {
+const HuiRadioGroup: React.FC<HuiRadioGroupProps> = (props) => {
   const {
     className = '',
     onChange = defaultProps.onChange,
@@ -23,7 +23,7 @@ const HuiRadioGroup: React.FC<HuiRadioGroupProps> = props => {
     children,
   } = props
 
-  const onRadioChange = v => {
+  const onRadioChange = (v) => {
     onChange(v)
   }
 
@@ -34,10 +34,7 @@ const HuiRadioGroup: React.FC<HuiRadioGroupProps> = props => {
         disabled,
       }}
     >
-      <View
-        {...props}
-        className={`hui-radio-group ${className}`}
-      >
+      <View {...props} className={`hui-radio-group ${className}`}>
         {children}
       </View>
     </HuiRadioGroupContextProvider>

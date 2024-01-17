@@ -17,25 +17,19 @@ import { getPageUrl } from './page'
 /**
  * 包装原生的路由方法
  */
-function reLaunch<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function reLaunch<P>(packageName: string, name: string, params?: P): void {
   Taro.reLaunch({
     url: getPageUrl(packageName, name, params),
   })
 }
 
-function redirectTo<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function redirectTo<P>(packageName: string, name: string, params?: P): void {
   Taro.redirectTo({
     url: getPageUrl(packageName, name, params),
   })
 }
 
-function navigateTo<P>(
-  packageName: string, name: string, params?: P,
-): void {
+function navigateTo<P>(packageName: string, name: string, params?: P): void {
   Taro.navigateTo({
     url: getPageUrl(packageName, name, params),
   })
@@ -110,6 +104,7 @@ export default {
   ToastPage: new PageItemNormal('ToastPage'),
   Dialog: new PageItemNormal('Dialog'),
   Input: new PageItemNormal('Input'),
+  Form: new PageItemNormal('Form'),
   Button: new PageItemNormal('Button'),
   TextArea: new PageItemNormal('TextArea'),
   Divider: new PageItemNormal('Divider'),
@@ -124,6 +119,7 @@ export default {
   Sticky: new PageItemNormal('Sticky'),
   Tag: new PageItemNormal('Tag'),
   List: new PageItemNormal('List'),
+  ContentList: new PageItemNormal('ContentList'),
   Grid: new PageItemNormal('Grid'),
   Stepper: new PageItemNormal('Stepper'),
   Tooltip: new PageItemNormal('Tooltip'),
@@ -143,7 +139,7 @@ export default {
   //  ('SubPackagePage', COMMON_PACKAGE_NAME),
 
   Color: new PageItemNormal('Color'),
-  Font: new PageItemNormal('Font'),
+  Text: new PageItemNormal('Text'),
   Layer: new PageItemNormal('Layer'),
   DefaultPageDetail: new PageItemNormal('DefaultPageDetail'),
   LoaderDetail: new PageItemNormal('LoaderDetail'),
@@ -159,4 +155,10 @@ export default {
   EditorDisplayDetail: new PageItemNormal('EditorDisplayDetail'),
   Mask: new PageItemNormal('Mask'),
   FloatingActionButton: new PageItemNormal('FloatingActionButton'),
+  Title: new PageItemNormal('Title'),
+  HightLightText: new PageItemNormal('HighlightText'),
+  Card: new PageItemNormal('Card'),
+  Steppers: new PageItemNormal('Steppers'),
+  Filter: new PageItemNormal('Filter'),
+  CollapsePanel: new PageItemNormal('CollapsePanel'),
 }

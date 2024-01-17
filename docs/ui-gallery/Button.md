@@ -10,8 +10,7 @@
 
 ```jsx
 import { HuiButton } from 'hui-design'
-
-<HuiButton>按钮文字</HuiButton>
+;<HuiButton>按钮文字</HuiButton>
 ```
 
 代码示例

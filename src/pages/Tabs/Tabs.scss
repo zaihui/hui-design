@@ -1,4 +1,5 @@
-@import '@/styles/index.scss';
+@import '@/styles/variables.scss';
+@import '@/styles/colors.scss';
 @import '@/styles/demo-mixins.scss';
 
 .tabs-page {
@@ -11,10 +12,10 @@
     }
 
     .sticky-tab-content {
-      $item-1-bg-color: rgba($hui-color-grey-1, .1);
-      $item-2-bg-color: rgba(#ed3737, .1);
-      $item-3-bg-color: rgba(#ff6c00, .1);
-      $item-4-bg-color: rgba(#ffc82c, .1);
+      $item-1-bg-color: rgba($hui-color-grey-1, 0.1);
+      $item-2-bg-color: rgba(#ed3737, 0.1);
+      $item-3-bg-color: rgba(#ff6c00, 0.1);
+      $item-4-bg-color: rgba(#ffc82c, 0.1);
 
       display: flex;
       align-items: center;

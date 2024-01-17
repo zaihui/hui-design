@@ -6,11 +6,11 @@
 
 const { homepage: repositoriesUrl } = require('./package.json')
 
-const getUrlFormat = hash => `${repositoriesUrl}${hash}`
+const getUrlFormat = (hash) => `${repositoriesUrl}${hash}`
 
 module.exports = {
   header: '# CHANGELOG',
   releaseCommitMessageFormat: 'chore(release): {{currentTag}}',
   commitUrlFormat: getUrlFormat('/commit/{{hash}}'),
-  compareUrlFormat: getUrlFormat(`/compare/{{previousTag}}...{{currentTag}}`)
+  compareUrlFormat: getUrlFormat(`/compare/{{previousTag}}...{{currentTag}}`),
 }

@@ -42,7 +42,7 @@ const defaultProps = {
   onChange: () => void 0,
 }
 
-const HuiTimer: React.FC<HuiTimerProps> = props => {
+const HuiTimer: React.FC<HuiTimerProps> = (props) => {
   const {
     className = '',
     style,
@@ -75,14 +75,14 @@ const HuiTimer: React.FC<HuiTimerProps> = props => {
     timeoutId.current = null
   }
 
-  const getDisplayTime = remain => ({
+  const getDisplayTime = (remain) => ({
     days: parseDurationToTime(remain, 'DD'),
     hours: parseDurationToTime(remain, 'HH'),
     minutes: parseDurationToTime(remain, 'mm'),
     seconds: parseDurationToTime(remain, 'ss'),
   })
 
-  const handleChange = remain => {
+  const handleChange = (remain) => {
     setRemainingTime(getDisplayTime(remain))
     onChange(getDisplayTime(remain))
   }
@@ -120,20 +120,29 @@ const HuiTimer: React.FC<HuiTimerProps> = props => {
   return (
     <View
       style={style}
-      className={cx(
-        `hui-timer ${className}`,
-        { 'card-timer': isCard },
-      )}
+      className={cx(`hui-timer ${className}`, { 'card-timer': isCard })}
     >
       {isShowDay && formatSeparator.day && (
         <TimerItem
           num={remainingTime.days}
-          separator={isCard ? formatSeparator.day : <Block>{formatSeparator.day}&nbsp;</Block>}
+          separator={
+            isCard ? (
+              formatSeparator.day
+            ) : (
+              <Block>{formatSeparator.day}&nbsp;</Block>
+            )
+          }
         />
       )}
       <TimerItem num={remainingTime.hours} separator={formatSeparator.hour} />
-      <TimerItem num={remainingTime.minutes} separator={formatSeparator.minute} />
-      <TimerItem num={remainingTime.seconds} separator={formatSeparator.second} />
+      <TimerItem
+        num={remainingTime.minutes}
+        separator={formatSeparator.minute}
+      />
+      <TimerItem
+        num={remainingTime.seconds}
+        separator={formatSeparator.second}
+      />
     </View>
   )
 }

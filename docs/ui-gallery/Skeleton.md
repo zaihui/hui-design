@@ -12,9 +12,7 @@
 import React from 'react'
 import { HuiSkeleton } from '@zaihui/hui-design'
 
-const Demo: React.FC = () => (
-  <Skeleton />
-)
+const Demo: React.FC = () => <Skeleton />
 
 export default Demo
 ```

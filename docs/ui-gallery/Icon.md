@@ -19,7 +19,7 @@ export default Demo
 
 ## 使用自定义字体图标库
 
-以iconfont作为图标库为例，新建图标项目设置FontClass/Symbol前缀（避免设置前缀为`hui-`，该前缀为内置图标集的样式前缀），并新建icon.scss
+以 iconfont 作为图标库为例，新建图标项目设置 FontClass/Symbol 前缀（避免设置前缀为`hui-`，该前缀为内置图标集的样式前缀），并新建 icon.scss
 
 ```scss
 /* icon.scss */
@@ -41,7 +41,7 @@ export default Demo
 }
 
 .fa-clock::before {
-  content: "\f00c";
+  content: '\f00c';
 }
 ```
 
@@ -54,6 +54,7 @@ export default Demo
 ## 参数
 
 ### Icon
+
 <auto-doc path="components/Icon/Icon.tsx" />
 
 <demo-phone page="/pages/Icon/Icon" />

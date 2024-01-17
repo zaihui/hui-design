@@ -25,7 +25,7 @@ interface State {
   _visible: boolean
 }
 
-const DefaultIconName: Map<ToastTypeProp, HIconType > = new Map([
+const DefaultIconName: Map<ToastTypeProp, HIconType> = new Map([
   [ToastTypeEnum.SUCCESS, '003-right'],
   [ToastTypeEnum.WARNING, '002-warnings'],
   [ToastTypeEnum.FAIL, '001-close'],
@@ -93,20 +93,19 @@ export default class Index extends React.Component<HuiToastProps, State> {
 
   render(): JSX.Element | null {
     const { type, title, icon } = this.props
-    return this.state._visible ? (<View className={cx('hui-toast-box', { mask: this.props.mask })}>
-      <View className='toast'>
-        {
-          type !== ToastTypeEnum.TEXT && (
-          <View className='icon'>
-            {
-              (type as ToastTypeEnum) !== ToastTypeEnum.TEXT
-              && <HuiIcon name={this.getIconName(type, icon)} size={36} />
-            }
-          </View>
-          )
-        }
-        <Text className='text'>{ title }</Text>
+    return this.state._visible ? (
+      <View className={cx('hui-toast-box', { mask: this.props.mask })}>
+        <View className='toast'>
+          {type !== ToastTypeEnum.TEXT && (
+            <View className='icon'>
+              {(type as ToastTypeEnum) !== ToastTypeEnum.TEXT && (
+                <HuiIcon name={this.getIconName(type, icon)} size={36} />
+              )}
+            </View>
+          )}
+          <Text className='text'>{title}</Text>
+        </View>
       </View>
-    </View>) : null
+    ) : null
   }
 }

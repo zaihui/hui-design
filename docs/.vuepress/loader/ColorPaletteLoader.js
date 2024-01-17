@@ -4,7 +4,7 @@
 const sass = require('node-sass')
 
 // 把一行上的颜色提取出来
-const dealDeclaration = d => {
+const dealDeclaration = (d) => {
   const [name, value] = d.replace(';', '').split(':')
   return {
     name: name.trim(),
@@ -30,9 +30,9 @@ const dealBlock = (titleStr, contentStr) => {
   const colors = contentStr
     .split('\n')
     // 去掉行首行位的空格
-    .map(_ => _.trim())
+    .map((_) => _.trim())
     // 忽略空行
-    .filter(_ => !!_)
+    .filter((_) => !!_)
     .map(dealLine)
   return {
     title,
@@ -41,9 +41,9 @@ const dealBlock = (titleStr, contentStr) => {
 }
 
 // 匹配/** 类别名 **/格式的注释
-const blockTokenReg = /(^\/[*]{2} .+ [*]{2}\/$)[.|\n]+/mg
+const blockTokenReg = /(^\/[*]{2} .+ [*]{2}\/$)[.|\n]+/gm
 
-const genSemiFinishedBlocks = content => {
+const genSemiFinishedBlocks = (content) => {
   // 把scss文件按照注释分块
   const blocks = content.split(blockTokenReg).slice(1)
 
@@ -64,9 +64,11 @@ const getVarValues = (scssContent, varList) => {
         ${propsOfVars}
       }
     `
-  const css = sass.renderSync({
-    data: renderInputData,
-  }).css.toString()
+  const css = sass
+    .renderSync({
+      data: renderInputData,
+    })
+    .css.toString()
 
   // 渲染结果中去掉选择器等无关内容
   const cssProsp = css
@@ -75,31 +77,35 @@ const getVarValues = (scssContent, varList) => {
     .replace(/\}[\n| ]*$/, '')
     .replace(/^\/\*\*.*\*\*\/$/gm, '')
 
-  const varValueList = cssProsp.split('\n').map(_ => _.trim()).filter(_ => !!_).map(dealDeclaration)
+  const varValueList = cssProsp
+    .split('\n')
+    .map((_) => _.trim())
+    .filter((_) => !!_)
+    .map(dealDeclaration)
 
   // reduce得到一个由变量名和真正的变量值构成的map
-  return varValueList.reduce((acc, item) => ({
-    ...acc,
-    [`$${item.name}`]: item.value,
-  }), {})
+  return varValueList.reduce(
+    (acc, item) => ({
+      ...acc,
+      [`$${item.name}`]: item.value,
+    }),
+    {},
+  )
 }
 
-const genPalette = content => {
+const genPalette = (content) => {
   // 首先把scss文件分块，但这时获得的变量值还是scss中的原格式，存在rgba($theme-primary, .5)等写法
   const semiFinishedBlocks = genSemiFinishedBlocks(content)
 
   // 把所有的变量提取为一个列表
-  const allVarsInScssList = semiFinishedBlocks.reduce((acc, block) => ([
-    ...acc,
-    ...block.colors,
-  ]), [])
+  const allVarsInScssList = semiFinishedBlocks.reduce((acc, block) => [...acc, ...block.colors], [])
 
   // 利用所有的变量生成一个css文件调用sass渲染一遍生成浏览器可以处理的css格式
   const varValueMap = getVarValues(content, allVarsInScssList)
 
   // 把之前scss分块得到的结果中的变量替换为sass处理后的值
-  semiFinishedBlocks.forEach(block => {
-    block.colors.forEach(item => {
+  semiFinishedBlocks.forEach((block) => {
+    block.colors.forEach((item) => {
       item.value = varValueMap[item.name]
     })
   })
