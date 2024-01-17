@@ -4,6 +4,7 @@ import Taro from '@tarojs/taro'
 
 import { ScrollView, View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
+import isEqual from 'lodash/isEqual'
 
 import { selectorQueryClientRect } from '../../utils'
 import HuiIcon from '../Icon/Icon'
@@ -81,6 +82,19 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     tabsWrapperScrollLeft: 0,
   })
 
+  useEffect(() => {
+    if (!children || !Array.isArray(children)) {
+      setTabs([])
+      return
+    }
+    const newTabs = React.Children.map(children, (item, index) => ({
+      title: item?.props?.title,
+      subTitle: item?.props?.subTitle,
+      name: item?.props?.name ?? index,
+    }))
+    setTabs((prev) => (isEqual(prev, newTabs) ? prev : newTabs))
+  }, [children])
+
   const activeTabInfo = useMemo(() => {
     if (!tabs) {
       return defaultTabInfo
@@ -129,17 +143,6 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     }
   }, [tabs, hasSubTitle])
 
-  const handleUpdateParent = (i: number) => (tabValue) => {
-    setTabs((t) => {
-      const newTab = t.slice()
-      newTab[i] = tabValue
-      if (!newTab[i].name) {
-        newTab[i].name = i
-      }
-      return newTab
-    })
-  }
-
   const handleClickTabs = (name: number | string) => {
     onChange(name)
   }
@@ -147,12 +150,16 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
   const getChildren = () => {
     const fn = (child, index) =>
       React.cloneElement(child, {
-        updateParent: handleUpdateParent(index),
-        name: child.props.name || index,
+        name: child?.props?.name || index,
         active,
         animated,
       })
-    return (children && React.Children.map(children, fn)) || null
+    return (
+      (children &&
+        Array.isArray(children) &&
+        React.Children.map(children, fn)) ||
+      null
+    )
   }
 
   const tabsSize = React.Children.count(children)
