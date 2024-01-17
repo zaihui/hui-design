@@ -73,13 +73,23 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     Taro.NodesRef.BoundingClientRectCallbackResult[]
   >([])
   const [tabsWidth, setTabsWidth] = useState<number>(0)
-  const [tabs, setTabs] = useState<ITab[]>([])
 
   const [defaultTabInfo] = useState({
     width: 0,
     left: 0,
     tabsWrapperScrollLeft: 0,
   })
+
+  const tabs = useMemo<ITab[]>(() => {
+    if (!children || !Array.isArray(children)) {
+      return []
+    }
+    return React.Children.map(children, (item, index) => ({
+      title: item?.props?.title,
+      subTitle: item?.props?.subTitle,
+      name: item?.props?.name ?? index,
+    }))
+  }, [children])
 
   const activeTabInfo = useMemo(() => {
     if (!tabs) {
@@ -129,17 +139,6 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     }
   }, [tabs, hasSubTitle])
 
-  const handleUpdateParent = (i: number) => (tabValue) => {
-    setTabs((t) => {
-      const newTab = t.slice()
-      newTab[i] = tabValue
-      if (!newTab[i].name) {
-        newTab[i].name = i
-      }
-      return newTab
-    })
-  }
-
   const handleClickTabs = (name: number | string) => {
     onChange(name)
   }
@@ -147,12 +146,16 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
   const getChildren = () => {
     const fn = (child, index) =>
       React.cloneElement(child, {
-        updateParent: handleUpdateParent(index),
-        name: child.props.name || index,
+        name: child?.props?.name || index,
         active,
         animated,
       })
-    return (children && React.Children.map(children, fn)) || null
+    return (
+      (children &&
+        Array.isArray(children) &&
+        React.Children.map(children, fn)) ||
+      null
+    )
   }
 
   const tabsSize = React.Children.count(children)

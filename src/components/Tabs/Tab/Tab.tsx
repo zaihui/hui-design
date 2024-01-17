@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View } from '@tarojs/components'
 
 export interface HuiTabProps {
@@ -17,27 +17,8 @@ export interface HuiTabProps {
   updateParent?: (v) => void
 }
 
-const defaultProps = {
-  updateParent: () => undefined,
-}
-
 const HuiTab: React.FC<HuiTabProps> = (props) => {
-  const {
-    title,
-    subTitle,
-    animated,
-    active,
-    updateParent = defaultProps.updateParent,
-    name,
-    style,
-    className = '',
-    children,
-  } = props
-
-  useEffect(() => {
-    updateParent({ title, subTitle, name })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title, subTitle])
+  const { animated, active, name, style, className = '', children } = props
 
   return (
     <View

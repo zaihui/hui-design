@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
 
@@ -22,6 +22,82 @@ const TabsPage: React.FC = () => {
   const [smileTabsIndex, setSmileTabsIndex] = useState<number>(0)
   const [twoLineAutoTabsIndex, setTwoLineAutoTabsIndex] = useState<number>(0)
   const [stickyTabsIndex, setStickyTabsIndex] = useState<number>(0)
+
+  const [tabs, setTabs] = useState([
+    {
+      title: '基本信息',
+      key: 'baseInfo',
+    },
+    {
+      title: '联系人',
+      key: 'linkmen',
+    },
+    {
+      title: '拜访计划',
+      key: 'visitPlan',
+    },
+    {
+      title: '拜访记录',
+      key: 'visitRecord',
+    },
+    {
+      title: '相关订单',
+      key: 'relevantOrder',
+    },
+    {
+      title: '相关特批',
+      key: 'relevantSpecialApproval',
+    },
+    {
+      title: '流转记录',
+      key: 'transfer',
+    },
+    {
+      title: '评论记录',
+      key: 'comment',
+    },
+  ])
+
+  useEffect(() => {
+    setTabs([
+      {
+        title: '基本信息',
+        key: 'baseInfo',
+      },
+      {
+        title: '确认函',
+        key: 'relevantConfirmation',
+      },
+      {
+        title: '联系人',
+        key: 'linkmen',
+      },
+      {
+        title: '拜访计划',
+        key: 'visitPlan',
+      },
+      {
+        title: '拜访记录',
+        key: 'visitRecord',
+      },
+      {
+        title: '相关订单',
+        key: 'relevantOrder',
+      },
+      {
+        title: '相关特批',
+        key: 'relevantSpecialApproval',
+      },
+      {
+        title: '流转记录',
+        key: 'transfer',
+      },
+      {
+        title: '评论记录',
+        key: 'comment',
+      },
+    ])
+  }, [])
 
   return (
     <View className='tabs-page'>
@@ -50,10 +126,11 @@ const TabsPage: React.FC = () => {
               <HuiTabs
                 active={normalTabsThreeIndex}
                 onChange={(index) => setNormalTabsThreeIndex(Number(index))}
+                scroll
               >
-                <HuiTab title='案例一'></HuiTab>
-                <HuiTab title='案例二'></HuiTab>
-                <HuiTab title='案例展示三'></HuiTab>
+                {tabs.map((item) => (
+                  <HuiTab key={item.key} title={item.title}></HuiTab>
+                ))}
               </HuiTabs>
             </View>
 
@@ -70,6 +147,7 @@ const TabsPage: React.FC = () => {
 
           <SubGroupSection title='单行自适应宽度Tab'>
             <HuiTabs
+              autoScroll
               scroll
               active={singleLineAutoTabsIndex}
               onChange={(index) => setSingleLineAutoTabsIndex(Number(index))}
