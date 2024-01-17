@@ -124,6 +124,7 @@ const TabsPage: React.FC = () => {
 
             <View style={{ marginBottom: Taro.pxTransform(16) }}>
               <HuiTabs
+                autoScroll
                 active={normalTabsThreeIndex}
                 onChange={(index) => setNormalTabsThreeIndex(Number(index))}
                 scroll

@@ -4,6 +4,7 @@ import Taro from '@tarojs/taro'
 
 import { ScrollView, View } from '@tarojs/components'
 import { ViewProps } from '@tarojs/components/types/View'
+import isEqual from 'lodash/isEqual'
 
 import { selectorQueryClientRect } from '../../utils'
 import HuiIcon from '../Icon/Icon'
@@ -73,6 +74,7 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     Taro.NodesRef.BoundingClientRectCallbackResult[]
   >([])
   const [tabsWidth, setTabsWidth] = useState<number>(0)
+  const [tabs, setTabs] = useState<ITab[]>([])
 
   const [defaultTabInfo] = useState({
     width: 0,
@@ -80,15 +82,17 @@ const HuiTabs: React.FC<HuiTabsProps> = (props) => {
     tabsWrapperScrollLeft: 0,
   })
 
-  const tabs = useMemo<ITab[]>(() => {
+  useEffect(() => {
     if (!children || !Array.isArray(children)) {
-      return []
+      setTabs([])
+      return
     }
-    return React.Children.map(children, (item, index) => ({
+    const newTabs = React.Children.map(children, (item, index) => ({
       title: item?.props?.title,
       subTitle: item?.props?.subTitle,
       name: item?.props?.name ?? index,
     }))
+    setTabs((prev) => (isEqual(prev, newTabs) ? prev : newTabs))
   }, [children])
 
   const activeTabInfo = useMemo(() => {
