@@ -1,5 +1,6 @@
 // form-item
 
+import { LabelProps } from '@tarojs/components'
 import { CSSProperties, ReactNode } from 'react'
 
 export const TextareaHeight = 'auto'
@@ -73,6 +74,8 @@ export interface HuiFormItemProps {
    * @description customFunction - 自定义校验函数 返回一个数组【boolean，string】 - true表示通过
    */
   rule?: Rule
+  /** Label 标签的props */
+  labelWrapProps?: LabelProps
   /** 提示文案 */
   tipsText?: string
   /** 显示 */
