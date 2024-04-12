@@ -136,3 +136,8 @@ export const getTimerFormatSeparator = (
   minute: format.split('mm')?.[1]?.[0],
   second: format.split('ss')?.[1]?.[0],
 })
+
+export const generateUuid = (length = 5): string =>
+  Number(Math.random().toString().substring(3, length) + Date.now()).toString(
+    36,
+  )

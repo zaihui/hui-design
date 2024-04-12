@@ -11,7 +11,7 @@ export interface registerWatchType {
 }
 
 export interface FieldContext {
-  /** 获取单个表单数据 */
+  /** 删除单个表单数据 */
   removeFieldValue: (name: string | string[]) => void
   /** 获取单个表单数据 */
   getFieldValue: (name: string | string[]) => any
@@ -24,7 +24,7 @@ export interface FieldContext {
   /** 验证表单 */
   validatorFields: () => any
   /** 注册监听 */
-  registerWatch: (filed: registerWatchType) => any
+  registerWatch: (id: string, filed: registerWatchType) => any
   /** 设置回调函数 */
   setCallbacks: (callbacks: any) => any
   /** 提交表单 */

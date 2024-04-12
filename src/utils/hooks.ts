@@ -1,5 +1,6 @@
 import Taro from '@tarojs/taro'
 import { useEffect, useState } from 'react'
+import { generateUuid } from '.'
 
 export const useBoundingClientRect: <T extends Element | null | undefined>(
   ref: React.MutableRefObject<T>,
@@ -30,4 +31,9 @@ export const useBoundingClientRect: <T extends Element | null | undefined>(
   }, [ref])
 
   return info
+}
+
+export const useId = (): string => {
+  const [id] = useState(generateUuid())
+  return id
 }
