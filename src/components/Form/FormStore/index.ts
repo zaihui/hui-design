@@ -17,7 +17,7 @@ type Store = any
 class FormStore {
   store: Store
 
-  watchList: any[]
+  watchList: Map<string, any>
 
   callbacks: Callbacks
 
@@ -33,7 +33,7 @@ class FormStore {
      * onStoreChange - 更新方法
      * rules - 规则
      */
-    this.watchList = []
+    this.watchList = new Map()
 
     this.callbacks = {
       onFinish() {},
@@ -47,10 +47,10 @@ class FormStore {
     this.timer = undefined
   }
 
-  registerWatch(field: registerWatchType): () => void {
-    this.watchList.push(field)
+  registerWatch(id: string, field: registerWatchType): () => void {
+    this.watchList.set(id, field)
     return () => {
-      this.watchList = this.watchList.filter((e) => e !== field)
+      this.watchList.delete(id)
     }
   }
 
@@ -131,9 +131,10 @@ class FormStore {
 
   async validatorFields(): Promise<void | null | string> {
     const errorValiadtorArr: any[] = []
-    const valiadtorPromiseArr = this.watchList.map(({ validatorRules, name }) =>
-      validatorRules(this.getFieldValue(name) ?? ''),
-    )
+    const valiadtorPromiseArr: any[] = []
+    this.watchList.forEach(({ validatorRules, name }) => {
+      valiadtorPromiseArr.push(validatorRules(this.getFieldValue(name) ?? ''))
+    })
 
     const allRes = await Promise.all(valiadtorPromiseArr)
 
@@ -185,9 +186,10 @@ class FormStore {
     const { onReset } = this.callbacks
     try {
       this.resetStore()
-      const arr = this.watchList.map(({ validatorRules }) =>
-        validatorRules(undefined),
-      )
+      const arr: any = []
+      this.watchList.forEach(({ validatorRules }) => {
+        arr.push(validatorRules(undefined))
+      })
       await Promise.all(arr)
       onReset()
     } catch (error) {}
