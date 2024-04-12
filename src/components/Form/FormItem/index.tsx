@@ -59,6 +59,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     tipsText = '',
     labelStyle,
     rule = [],
+    labelWrapProps = {},
     align = AlignType.ROW,
     customOptionalStyle = null,
     hiddenOptionalStyle = false,
@@ -217,7 +218,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
               </View>
             </View>
           )}
-          <Label className={`${formItemPrefix}-content`}>
+          <Label {...labelWrapProps} className={`${formItemPrefix}-content`}>
             <Provider
               value={{
                 setRenderType,
