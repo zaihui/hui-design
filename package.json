@@ -1,6 +1,6 @@
 {
   "name": "@zaihui/hui-design",
-  "version": "0.0.1-beta.61",
+  "version": "0.0.1-beta.62",
   "description": "小程序组件库",
   "templateInfo": {
     "name": "mobx",
@@ -14,7 +14,7 @@
   "main": "lib/index.js",
   "module": "lib/index.js",
   "scripts": {
-    "setup": "yarn install --frozen-lockfile",
+    "setup": "yarn config set strict-ssl false && yarn install --frozen-lockfile",
     "depup": "yarn upgrade-interactive --latest",
     "lint:style": "stylelint 'src/**/*.scss' --syntax scss",
     "lint:style:fix": "prettier --check --write src/**/*.scss && npm run lint:style -- --fix",

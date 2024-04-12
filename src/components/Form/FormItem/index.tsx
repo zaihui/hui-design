@@ -26,20 +26,22 @@ import Context, {
   AlignType,
 } from '../constants'
 import { toArray } from '../util'
+import { useId } from '../../../utils/hooks'
 
 /**
  * form表单基础组件
  */
 const Item: React.FC<HuiFormItemProps> = (props) => {
   const context = useContext<FieldContext>(Context)
-  const { registerWatch, getFieldValue, setFieldValue, removeFieldValue } =
-    context
+  const { registerWatch, getFieldValue, setFieldValue } = context
   const listContext = useContext<FormListContextProps>(FormListContext)
   const [renderType, setRenderType] = useState<keyof ItemType>('other')
   const [, update] = useState({})
   const [submitTotal, setSubmitTotal] = useState(0)
   const [ruleCss, setRuleCss] = useState<string>(NormalCss)
   const [ruleText, setRuleText] = useState<string>()
+
+  const id = useId()
 
   const newProps = useRef<{
     onChange?: (event: any) => void
@@ -141,37 +143,44 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     !!ruleText,
   )
 
-  const validatorRules = async (value: string) => {
-    try {
-      const [css, text] = validatorField(rule, value, renderType, getFieldValue)
+  const validatorRules = useCallback(
+    async (value: string) => {
+      try {
+        const [css, text] = validatorField(
+          rule,
+          value,
+          renderType,
+          getFieldValue,
+        )
 
-      setRuleCss(css)
-      setRuleText(text)
-      return {
-        state: !text,
-        name: path,
+        setRuleCss(css)
+        setRuleText(text)
+        return {
+          state: !text,
+          name: path,
+        }
+      } catch (error) {
+        throw new Error(error)
       }
-    } catch (error) {
-      throw new Error(error)
-    }
-  }
+    },
+    [getFieldValue, path, renderType, rule],
+  )
 
   useEffect(() => {
     validatorRules(localValue)
   }, [localValue])
 
   useEffect(() => {
-    const unMount = registerWatch({
+    const unMount = registerWatch(id, {
       name: path,
       setSubmitTotal,
       validatorRules,
       onStoreChange: () => update({}),
     } as any)
     return () => {
-      removeFieldValue(path)
       unMount()
     }
-  }, [path, registerWatch])
+  }, [id, path, registerWatch, validatorRules])
 
   useEffect(() => {
     if (submitTotal) implementAnimation()
