@@ -29,6 +29,11 @@ export type DefaultRuleTarget = {
   pattern?: RegExp
   /** 文案 */
   message?: string
+  /**
+   * @param value FormItem的值
+   * @param callback 自定义执行函数
+   */
+  validator?: (value: any) => Promise<void | Error>
 }
 
 type RuleReg = (

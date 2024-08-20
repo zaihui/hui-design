@@ -62,6 +62,7 @@ const InputPage: React.FC = () => {
   const [localData, setLocalData] = useState({
     sync: false,
     account: '',
+    money: '',
     password: '',
     gender: '男',
     disable: '',
@@ -132,6 +133,13 @@ const InputPage: React.FC = () => {
     return ''
   }
 
+  const validateMoney = (value: string) => {
+    if (!value) return Promise.reject(new Error('请填写金额数！'))
+    if (value === '123') return Promise.reject(new Error('金额数错误！'))
+    if (/^0/.test(value)) return Promise.reject(new Error('金额数不能为0！'))
+    return Promise.resolve()
+  }
+
   const HuiFormItem = HuiForm.Item
   return (
     <View className='form-demo-page'>
@@ -175,13 +183,15 @@ const InputPage: React.FC = () => {
               ]}
               tipsText='密码必须为6-10个字符之间'
             >
-              <HuiInput
-                divider={false}
-                onInput={(e) => form.setFieldValue('password', e.detail.value)}
-                type='safe-password'
-              ></HuiInput>
+              <HuiInput divider={false} type='safe-password'></HuiInput>
             </HuiFormItem>
-
+            <HuiFormItem
+              rule={[{ require: true, validator: validateMoney }]}
+              label='支付金额'
+              name='money'
+            >
+              <HuiInput divider={false} />
+            </HuiFormItem>
             <HuiFormItem
               rule={[{ require: true }]}
               label='是否同步信息'
