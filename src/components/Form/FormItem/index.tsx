@@ -124,19 +124,26 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
 
   const copyChildren = () => {
     if (React.isValidElement(children)) {
-      if (!Object.prototype.hasOwnProperty.call(children.props, 'onChange')) {
-        newProps.current.onChange = onChange
-      } else {
-        delete newProps.current.onChange
-      }
-      if (!Object.prototype.hasOwnProperty.call(children.props, 'value')) {
-        newProps.current.value = localValue
-      } else {
-        delete newProps.current.value
-      }
+      setNewPropsProperty('onChange', onChange)
+      setNewPropsProperty('value', localValue)
+      setNewPropsProperty('onInput', onChange)
       return children && React.cloneElement(children as any, newProps.current)
     }
     return children
+  }
+
+  const setNewPropsProperty = (key: string, value: any = null) => {
+    if (React.isValidElement(children)) {
+      const hasPrototypeAttribute = Object.prototype.hasOwnProperty.call(
+        children.props,
+        key,
+      )
+      if (!hasPrototypeAttribute) {
+        newProps.current[key] = value
+      } else {
+        delete newProps.current[key]
+      }
+    }
   }
 
   const [implementAnimation] = useAnimationCss(
@@ -147,7 +154,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   const validatorRules = useCallback(
     async (value: string) => {
       try {
-        const [css, text] = validatorField(
+        const [css, text] = await validatorField(
           rule,
           value,
           renderType,
@@ -161,7 +168,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
           name: path,
         }
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error as string)
       }
     },
     [getFieldValue, path, renderType, rule],

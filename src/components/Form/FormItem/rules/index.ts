@@ -10,12 +10,14 @@ import {
   validatorDigitText,
   validatorIntegerText,
   validatorRequireText,
+  validateInnerCustom,
 } from '../../constants/field'
 
 interface ValidatorType {
   inner
   rule
   custom
+  innerCustomValidate
 }
 
 /**
@@ -32,19 +34,27 @@ const validatorInnerField = (value: string, itemType: keyof ItemType) => {
   }
 }
 
-const validatorRule = (
+const validatorRule = async (
   rule: Rule,
   value: string,
   fieldType: keyof ItemType,
   getFieldValue: any,
-): {
+): Promise<{
   fieldState: boolean
   validatorType: keyof ValidatorType
-} => {
+}> => {
   const [defaultRuleTarget, customRuleFun] = rule || []
-  const { require, pattern } = defaultRuleTarget || {}
+  const { require, pattern, validator } = defaultRuleTarget || {}
   let globalInputStatus = true
 
+  // 如果 rule 中存在自定义函数，那么他的优先级最高
+  if (validator && typeof validator === 'function') {
+    const validateMsg = await validateInnerCustom(value, rule)
+    return {
+      fieldState: !validateMsg,
+      validatorType: 'innerCustomValidate',
+    } as any
+  }
   // 内部值检验
   const innerCheckResult = value ? validatorInnerField(value, fieldType) : true
   if (!innerCheckResult) {
@@ -80,7 +90,10 @@ const validatorRule = (
   }
 }
 
-const validatorStyleInner = (type: keyof FieldType, value: string): [string, string] => {
+const validatorStyleInner = (
+  type: keyof FieldType,
+  value: string,
+): [string, string] => {
   let str = ''
   switch (type) {
     case 'inputNumber':
@@ -95,16 +108,18 @@ const validatorStyleInner = (type: keyof FieldType, value: string): [string, str
   return [errorCss, str]
 }
 
-const validatorStyle = (
+const validatorStyle = async (
   validatorType: keyof ValidatorType,
   type: keyof FieldType,
   value: string,
   rule: Rule,
-): [string, string] => {
+) => {
+  const msg = (await validateInnerCustom(value, rule)) as string
   switch (validatorType) {
+    case 'innerCustomValidate':
+      return [errorCss, msg]
     case 'custom':
       return [errorCss, validatorRequireText(rule[0]?.message || '')]
-
     case 'inner':
       return validatorStyleInner(type, value)
     case 'rule':
@@ -114,14 +129,19 @@ const validatorStyle = (
   }
 }
 
-const validatorField = <T>(
+const validatorField = async <T>(
   rule: Rule,
   value: string | undefined,
   fieldType: keyof ItemType,
   getFieldValue: T,
-): string[] => {
+): Promise<string[]> => {
   if (typeof value === 'undefined') return [normalCss, '']
-  const { fieldState, validatorType } = validatorRule(rule, value, fieldType, getFieldValue)
+  const { fieldState, validatorType } = await validatorRule(
+    rule,
+    value,
+    fieldType,
+    getFieldValue,
+  )
   if (fieldState) {
     // 兼容下item里面的处理
     return [normalCss, '']

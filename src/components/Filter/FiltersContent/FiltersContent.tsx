@@ -36,7 +36,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
   } = props as any
 
   const positionStyle = useMemo(() => {
-    if (position === 'top' && parent) {
+    if (visible && position === 'top' && parent) {
       return {
         top: parent.filterTop,
       }

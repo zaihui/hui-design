@@ -69,6 +69,7 @@ const Popup: React.FC<HuiPopupProps> = (props) => {
         onClick={handleClose}
       />
       <View
+        // catchMove 添加后会全部都不可滚动
         className={`popup-content ${position} ${contentClassName}`}
         style={contentStyle}
         onTouchMove={handleTouchMove}
