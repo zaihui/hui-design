@@ -17,15 +17,15 @@ dayjs.extend(duration)
 //   require('nerv-devtools')
 // }
 
-const App: React.FC<PropsWithChildren> = props => {
+const App: React.FC<PropsWithChildren> = (props) => {
   useEffect(() => {
     Taro.initPxTransform({
       designWidth: DESIGN_WIDTH,
       deviceRatio: {
-        '640': 2.34 / 2,
-        '750': 1,
-        '828': 1.81 / 2,
-        '375': 2 / 1,
+        640: 2.34 / 2,
+        750: 1,
+        828: 1.81 / 2,
+        375: 2 / 1,
       },
     })
   }, [])

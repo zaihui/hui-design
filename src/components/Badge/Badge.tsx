@@ -19,7 +19,7 @@ export interface HuiBadgeProps {
   children?: React.ReactNode
 }
 
-const HuiBadge: React.FC<HuiBadgeProps> = props => {
+const HuiBadge: React.FC<HuiBadgeProps> = (props) => {
   const {
     showZero = false,
     dot = false,

@@ -1,28 +1,9 @@
 <template>
-  <div
-    class="demo-phone"
-    :class="{fold}"
-  >
+  <div class="demo-phone" :class="{ fold }">
     <!-- 提供收起展开功能避免影响阅读文档 -->
-    <span
-      v-if="fold"
-      class="tip-unfold"
-      @click="handleUnFold"
-    >
-      展开
-    </span>
-    <span
-      v-else
-      class="tip-fold"
-      @click="handleFold"
-    >
-      点击收起
-    </span>
-    <iframe
-      v-show="!fold"
-      class="iframe"
-      :src="src"
-    />
+    <span v-if="fold" class="tip-unfold" @click="handleUnFold"> 展开 </span>
+    <span v-else class="tip-fold" @click="handleFold"> 点击收起 </span>
+    <iframe v-show="!fold" class="iframe" :src="src" />
   </div>
 </template>
 <script>
@@ -35,7 +16,7 @@ const getH5BaseUrlFn = () => {
     return () => 'http://localhost:10086/#'
   }
 
-  return window => `${window.location.origin}${process.env.H5_BASE_URL}`
+  return (window) => `${window.location.origin}${process.env.H5_BASE_URL}`
 }
 
 const getH5BaseUrl = getH5BaseUrlFn()
@@ -106,15 +87,15 @@ export default {
   background: url('../assets/iframe_iphonex.png');
   background-size: 100% 100%;
   border-radius: 1.5rem;
-  box-shadow: 0 4px 30px 0 rgba(4, 59, 85, .1);
-  transition: width .4s ease-in-out, height .4s ease-in-out;
+  box-shadow: 0 4px 30px 0 rgba(4, 59, 85, 0.1);
+  transition: width 0.4s ease-in-out, height 0.4s ease-in-out;
 
   .tip-fold {
     position: absolute;
     top: 0;
     display: block;
     width: 100%;
-    margin-top: .2rem;
+    margin-top: 0.2rem;
     text-align: center;
   }
 

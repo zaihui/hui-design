@@ -2,7 +2,7 @@
 
 ## 介绍
 
-弹窗Toast
+弹窗 Toast
 
 ## 使用指南
 
@@ -10,15 +10,7 @@
 
 ```jsx
 import { Toast } from 'hui-design'
-
-<Toast
-  title={title}
-  mask={mask}
-  type={type}
-  visible={visible}
-  duration={duration}
-  icon={icon}
-/>
+;<Toast title={title} mask={mask} type={type} visible={visible} duration={duration} icon={icon} />
 ```
 
 ## 参数
@@ -26,4 +18,3 @@ import { Toast } from 'hui-design'
 <auto-doc path="components/Toast/Toast.tsx" />
 
 <demo-phone page="/pages/ToastPage/ToastPage" />
-

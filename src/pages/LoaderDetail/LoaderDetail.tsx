@@ -9,7 +9,9 @@ import './LoaderDetail.scss'
 type LoaderType = 'page' | 'bottom' | 'module'
 const LoaderDetail: React.FC = () => {
   const { q = '{}' } = useRouter().params
-  const { type = 'page' } = JSON.parse(decodeURIComponent(q)) as { type: LoaderType }
+  const { type = 'page' } = JSON.parse(decodeURIComponent(q)) as {
+    type: LoaderType
+  }
 
   const [bottomLoading, setBottomLoading] = useState(false)
 
@@ -24,9 +26,7 @@ const LoaderDetail: React.FC = () => {
 
   return (
     <View className='loader-detail'>
-      {type === 'page' && (
-        <HuiLoader loading type='page' />
-      )}
+      {type === 'page' && <HuiLoader loading type='page' />}
       {type === 'module' && (
         <View className='module-loader-demo'>
           <View className='top'>
@@ -39,9 +39,15 @@ const LoaderDetail: React.FC = () => {
       {type === 'bottom' && (
         <View className='bottom-loader-demo'>
           <HuiLoader loading={bottomLoading} type='bottom'>
-            <View className='bl-section top'><View className='inner'>页面内容</View></View>
-            <View className='bl-section middle'><View className='inner'>页面内容</View></View>
-            <View className='bl-section bottom'><View className='inner'>页面内容</View></View>
+            <View className='bl-section top'>
+              <View className='inner'>页面内容</View>
+            </View>
+            <View className='bl-section middle'>
+              <View className='inner'>页面内容</View>
+            </View>
+            <View className='bl-section bottom'>
+              <View className='inner'>页面内容</View>
+            </View>
           </HuiLoader>
         </View>
       )}

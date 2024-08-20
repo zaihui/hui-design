@@ -36,7 +36,7 @@ export interface HuiImageProps extends Omit<ImageProps, 'src'> {
   wapperClassName?: string
 }
 
-const HuiImage: React.FC<HuiImageProps> = props => {
+const HuiImage: React.FC<HuiImageProps> = (props) => {
   const {
     style: customStyle,
     width = 0,
@@ -50,7 +50,9 @@ const HuiImage: React.FC<HuiImageProps> = props => {
     onError,
     ...rest
   } = props
-  const [imageStatus, setImageStatus] = useState(src ? ImageStatus.Loading : ImageStatus.Empty)
+  const [imageStatus, setImageStatus] = useState(
+    src ? ImageStatus.Loading : ImageStatus.Empty,
+  )
   const defaultPlaceholderSize = width * 0.4
   const customPlaceholderSize = width * 0.16
 
@@ -61,7 +63,9 @@ const HuiImage: React.FC<HuiImageProps> = props => {
     onLoad && onLoad(event)
   }
 
-  const handleOnError = (event: BaseEventOrig<ImageProps.onErrorEventDetail>) => {
+  const handleOnError = (
+    event: BaseEventOrig<ImageProps.onErrorEventDetail>,
+  ) => {
     setImageStatus(ImageStatus.Fail)
     onError && onError(event)
   }
@@ -82,7 +86,13 @@ const HuiImage: React.FC<HuiImageProps> = props => {
     }
     if (placeholderImg) {
       const placeholderImgSize = pxTransform(customPlaceholderSize)
-      return <Image mode='aspectFill' src={placeholderImg} style={{ width: placeholderImgSize, height: placeholderImgSize }} />
+      return (
+        <Image
+          mode='aspectFill'
+          src={placeholderImg}
+          style={{ width: placeholderImgSize, height: placeholderImgSize }}
+        />
+      )
     }
     return ''
   }
@@ -96,8 +106,10 @@ const HuiImage: React.FC<HuiImageProps> = props => {
   const getImageSize = () => {
     if (height && width) {
       return width < 60 || height < 60
-        ? ImageSize.SMALL : width < 86 || height < 86
-          ? ImageSize.MEDIUM : ImageSize.LARGE
+        ? ImageSize.SMALL
+        : width < 86 || height < 86
+        ? ImageSize.MEDIUM
+        : ImageSize.LARGE
     }
     return ImageSize.SMALL
   }
@@ -107,32 +119,37 @@ const HuiImage: React.FC<HuiImageProps> = props => {
   const showAnimation = animated || !height || !width
 
   const style = Object.assign(
-    height && width ? { height: pxTransform(height), width: pxTransform(width) } : {},
+    height && width
+      ? { height: pxTransform(height), width: pxTransform(width) }
+      : {},
     customStyle,
   )
 
   return (
     <View className={`hui-image ${wapperClassName}`} style={style}>
-      {
-        imageStatus !== ImageStatus.Success && (
-          <View className={cx('placeholder', { 'shine': imageStatus === ImageStatus.Loading && showAnimation })}>
-            {imageSize === ImageSize.LARGE ? getPlaceholder() : null}
-            {imageSize === ImageSize.LARGE && imageStatus === ImageStatus.Loading && <View className='loading-text'>加载中…</View>}
-            {imageSize === ImageSize.MEDIUM ? getImageStatusText() : null}
-          </View>
-        )
-      }
-      {
-        src && (
-          <Image
-            src={src}
-            className='image'
-            onLoad={handleOnLoad}
-            onError={handleOnError}
-            {... rest}
-          />
-        )
-      }
+      {imageStatus !== ImageStatus.Success && (
+        <View
+          className={cx('placeholder', {
+            shine: imageStatus === ImageStatus.Loading && showAnimation,
+          })}
+        >
+          {imageSize === ImageSize.LARGE ? getPlaceholder() : null}
+          {imageSize === ImageSize.LARGE &&
+            imageStatus === ImageStatus.Loading && (
+              <View className='loading-text'>加载中…</View>
+            )}
+          {imageSize === ImageSize.MEDIUM ? getImageStatusText() : null}
+        </View>
+      )}
+      {src && (
+        <Image
+          src={src}
+          className='image'
+          onLoad={handleOnLoad}
+          onError={handleOnError}
+          {...rest}
+        />
+      )}
     </View>
   )
 }

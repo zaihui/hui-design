@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import Taro, { useRouter } from '@tarojs/taro'
 import { View, ScrollView } from '@tarojs/components'
 
-import HuiNavBar, { getOpacityChangeHandlerGenerator } from '@/components/NavBar'
+import HuiNavBar, {
+  getOpacityChangeHandlerGenerator,
+} from '@/components/NavBar'
 import HuiButton from '@/components/Button/Button'
 
 import './NavBarWhiteDetail.scss'
@@ -23,19 +25,24 @@ const NavBarBlackDetail: React.FC = () => {
   const [navBarOpacity, setNavBarOpacity] = useState(0)
   const noCapsule = (!showHome && hideBack) || customButton
 
-  const background = backgroundUrl
-    ? `url(${backgroundUrl})`
-    : undefined
+  const background = backgroundUrl ? `url(${backgroundUrl})` : undefined
 
   return (
-    <View className='nav-bar-black-detail-page' style={{ backgroundImage: background }}>
+    <View
+      className='nav-bar-black-detail-page'
+      style={{ backgroundImage: background }}
+    >
       <HuiNavBar
         title={title}
         theme={theme}
         hideBack={hideBack}
         showHome={showHome}
         homepagePath={homepagePath}
-        button={customButton ? <HuiButton size='small'>自定义按钮</HuiButton> : undefined}
+        button={
+          customButton ? (
+            <HuiButton size='small'>自定义按钮</HuiButton>
+          ) : undefined
+        }
         transparent={transparent}
         opacity={navBarOpacity}
       />
@@ -44,12 +51,18 @@ const NavBarBlackDetail: React.FC = () => {
         scrollY
         scrollWithAnimation
         style={{ height: '100vh' }}
-        onScroll={e => getOpacityChangeHandlerGenerator(e, opacity => setNavBarOpacity(opacity))}
+        onScroll={(e) =>
+          getOpacityChangeHandlerGenerator(e, (opacity) =>
+            setNavBarOpacity(opacity),
+          )
+        }
       >
         <View className='custom-content'>
           {noCapsule && (
             <View className='special-button'>
-              <HuiButton block onClick={() => Taro.navigateBack()}>返回</HuiButton>
+              <HuiButton block onClick={() => Taro.navigateBack()}>
+                返回
+              </HuiButton>
             </View>
           )}
         </View>

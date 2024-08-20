@@ -2,7 +2,11 @@
 import React, { useState } from 'react'
 import { ViewProps } from '@tarojs/components/types/View'
 import { View, Input } from '@tarojs/components'
-import { CommonEvent, CommonEventFunction, ITouchEvent } from '@tarojs/components/types/common'
+import {
+  CommonEvent,
+  CommonEventFunction,
+  ITouchEvent,
+} from '@tarojs/components/types/common'
 import { pxTransform } from '../../utils'
 import Icon from '../Icon/Icon'
 
@@ -73,7 +77,7 @@ export interface HuiStepperProps extends ViewProps {
    * @param {number} value 输入框当前值
    * @description 开发者需要通过 onChange 事件来更新 value 值变化，onChange 函数必填
    */
-  onChange: (value: number, e: CommonEvent) => void
+  onChange?: (value: number, e: CommonEvent) => void
   /**
    * 输入框值失去焦点时触发的事件
    */
@@ -231,8 +235,7 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
     onChange(Number(newValue), e)
   }
 
-  const handleBlur = (event: ITouchEvent): void =>
-    onBlur && onBlur(event)
+  const handleBlur = (event: ITouchEvent): void => onBlur && onBlur(event)
 
   const handleError = (errorValue: InputError): void => {
     if (!props.onErrorInput) {
@@ -247,22 +250,26 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
 
   const inputValue = Number(handleValue(value))
 
-  const minusBtnCls = `hui-stepper-btn minus ${inputValue <= min || disabled ? 'hui-stepper-disabled' : ''}`
-  const plusBtnCls = `hui-stepper-btn plus ${inputValue >= max || disabled ? 'hui-stepper-disabled' : ''}`
+  const minusBtnCls = `hui-stepper-btn minus ${
+    inputValue <= min || disabled ? 'hui-stepper-disabled' : ''
+  }`
+  const plusBtnCls = `hui-stepper-btn plus ${
+    inputValue >= max || disabled ? 'hui-stepper-disabled' : ''
+  }`
 
   const initHideMinusAndInput = `${hideMinus && value === min ? 'hide' : ''}`
 
-  const disableInputFormat = hideMinus ? !!(initHideMinusAndInput || disabledInput) : disabledInput
+  const disableInputFormat = hideMinus
+    ? !!(initHideMinusAndInput || disabledInput)
+    : disabledInput
 
   return (
-    <View className={`hui-stepper ${className} ${initHideMinusAndInput}`} style={style}>
-      <View
-        className={minusBtnCls}
-        onClick={e => handleClick('minus', e)}
-      >
-        <View
-          className={`btn ${scaleAnimation.minus ? 'active' : ''}`}
-        >
+    <View
+      className={`hui-stepper ${className} ${initHideMinusAndInput}`}
+      style={style}
+    >
+      <View className={minusBtnCls} onClick={(e) => handleClick('minus', e)}>
+        <View className={`btn ${scaleAnimation.minus ? 'active' : ''}`}>
           <Icon
             name='008-remove'
             size={20}
@@ -279,16 +286,11 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
         type={type}
         value={String(inputValue)}
         disabled={disableInputFormat || disabled}
-        onInput={e => handleInput(e as CommonEvent & ExtendEvent)}
-        onBlur={e => handleBlur(e as ITouchEvent)}
+        onInput={(e) => handleInput(e as CommonEvent & ExtendEvent)}
+        onBlur={(e) => handleBlur(e as ITouchEvent)}
       />
-      <View
-        className={plusBtnCls}
-        onClick={e => handleClick('plus', e)}
-      >
-        <View
-          className={`btn ${scaleAnimation.plus ? 'active' : ''}`}
-        >
+      <View className={plusBtnCls} onClick={(e) => handleClick('plus', e)}>
+        <View className={`btn ${scaleAnimation.plus ? 'active' : ''}`}>
           <Icon
             name='007-add'
             size={20}

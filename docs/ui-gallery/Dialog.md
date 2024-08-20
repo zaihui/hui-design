@@ -1,6 +1,7 @@
-# Dialog组件
+# Dialog 组件
 
 ## 基本用法
+
 ```tsx
 import { useState } from '@tarojs/taro'
 import { Button } from '@tarojs/components'
@@ -30,6 +31,7 @@ export default Demo
 ## 代码示例
 
 <<< src/pages/ActionSheet/ActionSheet.tsx#demo
+
 ## 参数
 
 ### Dialog

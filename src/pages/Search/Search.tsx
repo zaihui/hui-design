@@ -34,8 +34,8 @@ const Search: React.FC = () => {
                 searchText='搜索'
                 theme='dark'
                 value={val1}
-                onInput={val => setVal1(val)}
-                onSearch={val => Taro.showToast({ title: `您要搜索${val}` })}
+                onInput={(val) => setVal1(val)}
+                onSearch={(val) => Taro.showToast({ title: `您要搜索${val}` })}
               />
             </ListItem>
             <ListItem style={{ backgroundColor: '#e8e8e8' }} border={false}>
@@ -43,8 +43,8 @@ const Search: React.FC = () => {
                 placeholder='请输入关键词'
                 searchText='搜索'
                 value={val2}
-                onInput={val => setVal2(val)}
-                onSearch={val => Taro.showToast({ title: `您要搜索${val}` })}
+                onInput={(val) => setVal2(val)}
+                onSearch={(val) => Taro.showToast({ title: `您要搜索${val}` })}
               />
             </ListItem>
           </SubGroupSection>
@@ -54,16 +54,16 @@ const Search: React.FC = () => {
                 placeholder='请输入关键词'
                 theme='dark'
                 value={val3}
-                onInput={val => setVal3(val)}
-                onSearch={val => Taro.showToast({ title: `您要搜索${val}` })}
+                onInput={(val) => setVal3(val)}
+                onSearch={(val) => Taro.showToast({ title: `您要搜索${val}` })}
               />
             </ListItem>
             <ListItem style={{ backgroundColor: '#e8e8e8' }} border={false}>
               <HuiSearch
                 placeholder='请输入关键词'
                 value={val4}
-                onInput={val => setVal4(val)}
-                onSearch={val => Taro.showToast({ title: `您要搜索${val}` })}
+                onInput={(val) => setVal4(val)}
+                onSearch={(val) => Taro.showToast({ title: `您要搜索${val}` })}
               />
             </ListItem>
           </SubGroupSection>

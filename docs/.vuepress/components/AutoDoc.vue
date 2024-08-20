@@ -3,35 +3,19 @@
     <p>{{ componentInfo.description }}</p>
     <table>
       <thead>
-        <th
-          v-for="(head,index) in tableHeader"
-          :key="index"
-        >
+        <th v-for="(head, index) in tableHeader" :key="index">
           {{ head }}
         </th>
       </thead>
       <tbody>
-        <tr
-          v-for="(row, ri) in tableContents"
-          :key="ri"
-        >
-          <td
-            v-for="(item, ii) in row"
-            :key="ii"
-          >
-            <div
-              v-if="Array.isArray(item)"
-            >
-              <p
-                v-for="(line, li) in item"
-                :key="li"
-              >
+        <tr v-for="(row, ri) in tableContents" :key="ri">
+          <td v-for="(item, ii) in row" :key="ii">
+            <div v-if="Array.isArray(item)">
+              <p v-for="(line, li) in item" :key="li">
                 {{ line }}
               </p>
             </div>
-            <p
-              v-else
-            >
+            <p v-else>
               {{ item }}
             </p>
           </td>
@@ -45,10 +29,9 @@
   </div>
 </template>
 <script>
-
 const tableHeader = ['参数名', '说明', '类型', '是否必须', '默认值']
 
-const breakDescription = d => d.split('\n')
+const breakDescription = (d) => d.split('\n')
 /**
  * 利用react-docgen自动生成文档，关于文档系统参见DocSystem.md
  *

@@ -1,17 +1,10 @@
 <template>
   <!-- 利用Loader自动生成色板文档，详见colors.scss -->
   <div class="color-palette">
-    <div
-      v-for="(item, itemIndex) in colorsList"
-      :key="itemIndex"
-    >
+    <div v-for="(item, itemIndex) in colorsList" :key="itemIndex">
       <h3>{{ item.title }}</h3>
       <div class="colors-list">
-        <div
-          v-for="(color, colorIndex) in item.colors"
-          :key="colorIndex"
-          class="color-item"
-        >
+        <div v-for="(color, colorIndex) in item.colors" :key="colorIndex" class="color-item">
           <span class="color-name">{{ color.name }}</span>
           <div class="line">
             <span
@@ -25,7 +18,8 @@
               :style="{
                 color: color.value,
               }"
-            >{{ color.value }}</span>
+              >{{ color.value }}</span
+            >
           </div>
           <code class="color-usage">{{ color.usage }} </code>
         </div>

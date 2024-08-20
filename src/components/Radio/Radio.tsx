@@ -23,7 +23,8 @@ export interface HuiRadioProps extends ViewProps {
   style?: React.CSSProperties
 }
 
-const HuiRadio: React.FC<HuiRadioProps> = props => {
+const prefix = 'hui-radio'
+const HuiRadio: React.FC<HuiRadioProps> = (props) => {
   const {
     className = '',
     style,
@@ -39,7 +40,7 @@ const HuiRadio: React.FC<HuiRadioProps> = props => {
   const context = React.useContext(RadioGroupContext)
   const finalDisabled = context?.disabled || disabled
 
-  const handleChange = v => {
+  const handleChange = (v) => {
     if (finalDisabled) {
       return
     }
@@ -61,29 +62,24 @@ const HuiRadio: React.FC<HuiRadioProps> = props => {
   return (
     <View
       {...props}
-      className={cx(
-        `hui-radio ${className || ''}`,
-        { 'disabled': disabled },
-      )}
+      className={cx(`${prefix} ${className || ''}`, { disabled })}
       style={style}
-      onClick={() => handleChange(value)}
     >
       <View
-        className={cx('hui-radio-icon', { 'checked': checked, 'disabled': disabled })}
+        className={cx(`${prefix}-icon`, { checked, disabled })}
         style={iconStyle}
       >
-        <View
-          className='inner'
-          style={iconInnerStyle}
-        />
+        <View className='inner' style={iconInnerStyle} />
       </View>
       {hasChildren && (
-        <View
-          className='hui-radio-content'
-        >
+        <View className='hui-radio-content' onClick={() => handleChange(value)}>
           {children}
         </View>
       )}
+      <View
+        className={`${prefix}-mask`}
+        onClick={() => handleChange(value)}
+      ></View>
     </View>
   )
 }

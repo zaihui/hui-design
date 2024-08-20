@@ -12,33 +12,25 @@ Taro.initPxTransform({ designWidth: 375, deviceRatio: {} })
 describe('huiButton Snap', () => {
   it('renders HuiButton', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiButton>按钮文字</HuiButton>,
-    )
+    const component = renderToString(<HuiButton>按钮文字</HuiButton>)
     expect(component).toMatchSnapshot()
   })
 
   it('renders HuiButton - type', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiButton type='primary'>主操作按钮</HuiButton>,
-    )
+    const component = renderToString(<HuiButton type='primary'>主操作按钮</HuiButton>)
     expect(component).toMatchSnapshot()
   })
 
   it('renders HuiButton - width', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiButton width={188}>自定义宽度</HuiButton>,
-    )
+    const component = renderToString(<HuiButton width={188}>自定义宽度</HuiButton>)
     expect(component).toMatchSnapshot()
   })
 
   it('renders HuiButton - block', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiButton block>按钮文字</HuiButton>,
-    )
+    const component = renderToString(<HuiButton block>按钮文字</HuiButton>)
     expect(component).toMatchSnapshot()
   })
 
@@ -58,8 +50,12 @@ describe('huiButton Snap', () => {
     expect.hasAssertions()
     const component = renderToString(
       <Block>
-        <HuiButton size='small' color='#ed3737'>按钮文字</HuiButton>
-        <HuiButton size='small' color='#ff6c00'>按钮文字</HuiButton>
+        <HuiButton size='small' color='#ed3737'>
+          按钮文字
+        </HuiButton>
+        <HuiButton size='small' color='#ff6c00'>
+          按钮文字
+        </HuiButton>
       </Block>,
     )
     expect(component).toMatchSnapshot()
@@ -67,9 +63,7 @@ describe('huiButton Snap', () => {
 
   it('renders HuiButton - disabled', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiButton disabled>按钮文字</HuiButton>,
-    )
+    const component = renderToString(<HuiButton disabled>按钮文字</HuiButton>)
     expect(component).toMatchSnapshot()
   })
 
@@ -87,16 +81,16 @@ describe('huiButton Snap', () => {
   it('renders HuiButton - extra', () => {
     expect.hasAssertions()
     const component = renderToString(
-      <HuiButton extra='辅助文字' size='large'>按钮文字</HuiButton>,
+      <HuiButton extra='辅助文字' size='large'>
+        按钮文字
+      </HuiButton>,
     )
     expect(component).toMatchSnapshot()
   })
 
   it('renders HuiButton - extra with size m', () => {
     expect.hasAssertions()
-    const component = renderToString(
-      <HuiButton extra='辅助文字'>按钮文字</HuiButton>,
-    )
+    const component = renderToString(<HuiButton extra='辅助文字'>按钮文字</HuiButton>)
     expect(component).toMatchSnapshot()
   })
 })
@@ -105,9 +99,7 @@ describe('huiButton Event', () => {
   it('huiButton onClick', () => {
     expect.hasAssertions()
     const onClick = jest.fn()
-    const component = renderIntoDocument(
-      <HuiButton onClick={onClick}>按钮文字</HuiButton>,
-    )
+    const component = renderIntoDocument(<HuiButton onClick={onClick}>按钮文字</HuiButton>)
     const componentDom = findDOMNode(component, 'hui-button')
     Simulate.click(componentDom)
     expect(onClick).toHaveBeenCalled()
@@ -117,7 +109,9 @@ describe('huiButton Event', () => {
     expect.hasAssertions()
     const onClick = jest.fn()
     const component = renderIntoDocument(
-      <HuiButton disabled onClick={onClick}>按钮文字</HuiButton>,
+      <HuiButton disabled onClick={onClick}>
+        按钮文字
+      </HuiButton>,
     )
     const componentDom = findDOMNode(component, 'hui-button')
     Simulate.click(componentDom)

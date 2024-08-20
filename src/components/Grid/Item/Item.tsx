@@ -9,7 +9,7 @@ export interface HuiGridItemProps extends NavigatorProps {
   className?: string
 }
 
-const HuiGridItem: React.FC<HuiGridItemProps> = props => {
+const HuiGridItem: React.FC<HuiGridItemProps> = (props) => {
   const { image, text, style, className = '', ...rest } = props
 
   return (

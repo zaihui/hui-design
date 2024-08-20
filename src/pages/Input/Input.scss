@@ -1,4 +1,5 @@
-@import '../../styles/index.scss';
+@import '@/styles/variables.scss';
+@import '@/styles/colors.scss';
 
 .input-page {
   > .content {
@@ -8,5 +9,9 @@
         padding-left: 16px;
       }
     }
+  }
+
+  .disabled-input-status-group {
+    background-color: $hui-disabled-background-color;
   }
 }

@@ -17,14 +17,13 @@ const Demo: React.FC = () => {
 
   return (
     <View>
-      <HuiListItem title='单选' onClick={() => setV1(true)}>
-      </HuiListItem>
+      <HuiListItem title='单选' onClick={() => setV1(true)}></HuiListItem>
       <HuiSelect
         visible={v1}
         title='这是个标题'
         level={1}
         options={data}
-        onConfirm={v => setV1(false)}
+        onConfirm={(v) => setV1(false)}
         onClose={() => setV1(false)}
       ></HuiSelect>
     </View>

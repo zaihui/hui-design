@@ -1,10 +1,10 @@
-@import "../../styles/colors.scss";
-@import "../../styles/variables.scss";
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
 
 $hui-action-sheet-duration: 300ms;
 $hui-action-sheet-font-color: #1e1e1e;
 $hui-action-sheet-footer-color: #8e8e8e;
-$timing-func: cubic-bezier(.36, .66, .04, 1);
+$timing-func: cubic-bezier(0.36, 0.66, 0.04, 1);
 $prefix: hui-action-sheet;
 $hui-action-sheet-font-size: px(16);
 

@@ -22,7 +22,9 @@ const Members: { name: string; desc: string }[] = [
   { name: '吴东垠', desc: '产品体验设计' },
   { name: '罗玉平', desc: '产品体验设计' },
   { name: '孙玲玲', desc: '产品体验设计' },
-].sort((a, b) => a.name.localeCompare(b.name, 'zh-Hans-CN', { sensitivity: 'accent' }))
+].sort((a, b) =>
+  a.name.localeCompare(b.name, 'zh-Hans-CN', { sensitivity: 'accent' }),
+)
 
 const TeamsPage: React.FC = () => (
   <View className='team-page'>
@@ -31,7 +33,7 @@ const TeamsPage: React.FC = () => (
       desc='感谢大家为组件库贡献的代码以及设计(排名不分先后)'
     />
     <View className='team-content'>
-      {Members.map(member => (
+      {Members.map((member) => (
         <View key={member.name} className='team-member'>
           <View className='name'>{member.name}</View>
           <View className='desc'>{member.desc}</View>

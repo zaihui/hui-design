@@ -13,7 +13,7 @@ export interface HuiEditorDisplayProps {
   footerContent?: string
 }
 
-const EditorDisplay: React.FC<HuiEditorDisplayProps> = props => {
+const EditorDisplay: React.FC<HuiEditorDisplayProps> = (props) => {
   const { type, image, headerContent, footerContent } = props
 
   return (
@@ -24,9 +24,7 @@ const EditorDisplay: React.FC<HuiEditorDisplayProps> = props => {
           {headerContent}
         </View>
       )}
-      <View
-        className='hui-editor-display-image-container'
-      >
+      <View className='hui-editor-display-image-container'>
         <Image
           src={image}
           style={{ width: Taro.pxTransform(343) }}

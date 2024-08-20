@@ -1,0 +1,26 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/colors.scss';
+
+.filters-default-popup-content {
+  padding: $filters-content-popup-default-padding;
+}
+
+$prefix: filters-content;
+
+.#{$prefix} {
+  height: 100%;
+
+  &-content {
+    overflow-y: auto;
+
+    &.right,
+    &.left {
+      width: $filters-content-popup-left-right-width;
+      height: 82%;
+    }
+
+    &.top {
+      max-height: $filters-content-popup-top-content-max-height;
+    }
+  }
+}

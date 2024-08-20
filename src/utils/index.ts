@@ -3,16 +3,21 @@ import dayjs from 'dayjs'
 import 'dayjs/plugin/duration'
 import { DESIGN_WIDTH } from './constant'
 
-export const pxTransform = (size: number): string => Taro.pxTransform(size, DESIGN_WIDTH)
+export const pxTransform = (size: number): string =>
+  Taro.pxTransform(size, DESIGN_WIDTH)
 
 export const selectorQueryClientRect = (
   selector: string,
-): Promise<NodesRef.BoundingClientRectCallbackResult> =>
-  new Promise(resolve => {
+): Promise<NodesRef.BoundingClientRectCallbackResult | any> =>
+  new Promise((resolve) => {
     const query = Taro.createSelectorQuery()
+    const timer = setTimeout(() => {
+      resolve({})
+    }, 2000)
     query
       .select(selector)
       .boundingClientRect((res: NodesRef.BoundingClientRectCallbackResult) => {
+        clearTimeout(timer)
         resolve(res)
       })
       .exec()
@@ -20,12 +25,16 @@ export const selectorQueryClientRect = (
 
 export const selectorQueryScrollOffset = (
   selector: string,
-): Promise<NodesRef.ScrollOffsetCallbackResult> =>
-  new Promise(resolve => {
+): Promise<NodesRef.ScrollOffsetCallbackResult | any> =>
+  new Promise((resolve) => {
     const query = Taro.createSelectorQuery()
+    const timer = setTimeout(() => {
+      resolve({})
+    }, 1000)
     query
       .select(selector)
       .scrollOffset((res: NodesRef.ScrollOffsetCallbackResult) => {
+        clearTimeout(timer)
         resolve(res)
       })
       .exec()
@@ -35,10 +44,10 @@ const hexToRgb = (hex: string): { r: number; g: number; b: number } | null => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result
     ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16),
-    }
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
     : null
 }
 
@@ -114,7 +123,9 @@ export const parseDurationToTime = (d: number, format: string): string => {
  * 获取格式中的分隔符
  * @param format 格式
  */
-export const getTimerFormatSeparator = (format = 'HH:mm:ss'): {
+export const getTimerFormatSeparator = (
+  format = 'HH:mm:ss',
+): {
   day: string
   hour: string
   minute: string
@@ -125,3 +136,8 @@ export const getTimerFormatSeparator = (format = 'HH:mm:ss'): {
   minute: format.split('mm')?.[1]?.[0],
   second: format.split('ss')?.[1]?.[0],
 })
+
+export const generateUuid = (length = 5): string =>
+  Number(Math.random().toString().substring(3, length) + Date.now()).toString(
+    36,
+  )

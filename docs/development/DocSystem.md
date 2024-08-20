@@ -1,22 +1,22 @@
 # 文档系统选型
 
-hui-design的文档系统采用vuepress搭配react-docgen的模式。
+hui-design 的文档系统采用 vuepress 搭配 react-docgen 的模式。
 
 ## 文档系统需要提供哪些内容
 
-- 各ui组件的参数说明页面
-- ui组件的实时展示
+- 各 ui 组件的参数说明页面
+- ui 组件的实时展示
 - 各种问题技术方案的选型介绍与原因
 - 图标列表、主题色列表介绍
 
 ## 对每种文档系统方案的评估
 
-### 复用taro-ui的文档系统
+### 复用 taro-ui 的文档系统
 
 优点：
 
 - 可以拿来即用
-- 基于react技术
+- 基于 react 技术
 
 缺点：
 
@@ -24,53 +24,53 @@ hui-design的文档系统采用vuepress搭配react-docgen的模式。
 - 面向大众用户，需要删改其中部分内容。
 - 不支持从代码自动生成文档，完全依赖手工编写文档，操作成本高
 
-### 使用vuepress
+### 使用 vuepress
 
 优点：
 
-- 简单易用，vue背书，有中文文档
-- 曾经在forseti下使用过，比较熟悉
+- 简单易用，vue 背书，有中文文档
+- 曾经在 forseti 下使用过，比较熟悉
 
 缺点：
 
-- vue技术，用作react项目的文档怪怪的
+- vue 技术，用作 react 项目的文档怪怪的
 
-### 使用docz等
+### 使用 docz 等
 
-> react下的vuepress
+> react 下的 vuepress
 
 优点：
 
-- react项目，技术栈一致
+- react 项目，技术栈一致
 
 缺点：
 
 - 新技术、引入需要花一点时间。
 - 没有官方背书。
 
-### 使用storybook、styleguidist
+### 使用 storybook、styleguidist
 
 优点：
 
 - 专业的做文档的系统
-- storybook侧重独立调试某个ui组件
-- styleguidist侧重于利用注释自动生成文档
+- storybook 侧重独立调试某个 ui 组件
+- styleguidist 侧重于利用注释自动生成文档
 
 缺点：
 
 - 需要熟悉对应技术
-- 需要验证是否和Taro的react兼容
-- storybook提供的功能目前可能不一定需要
-- styleguidist需要写比较详尽的注释，现在的开发资源可能不足以满足。
+- 需要验证是否和 Taro 的 react 兼容
+- storybook 提供的功能目前可能不一定需要
+- styleguidist 需要写比较详尽的注释，现在的开发资源可能不足以满足。
 - 需要调研是否能支持单独的文档页面，是否能支持组件的实时展示。
 
 ## 当前文档系统下各问题的解决方案
 
-综合以上考虑选择了使用vuepress配合react-docgen的模式，react-docgen可以从代码自动生成简单的props注释，可以减轻一部分文档工作量。
+综合以上考虑选择了使用 vuepress 配合 react-docgen 的模式，react-docgen 可以从代码自动生成简单的 props 注释，可以减轻一部分文档工作量。
 
 ### 当前方案下文档系统各内容的实现方式
 
-- 各ui组件的参数说明页面：vuepress页面可引入react-docgen的文档，两者互相配合。
-- ui组件的实时展示：照搬taro的实现方式（iframe引入h5），开发量不大。
-- 各种问题技术方案的选型介绍与原因：编写markdown文件即可。
-- 图标列表、主题色列表介绍：可以复用之前在forseti下的相关操作。
+- 各 ui 组件的参数说明页面：vuepress 页面可引入 react-docgen 的文档，两者互相配合。
+- ui 组件的实时展示：照搬 taro 的实现方式（iframe 引入 h5），开发量不大。
+- 各种问题技术方案的选型介绍与原因：编写 markdown 文件即可。
+- 图标列表、主题色列表介绍：可以复用之前在 forseti 下的相关操作。

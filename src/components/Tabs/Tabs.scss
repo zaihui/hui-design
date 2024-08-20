@@ -1,13 +1,13 @@
 /* stylelint-disable no-descending-specificity */
-@import "../../styles/colors.scss";
-@import "../../styles/variables.scss";
+@import '../../styles/colors.scss';
+@import '../../styles/variables.scss';
 
 .hui-tabs {
   .hui-tabs-bar {
     position: relative;
     z-index: 1;
     overflow: hidden;
-    box-shadow: 0 0 px(10) 0 rgba(0, 0, 0, .05);
+    box-shadow: 0 0 px(10) 0 rgba(0, 0, 0, 0.05);
 
     &.no-shadow {
       box-shadow: unset;
@@ -50,6 +50,7 @@
           }
 
           .tabs-item-wrapper {
+            position: relative;
             display: inline-block;
             overflow: hidden;
           }
@@ -65,75 +66,79 @@
           &:not(:first-child) {
             margin-left: px(32);
           }
-
-          .tabs-item-wrapper {
-            .tabs-title-smile {
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              justify-content: center;
-              padding: px(12) 0 px(23);
-              line-height: 1;
-
-              .title {
-                max-width: px(163);
-                font-size: $hui-font-body-m;
-                font-weight: $hui-font-weight-medium;
-                line-height: 1;
-                color: $hui-font-color-base-50;
-
-                @include no-wrap();
-              }
-
-              .sub-title {
-                max-width: px(163);
-                margin-top: px(4);
-                font-size: $hui-font-caption-m;
-                font-weight: $hui-font-weight-regular;
-                line-height: 1;
-                color: $hui-font-color-base-35;
-
-                @include no-wrap();
-              }
-            }
-
-            &.active {
-              .tabs-title-smile {
-                .title {
-                  color: $hui-tabs-smile-title-color;
-                }
-
-                .sub-title {
-                  color: $hui-tabs-smile-title-color;
-                }
-              }
-            }
-          }
-
-          &:nth-last-child(2) {
-            .tabs-item-wrapper {
-              padding-right: px(16);
-            }
-          }
         }
 
         .tabs-indicator-smile {
           position: absolute;
           bottom: 0;
+          left: 50%;
+          display: flex;
+          justify-content: center;
+          width: 0;
           margin-bottom: px(2);
+          overflow: hidden;
           color: $hui-tabs-indicator-bg-color;
-          transition: width .3s, left .3s;
+          transition: width 0.3s, left 0.3s;
           transform: translateX(-50%);
         }
       }
 
       .tabs-item {
         .tabs-item-wrapper {
+          position: relative;
           overflow: hidden;
+
+          .tabs-title-twin {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: px(12) 0 px(23);
+            line-height: 1;
+
+            .title {
+              max-width: px(163);
+              font-size: $hui-font-body-m;
+              font-weight: $hui-font-weight-medium;
+              line-height: 1;
+              color: $hui-font-color-base-50;
+
+              @include no-wrap();
+            }
+
+            .sub-title {
+              max-width: px(163);
+              margin-top: px(4);
+              font-size: $hui-font-caption-m;
+              font-weight: $hui-font-weight-regular;
+              line-height: 1;
+              color: $hui-font-color-base-35;
+
+              @include no-wrap();
+            }
+          }
 
           &.active {
             .tabs-title {
               color: $hui-font-color-base;
+            }
+
+            .tabs-title-twin {
+              .title {
+                color: $hui-font-color-base;
+              }
+
+              .sub-title {
+                color: $hui-font-color-base-75;
+              }
+            }
+
+            .tabs-indicator {
+              width: 80% !important;
+
+              &-smile {
+                width: 80% !important;
+              }
             }
           }
 
@@ -145,6 +150,10 @@
             color: $hui-font-color-base-50;
 
             @include no-wrap();
+
+            &-smile {
+              padding: px(18) 0 px(23);
+            }
           }
         }
       }
@@ -152,10 +161,13 @@
       .tabs-indicator {
         position: absolute;
         bottom: 0;
+        left: 50%;
+        width: 0;
         height: px(3);
         margin-bottom: px(6);
         background: $hui-tabs-indicator-bg-color;
-        transition: width .3s, left .3s;
+        transition: width 0.3s, left 0.3s;
+        transform: translateX(-50%);
       }
     }
   }
@@ -166,7 +178,7 @@
     .hui-tabs-panel {
       &.switch-with-animation {
         display: flex;
-        transition: transform .3s;
+        transition: transform 0.3s;
       }
 
       .hui-tab {
