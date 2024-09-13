@@ -43,6 +43,7 @@ export default {
     'pages/Tooltip/Tooltip',
     'pages/ActionSheet/ActionSheet',
     'pages/ToastPage/ToastPage',
+    'pages/UseToast/UseToast',
     'pages/Dialog/Dialog',
     'pages/Team/Team',
     'pages/Share/Share',

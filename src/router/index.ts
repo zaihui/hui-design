@@ -102,6 +102,7 @@ export default {
   Demo: new PageItemNormal('Demo'),
   Icon: new PageItemNormal('Icon'),
   ToastPage: new PageItemNormal('ToastPage'),
+  UseToast: new PageItemNormal('UseToast'),
   Dialog: new PageItemNormal('Dialog'),
   Input: new PageItemNormal('Input'),
   Form: new PageItemNormal('Form'),
