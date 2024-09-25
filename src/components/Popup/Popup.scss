@@ -3,12 +3,7 @@
 
 .hui-popup {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   z-index: $hui-z-index-s;
-  width: 100%;
   visibility: hidden;
   transition: visibility $hui-popup-duration $hui-popup-timing-function;
 
@@ -22,7 +17,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     touch-action: none;
     background: $hui-popup-mask-background;
     opacity: 0;
@@ -31,7 +25,6 @@
 
   .popup-content {
     position: fixed;
-    overflow: hidden;
     background: $hui-theme-color-background;
     transition: transform $hui-popup-duration $hui-popup-timing-function;
 
@@ -75,9 +68,6 @@
 }
 
 .popup-container-active {
-  height: 100vh;
-  overflow: hidden;
-  touch-action: none;
   visibility: visible;
 
   .popup-mask {

@@ -11,13 +11,14 @@ export const validateInnerCustom = async (
 ): Promise<string> => {
   if (!rule || !rule.length) return ''
   const [defaultRuleTarget] = rule
-
-  const defaultRuleMsg = defaultRuleTarget.message
-  if (!defaultRuleTarget?.validator) return defaultRuleMsg || '当前选项必填'
+  const { validator = null } = defaultRuleTarget
   try {
-    return (await defaultRuleTarget?.validator(value)) as unknown as string
-  } catch (err: any) {
-    return err.message
+    if (typeof validator !== 'function') {
+      throw new Error('validator must be function')
+    }
+    return (await validator(value)) as unknown as string
+  } catch (err) {
+    return (err as Error)?.message || ''
   }
 }
 export const validatorRequireText = (value: string): string =>

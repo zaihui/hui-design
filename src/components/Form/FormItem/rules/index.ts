@@ -114,10 +114,9 @@ const validatorStyle = async (
   value: string,
   rule: Rule,
 ) => {
-  const msg = (await validateInnerCustom(value, rule)) as string
   switch (validatorType) {
     case 'innerCustomValidate':
-      return [errorCss, msg]
+      return [errorCss, await validateInnerCustom(value, rule)]
     case 'custom':
       return [errorCss, validatorRequireText(rule[0]?.message || '')]
     case 'inner':
