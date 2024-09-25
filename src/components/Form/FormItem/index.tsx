@@ -58,7 +58,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     // desc,
     tipsText = '',
     labelStyle,
-    rule = [],
+    rule,
     labelWrapProps = {},
     align = AlignType.ROW,
     customOptionalStyle = null,
@@ -70,7 +70,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   } = props
 
   const { Provider } = FormItemContext
-  const [ruleTarget = {}] = rule
+  const [ruleTarget] = rule ?? []
   const { name: listName } = listContext
 
   const path = useMemo(() => {
