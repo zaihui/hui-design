@@ -59,14 +59,14 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     onMaskClose,
   } = props as any
 
-  const position = useMemo(() => {
-    if (parent.filterTop) {
-      return {
-        top: parent.filterTop,
-      }
-    }
-    return {}
-  }, [parent])
+  const coverDefaultStyle = useMemo(
+    () =>
+      ({
+        position: 'absolute',
+        height: 'auto',
+      } as CSSProperties),
+    [],
+  )
 
   useImperativeHandle(ref, () => ({ hideMenu }))
 
@@ -125,17 +125,18 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
   }
 
   return (
+    // 现在的弹窗是针对于 huifilter 定位的
     <Popup
       visible={parent.show}
       position='top'
-      maskStyle={position}
-      contentStyle={position}
+      maskStyle={{ ...coverDefaultStyle, height: '100vh' }}
+      contentStyle={coverDefaultStyle}
       onClose={() => {
         hideMenu()
         onMaskClose && onMaskClose()
       }}
-      className={cx('hui-filter-animation', {
-        'no-animation': !parent.show,
+      className={cx('hui-filter-animation', 'hui-filter-item', {
+        'no-animation': !parent?.show,
       })}
     >
       <View

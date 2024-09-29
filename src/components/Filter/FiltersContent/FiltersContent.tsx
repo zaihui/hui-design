@@ -31,18 +31,16 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
     filterContent,
     onClose,
     visible,
-    parent,
     ...rest
   } = props as any
 
   const positionStyle = useMemo(() => {
-    if (position === 'top' && parent) {
-      return {
-        top: parent.filterTop,
-      }
-    }
-    return {}
-  }, [parent, position, visible])
+    if (position !== 'top') return {}
+    return {
+      position: 'absolute',
+      height: 'auto',
+    } as React.CSSProperties
+  }, [position])
 
   const actionButtonProps: ActionFooterProps = {
     confirmButtonProps: props.confirmButtonProps,
@@ -56,7 +54,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
 
   return (
     <HuiPopup
-      className={cx('hui-filter-animation', {
+      className={cx('hui-filter-animation', 'hui-filter-filters', {
         'no-animation': position === 'top' && !visible,
       })}
       visible={visible}
@@ -65,7 +63,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
         popupContentClassName,
       })}
       contentStyle={positionStyle}
-      maskStyle={positionStyle}
+      maskStyle={{ ...positionStyle, height: '100vh' }}
       onClose={() => {
         if (onClose) {
           onClose()
@@ -79,7 +77,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
         )}
         style={contentStyle}
       >
-        {filterContent}
+        {visible && filterContent}
       </View>
       <ActionFooter {...actionButtonProps} />
     </HuiPopup>
