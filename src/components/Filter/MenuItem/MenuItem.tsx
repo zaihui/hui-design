@@ -68,6 +68,15 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     [],
   )
 
+  const maskDefaultStyle = useMemo(
+    () =>
+      ({
+        position: 'absolute',
+        height: '100vh',
+      } as CSSProperties),
+    [],
+  )
+
   useImperativeHandle(ref, () => ({ hideMenu }))
 
   usePageScroll(() => {
@@ -129,7 +138,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     <Popup
       visible={parent.show}
       position='top'
-      maskStyle={{ ...coverDefaultStyle, height: '100vh' }}
+      maskStyle={maskDefaultStyle}
       contentStyle={coverDefaultStyle}
       onClose={() => {
         hideMenu()

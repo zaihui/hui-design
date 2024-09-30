@@ -34,6 +34,14 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
     ...rest
   } = props as any
 
+  const maskStyle = useMemo(() => {
+    if (position !== 'top') return {}
+    return {
+      position: 'absolute',
+      height: '100vh',
+    } as React.CSSProperties
+  }, [position])
+
   const positionStyle = useMemo(() => {
     if (position !== 'top') return {}
     return {
@@ -63,7 +71,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
         popupContentClassName,
       })}
       contentStyle={positionStyle}
-      maskStyle={{ ...positionStyle, height: '100vh' }}
+      maskStyle={maskStyle}
       onClose={() => {
         if (onClose) {
           onClose()
