@@ -7,6 +7,13 @@
 
 $prefix: filters-content;
 
+.hui-filter-filters {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: $hui-z-index-m;
+  width: 100%;
+}
 .#{$prefix} {
   height: 100%;
 

@@ -1,16 +1,16 @@
 import React, {
   CSSProperties,
-  ReactNode,
+  Fragment,
   useState,
   useRef,
   useImperativeHandle,
   forwardRef,
   useContext,
-  useMemo,
+  useCallback,
 } from 'react'
 import { View, ITouchEvent } from '@tarojs/components'
 import cx from 'classnames'
-import MenuItem, { MenuItemOption } from '../MenuItem/MenuItem'
+import MenuItem, { MenuItemOption, MenuItemProps } from '../MenuItem/MenuItem'
 import HuiIcon from '../../Icon'
 import { generateUniqueId } from '../utils'
 import FilterContext from '../context'
@@ -18,11 +18,11 @@ import FilterContext from '../context'
 export interface MenuProps {
   className?: string
   style?: CSSProperties
-  children?: ReactNode
   /** 透传到menu组件 当筛选项变化的时候调用 */
   menuOnChange?: (option: MenuItemOption) => void
   /** 点击menu title */
   onMenuTitleClick?: (e: ITouchEvent, index: number, maskShow: boolean) => void
+  menuItems?: MenuItemProps[]
 }
 
 export interface MenuRef {
@@ -35,7 +35,8 @@ const defaultProps = {
 }
 
 const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
-  const { menuOnChange, onMenuTitleClick, className, children, ...rest } = props
+  const { menuOnChange, onMenuTitleClick, className, menuItems, ...rest } =
+    props
   const menuRef = useRef()
   const [activatedList, setActivatedList] = useState<boolean[]>([])
   const [menuItemTitle, setMenuItemTitle] = useState<string[]>([])
@@ -54,58 +55,37 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
     context?.hideFilter()
   }
 
-  const hideMenuItem = (index: number) => {
-    const temp = [...activatedList]
-    temp[index] = false
-    setActivatedList(temp)
-  }
-
   useImperativeHandle(ref, () => ({
     hide: () => {
       setActivatedList([])
     },
   }))
 
-  const updateMenuItemTitle = (index: number, text: string) => {
-    const temp = [...menuItemTitle]
-    temp[index] = text
-    setMenuItemTitle(temp)
-  }
-
-  const renderMenuTitle = () =>
-    React.Children.map(children, (child, index) => {
+  const renderMenuTitle = (newChild) =>
+    React.Children.map(newChild, (child) => {
       if (React.isValidElement(child)) {
-        const { title, options, value, icon, disabled } = child.props
+        const { title, options, value, icon, disabled, activeIndex } =
+          child.props as any
 
         const selected = options?.filter((item) => item.value === value)
 
         const getTitle = () => {
           if (title) return title
-          if (menuItemTitle[index]) {
-            return menuItemTitle[index]
+          if (menuItemTitle[activeIndex]) {
+            return menuItemTitle[activeIndex]
           }
           return selected?.[0]?.text
-        }
-
-        const clipText = (text: string) => {
-          if (text.length > 6) {
-            return `${text.substring(0, 6)}...`
-          } else {
-            return text
-          }
         }
 
         return (
           <View
             className={cx('hui-filter-menu-item', {
-              active: activatedList[index],
+              active: activatedList[activeIndex],
               disabled,
             })}
-            onClick={(e) => toggleMenuItem(index, disabled, e)}
+            onClick={(e) => toggleMenuItem(activeIndex, disabled, e)}
           >
-            <View className='hui-filter-menu-item-text'>
-              {clipText(getTitle())}
-            </View>
+            <View className='hui-filter-menu-item-text'>{getTitle()}</View>
             {icon || (
               <View className='hui-filter-menu-item-icon'>
                 <HuiIcon name='h110-upwards' size={14} />
@@ -117,32 +97,38 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
       return null
     })
 
-  const renderMenuItem = useMemo(
-    () =>
-      React.Children.map(children, (child, index) => {
+  const renderMenuItem = useCallback(
+    (newChild) => {
+      const updateMenuItemTitle = (index: number, text: string) => {
+        const temp = [...menuItemTitle]
+        temp[index] = text
+        setMenuItemTitle(temp)
+      }
+
+      const hideMenuItem = (index: number) => {
+        const temp = [...activatedList]
+        temp[index] = false
+        setActivatedList(temp)
+      }
+
+      return React.Children.map(newChild, (child) => {
+        const { activeIndex } = child.props
         if (React.isValidElement(child)) {
           return React.cloneElement(child, {
             parent: {
-              index,
-              show: activatedList[index],
+              index: activeIndex,
+              show: activatedList[activeIndex],
               menuRef,
               hideMenuItem,
               updateMenuItemTitle,
               menuOnChange,
-              filterTop: context.filterTop,
             },
           } as any)
         }
         return null
-      }),
-    [
-      activatedList,
-      menuRef,
-      hideMenuItem,
-      updateMenuItemTitle,
-      menuOnChange,
-      context.filterTop,
-    ],
+      })
+    },
+    [menuItemTitle, activatedList, menuRef, menuOnChange],
   )
 
   return (
@@ -151,8 +137,17 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
       className={cx('hui-filter-menu', className, generateUniqueId())}
       ref={menuRef}
     >
-      <View className='hui-filter-menu-bar'>{renderMenuTitle()}</View>
-      {renderMenuItem}
+      {menuItems?.map((item, index) => {
+        const itemInfo = { ...item, activeIndex: index }
+        return (
+          <Fragment key={index}>
+            <View className='hui-filter-menu-container'>
+              {renderMenuTitle(<Menu.Item {...itemInfo} />)}
+            </View>
+            {renderMenuItem(<Menu.Item {...itemInfo} />)}
+          </Fragment>
+        )
+      })}
     </View>
   )
 })

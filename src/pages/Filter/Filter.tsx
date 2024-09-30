@@ -28,6 +28,7 @@ const TagsGroup = (props) => {
       {mockTags.length &&
         mockTags.map((t, index) => (
           <HuiTag
+            key={index}
             onClick={() => {
               onChange(index + 1)
             }}
