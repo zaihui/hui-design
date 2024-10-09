@@ -10,6 +10,10 @@ export interface registerWatchType {
   onStoreChange: () => void
 }
 
+export type NamePath = string | string[]
+
+export type FieldWatchCallback = (values: any) => void
+
 export interface FieldContext {
   /** 删除单个表单数据 */
   removeFieldValue: (name: string | string[]) => void
@@ -25,6 +29,8 @@ export interface FieldContext {
   validatorFields: () => any
   /** 注册监听 */
   registerWatch: (id: string, filed: registerWatchType) => any
+  /** 字段注册监听 */
+  registerFieldWatch: (path: string, callback: FieldWatchCallback) => any
   /** 设置回调函数 */
   setCallbacks: (callbacks: any) => any
   /** 提交表单 */
@@ -43,6 +49,7 @@ const Context = React.createContext<FieldContext>({
   setFieldValue: warningFunc,
   validatorFields: warningFunc,
   registerWatch: warningFunc,
+  registerFieldWatch: warningFunc,
   setCallbacks: warningFunc,
   submit: () => Promise.resolve().then(warningFunc as any),
   reset: () => Promise.resolve().then(warningFunc),

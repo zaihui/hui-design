@@ -97,4 +97,6 @@ export interface HuiFormItemProps {
   extra?: ReactNode
   /** align === row 时生效，展示箭头 默认值为false */
   showArrow?: boolean
+  /** 是否隐藏字段 */
+  hidden?: boolean
 }

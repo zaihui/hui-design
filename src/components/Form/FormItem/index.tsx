@@ -67,6 +67,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     onLabelIconClick,
     showArrow = false,
     extra = null,
+    hidden = false,
   } = props
 
   const { Provider } = FormItemContext
@@ -189,7 +190,11 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
 
   if (!visible) return null
   return (
-    <View className={classNames(formItemPrefix)}>
+    <View
+      className={classNames(formItemPrefix, {
+        [`${formItemPrefix}-hidden`]: hidden,
+      })}
+    >
       <View
         className={classNames(`${formItemPrefix}-wrapper`, className, {
           [ruleCss]: renderType === 'other',

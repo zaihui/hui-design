@@ -3,7 +3,11 @@ import set from 'lodash/set'
 import unset from 'lodash/unset'
 
 import { toArray, getErrorTarget, toString } from '../util'
-import { FieldContext, registerWatchType } from '../constants'
+import {
+  FieldContext,
+  FieldWatchCallback,
+  registerWatchType,
+} from '../constants'
 
 interface Callbacks {
   onFinish: (store: Store) => void
@@ -18,6 +22,8 @@ class FormStore {
   store: Store
 
   watchList: Map<string, any>
+
+  fieldWatchList: Map<string, any>
 
   callbacks: Callbacks
 
@@ -35,6 +41,8 @@ class FormStore {
      */
     this.watchList = new Map()
 
+    this.fieldWatchList = new Map()
+
     this.callbacks = {
       onFinish() {},
       onFinishFailed() {},
@@ -51,6 +59,13 @@ class FormStore {
     this.watchList.set(id, field)
     return () => {
       this.watchList.delete(id)
+    }
+  }
+
+  registerFieldWatch(path: string, callback: FieldWatchCallback): () => void {
+    this.fieldWatchList.set(path, callback)
+    return () => {
+      this.fieldWatchList.delete(path)
     }
   }
 
@@ -119,8 +134,14 @@ class FormStore {
   notifywatchList(name?: string | string[]): void {
     this.watchList.forEach((field: any) => {
       const { onStoreChange } = field
+      const fieldName = toString(field.name)
+
+      if (this.fieldWatchList.has(fieldName)) {
+        this.fieldWatchList.get(fieldName)(this.store)
+      }
+
       if (name) {
-        if (toString(name) === toString(field.name)) {
+        if (toString(name) === fieldName) {
           onStoreChange()
         }
       } else {
@@ -205,6 +226,7 @@ class FormStore {
       validatorFields: this.validatorFields.bind(this),
       setCallbacks: this.setCallbacks.bind(this),
       registerWatch: this.registerWatch.bind(this),
+      registerFieldWatch: this.registerFieldWatch.bind(this),
       submit: this.submit.bind(this),
       reset: this.reset.bind(this),
     }
