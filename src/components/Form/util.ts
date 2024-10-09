@@ -1,6 +1,10 @@
-export const toArray = (element: string | any[]): any[] =>
-  Array.isArray(element) ? element : [element]
+export const toArray = (element: string | any[]): any[] => {
+  if (element === undefined || element === null) {
+    return []
+  }
 
+  return Array.isArray(element) ? element : [element]
+}
 export function getErrorTarget(err: Error): string | null {
   const msg = err.message.replace('Error: ', '')
   try {
