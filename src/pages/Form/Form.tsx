@@ -160,7 +160,7 @@ const InputPage: React.FC = () => {
                 },
                 (value) => value,
               ]}
-              label='账号'
+              label={(v) => `账号长度: ${v?.length ?? 0}`}
               name='account'
             >
               <HuiInput

@@ -123,6 +123,14 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     [path, setFieldValue],
   )
 
+  const renderLabel = () => {
+    if (typeof label === 'function') {
+      return label(getFieldValue(path))
+    }
+
+    return label
+  }
+
   const copyChildren = () => {
     if (React.isValidElement(children)) {
       if (!Object.prototype.hasOwnProperty.call(children.props, 'onChange')) {
@@ -217,7 +225,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
               }}
             >
               <View className={`${formItemPrefix}-text-label`}>
-                {label}
+                {renderLabel()}
                 {requireIcon}
                 {labelIcon}
               </View>
