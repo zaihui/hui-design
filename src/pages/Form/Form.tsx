@@ -3,7 +3,7 @@ import Taro from '@tarojs/taro'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import HuiButton from '@/components/Button/Button'
-import HuiForm, { useForm } from '@/components/Form/index'
+import HuiForm, { useForm, useWatch } from '@/components/Form/index'
 import HuiInput from '@/components/Input'
 import HuiPicker, { HuiPickerColumn } from '@/components/Picker'
 import HuiTextArea from '@/components/TextArea'
@@ -58,6 +58,7 @@ const open1Columns: HuiPickerColumn<string>[][] = [
   [{ text: '男' }, { text: '女' }],
 ]
 
+const TextStyle: React.CSSProperties = { fontSize: 14, marginTop: 4 }
 const InputPage: React.FC = () => {
   const [localData, setLocalData] = useState({
     sync: false,
@@ -75,6 +76,10 @@ const InputPage: React.FC = () => {
   const [form] = useForm()
 
   const [form2] = useForm()
+
+  const [form3] = useForm()
+
+  const text = useWatch('text', form3)
 
   useEffect(() => {
     form.setFieldsValue(localData)
@@ -255,6 +260,28 @@ const InputPage: React.FC = () => {
                 ></HuiInput>
               </HuiFormItem>
             )}
+
+            <HuiButton formType='submit' block style={buttonStyle}>
+              提交表单
+            </HuiButton>
+            <HuiButton formType='reset' block style={buttonStyle}>
+              重置表单
+            </HuiButton>
+          </HuiForm>
+        </GroupSection>
+
+        <GroupSection title='useWatch 用法'>
+          <HuiForm form={form3}>
+            <HuiFormItem label='文本' name='text'>
+              <HuiInput
+                divider={false}
+                onInput={(e) => form3.setFieldValue('text', e.detail.value)}
+                type='text'
+              ></HuiInput>
+            </HuiFormItem>
+            <View
+              style={TextStyle}
+            >{`使用 useWatch 获取的文本值 ${text}`}</View>
 
             <HuiButton formType='submit' block style={buttonStyle}>
               提交表单
