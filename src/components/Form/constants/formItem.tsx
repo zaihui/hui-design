@@ -61,7 +61,7 @@ export interface HuiFormItemProps {
   /** 表单key */
   name: string | string[]
   /** 文本 */
-  label?: string | ReactNode
+  label?: string | ReactNode | ((value) => string)
   /** 补充描述 */
   // desc?: string
   /** 对单排列方式, 默认row */
