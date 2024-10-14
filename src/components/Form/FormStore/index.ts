@@ -62,10 +62,28 @@ class FormStore {
     }
   }
 
-  registerFieldWatch(path: string, callback: FieldWatchCallback): () => void {
-    this.fieldWatchList.set(path, callback)
-    return () => {
-      this.fieldWatchList.delete(path)
+  registerFieldWatch(
+    path: string,
+    callback: FieldWatchCallback,
+  ): (bool: boolean) => void {
+    if (this.fieldWatchList.has(path)) {
+      this.fieldWatchList.set(
+        path,
+        this.fieldWatchList.get(path).concat(callback),
+      )
+    } else {
+      this.fieldWatchList.set(path, [callback])
+    }
+
+    return (bool) => {
+      if (bool) {
+        this.fieldWatchList.delete(path)
+      } else if (this.fieldWatchList.has(path)) {
+        this.fieldWatchList.set(
+          path,
+          this.fieldWatchList.get(path)?.filter((fn) => fn !== callback),
+        )
+      }
     }
   }
 
