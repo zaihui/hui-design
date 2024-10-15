@@ -155,7 +155,7 @@ class FormStore {
       const fieldName = toString(field.name)
 
       if (this.fieldWatchList.has(fieldName)) {
-        this.fieldWatchList.get(fieldName)(this.store)
+        this.fieldWatchList.get(fieldName).forEach((fn) => fn(this.store))
       }
 
       if (name) {
