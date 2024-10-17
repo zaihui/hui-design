@@ -150,15 +150,17 @@ class FormStore {
   }
 
   notifywatchList(name?: string | string[]): void {
+    if (!name) {
+      this.fieldWatchList.forEach((fns) => fns.forEach((fn) => fn(this.store)))
+    }
     this.watchList.forEach((field: any) => {
       const { onStoreChange } = field
       const fieldName = toString(field.name)
 
-      if (this.fieldWatchList.has(fieldName)) {
-        this.fieldWatchList.get(fieldName).forEach((fn) => fn(this.store))
-      }
-
       if (name) {
+        if (this.fieldWatchList.has(fieldName)) {
+          this.fieldWatchList.get(fieldName).forEach((fn) => fn(this.store))
+        }
         if (toString(name) === fieldName) {
           onStoreChange()
         }

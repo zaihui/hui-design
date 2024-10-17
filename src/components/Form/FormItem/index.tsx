@@ -33,7 +33,8 @@ import { useId } from '../../../utils/hooks'
  */
 const Item: React.FC<HuiFormItemProps> = (props) => {
   const context = useContext<FieldContext>(Context)
-  const { registerWatch, getFieldValue, setFieldValue } = context
+  const { registerWatch, getFieldValue, setFieldValue, removeFieldValue } =
+    context
   const listContext = useContext<FormListContextProps>(FormListContext)
   const [renderType, setRenderType] = useState<keyof ItemType>('other')
   const [, update] = useState({})
@@ -179,6 +180,9 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   useEffect(() => {
     validatorRules(localValue)
   }, [localValue])
+
+  // 组件卸载后移出字段
+  useEffect(() => () => removeFieldValue(path), [path, removeFieldValue])
 
   useEffect(() => {
     const unMount = registerWatch(id, {
