@@ -33,7 +33,7 @@ const HighlightText: React.FC<HighlightTextProps> = ({
           if (
             lowerText.substring(i, i + lowerKeyword.length) === lowerKeyword
           ) {
-            if (i > startIndex) {
+            if (i >= startIndex) {
               unmatchText.push(text.substring(startIndex, i))
             }
 
@@ -45,6 +45,11 @@ const HighlightText: React.FC<HighlightTextProps> = ({
 
         if (startIndex < text.length) {
           unmatchText.push(text.substring(startIndex))
+        }
+
+        // 解决 keyword 在结尾的情况
+        if (unmatchText.length === matchText.length) {
+          unmatchText.push('')
         }
       } else {
         unmatchText = text.split(keyword)
