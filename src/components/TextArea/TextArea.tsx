@@ -1,12 +1,20 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useMemo, useState } from 'react'
+import React, {
+  forwardRef,
+  RefObject,
+  useEffect,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react'
 import cx from 'classnames'
-import { View, Textarea, Text } from '@tarojs/components'
+import { View, Text } from '@tarojs/components'
 import { TextareaProps } from '@tarojs/components/types/Textarea'
+import useDebounce from '../../hook/useDebounce'
+
 import { HIconType } from '../Icon/type'
 import HuiIcon from '../Icon'
 
-const requiredMsg = '此为必填项'
 export interface HuiTextAreaProps extends TextareaProps {
   /** 字段名字 */
   label?: React.ReactNode
@@ -22,36 +30,92 @@ export interface HuiTextAreaProps extends TextareaProps {
   height?: string | number
   style?: React.CSSProperties
   className?: string
+  /** 键盘对齐位置 */
+  adjustKeyboardTo?: 'cursor' | 'bottom'
+  /** 输入时是否开启 */
+  dirtyInput?: boolean
 }
+
+interface HuiTextAreaNumberRef {
+  updateLen: React.Dispatch<React.SetStateAction<number>>
+  setIsInput: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const HuiTextAreaNumber = forwardRef<
+  HuiTextAreaNumberRef,
+  {
+    upperLimit?: number
+    required?: boolean
+    errorMsg?: React.ReactNode
+    hiddenLimit?: boolean
+  }
+>(({ upperLimit, required, errorMsg, hiddenLimit = false }, ref) => {
+  const [len, setLen] = useState(0)
+  const [isInput, setIsInput] = useState(false)
+  useImperativeHandle(
+    ref,
+    () => ({
+      updateLen: setLen,
+      setIsInput,
+    }),
+    [],
+  )
+  return required && !len && isInput ? (
+    <View className='error-wrapper'>
+      <View className='error-msg-wrapper'>{errorMsg}</View>
+    </View>
+  ) : upperLimit && !hiddenLimit ? (
+    <View className='indicator'>
+      <Text
+        className={`current-number ${
+          upperLimit && len > upperLimit ? 'overage' : len ? '' : 'zero'
+        }`}
+      >
+        {len <= upperLimit ? len : upperLimit}
+      </Text>
+      <Text>/{upperLimit || '-'}</Text>
+    </View>
+  ) : null
+})
 
 const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
   const {
+    errorMsg = '此为必填项',
     label,
     labelIcon,
     required = true,
-    value,
+    value = '',
+    dirtyInput = false,
     maxLength = 140,
     maxlength,
-    placeholder,
+    placeholder = '请输入内容',
     disabled,
-    focus,
     adjustPosition,
     showConfirmBar,
+    autoFocus,
+    confirmType = 'return',
     disableDefaultPadding,
-    onLineChange = () => {},
-    onInput = () => {},
-    onFocus = () => {},
-    onBlur = () => {},
-    onConfirm = () => {},
-    onKeyboardHeightChange = () => {},
-    upperLimit,
+    adjustKeyboardTo = 'cursor',
+    onLineChange,
+    onInput,
+    onFocus,
+    onBlur,
+    onConfirm,
+    onKeyboardHeightChange,
     height,
     style,
+    cursor = 0,
+    holdKeyboard,
     className = '',
-    ...rest
   } = props
-  const valueLen = useMemo(() => (value && value.length) || 0, [value])
-  const [errorMsg, setErrorMsg] = useState(props.errorMsg)
+  const localValue = useRef(value)
+  const huiTextAreaNumberRef = useRef<HuiTextAreaNumberRef>()
+  const maxLen = maxlength || maxLength
+
+  useEffect(() => {
+    localValue.current = value
+    huiTextAreaNumberRef?.current?.updateLen?.(localValue.current?.length ?? 0)
+  }, [value])
 
   const labelDom = label ? (
     <View className='label'>
@@ -68,45 +132,49 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     </View>
   ) : null
 
-  // 错误信息是否展示
-  const errorMsgDom = errorMsg ? (
-    <View className='error-wrapper'>
-      <View className='error-msg-wrapper'>{errorMsg}</View>
-    </View>
-  ) : null
+  const handleInput = useDebounce((e) => {
+    onInput?.(e)
+  }, 600)
 
   const textareaDom = (
-    <Textarea
+    // eslint-disable-next-line
+    // @ts-ignore
+    <hui-textarea
+      adjustKeyboardTo={adjustKeyboardTo}
+      confirmType={confirmType}
       disableDefaultPadding={disableDefaultPadding}
       showConfirmBar={showConfirmBar}
       adjustPosition={adjustPosition}
-      focus={focus}
+      focus
       placeholder={placeholder}
+      holdKeyboard={holdKeyboard}
+      cursor={cursor}
+      autoFocus={autoFocus}
+      maxlength={maxLen}
       disabled={disabled}
-      value={value}
-      maxlength={maxlength || maxLength}
       cursorSpacing={32}
       placeholderClass='placeholder'
-      className='text-area'
-      onLineChange={onLineChange}
-      onInput={(e) => {
-        // eslint-disable-next-line
-        // @ts-ignore
-        if (
-          !props.errorMsg &&
-          required &&
-          !e.detail.value &&
-          errorMsg !== requiredMsg
-        ) {
-          setErrorMsg(requiredMsg)
-        }
-        onInput(e)
-      }}
+      onLinechange={onLineChange}
       onFocus={onFocus}
       onBlur={onBlur}
       onConfirm={onConfirm}
-      onKeyboardHeightChange={onKeyboardHeightChange}
-      {...rest}
+      onKeyboardheightchange={onKeyboardHeightChange}
+      value={value}
+      onInput={(e) => {
+        huiTextAreaNumberRef?.current?.setIsInput(true)
+
+        localValue.current = e.detail.value
+
+        huiTextAreaNumberRef?.current?.updateLen?.(
+          localValue.current?.length ?? 0,
+        )
+
+        if (!dirtyInput) {
+          handleInput(e)
+        } else {
+          onInput?.(e)
+        }
+      }}
     />
   )
 
@@ -114,28 +182,18 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     <View
       className={cx('hui-text-area', className, { disabled })}
       style={{
-        height: typeof height === 'string' ? height : `${height}px`,
+        height: typeof height === 'number' ? `${height}px` : height,
         ...style,
       }}
     >
       <View className='hui-text-area-label-area'>{labelDom}</View>
       {textareaDom}
-      {errorMsgDom || (
-        <View className='indicator'>
-          <Text
-            className={`current-number ${
-              upperLimit && valueLen > upperLimit
-                ? 'overage'
-                : valueLen
-                ? ''
-                : 'zero'
-            }`}
-          >
-            {valueLen}
-          </Text>
-          <Text>/{upperLimit || '-'}</Text>
-        </View>
-      )}
+      <HuiTextAreaNumber
+        required={required}
+        ref={huiTextAreaNumberRef as RefObject<HuiTextAreaNumberRef>}
+        upperLimit={maxLen}
+        errorMsg={errorMsg}
+      />
     </View>
   )
 }

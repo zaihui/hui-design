@@ -1,6 +1,6 @@
 {
   "name": "@zaihui/hui-design",
-  "version": "0.0.1-beta.79",
+  "version": "0.0.1-beta.81",
   "description": "小程序组件库",
   "templateInfo": {
     "name": "mobx",
@@ -32,7 +32,7 @@
     "build:h5:alpha": "cross-env BUILD_ENV=alpha npm run build:h5",
     "build:h5:prod": "cross-env BUILD_ENV=prod npm run build:h5",
     "dev:h5": "npm run build:h5 -- --watch",
-    "build:ci": "rimraf ./lib && tsc -p ./tsconfig.build.json && node ./scripts/copy-files.js src/ lib/ png scss",
+    "build:ci": "rimraf ./lib && tsc -p ./tsconfig.build.json && node ./scripts/copy-files.js src lib png scss && node ./scripts/copy-files.js src/miniapp lib/miniapp wxml wxss js json",
     "docs:start": "concurrently -k -p \"[{name}]\" -n \"dev:h5,docs:dev\" -c \"yellow.bold,cyan.bold,green.bold\" \"npm run dev:h5\" \"npm run docs:dev\"",
     "docs:dev": "vuepress dev docs --open",
     "docs:build": "vuepress build docs",

@@ -8,5 +8,10 @@
     "jsx": "react",
     "module": "es6"
   },
-  "include": ["./src/index.ts", "./src/bin.ts", "./global.d.ts"]
+  "include": [
+    "./src/index.ts",
+    "./src/nativeComponentsConfig.ts",
+    "./src/bin.ts",
+    "./global.d.ts"
+  ]
 }

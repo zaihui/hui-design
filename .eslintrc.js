@@ -9,6 +9,7 @@ module.exports = {
     useJSXTextNode: true,
     project: './tsconfig.json',
   },
+  ignorePatterns: ['*.json'],
   extends: [
     'airbnb-base',
     '@zaihui/base',

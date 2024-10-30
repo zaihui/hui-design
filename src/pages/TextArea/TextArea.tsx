@@ -12,7 +12,6 @@ const TextArea: React.FC = () => {
   const [value2, setValue2] = useState('')
   const [value3, setValue3] = useState('')
   const [value4, setValue4] = useState('')
-  const [errorMsg, setErrorMsg] = useState('')
 
   return (
     <View className='textarea-page'>
@@ -25,16 +24,10 @@ const TextArea: React.FC = () => {
         <GroupSection title='基础用法'>
           <HuiTextArea
             label='身份证'
-            errorMsg={errorMsg}
-            upperLimit={50}
+            maxlength={500}
             placeholder='请输入内容，最多50字'
             value={value1}
             onInput={(e) => {
-              // eslint-disable-next-line
-              // @ts-ignore
-              if (!e.target.value) {
-                setErrorMsg('此为必填项')
-              }
               // eslint-disable-next-line
               // @ts-ignore
               setValue1(e.target.value)
@@ -43,16 +36,10 @@ const TextArea: React.FC = () => {
           <HuiTextArea
             label='备注'
             required={false}
-            errorMsg={errorMsg}
             upperLimit={50}
             placeholder='请输入内容，最多50字'
             value={value2}
             onInput={(e) => {
-              // eslint-disable-next-line
-              // @ts-ignore
-              if (!e.target.value) {
-                setErrorMsg('此为必填项')
-              }
               // eslint-disable-next-line
               // @ts-ignore
               setValue2(e.target.value)
@@ -61,7 +48,6 @@ const TextArea: React.FC = () => {
         </GroupSection>
         <GroupSection title='不带标签'>
           <HuiTextArea
-            errorMsg={errorMsg}
             upperLimit={50}
             placeholder='不带标签'
             value={value3}
@@ -74,7 +60,6 @@ const TextArea: React.FC = () => {
           <HuiTextArea
             label='带标签的文本域'
             labelIcon='112-doubtfill'
-            errorMsg={errorMsg}
             upperLimit={50}
             placeholder='请输入'
             value={value3}

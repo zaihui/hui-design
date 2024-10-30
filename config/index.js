@@ -78,6 +78,8 @@ module.exports = function (merge) {
   }
   return merge(
     config,
-    process.env.NODE_ENV === 'development' ? devConfig : getEnvConfig(process.env.BUILD_ENV),
+    process.env.NODE_ENV === 'development'
+      ? devConfig
+      : getEnvConfig(process.env.BUILD_ENV),
   )
 }
