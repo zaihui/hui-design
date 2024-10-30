@@ -4,7 +4,7 @@ $hui-design-width: 375 !default; // 默认使用设计稿尺寸
 
 // 将 375 尺寸下的像素转换为其他尺寸下的像素
 @function px($px) {
-  @return calc((#{$px} / (375 / #{$hui-design-width})) * 1px);
+  @return #{$px}px;
 }
 
 // 单行常规文本溢出...

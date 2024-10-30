@@ -12,6 +12,38 @@ npm install @zaihui/hui-design
 
 ## 使用
 
+需要注意的是，为了修复频繁输入空格和长按删除操作是产生的闪烁 bug，textarea 使用的是原生小程序组件进行了封装，所以这需要在使用项目中时进行以下配置设置：
+
+### 在 Taro 的 config 中配置
+
+```jsx
+const config = {
+  copy: {
+    patterns: [
+      {
+        from: 'node_modules/@zaihui/hui-design/lib/miniapp/',
+        to: 'dist/miniapp/', // dist 为自己的构建文件夹，其他路径不可修改
+      },
+    ],
+  },
+}
+```
+
+### 在 app.config.ts 中配置
+
+```jsx
+const {
+  nativeComponentConfig,
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+} = require('@zaihui/hui-design/lib/nativeComponentsConfig')
+
+export default = {
+  usingComponents: {
+    ...nativeComponentConfig,
+  },
+}
+```
+
 ### 本地调试
 
 [组件库本地调试方案](https://zaihui.feishu.cn/docx/B7ONd4WLwoh4gPxamEDcnfsWnwb)

@@ -1,5 +1,8 @@
 import { Config } from '@tarojs/taro'
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires, import/no-commonjs
+const nativeComponentsConfig = require('./nativeComponentsConfig')
+
 export default {
   pages: [
     'pages/Index/Index',
@@ -68,5 +71,8 @@ export default {
     navigationBarBackgroundColor: '#f8f8f8',
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
+  },
+  usingComponents: {
+    ...nativeComponentsConfig,
   },
 } as Config
