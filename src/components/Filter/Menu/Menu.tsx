@@ -12,7 +12,6 @@ import { View, ITouchEvent } from '@tarojs/components'
 import cx from 'classnames'
 import MenuItem, { MenuItemOption, MenuItemProps } from '../MenuItem/MenuItem'
 import HuiIcon from '../../Icon'
-import { generateUniqueId } from '../utils'
 import FilterContext from '../context'
 
 export interface MenuProps {
@@ -110,7 +109,6 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
         temp[index] = false
         setActivatedList(temp)
       }
-
       return React.Children.map(newChild, (child) => {
         const { activeIndex } = child.props
         if (React.isValidElement(child)) {
@@ -122,6 +120,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
               hideMenuItem,
               updateMenuItemTitle,
               menuOnChange,
+              offsetLeft: context?.offsetLeft,
             },
           } as any)
         }
@@ -132,11 +131,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
   )
 
   return (
-    <View
-      {...rest}
-      className={cx('hui-filter-menu', className, generateUniqueId())}
-      ref={menuRef}
-    >
+    <View {...rest} className={cx('hui-filter-menu', className)} ref={menuRef}>
       {menuItems?.map((item, index) => {
         const itemInfo = { ...item, activeIndex: index }
         return (

@@ -147,22 +147,26 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
       className={cx('hui-filter-animation', 'hui-filter-item', {
         'no-animation': !parent?.show,
       })}
+      // 解决组件因为子绝父相定位导致的left距离问题
+      style={{ left: `-${parent?.offsetLeft ?? 0}px` }}
     >
-      <View
-        className={cx(className)}
-        style={{
-          ...style,
-        }}
-      >
+      {parent.show && (
         <View
-          className={cx('hui-filter-menu-item-content', {
-            'is-footer': options,
-          })}
+          className={cx(className, 'awdqweqwe')}
+          style={{
+            ...style,
+          }}
         >
-          {!options ? renderChildren() : renderOptions()}
+          <View
+            className={cx('hui-filter-menu-item-content', {
+              'is-footer': options,
+            })}
+          >
+            {!options ? renderChildren() : renderOptions()}
+          </View>
+          {footer && <ActionFooter {...actionFooterProps} />}
         </View>
-        {footer && <ActionFooter {...actionFooterProps} />}
-      </View>
+      )}
     </Popup>
   )
 })

@@ -4,8 +4,9 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  z-index: $hui-z-index-s;
+  z-index: $hui-filter-menu-item-z-index;
   width: 100%;
+  min-width: 100vw;
   height: auto;
 }
 
