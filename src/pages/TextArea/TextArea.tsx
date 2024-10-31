@@ -23,6 +23,7 @@ const TextArea: React.FC = () => {
       <View className='content'>
         <GroupSection title='基础用法'>
           <HuiTextArea
+            height={74}
             label='身份证'
             maxlength={500}
             placeholder='请输入内容，最多50字'

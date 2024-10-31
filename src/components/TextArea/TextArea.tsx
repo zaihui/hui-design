@@ -140,6 +140,7 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     // eslint-disable-next-line
     // @ts-ignore
     <hui-textarea
+      style={`height: ${typeof height === 'number' ? `${height}px` : height}`}
       adjustKeyboardTo={adjustKeyboardTo}
       confirmType={confirmType}
       disableDefaultPadding={disableDefaultPadding}
@@ -182,7 +183,6 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     <View
       className={cx('hui-text-area', className, { disabled })}
       style={{
-        height: typeof height === 'number' ? `${height}px` : height,
         ...style,
       }}
     >

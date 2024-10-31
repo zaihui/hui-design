@@ -69,6 +69,10 @@ Component({
       type: String,
       value: 'cursor',
     },
+    style: {
+      type: String,
+      value: '',
+    },
   },
   methods: {
     handleFocus(e) {
