@@ -1,4 +1,5 @@
 <textarea
+  style="{{style}}"
   class="text-area"
   placeholder-class="{{placeholderClass}}"
   placeholder="{{placeholder}}"
