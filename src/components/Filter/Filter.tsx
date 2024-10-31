@@ -1,9 +1,10 @@
 import { View } from '@tarojs/components'
-import { usePageScroll } from '@tarojs/taro'
+import Taro, { usePageScroll } from '@tarojs/taro'
 import cx from 'classnames'
 import React, {
   CSSProperties,
   ReactNode,
+  useEffect,
   useMemo,
   useRef,
   useState,
@@ -56,6 +57,7 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
   const filterRef = useRef()
   const menuRef = useRef<any>()
 
+  const [offsetLeft, setOffsetLeft] = useState(0)
   const contextValue = useMemo(
     () => ({
       isFixed,
@@ -63,8 +65,9 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
       hideMenu: () => {
         menuRef.current && menuRef.current.hide()
       },
+      offsetLeft,
     }),
-    [menuRef, isFixed],
+    [menuRef, isFixed, offsetLeft],
   )
 
   const info = useBoundingClientRect(filterRef)
@@ -101,11 +104,22 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
     setVisible(!visible)
   }
 
+  const uuid = useMemo(() => generateUniqueId(), [])
+
+  useEffect(() => {
+    Taro.createSelectorQuery()
+      .select(`.${uuid}`)
+      .boundingClientRect((rect) => {
+        setOffsetLeft(rect?.left ?? 0)
+      })
+      .exec()
+  }, [])
+
   const render = () => (
     <View
       {...rest}
       ref={filterRef}
-      className={cx('hui-filter', className, generateUniqueId())}
+      className={cx('hui-filter', className, uuid)}
     >
       <FilterContext.Provider value={contextValue}>
         {isMenu ? (
