@@ -55,7 +55,10 @@ const HuiTextAreaNumber = forwardRef<
   useImperativeHandle(
     ref,
     () => ({
-      updateLen: setLen,
+      updateLen: ((n: number) =>
+        setLen(
+          upperLimit && n > upperLimit ? upperLimit : n,
+        )) as React.Dispatch<React.SetStateAction<number>>,
       setIsInput,
     }),
     [],

@@ -74,6 +74,9 @@ Component({
       value: '',
     },
   },
+  options: {
+    addGlobalClass: true,
+  },
   methods: {
     handleFocus(e) {
       this.triggerEvent('focus', { value: e.detail.value })
