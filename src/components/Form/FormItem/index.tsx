@@ -99,20 +99,22 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     [labelIconNode, onLabelIconClick],
   )
 
-  const ruleErrorView = useMemo(
-    () =>
-      ruleText ? (
-        <View className={`${formItemPrefix}-rule`}>{ruleText}</View>
-      ) : null,
-    [ruleText],
+  const ruleErrorView = (
+    <View
+      className={`${formItemPrefix}-rule`}
+      style={!ruleText ? { display: 'none' } : {}}
+    >
+      {ruleText}
+    </View>
   )
 
-  const tipsView = useMemo(
-    () =>
-      tipsText ? (
-        <View className={`${formItemPrefix}-tips`}>{tipsText}</View>
-      ) : null,
-    [tipsText],
+  const tipsView = (
+    <View
+      className={`${formItemPrefix}-tips`}
+      style={!tipsText ? { display: 'none' } : {}}
+    >
+      {tipsText}
+    </View>
   )
 
   const localValue = getFieldValue(path)
