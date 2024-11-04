@@ -88,6 +88,7 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     labelIcon,
     required = true,
     value = '',
+    focus,
     dirtyInput = false,
     maxLength = 140,
     maxlength,
@@ -149,7 +150,7 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
       disableDefaultPadding={disableDefaultPadding}
       showConfirmBar={showConfirmBar}
       adjustPosition={adjustPosition}
-      focus
+      focus={focus}
       placeholder={placeholder}
       holdKeyboard={holdKeyboard}
       cursor={cursor}
