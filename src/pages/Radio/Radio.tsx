@@ -58,6 +58,19 @@ const RadioPage: React.FC = () => {
             <Radio value='demo5' checked={false} disabled />
           </RadioSample>
         </GroupSection>
+        <GroupSection title='单选框组合'>
+          <Radio.Group disabled>
+            <RadioSample title='单选1'>
+              <Radio value='group1' checked />
+            </RadioSample>
+            <RadioSample title='单选2'>
+              <Radio value='group2' />
+            </RadioSample>
+            <RadioSample title='单选3'>
+              <Radio value='group3' />
+            </RadioSample>
+          </Radio.Group>
+        </GroupSection>
       </View>
     </View>
   )

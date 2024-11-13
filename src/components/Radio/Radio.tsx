@@ -62,11 +62,13 @@ const HuiRadio: React.FC<HuiRadioProps> = (props) => {
   return (
     <View
       {...props}
-      className={cx(`${prefix} ${className || ''}`, { disabled })}
+      className={cx(`${prefix} ${className || ''}`, {
+        disabled: finalDisabled,
+      })}
       style={style}
     >
       <View
-        className={cx(`${prefix}-icon`, { checked, disabled })}
+        className={cx(`${prefix}-icon`, { checked, disabled: finalDisabled })}
         style={iconStyle}
       >
         <View className='inner' style={iconInnerStyle} />
