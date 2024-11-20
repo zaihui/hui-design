@@ -147,6 +147,7 @@ const NAV_LIST: {
     icon: '009-checkcircle',
     items: [
       { title: '轻提示Toast', url: router.ToastPage.url },
+      { title: '轻提示UseToast(new)', url: router.UseToast.url },
       { title: '加载Loading', url: router.Loader.url },
       { title: '文字提示Tooltip', url: router.Tooltip.url },
       { title: '对话框Dialog', url: router.Dialog.url },

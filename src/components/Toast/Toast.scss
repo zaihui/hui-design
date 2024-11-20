@@ -26,12 +26,26 @@
     border-radius: $hui-toast-border-radius;
     transform: $hui-toast-position-transform-x;
 
-    .text {
-      @include line-clamp(2);
+    .content-text {
+      display: flex;
+      align-items: center;
+
+      .text {
+        @include line-clamp(2);
+      }
     }
 
     .icon {
       margin-bottom: $hui-toast-icon-position-top;
+    }
+  }
+
+  .row-toast {
+    flex-direction: unset;
+
+    .icon {
+      margin-right: $hui-toast-icon-position-top;
+      margin-bottom: 0;
     }
   }
 }

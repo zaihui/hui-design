@@ -5,21 +5,34 @@ import cx from 'classnames'
 
 import HuiIcon from '../Icon/Icon'
 import { HIconType } from '../Icon/type'
-import { ToastTypeProp, ToastTypeEnum } from './constants'
+import {
+  ToastTypeProp,
+  ToastTypeEnum,
+  AlignType,
+  getIconSize,
+} from './constants'
 
 export interface HuiToastProps {
   /** 轻提示内容 */
   title: string
   /** 是否有遮罩层 */
-  mask: boolean
+  mask?: boolean
   /** 轻提示类型： 成功（success）失败（fail）警告（warning）纯文本（text）自定义（custom） */
   type: ToastTypeProp
   /** 轻提示可见 */
   visible: boolean
   /** 轻提示持续显示的时间 */
-  duration: number
-  /** 轻提示自定义icon */
+  duration?: number
+  /** 轻提示自定义icon, type !== text时，一定要传，要不不显示 Icon */
   icon: HIconType
+  /** icon 的颜色 */
+  iconColor?: string
+  /** 接口调用结束的回调函数 */
+  success?: () => void
+  /** toast 布局方向 */
+  align?: AlignType
+  /** 自定义提示的内容 */
+  customIcon?: React.ReactNode
 }
 interface State {
   _visible: boolean
@@ -52,6 +65,7 @@ export default class Index extends React.Component<HuiToastProps, State> {
       this.setState({
         _visible: false,
       })
+      this.props.success && this.props.success()
       this.clearTimer()
     }
   }
@@ -87,23 +101,39 @@ export default class Index extends React.Component<HuiToastProps, State> {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  getIconName(type: ToastTypeProp, customIcon: HIconType): HIconType {
-    return DefaultIconName.get(type) || customIcon
+  getIconName(type: ToastTypeProp, iconFont: HIconType): HIconType {
+    return DefaultIconName.get(type) || iconFont
   }
 
   render(): JSX.Element | null {
-    const { type, title, icon } = this.props
+    const {
+      type,
+      title,
+      icon,
+      align = 'column',
+      customIcon,
+      iconColor,
+    } = this.props
     return this.state._visible ? (
       <View className={cx('hui-toast-box', { mask: this.props.mask })}>
-        <View className='toast'>
-          {type !== ToastTypeEnum.TEXT && (
-            <View className='icon'>
-              {(type as ToastTypeEnum) !== ToastTypeEnum.TEXT && (
-                <HuiIcon name={this.getIconName(type, icon)} size={36} />
+        <View className={cx('toast', align === 'row' && 'row-toast')}>
+          {customIcon || (
+            <React.Fragment>
+              {type && type !== ToastTypeEnum.TEXT && (
+                <View className='icon'>
+                  <HuiIcon
+                    color={iconColor}
+                    name={this.getIconName(type, icon)}
+                    size={getIconSize(align)}
+                  />
+                </View>
               )}
-            </View>
+
+              <View className='content-text'>
+                <Text className='text'>{title}</Text>
+              </View>
+            </React.Fragment>
           )}
-          <Text className='text'>{title}</Text>
         </View>
       </View>
     ) : null
