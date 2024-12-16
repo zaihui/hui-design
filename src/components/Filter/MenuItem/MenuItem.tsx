@@ -28,6 +28,10 @@ export interface MenuItemProps extends Omit<ActionFooterProps, 'hideMenu'> {
   icon?: React.ReactNode
   /** 能否展开当前列表选项 */
   disabled?: boolean
+  /** 是否需要下拉菜单 */
+  needMenu?: boolean
+  /** 自定义标题点击事件 */
+  onTitleClick?: () => void
   /** option改变的回调 */
   onChange?: (option: MenuItemOption) => void
   /** 关闭mask回调 */

@@ -13,7 +13,7 @@ import HuiButton from '@/components/Button/Button'
 import HuiSearch from '@/components/Search'
 import HuiStepper from '@/components/Stepper'
 import HuiSwitch from '@/components/Switch'
-
+import router from '@/router'
 import './Filter.scss'
 
 const TagsGroup = (props) => {
@@ -115,17 +115,6 @@ const MenuPage: React.FC = () => {
               menuConfig={{
                 className: 'hui-menu-xxx',
                 menuItems: [
-                  { value: '1', options },
-                  { value: '2', options },
-                  { value: '2', options },
-                ],
-              }}
-            />
-            <HuiFilter
-              sticky
-              menuConfig={{
-                className: 'hui-menu-xxx',
-                menuItems: [
                   { value: '1', options: options1 },
                   { value: '1', options: options1 },
                   { value: '1', options: options1 },
@@ -133,6 +122,26 @@ const MenuPage: React.FC = () => {
               }}
             />
           </View>
+        </GroupSection>
+        <GroupSection title='自定义选项事件'>
+          <HuiFilter
+            sticky
+            menuConfig={{
+              className: 'hui-menu-xxx',
+              menuItems: [
+                { value: '1', options },
+                {
+                  value: '2',
+                  title: '自定义跳转',
+                  needMenu: false,
+                  onTitleClick: () => {
+                    router.Color.navigateTo()
+                  },
+                },
+                { value: '2', options },
+              ],
+            }}
+          />
         </GroupSection>
         <GroupSection title='单维度筛选(打开弹窗禁止页面滚动)'>
           <HuiFilter
