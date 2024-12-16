@@ -49,8 +49,10 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
     for (let i = 0; i < temp.length; i++) {
       temp[i] = i === index ? temp[i] : false
     }
+
     setActivatedList(temp)
     onMenuTitleClick && onMenuTitleClick(e, index, temp.includes(true))
+
     context?.hideFilter()
   }
 
@@ -63,8 +65,15 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
   const renderMenuTitle = (newChild) =>
     React.Children.map(newChild, (child) => {
       if (React.isValidElement(child)) {
-        const { title, options, value, icon, disabled, activeIndex } =
-          child.props as any
+        const {
+          title,
+          options,
+          value,
+          icon,
+          disabled,
+          activeIndex,
+          onTitleClick,
+        } = child.props as any
 
         const selected = options?.filter((item) => item.value === value)
 
@@ -82,7 +91,14 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
               active: activatedList[activeIndex],
               disabled,
             })}
-            onClick={(e) => toggleMenuItem(activeIndex, disabled, e)}
+            onClick={(e) => {
+              if (onTitleClick) {
+                onTitleClick()
+                context?.hideMenu()
+              } else {
+                toggleMenuItem(activeIndex, disabled, e)
+              }
+            }}
           >
             <View className='hui-filter-menu-item-text'>{getTitle()}</View>
             {icon || (
@@ -133,13 +149,15 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
   return (
     <View {...rest} className={cx('hui-filter-menu', className)} ref={menuRef}>
       {menuItems?.map((item, index) => {
-        const itemInfo = { ...item, activeIndex: index }
+        const { needMenu = true, ...other } = item
+        const itemInfo = { ...other, activeIndex: index }
+
         return (
           <Fragment key={index}>
             <View className='hui-filter-menu-container'>
               {renderMenuTitle(<Menu.Item {...itemInfo} />)}
             </View>
-            {renderMenuItem(<Menu.Item {...itemInfo} />)}
+            {needMenu ? renderMenuItem(<Menu.Item {...itemInfo} />) : null}
           </Fragment>
         )
       })}
