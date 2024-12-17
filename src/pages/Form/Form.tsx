@@ -79,6 +79,8 @@ const InputPage: React.FC = () => {
 
   const [form3] = useForm()
 
+  const [form4] = useForm()
+
   const text = useWatch('text', form3)
 
   useEffect(() => {
@@ -289,6 +291,33 @@ const InputPage: React.FC = () => {
             <HuiButton formType='reset' block style={buttonStyle}>
               重置表单
             </HuiButton>
+          </HuiForm>
+        </GroupSection>
+
+        <GroupSection title='底部额外内容'>
+          <HuiForm form={form4}>
+            <HuiFormItem
+              label='文本'
+              name='text'
+              rowExtra={
+                <View
+                  style={{
+                    color: '#999',
+                    fontSize: 14,
+                    marginTop: 4,
+                  }}
+                >
+                  OCR 智能识别填写
+                </View>
+              }
+            >
+              <HuiInput
+                divider={false}
+                onInput={(e) => form3.setFieldValue('text', e.detail.value)}
+                type='text'
+                placeholder='请输入'
+              />
+            </HuiFormItem>
           </HuiForm>
         </GroupSection>
       </View>
