@@ -52,6 +52,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   const {
     name,
     label,
+    rowExtra = null,
     children,
     className = '',
     style,
@@ -259,7 +260,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
             )}
           </View>
         </View>
-
+        {rowExtra}
         {ruleErrorView ?? tipsView}
       </View>
     </View>
