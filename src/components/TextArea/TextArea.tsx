@@ -94,7 +94,7 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     maxlength,
     placeholder = '请输入内容',
     disabled,
-    adjustPosition,
+    adjustPosition = true,
     showConfirmBar,
     autoFocus,
     confirmType = 'return',
