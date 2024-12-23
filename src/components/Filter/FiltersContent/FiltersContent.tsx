@@ -89,19 +89,15 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
       style={offsetLeftStyle}
       {...rest}
     >
-      {visible ? (
-        <React.Fragment>
-          <View
-            className={cx(
-              `filters-default-popup-content ${prefix}-content ${position} ${contentClassName}`,
-            )}
-            style={contentStyle}
-          >
-            {visible && filterContent}
-          </View>
-          <ActionFooter {...actionButtonProps} />
-        </React.Fragment>
-      ) : null}
+      <View
+        className={cx(
+          `filters-default-popup-content ${prefix}-content ${position} ${contentClassName}`,
+        )}
+        style={contentStyle}
+      >
+        {visible && filterContent}
+      </View>
+      <ActionFooter {...actionButtonProps} />
     </HuiPopup>
   )
 }

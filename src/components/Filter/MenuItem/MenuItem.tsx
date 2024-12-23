@@ -154,23 +154,21 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
       // 解决组件因为子绝父相定位导致的left距离问题
       style={{ left: `-${parent?.offsetLeft ?? 0}px` }}
     >
-      {parent.show && (
+      <View
+        className={cx(className)}
+        style={{
+          ...style,
+        }}
+      >
         <View
-          className={cx(className, 'awdqweqwe')}
-          style={{
-            ...style,
-          }}
+          className={cx('hui-filter-menu-item-content', {
+            'is-footer': options,
+          })}
         >
-          <View
-            className={cx('hui-filter-menu-item-content', {
-              'is-footer': options,
-            })}
-          >
-            {!options ? renderChildren() : renderOptions()}
-          </View>
-          {footer && <ActionFooter {...actionFooterProps} />}
+          {!options ? renderChildren() : renderOptions()}
         </View>
-      )}
+        {footer && <ActionFooter {...actionFooterProps} />}
+      </View>
     </Popup>
   )
 })
