@@ -17,6 +17,8 @@ import FilterContext from '../context'
 export interface MenuProps {
   className?: string
   style?: CSSProperties
+  /** 是否保持 menu 展开状态，而不随页面滚动而关闭 */
+  holdOpen?: boolean
   /** 透传到menu组件 当筛选项变化的时候调用 */
   menuOnChange?: (option: MenuItemOption) => void
   /** 点击menu title */
@@ -34,8 +36,14 @@ const defaultProps = {
 }
 
 const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
-  const { menuOnChange, onMenuTitleClick, className, menuItems, ...rest } =
-    props
+  const {
+    menuOnChange,
+    onMenuTitleClick,
+    className,
+    menuItems,
+    holdOpen = false,
+    ...rest
+  } = props
   const menuRef = useRef()
   const [activatedList, setActivatedList] = useState<boolean[]>([])
   const [menuItemTitle, setMenuItemTitle] = useState<string[]>([])
@@ -132,6 +140,7 @@ const InternalMenu = forwardRef<MenuRef, MenuProps>((props, ref) => {
             parent: {
               index: activeIndex,
               show: activatedList[activeIndex],
+              holdOpen,
               menuRef,
               hideMenuItem,
               updateMenuItemTitle,

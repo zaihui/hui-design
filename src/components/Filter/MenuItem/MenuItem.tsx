@@ -84,7 +84,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
   useImperativeHandle(ref, () => ({ hideMenu }))
 
   usePageScroll(() => {
-    if (parent.show) hideMenu()
+    if (parent.show && !parent.holdOpen) hideMenu()
   })
 
   const hideMenu = () => {
