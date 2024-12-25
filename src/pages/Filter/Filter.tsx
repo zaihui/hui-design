@@ -96,6 +96,34 @@ const MenuPage: React.FC = () => {
     >
       <PageHeader title='筛选栏Filter' desc='' />
       <View className='content'>
+        <GroupSection title='保持打开'>
+          <View className='gap'>
+            <HuiFilter
+              sticky
+              menuConfig={{
+                holdOpen: true,
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  {
+                    value: '1',
+                    options,
+                  },
+                ],
+              }}
+            />
+            <HuiFilter
+              sticky
+              menuConfig={{
+                className: 'hui-menu-xxx',
+                menuItems: [
+                  { value: '1', options: options1 },
+                  { value: '1', options: options1 },
+                  { value: '1', options: options1 },
+                ],
+              }}
+            />
+          </View>
+        </GroupSection>
         <GroupSection title='单维度筛选'>
           <View className='gap'>
             <HuiFilter
