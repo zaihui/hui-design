@@ -91,6 +91,7 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
     focus,
     dirtyInput = false,
     maxLength = 140,
+    cursorSpacing = 32,
     maxlength,
     placeholder = '请输入内容',
     disabled,
@@ -157,7 +158,7 @@ const HuiTextArea: React.FC<HuiTextAreaProps> = (props) => {
       autoFocus={autoFocus}
       maxlength={maxLen}
       disabled={disabled}
-      cursorSpacing={32}
+      cursorSpacing={cursorSpacing}
       placeholderClass='placeholder'
       onLinechange={onLineChange}
       onFocus={onFocus}
