@@ -30,6 +30,8 @@ export interface MenuItemProps extends Omit<ActionFooterProps, 'hideMenu'> {
   disabled?: boolean
   /** 是否需要下拉菜单 */
   needMenu?: boolean
+  /** 是否支持点击 mask 关闭，默认支持 */
+  maskClosable?: boolean
   /** 自定义标题点击事件 */
   onTitleClick?: () => void
   /** option改变的回调 */
@@ -60,6 +62,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     parent,
     children,
     footer,
+    maskClosable = true,
     onMaskClose,
   } = props as any
 
@@ -144,6 +147,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
       position='top'
       maskStyle={maskDefaultStyle}
       contentStyle={coverDefaultStyle}
+      maskClosable={maskClosable}
       onClose={() => {
         hideMenu()
         onMaskClose && onMaskClose()
