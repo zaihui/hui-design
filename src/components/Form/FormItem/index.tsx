@@ -261,7 +261,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
           </View>
         </View>
         {rowExtra}
-        {ruleErrorView ?? tipsView}
+        {ruleText ? ruleErrorView : tipsView}
       </View>
     </View>
   )
