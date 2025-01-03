@@ -1,5 +1,5 @@
 import { View } from '@tarojs/components'
-import Taro, { usePageScroll } from '@tarojs/taro'
+import Taro, { nextTick, usePageScroll } from '@tarojs/taro'
 import cx from 'classnames'
 import React, {
   CSSProperties,
@@ -107,12 +107,15 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
   const uuid = useMemo(() => generateUniqueId(), [])
 
   useEffect(() => {
-    Taro.createSelectorQuery()
-      .select(`.${uuid}`)
-      .boundingClientRect((rect) => {
-        setOffsetLeft(rect?.left ?? 0)
-      })
-      .exec()
+    if (!uuid) return
+    nextTick(() => {
+      Taro.createSelectorQuery()
+        .select(`.${uuid}`)
+        .boundingClientRect((rect) => {
+          setOffsetLeft(rect?.left ?? 0)
+        })
+        .exec()
+    })
   }, [])
 
   const render = () => (

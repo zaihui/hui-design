@@ -95,7 +95,7 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
         )}
         style={contentStyle}
       >
-        {visible && filterContent}
+        {filterContent}
       </View>
       <ActionFooter {...actionButtonProps} />
     </HuiPopup>
