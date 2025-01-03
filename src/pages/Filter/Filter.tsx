@@ -157,7 +157,7 @@ const MenuPage: React.FC = () => {
             menuConfig={{
               className: 'hui-menu-xxx',
               menuItems: [
-                { value: '点击遮罩层不关闭', options, maskClosable: false },
+                { title: '点击遮罩层不关闭', options, maskClosable: false },
                 {
                   value: '2',
                   title: '自定义跳转',
