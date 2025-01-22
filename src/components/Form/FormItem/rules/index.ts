@@ -33,7 +33,7 @@ const validatorInnerField = (value: string, itemType: keyof ItemType) => {
 }
 
 const validatorRule = (
-  rule: Rule,
+  rule: Rule | undefined,
   value: string,
   fieldType: keyof ItemType,
   getFieldValue: any,
@@ -41,8 +41,8 @@ const validatorRule = (
   fieldState: boolean
   validatorType: keyof ValidatorType
 } => {
-  const [defaultRuleTarget, customRuleFun] = rule || []
-  const { require, pattern } = defaultRuleTarget || {}
+  const [defaultRuleTarget, customRuleFun] = rule ?? []
+  const { require, pattern } = defaultRuleTarget ?? {}
   let globalInputStatus = true
 
   // 内部值检验
@@ -80,7 +80,10 @@ const validatorRule = (
   }
 }
 
-const validatorStyleInner = (type: keyof FieldType, value: string): [string, string] => {
+const validatorStyleInner = (
+  type: keyof FieldType,
+  value: string,
+): [string, string] => {
   let str = ''
   switch (type) {
     case 'inputNumber':
@@ -99,29 +102,34 @@ const validatorStyle = (
   validatorType: keyof ValidatorType,
   type: keyof FieldType,
   value: string,
-  rule: Rule,
+  rule: Rule | undefined,
 ): [string, string] => {
   switch (validatorType) {
     case 'custom':
-      return [errorCss, validatorRequireText(rule[0]?.message || '')]
+      return [errorCss, validatorRequireText(rule?.[0]?.message ?? '')]
 
     case 'inner':
       return validatorStyleInner(type, value)
     case 'rule':
-      return [errorCss, validatorRequireText(rule[0]?.message || '')]
+      return [errorCss, validatorRequireText(rule?.[0]?.message ?? '')]
     default:
       return [errorCss, '']
   }
 }
 
 const validatorField = <T>(
-  rule: Rule,
+  rule: Rule | undefined,
   value: string | undefined,
   fieldType: keyof ItemType,
   getFieldValue: T,
 ): string[] => {
   if (typeof value === 'undefined') return [normalCss, '']
-  const { fieldState, validatorType } = validatorRule(rule, value, fieldType, getFieldValue)
+  const { fieldState, validatorType } = validatorRule(
+    rule,
+    value,
+    fieldType,
+    getFieldValue,
+  )
   if (fieldState) {
     // 兼容下item里面的处理
     return [normalCss, '']

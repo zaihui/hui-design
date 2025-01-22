@@ -33,7 +33,8 @@ import { useId } from '../../../utils/hooks'
  */
 const Item: React.FC<HuiFormItemProps> = (props) => {
   const context = useContext<FieldContext>(Context)
-  const { registerWatch, getFieldValue, setFieldValue } = context
+  const { registerWatch, getFieldValue, setFieldValue, removeFieldValue } =
+    context
   const listContext = useContext<FormListContextProps>(FormListContext)
   const [renderType, setRenderType] = useState<keyof ItemType>('other')
   const [, update] = useState({})
@@ -51,6 +52,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   const {
     name,
     label,
+    rowExtra = null,
     children,
     className = '',
     style,
@@ -58,7 +60,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     // desc,
     tipsText = '',
     labelStyle,
-    rule = [],
+    rule,
     labelWrapProps = {},
     align = AlignType.ROW,
     customOptionalStyle = null,
@@ -67,10 +69,11 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     onLabelIconClick,
     showArrow = false,
     extra = null,
+    hidden = false,
   } = props
 
   const { Provider } = FormItemContext
-  const [ruleTarget = {}] = rule
+  const [ruleTarget] = rule ?? []
   const { name: listName } = listContext
 
   const path = useMemo(() => {
@@ -97,20 +100,22 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     [labelIconNode, onLabelIconClick],
   )
 
-  const ruleErrorView = useMemo(
-    () =>
-      ruleText ? (
-        <View className={`${formItemPrefix}-rule`}>{ruleText}</View>
-      ) : null,
-    [ruleText],
+  const ruleErrorView = (
+    <View
+      className={`${formItemPrefix}-rule`}
+      style={!ruleText ? { display: 'none' } : {}}
+    >
+      {ruleText}
+    </View>
   )
 
-  const tipsView = useMemo(
-    () =>
-      tipsText ? (
-        <View className={`${formItemPrefix}-tips`}>{tipsText}</View>
-      ) : null,
-    [tipsText],
+  const tipsView = (
+    <View
+      className={`${formItemPrefix}-tips`}
+      style={!tipsText ? { display: 'none' } : {}}
+    >
+      {tipsText}
+    </View>
   )
 
   const localValue = getFieldValue(path)
@@ -121,6 +126,14 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     },
     [path, setFieldValue],
   )
+
+  const renderLabel = () => {
+    if (typeof label === 'function') {
+      return label(getFieldValue(path))
+    }
+
+    return label
+  }
 
   const copyChildren = () => {
     if (React.isValidElement(children)) {
@@ -171,6 +184,9 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     validatorRules(localValue)
   }, [localValue])
 
+  // 组件卸载后移出字段
+  useEffect(() => () => removeFieldValue(path), [path, removeFieldValue])
+
   useEffect(() => {
     const unMount = registerWatch(id, {
       name: path,
@@ -189,7 +205,11 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
 
   if (!visible) return null
   return (
-    <View className={classNames(formItemPrefix)}>
+    <View
+      className={classNames(formItemPrefix, {
+        [`${formItemPrefix}-hidden`]: hidden,
+      })}
+    >
       <View
         className={classNames(`${formItemPrefix}-wrapper`, className, {
           [ruleCss]: renderType === 'other',
@@ -212,7 +232,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
               }}
             >
               <View className={`${formItemPrefix}-text-label`}>
-                {label}
+                {renderLabel()}
                 {requireIcon}
                 {labelIcon}
               </View>
@@ -240,8 +260,8 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
             )}
           </View>
         </View>
-
-        {ruleErrorView ?? tipsView}
+        {rowExtra}
+        {ruleText ? ruleErrorView : tipsView}
       </View>
     </View>
   )

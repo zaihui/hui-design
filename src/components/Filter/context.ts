@@ -9,8 +9,8 @@ interface FilterContext {
   hideMenu: () => void
   /** 隐藏右侧filter组件的popup */
   hideFilter: () => void
-  /** filter距离顶部的top  */
-  filterTop: number
+  /** filter弹出层需要便宜的距离  */
+  offsetLeft: number
 }
 
 const FilterContext = React.createContext<FilterContext | Record<string, any>>(

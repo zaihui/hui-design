@@ -4,7 +4,7 @@ $hui-design-width: 375 !default; // 默认使用设计稿尺寸
 
 // 将 375 尺寸下的像素转换为其他尺寸下的像素
 @function px($px) {
-  @return calc((#{$px} / (375 / #{$hui-design-width})) * 1px);
+  @return #{$px}px;
 }
 
 // 单行常规文本溢出...
@@ -244,7 +244,7 @@ $hui-card-assist-color: #999;
 $hui-menu-scroll-fixed-top: px(0) !default;
 $hui-menu-scroll-fixed-z-index: $hui-z-index-m !default;
 $hui-filter-bg-color: #fff !default;
-$hui-filter-box-shadow: inset px(-4) 0 px(8) px(-8) rgba(0, 0, 0, 0.3) !default;
+$hui-filter-box-shadow: inset px(1) 0 px(10) px(-8) rgba(0, 0, 0, 0.3) !default;
 $hui-filter-menu-bar-padding-y: px(15) !default;
 $hui-filter-menu-bar-padding-x: px(16) !default;
 $hui-filter-menu-text-color: #444 !default;
@@ -254,6 +254,7 @@ $hui-filter-menu-item-text-padding-x: px(4) !default;
 $hui-filter-menu-bg-color: #fff !default;
 $hui-filter-menu-item-wrap-bg-color: #fff !default;
 $hui-filter-menu-item-content-max-height: px(410) !default;
+$hui-filter-menu-item-z-index: 99;
 $hui-filter-menu-item-content-padding-y: px(20) !default;
 $hui-filter-menu-item-content-padding-x: px(16) !default;
 $hui-filter-menu-item-content-padding-bottom-is-footer: px(10) !default;

@@ -18,48 +18,45 @@ const HighlightText: React.FC<HighlightTextProps> = ({
   keywordStyle,
   ignoreCase = false,
 }) => {
+  // 转义输入搜索项时触发正则表达式中的特殊字符
+  const escapeRegExp = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+
   const highLightText = useCallback(
     (text: string) => {
       if (typeof keyword !== 'string') return text
-      let unmatchText: string[] = []
-      const matchText: string[] = []
-      if (ignoreCase) {
-        const lowerText = text.toLowerCase()
-        const lowerKeyword = keyword.toLowerCase()
 
-        let startIndex = 0
+      if (!keyword?.length) return text
 
-        for (let i = 0; i < lowerText.length; i++) {
-          if (
-            lowerText.substring(i, i + lowerKeyword.length) === lowerKeyword
-          ) {
-            if (i > startIndex) {
-              unmatchText.push(text.substring(startIndex, i))
-            }
+      const keywordResult = escapeRegExp(keyword)
 
-            matchText.push(text.substring(i, i + lowerKeyword.length))
+      // 匹配规则
+      const regex = new RegExp(keywordResult, ignoreCase ? 'gi' : 'g')
 
-            startIndex = i + lowerKeyword.length
-          }
+      // 匹配到的结果分割
+      const replaceResultArr = text
+        ?.replace(regex, (matchStr) => `%%${matchStr}%%`)
+        ?.split('%%')
+        ?.filter((item) => item !== '')
+
+      const renderHighlightText = (highlightText: string) => (
+        <Text style={keywordStyle ?? { color: defaultHighLightTextColor }}>
+          {highlightText}
+        </Text>
+      )
+
+      return replaceResultArr.map((str, index) => {
+        // 忽略大小写
+        if (ignoreCase && keyword?.toLowerCase() === str?.toLowerCase()) {
+          return renderHighlightText(str)
         }
 
-        if (startIndex < text.length) {
-          unmatchText.push(text.substring(startIndex))
+        // 不忽略大小写
+        if (keyword === str) {
+          return renderHighlightText(str)
         }
-      } else {
-        unmatchText = text.split(keyword)
-      }
-
-      return unmatchText.map((item, index) => (
-        <React.Fragment key={index}>
-          {item}
-          {index !== unmatchText.length - 1 && (
-            <Text style={keywordStyle ?? { color: defaultHighLightTextColor }}>
-              {ignoreCase ? matchText[index] : keyword}
-            </Text>
-          )}
-        </React.Fragment>
-      ))
+        // 必须包一层标签，要不就有 bug ！！！
+        return <Text key={index}>{str}</Text>
+      })
     },
     [ignoreCase, keyword, keywordStyle],
   )

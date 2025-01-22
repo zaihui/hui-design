@@ -61,7 +61,9 @@ export interface HuiFormItemProps {
   /** 表单key */
   name: string | string[]
   /** 文本 */
-  label?: string | ReactNode
+  label?: string | ReactNode | ((value) => string)
+  /** 位于 Item-Row 下方的额外内容  */
+  rowExtra?: ReactNode
   /** 补充描述 */
   // desc?: string
   /** 对单排列方式, 默认row */
@@ -97,4 +99,6 @@ export interface HuiFormItemProps {
   extra?: ReactNode
   /** align === row 时生效，展示箭头 默认值为false */
   showArrow?: boolean
+  /** 是否隐藏字段 */
+  hidden?: boolean
 }

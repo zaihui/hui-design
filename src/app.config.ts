@@ -69,4 +69,7 @@ export default {
     navigationBarTitleText: 'WeChat',
     navigationBarTextStyle: 'black',
   },
+  usingComponents: {
+    'hui-textarea': './miniapp/components/textarea/textarea',
+  },
 } as Config

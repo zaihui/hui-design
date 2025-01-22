@@ -1,5 +1,5 @@
 import { View } from '@tarojs/components'
-import Taro, { usePageScroll } from '@tarojs/taro'
+import Taro, { nextTick, usePageScroll } from '@tarojs/taro'
 import cx from 'classnames'
 import React, {
   CSSProperties,
@@ -46,33 +46,33 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
     menuConfig,
     children,
     filtersContentConfig,
-    fixed = false,
+    // eslint-disable-next-line
+    fixed = false, // 组件内没有用到，但是小程序内都穿了，不能删
     sticky = false,
     ...rest
   } = { ...defaultProps, ...props }
   const [isFixed, setIsFixed] = useState(false)
   const [visible, setVisible] = useState<boolean>(false)
-  const [filterTop, setFilterTop] = useState<number>(0)
 
   const filterRef = useRef()
   const menuRef = useRef<any>()
 
+  const [offsetLeft, setOffsetLeft] = useState(0)
   const contextValue = useMemo(
     () => ({
       isFixed,
-      filterTop,
       hideFilter: () => setVisible(false),
       hideMenu: () => {
         menuRef.current && menuRef.current.hide()
       },
+      offsetLeft,
     }),
-    [menuRef, filterTop],
+    [menuRef, isFixed, offsetLeft],
   )
 
   const info = useBoundingClientRect(filterRef)
 
   usePageScroll((res) => {
-    getCurrentRef()
     if (!info || !res) return
     if (res.scrollTop >= info.top) {
       setIsFixed(true)
@@ -93,15 +93,10 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
   const filterProps = useMemo(
     () => ({
       ...(filtersContentConfig || {}),
-      parent: {
-        filterRef,
-        filterTop,
-        isFixed: fixed,
-      },
       visible,
       onClose: () => setVisible(false),
     }),
-    [filtersContentConfig, fixed, visible, filterTop],
+    [filtersContentConfig, visible],
   )
 
   const handleFilter = () => {
@@ -109,40 +104,25 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
     setVisible(!visible)
   }
 
-  useEffect(() => getCurrentRef(), [])
+  const uuid = useMemo(() => generateUniqueId(), [])
 
-  const getCurrentRef = () => {
-    Taro.nextTick(() => {
-      if (filterRef.current) {
-        const query = Taro.createSelectorQuery()
-        if (!(filterRef?.current as any)?.className) {
-          throw new Error(
-            'createSelectorQuery 传入的Taro.TaroElement对象需要有className',
-          )
-        }
-        const refClassName = (filterRef.current as any)?.className?.replace(
-          / /g,
-          '.',
-        )
-        // eslint-disable-next-line no-unused-expressions
-        query
-          .select(`.${refClassName}`)
-          ?.boundingClientRect((rect) => {
-            if (rect) {
-              const { height, top } = rect
-              setFilterTop(height + top)
-            }
-          })
-          .exec()
-      }
+  useEffect(() => {
+    if (!uuid) return
+    nextTick(() => {
+      Taro.createSelectorQuery()
+        .select(`.${uuid}`)
+        .boundingClientRect((rect) => {
+          setOffsetLeft(rect?.left ?? 0)
+        })
+        .exec()
     })
-  }
+  }, [])
 
   const render = () => (
     <View
       {...rest}
       ref={filterRef}
-      className={cx('hui-filter', className, generateUniqueId())}
+      className={cx('hui-filter', className, uuid)}
     >
       <FilterContext.Provider value={contextValue}>
         {isMenu ? (
@@ -150,14 +130,12 @@ const HuiFilter: React.FC<HuiFilterProps> = (props) => {
             {...menuProps}
             className='hui-filter-left-content'
             ref={menuRef}
-          >
-            {menuItems?.map((item, index) => (
-              <Menu.Item {...item} key={index} />
-            ))}
-          </Menu>
+            menuItems={menuItems}
+          ></Menu>
         ) : (
           <View className='hui-filter-left-content custom'>{children}</View>
         )}
+
         {filtersContentConfig && (
           <View className='hui-filter-right-content'>
             <View

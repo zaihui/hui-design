@@ -1,9 +1,10 @@
 import { View } from '@tarojs/components'
 import cx from 'classnames'
-import React, { useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import HuiPopup, { HuiPopupProps } from '../../Popup'
 
 import ActionFooter, { ActionFooterProps } from '../ActionFooter/ActionFooter'
+import FilterContext from '../context'
 
 export interface FiltersContentProps
   extends HuiPopupProps,
@@ -31,18 +32,26 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
     filterContent,
     onClose,
     visible,
-    parent,
     ...rest
   } = props as any
 
+  const { offsetLeft } = useContext(FilterContext)
+
+  const maskStyle = useMemo(() => {
+    if (position !== 'top') return {}
+    return {
+      position: 'absolute',
+      height: '100vh',
+    } as React.CSSProperties
+  }, [position])
+
   const positionStyle = useMemo(() => {
-    if (position === 'top' && parent) {
-      return {
-        top: parent.filterTop,
-      }
-    }
-    return {}
-  }, [parent, position, visible])
+    if (position !== 'top') return {}
+    return {
+      position: 'absolute',
+      height: 'auto',
+    } as React.CSSProperties
+  }, [position])
 
   const actionButtonProps: ActionFooterProps = {
     confirmButtonProps: props.confirmButtonProps,
@@ -54,9 +63,15 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
     hideMenu: onClose,
   }
 
+  // 解决组件因为子绝父相定位导致的left距离问题
+  const offsetLeftStyle = useMemo(() => {
+    if (position !== 'top') return {}
+    return { left: `-${offsetLeft ?? 0}px` } as React.CSSProperties
+  }, [offsetLeft, position])
+
   return (
     <HuiPopup
-      className={cx('hui-filter-animation', {
+      className={cx('hui-filter-animation', 'hui-filter-filters', {
         'no-animation': position === 'top' && !visible,
       })}
       visible={visible}
@@ -65,12 +80,13 @@ const FiltersContent: React.FC<FiltersContentProps> = (props) => {
         popupContentClassName,
       })}
       contentStyle={positionStyle}
-      maskStyle={positionStyle}
+      maskStyle={maskStyle}
       onClose={() => {
         if (onClose) {
           onClose()
         }
       }}
+      style={offsetLeftStyle}
       {...rest}
     >
       <View

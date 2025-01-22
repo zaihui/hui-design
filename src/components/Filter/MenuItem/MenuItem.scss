@@ -1,11 +1,21 @@
 @import '../../../styles/variables';
 
+.hui-filter-item {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: $hui-filter-menu-item-z-index;
+  width: 100%;
+  min-width: 100vw;
+  height: auto;
+}
+
 .hui-filter-menu-item-content {
   display: flex;
   flex-wrap: wrap;
   max-height: $hui-filter-menu-item-content-max-height;
-  padding: $hui-filter-menu-item-content-padding-y $hui-filter-menu-item-content-padding-x;
-  overflow-y: auto;
+  padding: $hui-filter-menu-item-content-padding-y
+    $hui-filter-menu-item-content-padding-x;
 
   &.is-footer {
     padding-bottom: $hui-filter-menu-item-content-padding-bottom-is-footer;

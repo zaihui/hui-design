@@ -1,0 +1,14 @@
+.text-area {
+  width: 100%;
+  height: 145px;
+  font-size: 14px;
+  color: #111111;
+  resize: none;
+  border: none;
+  outline: none;
+  line-height: 20px;
+}
+
+.placeholder {
+  color: #bbbbbb;
+}

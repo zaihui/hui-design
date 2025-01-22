@@ -3,7 +3,11 @@ import set from 'lodash/set'
 import unset from 'lodash/unset'
 
 import { toArray, getErrorTarget, toString } from '../util'
-import { FieldContext, registerWatchType } from '../constants'
+import {
+  FieldContext,
+  FieldWatchCallback,
+  registerWatchType,
+} from '../constants'
 
 interface Callbacks {
   onFinish: (store: Store) => void
@@ -18,6 +22,8 @@ class FormStore {
   store: Store
 
   watchList: Map<string, any>
+
+  fieldWatchList: Map<string, any>
 
   callbacks: Callbacks
 
@@ -35,6 +41,8 @@ class FormStore {
      */
     this.watchList = new Map()
 
+    this.fieldWatchList = new Map()
+
     this.callbacks = {
       onFinish() {},
       onFinishFailed() {},
@@ -51,6 +59,31 @@ class FormStore {
     this.watchList.set(id, field)
     return () => {
       this.watchList.delete(id)
+    }
+  }
+
+  registerFieldWatch(
+    path: string,
+    callback: FieldWatchCallback,
+  ): (bool: boolean) => void {
+    if (this.fieldWatchList.has(path)) {
+      this.fieldWatchList.set(
+        path,
+        this.fieldWatchList.get(path).concat(callback),
+      )
+    } else {
+      this.fieldWatchList.set(path, [callback])
+    }
+
+    return (bool) => {
+      if (bool) {
+        this.fieldWatchList.delete(path)
+      } else if (this.fieldWatchList.has(path)) {
+        this.fieldWatchList.set(
+          path,
+          this.fieldWatchList.get(path)?.filter((fn) => fn !== callback),
+        )
+      }
     }
   }
 
@@ -117,10 +150,18 @@ class FormStore {
   }
 
   notifywatchList(name?: string | string[]): void {
+    if (!name) {
+      this.fieldWatchList.forEach((fns) => fns.forEach((fn) => fn(this.store)))
+    }
     this.watchList.forEach((field: any) => {
       const { onStoreChange } = field
+      const fieldName = toString(field.name)
+
       if (name) {
-        if (toString(name) === toString(field.name)) {
+        if (this.fieldWatchList.has(fieldName)) {
+          this.fieldWatchList.get(fieldName).forEach((fn) => fn(this.store))
+        }
+        if (toString(name) === fieldName) {
           onStoreChange()
         }
       } else {
@@ -205,6 +246,7 @@ class FormStore {
       validatorFields: this.validatorFields.bind(this),
       setCallbacks: this.setCallbacks.bind(this),
       registerWatch: this.registerWatch.bind(this),
+      registerFieldWatch: this.registerFieldWatch.bind(this),
       submit: this.submit.bind(this),
       reset: this.reset.bind(this),
     }

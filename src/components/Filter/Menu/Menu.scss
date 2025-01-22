@@ -1,49 +1,55 @@
 @import '../../../styles/variables';
 
 .hui-filter-menu {
-  position: relative;
+  box-sizing: border-box;
+  // position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
+  height: auto;
+  padding: $hui-filter-menu-bar-padding-y $hui-filter-menu-bar-padding-x;
+  overflow-x: auto;
+  gap: 16px;
 
-  .hui-filter-menu-bar {
-    position: relative;
+  .hui-filter-menu-container {
+    box-sizing: border-box;
     display: flex;
-    flex-wrap: nowrap;
+    align-items: center;
     max-width: 100%;
-    padding: $hui-filter-menu-bar-padding-y $hui-filter-menu-bar-padding-x;
-    overflow-x: auto;
-    background-color: $hui-filter-menu-bg-color;
-    gap: 16px;
+    margin: 0 auto;
+  }
 
-    .hui-filter-menu-item {
-      box-sizing: border-box;
-      display: flex;
-      flex: 1;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      color: $hui-filter-menu-text-color;
+  .hui-filter-menu-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    color: $hui-filter-menu-text-color;
+
+    .hui-filter-menu-item-icon {
+      transition: all 0.2s linear;
+    }
+
+    &.active {
+      color: $hui-filter-menu-active-text-color;
 
       .hui-filter-menu-item-icon {
-        transition: all 0.2s linear;
+        transform: rotate(180deg);
       }
+    }
 
-      &.active {
-        color: $hui-filter-menu-active-text-color;
+    &.disabled {
+      color: $hui-color-grey-4;
+    }
 
-        .hui-filter-menu-item-icon {
-          transform: rotate(180deg);
-        }
-      }
+    .hui-filter-menu-item-text {
+      width: auto;
+      max-width: 80px;
+      padding: 0 $hui-filter-menu-item-text-padding-x;
+      font-size: $hui-filter-menu-text-font-size;
+      font-weight: $hui-font-weight-regular;
 
-      &.disabled {
-        color: $hui-color-grey-4;
-      }
-
-      .hui-filter-menu-item-text {
-        padding: 0 $hui-filter-menu-item-text-padding-x;
-        font-size: $hui-filter-menu-text-font-size;
-        font-weight: $hui-font-weight-regular;
-        white-space: nowrap;
-      }
+      @include no-wrap();
     }
   }
 }

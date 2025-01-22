@@ -1,12 +1,12 @@
 @import '../../styles/variables';
 
 .hui-filter {
+  // 这个定位非常重要
   position: relative;
   display: flex;
   align-items: center;
   width: 100%;
-  height: 50px;
-  overflow: hidden;
+  height: auto;
   background-color: $hui-filter-bg-color;
 
   &.fixed {
@@ -18,7 +18,7 @@
 
   .hui-filter-left-content {
     flex: 1;
-    overflow: hidden;
+    width: 100%;
 
     &.custom {
       padding: px(6) px(16);
@@ -26,21 +26,10 @@
   }
 
   .hui-filter-right-content {
-    position: relative;
+    // position: relative;
     flex: 0 0 75px;
     padding: $hui-filter-menu-bar-padding-y $hui-filter-menu-bar-padding-x;
-
-    &::after {
-      position: absolute;
-      top: 0;
-      bottom: -1px;
-      left: 0;
-      width: 30px;
-      pointer-events: none;
-      content: '';
-      box-shadow: $hui-filter-box-shadow;
-      transform: translate(-100%);
-    }
+    box-shadow: $hui-filter-box-shadow;
 
     &-icon {
       display: flex;
