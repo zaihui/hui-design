@@ -1,0 +1,76 @@
+name: GitHub Actions Publish Npm
+
+run-name: ${{github.event.head_commit.message}}
+
+permissions:
+  contents: write
+
+on:
+  workflow_dispatch:
+    inputs:
+      AutomatedVersion:
+        description: '手动选择升级版本并自动构建发布 npm'
+        required: true
+        default: 'beta'
+        type: choice
+        options:
+          - major
+          - minor
+          - patch
+          - beta
+
+jobs:
+  prebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '14.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install Yarn
+        run: |
+          npm install -g yarn
+          yarn config set "strict-ssl" false -g
+          yarn config set "sass_binary_site" https://npm.taobao.org/mirrors/node-sass/ -g
+
+      - name: Install Python
+        uses: gabrielfalcao/pyenv-action@v17
+        with:
+          default: 2.7.18
+
+      - name: Init
+        run: |
+          python --version
+          yarn setup
+
+      - name: Update Version
+        run: |
+          npm run up-version --setVersion=${{ inputs.AutomatedVersion }}
+
+      - name: Commit Update Version Change
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add package.json
+          git commit -m 'refactor: Update Version'
+          git push origin HEAD:${{ github.ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Lint
+        run: yarn lint
+
+      - name: Build
+        run: yarn build:ci
+
+      - name: Publish
+        run: |
+          npm publish
+          # npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
