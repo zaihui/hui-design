@@ -166,5 +166,8 @@
     "scripts": {
       "postchangelog": "cp CHANGELOG.md docs/introduce/ && git add docs/introduce/CHANGELOG.md"
     }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
