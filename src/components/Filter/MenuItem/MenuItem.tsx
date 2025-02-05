@@ -64,6 +64,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     footer,
     maskClosable = true,
     onMaskClose,
+    value,
   } = props as any
 
   const coverDefaultStyle = useMemo(
@@ -71,6 +72,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
       ({
         position: 'absolute',
         height: 'auto',
+        background: 'none',
       } as CSSProperties),
     [],
   )
@@ -111,7 +113,9 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
     if (options) {
       return options.map((item, index) => (
         <View
-          className='hui-filter-menu-item-option'
+          className={cx('hui-filter-menu-item-option', {
+            'hui-filter-menu-item-option-active': item.value === value,
+          })}
           key={index}
           onClick={() => handleClick(item)}
           style={{ flexBasis: `${100 / columns}%` }}
@@ -150,7 +154,7 @@ const MenuItem = React.forwardRef((props: MenuItemProps, ref) => {
       maskClosable={maskClosable}
       onClose={() => {
         hideMenu()
-        onMaskClose && onMaskClose()
+        onMaskClose?.()
       }}
       className={cx('hui-filter-animation', 'hui-filter-item', {
         'no-animation': !parent?.show,
