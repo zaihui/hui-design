@@ -14,15 +14,23 @@
   display: flex;
   flex-wrap: wrap;
   max-height: $hui-filter-menu-item-content-max-height;
-  padding: $hui-filter-menu-item-content-padding-y
-    $hui-filter-menu-item-content-padding-x;
+  background: $hui-filter-menu-item-wrap-bg-color;
 
   &.is-footer {
-    padding-bottom: $hui-filter-menu-item-content-padding-bottom-is-footer;
+    overflow: hidden;
+    border-radius: 0 0 $hui-filter-menu-item-content-redius
+      $hui-filter-menu-item-content-redius;
   }
 
   .hui-filter-menu-item-option {
+    padding: $hui-filter-menu-item-option-padding-y
+      $hui-filter-menu-item-option-padding-x;
     font-size: $hui-filter-menu-text-font-size;
     color: $hui-filter-menu-text-color;
+    border-bottom: px(1) solid $hui-filter-menu0item-option-bottom-border-color;
+  }
+
+  .hui-filter-menu-item-option-active {
+    color: $hui-filter-menu-active-text-color;
   }
 }
