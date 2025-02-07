@@ -44,7 +44,8 @@
     "stylelint-check": "stylelint-config-prettier-check",
     "prepare": "husky install",
     "create-hook": "husky set .husky/commit-msg \"npx --no -- commitlint --edit ${1}\" && husky set .husky/pre-commit \"npx pretty-quick --staged\" && husky add .husky/pre-commit \"npx lint-staged\"",
-    "up-version": "node scripts/updateVersion.mjs"
+    "up-version": "node scripts/updateVersion.mjs",
+    "yalc:build": "yarn build:ci && yalc publish --push"
   },
   "repository": {
     "type": "git",
