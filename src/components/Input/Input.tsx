@@ -1,8 +1,11 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo } from 'react'
 import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
+import isNil from 'lodash/isNil'
+import isNumber from 'lodash/isNumber'
 import {
+  BaseEventOrig,
   CommonEventFunction,
   ITouchEvent,
 } from '@tarojs/components/types/common'
@@ -50,6 +53,8 @@ export interface HuiInputProps extends ViewProps {
   unit?: React.ReactNode
   style?: React.CSSProperties
   className?: string
+  /** 是否清楚换行符、零宽字符 */
+  clearSymbolChars?: boolean
   /** 点击事件 */
   onClick?: (event: ITouchEvent) => void
   /** 清除事件 */
@@ -65,6 +70,10 @@ export interface HuiInputProps extends ViewProps {
   /** 键盘高度发生变化的时候触发此事件 */
   onKeyboardHeightChange?: CommonEventFunction<InputProps.onKeyboardHeightChangeEventDetail>
 }
+
+// 匹配前后空格、换行符、零宽字符
+const symbolOrSpaceRegExp =
+  /(^\s+|\s+$|[\r\n\u2028\u2029\u200B-\u200F\uFEFF\u2060])/g
 
 const HuiInput: React.FC<HuiInputProps> = (props) => {
   const {
@@ -86,17 +95,70 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     labelIcon,
     clearable,
     cursorSpacing = 0,
+    clearSymbolChars = true,
   } = props
 
-  const [innerValue, setInnerValue] = useState(value)
+  // 是否存在换行符、零宽字符，前后空格等
+  const hasStringSpaceOrSymbols = (str: string | number) => {
+    const strValue = isNumber(str) ? str?.toString() : str
+    return symbolOrSpaceRegExp.test(strValue)
+  }
+
+  /** 清楚 input 中的换行符、零宽字符 */
+  const onClearSymbol = useCallback(
+    (inputValue: string | number | undefined) => {
+      // 空值直接返回，不做处理
+      if (isNil(inputValue)) return inputValue
+
+      let resultValue: string | null = null
+
+      // 数字类型的value需要转化为字符串
+      if (isNumber(inputValue)) {
+        resultValue = (inputValue as number)?.toString()
+      } else {
+        resultValue = inputValue
+      }
+
+      const mergeValueWithoutSymbols = resultValue?.replace(
+        symbolOrSpaceRegExp,
+        '',
+      )
+
+      return mergeValueWithoutSymbols
+    },
+    [],
+  )
 
   useEffect(() => {
-    setInnerValue(value)
-  }, [value])
+    if (clearSymbolChars && value && hasStringSpaceOrSymbols(value)) {
+      const clearDoneValue = onClearSymbol(value)
+      onInput?.({
+        detail: { value: clearDoneValue },
+      } as BaseEventOrig<InputProps.inputEventDetail>)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value, onClearSymbol, clearSymbolChars])
 
   const mergedOnInput = (e) => {
-    setInnerValue(e.detail.value)
-    onInput(e)
+    // 不需要处理的情况
+    if (!clearSymbolChars) {
+      onInput?.(e)
+      return
+    }
+
+    // 判断是否符合处理条件, 减少 js 逻辑
+    if (hasStringSpaceOrSymbols(e.detail.value)) {
+      const resultValue = onClearSymbol(e.detail.value)
+      const clearDoneEventObjeact = {
+        ...e,
+        detail: {
+          value: resultValue,
+        },
+      }
+      onInput?.(clearDoneEventObjeact)
+    } else {
+      onInput?.(e)
+    }
   }
 
   const labelDom = label ? (
@@ -120,15 +182,15 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
       <View
         className={cx(
           'display-area',
-          { 'none-value': !innerValue },
+          { 'none-value': !value },
           { 'right-align': label && align === 'right' },
         )}
       >
-        {innerValue || placeholder}
+        {value || placeholder}
       </View>
     ) : (
       <Input
-        value={innerValue}
+        value={value}
         className={cx('input', { 'right-align': label && align === 'right' })}
         type={type}
         placeholder={placeholder}
@@ -157,10 +219,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     />
   ) : null
 
-  const showClear = useMemo(
-    () => clearable && !!innerValue,
-    [clearable, innerValue],
-  )
+  const showClear = useMemo(() => clearable && !!value, [clearable, value])
 
   // input右侧清除按钮是否展示
   const inputClearDom = showClear ? (
