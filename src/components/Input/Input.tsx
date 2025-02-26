@@ -1,7 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
+import isNil from 'lodash/isNil'
+import isNumber from 'lodash/isNumber'
 import {
   CommonEventFunction,
   ITouchEvent,
@@ -50,6 +52,8 @@ export interface HuiInputProps extends ViewProps {
   unit?: React.ReactNode
   style?: React.CSSProperties
   className?: string
+  /** 是否清楚换行符、零宽字符 */
+  clearSymbolChars?: boolean
   /** 点击事件 */
   onClick?: (event: ITouchEvent) => void
   /** 清除事件 */
@@ -86,16 +90,35 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     labelIcon,
     clearable,
     cursorSpacing = 0,
+    clearSymbolChars = true,
   } = props
 
-  const [innerValue, setInnerValue] = useState(value)
+  /** 清楚 input 中的换行符、零宽字符 */
+  const innerValue = useMemo(() => {
+    if (!clearSymbolChars) return value
 
-  useEffect(() => {
-    setInnerValue(value)
-  }, [value])
+    // 空值直接返回，不做处理
+    if (isNil(value)) return value
+
+    let resultValue: string | null = null
+
+    // 数字类型的value需要转化为字符串
+    if (isNumber(value)) {
+      resultValue = (value as number)?.toString()
+    }
+
+    // 匹配换行符、零宽字符
+    const symbolRegExp = /[\r\n\u2028\u2029\u200B-\u200F\uFEFF\u2060]/g
+
+    const mergeValueWithoutSymbols = value?.replace(symbolRegExp, '')
+
+    // 去除前后空格
+    resultValue = mergeValueWithoutSymbols?.trim()
+
+    return resultValue
+  }, [value, clearSymbolChars])
 
   const mergedOnInput = (e) => {
-    setInnerValue(e.detail.value)
     onInput(e)
   }
 
