@@ -4,6 +4,7 @@ import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
 import isNil from 'lodash/isNil'
 import isNumber from 'lodash/isNumber'
+import cloneDeep from 'lodash/cloneDeep'
 import {
   BaseEventOrig,
   CommonEventFunction,
@@ -13,6 +14,7 @@ import { ViewProps } from '@tarojs/components/types/View'
 import { InputProps } from '@tarojs/components/types/Input'
 import HuiIcon from '../Icon'
 import { HIconType } from '../Icon/type'
+import { MatchRuleType, HuiInputParserType } from './constants'
 
 export interface HuiInputProps extends ViewProps {
   /** 字段名字 */
@@ -53,8 +55,10 @@ export interface HuiInputProps extends ViewProps {
   unit?: React.ReactNode
   style?: React.CSSProperties
   className?: string
-  /** 是否清楚换行符、零宽字符 */
+  /** 是否清除换行符、零宽字符 */
   clearSymbolChars?: boolean
+  /** 只存在指定类型，清除其他类型字符 */
+  parserValue?: HuiInputParserType | ((displayValue: string) => string)
   /** 点击事件 */
   onClick?: (event: ITouchEvent) => void
   /** 清除事件 */
@@ -96,11 +100,12 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     clearable,
     cursorSpacing = 0,
     clearSymbolChars = true,
+    parserValue,
   } = props
 
   // 是否存在换行符、零宽字符，前后空格等
   const hasStringSpaceOrSymbols = (str: string | number) => {
-    const strValue = isNumber(str) ? str?.toString() : str
+    const strValue = isNumber(str) ? String(str) : str
     return symbolOrSpaceRegExp.test(strValue)
   }
 
@@ -129,12 +134,42 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     [],
   )
 
+  /** 统一处理 输出格式 */
+  const mergedParser = useCallback(
+    (num: string | number) => {
+      const numStr = String(num)
+
+      if (typeof parserValue === 'function') {
+        return parserValue(numStr)
+      }
+
+      if (parserValue && Object.keys(MatchRuleType).includes(parserValue)) {
+        return numStr.replace(MatchRuleType?.[parserValue], '')
+      }
+
+      return numStr
+    },
+    [parserValue],
+  )
+
+  const onChange = (e) => {
+    const newEvent = cloneDeep(e)
+    if (parserValue) {
+      const formatValue = mergedParser(newEvent.detail.value)
+      newEvent.detail.value = formatValue
+      newEvent.target.value = formatValue
+    }
+    onInput?.(newEvent)
+  }
+
   useEffect(() => {
     if (clearSymbolChars && value && hasStringSpaceOrSymbols(value)) {
       const clearDoneValue = onClearSymbol(value)
-      onInput?.({
+      onChange?.({
         detail: { value: clearDoneValue },
-      } as BaseEventOrig<InputProps.inputEventDetail>)
+        // 防止外部有使用，e.target.value
+        target: { value: clearDoneValue },
+      } as unknown as BaseEventOrig<InputProps.inputEventDetail>)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, onClearSymbol, clearSymbolChars])
@@ -142,22 +177,26 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
   const mergedOnInput = (e) => {
     // 不需要处理的情况
     if (!clearSymbolChars) {
-      onInput?.(e)
+      onChange?.(e)
       return
     }
 
     // 判断是否符合处理条件, 减少 js 逻辑
     if (hasStringSpaceOrSymbols(e.detail.value)) {
       const resultValue = onClearSymbol(e.detail.value)
-      const clearDoneEventObjeact = {
-        ...e,
-        detail: {
-          value: resultValue,
+      const clearDoneEventObjeact = Object.assign(
+        // 继承原型，防止外部有使用，e.target.value
+        Object.create(Object.getPrototypeOf(e)),
+        e,
+        {
+          detail: {
+            value: resultValue,
+          },
         },
-      }
-      onInput?.(clearDoneEventObjeact)
+      )
+      onChange?.(clearDoneEventObjeact)
     } else {
-      onInput?.(e)
+      onChange?.(e)
     }
   }
 
