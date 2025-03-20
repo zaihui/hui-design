@@ -236,6 +236,7 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
         placeholderClass='input-item-placeholder'
         focus={props.focus}
         disabled={disabled}
+        cursor={value?.length ?? 0}
         adjustPosition={props.adjustPosition}
         cursorSpacing={cursorSpacing}
         confirmType={props.confirmType || 'done'}
