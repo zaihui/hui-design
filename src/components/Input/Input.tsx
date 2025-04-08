@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useCallback, useEffect, useMemo } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import cx from 'classnames'
 import { View, Input } from '@tarojs/components'
 import isNil from 'lodash/isNil'
@@ -27,6 +27,8 @@ export interface HuiInputProps extends ViewProps {
   align?: 'left' | 'right'
   /** 占位提示文案 */
   placeholder?: string
+  /** 占位提示文案的类名 */
+  placeholderClass?: string
   /** 右侧箭头 */
   arrow?: boolean
   /** 清除按钮 */
@@ -59,6 +61,10 @@ export interface HuiInputProps extends ViewProps {
   clearSymbolChars?: boolean
   /** 只存在指定类型，清除其他类型字符 */
   parserValue?: HuiInputParserType | ((displayValue: string) => string)
+  /** input元素的类名 */
+  inputClassName?: string
+  /** input元素的样式 */
+  inputStyle?: React.CSSProperties
   /** 点击事件 */
   onClick?: (event: ITouchEvent) => void
   /** 清除事件 */
@@ -101,7 +107,13 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     cursorSpacing = 0,
     clearSymbolChars = true,
     parserValue,
+    inputClassName = '',
+    inputStyle,
+    placeholderClass = '',
   } = props
+
+  // 存储最新事件对象中的 cursor 值
+  const cursorPosition = useRef<number>(0)
 
   // 是否存在换行符、零宽字符，前后空格等
   const hasStringSpaceOrSymbols = (str: string | number) => {
@@ -159,6 +171,8 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
       newEvent.detail.value = formatValue
       newEvent.target.value = formatValue
     }
+    // 更新状态
+    cursorPosition.current = newEvent?.detail?.cursor ?? 0
     onInput?.(newEvent)
   }
 
@@ -184,8 +198,8 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     // 判断是否符合处理条件, 减少 js 逻辑
     if (hasStringSpaceOrSymbols(e.detail.value)) {
       const resultValue = onClearSymbol(e.detail.value)
+      // 继承原型和不可访问属性，防止外部有使用，e.target.value
       const clearDoneEventObjeact = Object.assign(
-        // 继承原型，防止外部有使用，e.target.value
         Object.create(Object.getPrototypeOf(e)),
         e,
         {
@@ -215,6 +229,14 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
     </View>
   ) : null
 
+  const inputEvent = useMemo(
+    () => ({
+      value,
+      cursor: cursorPosition.current || value?.length,
+    }),
+    [value],
+  )
+
   // 输入框和只用来展示的div
   const inputDom =
     onlyClick || disabled ? (
@@ -229,14 +251,19 @@ const HuiInput: React.FC<HuiInputProps> = (props) => {
       </View>
     ) : (
       <Input
-        value={value}
-        className={cx('input', { 'right-align': label && align === 'right' })}
+        value={inputEvent?.value}
+        className={cx(
+          'input',
+          { 'right-align': label && align === 'right' },
+          inputClassName,
+        )}
+        style={inputStyle}
         type={type}
         placeholder={placeholder}
-        placeholderClass='input-item-placeholder'
+        placeholderClass={cx('input-item-placeholder', placeholderClass)}
         focus={props.focus}
         disabled={disabled}
-        cursor={value?.length ?? 0}
+        cursor={inputEvent.cursor}
         adjustPosition={props.adjustPosition}
         cursorSpacing={cursorSpacing}
         confirmType={props.confirmType || 'done'}
