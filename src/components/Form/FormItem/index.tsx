@@ -33,8 +33,14 @@ import { useId } from '../../../utils/hooks'
  */
 const Item: React.FC<HuiFormItemProps> = (props) => {
   const context = useContext<FieldContext>(Context)
-  const { registerWatch, getFieldValue, setFieldValue, removeFieldValue } =
-    context
+  const {
+    registerWatch,
+    getFieldValue,
+    setFieldValue,
+    removeFieldValue,
+    isFieldTouched,
+    registerFieldEvent,
+  } = context
   const listContext = useContext<FormListContextProps>(FormListContext)
   const [renderType, setRenderType] = useState<keyof ItemType>('other')
   const [, update] = useState({})
@@ -46,6 +52,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
 
   const newProps = useRef<{
     onChange?: (event: any) => void
+    onInput?: (event: any) => void
     value?: string
   }>({})
 
@@ -123,8 +130,9 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   const onChange = useCallback(
     (event) => {
       setFieldValue(path, event?.detail?.value ?? event)
+      registerFieldEvent(path, true)
     },
-    [path, setFieldValue],
+    [path, setFieldValue, registerFieldEvent],
   )
 
   const renderLabel = () => {
@@ -140,7 +148,18 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
       if (!Object.prototype.hasOwnProperty.call(children.props, 'onChange')) {
         newProps.current.onChange = onChange
       } else {
-        delete newProps.current.onChange
+        newProps.current.onChange = (event) => {
+          children.props?.onChange(event)
+          registerFieldEvent(path, true)
+        }
+      }
+      if (!Object.prototype.hasOwnProperty.call(children.props, 'onInput')) {
+        newProps.current.onInput = onChange
+      } else {
+        newProps.current.onInput = (event) => {
+          children.props?.onInput(event)
+          registerFieldEvent(path, true)
+        }
       }
       if (!Object.prototype.hasOwnProperty.call(children.props, 'value')) {
         newProps.current.value = localValue
@@ -158,26 +177,36 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
   )
 
   const validatorRules = useCallback(
-    async (value: string) => {
+    async (value: string, triggerType: 'submit' | 'change' = 'change') => {
       try {
-        const [css, text] = validatorField(
-          rule,
-          value,
-          renderType,
-          getFieldValue,
-        )
+        // 只有在字段被触摸过或者是正在提交时才进行校验
+        if (
+          triggerType === 'submit' ||
+          (triggerType === 'change' && isFieldTouched(path))
+        ) {
+          const [css, text] = validatorField(
+            rule,
+            value,
+            renderType,
+            getFieldValue,
+          )
 
-        setRuleCss(css)
-        setRuleText(text)
+          setRuleCss(css)
+          setRuleText(text)
+          return {
+            state: !text,
+            name: path,
+          }
+        }
         return {
-          state: !text,
+          state: true,
           name: path,
         }
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error as string)
       }
     },
-    [getFieldValue, path, renderType, rule],
+    [getFieldValue, path, renderType, rule, isFieldTouched],
   )
 
   useEffect(() => {
