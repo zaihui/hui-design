@@ -14,6 +14,11 @@ export type NamePath = string | string[]
 
 export type FieldWatchCallback = (values: any) => void
 
+export type FieldOptions = {
+  /** 是否需要校验 */
+  shouldValidate?: boolean
+}
+
 export interface FieldContext {
   /** 删除单个表单数据 */
   removeFieldValue: (name: string | string[]) => void
@@ -22,9 +27,13 @@ export interface FieldContext {
   /** 获取所有表单数据 */
   getFieldsValue: () => any
   /** 设置所有表单数据 */
-  setFieldsValue: (sotre: any) => any
+  setFieldsValue: (sotre: any, options?: FieldOptions) => any
   /** 设置单个表单数据 */
-  setFieldValue: (name: string | string[], value: any) => void
+  setFieldValue: (
+    name: string | string[],
+    value: any,
+    options?: FieldOptions,
+  ) => void
   /** 验证表单 */
   validatorFields: () => any
   /** 注册监听 */
@@ -37,6 +46,13 @@ export interface FieldContext {
   submit: () => Promise<{ type: 'success' | 'fail'; data: any }>
   /** 重制表单 */
   reset: () => Promise<void>
+  /** 更新校验状态 */
+  updateShouldValidate: (
+    name: string | string[],
+    shouldValidate: boolean,
+  ) => void
+  /** 获取字段信息 */
+  getFieldInfo: (name: string | string[]) => any
 }
 
 const warningFunc = () => {}
@@ -53,6 +69,8 @@ const Context = React.createContext<FieldContext>({
   setCallbacks: warningFunc,
   submit: () => Promise.resolve().then(warningFunc as any),
   reset: () => Promise.resolve().then(warningFunc),
+  updateShouldValidate: warningFunc,
+  getFieldInfo: warningFunc,
 })
 
 export interface FormItemContextProps {
