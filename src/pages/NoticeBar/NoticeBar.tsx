@@ -47,6 +47,15 @@ const NoticeBarPage: React.FC = () => {
                 {multiText}
               </NoticeBar>
             </View>
+            <View className='row'>
+              <NoticeBar
+                hasIcon
+                type='marquee'
+                icon={<View className='hui-noticebar-content-icon'>icon</View>}
+              >
+                {multiText}
+              </NoticeBar>
+            </View>
           </SubGroupSection>
           <SubGroupSection title='手动关闭类型'>
             <View className='row'>
