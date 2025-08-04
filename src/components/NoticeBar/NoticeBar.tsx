@@ -25,6 +25,8 @@ export interface HuiNoticeBarProps {
   /** 可跳转的回调（仅当type为more） */
   onGotoMore?: (e: ITouchEvent) => void
   children?: string
+  /** 自定义icon，当hasIcon为true时，icon有效 */
+  icon?: React.ReactNode
 }
 
 const NoticeBar: React.FC<HuiNoticeBarProps> = (props) => {
@@ -39,6 +41,7 @@ const NoticeBar: React.FC<HuiNoticeBarProps> = (props) => {
     style,
     className = '',
     children,
+    icon = <HuiIcon name='011-notice' size={16} />,
   } = props
   const [duration, setDuration] = useState(0)
 
@@ -79,11 +82,7 @@ const NoticeBar: React.FC<HuiNoticeBarProps> = (props) => {
       onClick={handleGoToMore}
     >
       <View className='hui-noticebar-content'>
-        {hasIcon && (
-          <View className='hui-noticebar-content-icon'>
-            <HuiIcon name='011-notice' size={16} />
-          </View>
-        )}
+        {hasIcon && <View className='hui-noticebar-content-icon'>{icon}</View>}
         <View className='hui-noticebar-content-text'>
           <View
             className={cx('hui-noticebar-content-inner', {
