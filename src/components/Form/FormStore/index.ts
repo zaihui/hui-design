@@ -5,6 +5,7 @@ import unset from 'lodash/unset'
 import { toArray, getErrorTarget, toString } from '../util'
 import {
   FieldContext,
+  FieldOptions,
   FieldWatchCallback,
   registerWatchType,
 } from '../constants'
@@ -31,6 +32,8 @@ class FormStore {
 
   timer: number | undefined
 
+  shouldValidateMap: Record<string, boolean>
+
   constructor() {
     this.store = {}
 
@@ -53,6 +56,8 @@ class FormStore {
     this.pendingUnset = []
 
     this.timer = undefined
+
+    this.shouldValidateMap = {}
   }
 
   registerWatch(id: string, field: registerWatchType): () => void {
@@ -112,18 +117,36 @@ class FormStore {
 
   getFieldsValue = (): any => this.store
 
-  setFieldValue<T>(name: string | string[], value: T): void {
+  setFieldValue<T>(
+    name: string | string[],
+    value: T,
+    options?: FieldOptions,
+  ): void {
     if (this.getFieldValue(name) !== value) {
       set(this.store, toArray(name), value)
+      set(
+        this.shouldValidateMap,
+        toArray(name),
+        options?.shouldValidate ?? true,
+      )
       this.handleChange({ name, value })
       this.notifywatchList(name)
     }
   }
 
-  setFieldsValue(newStore: Store): void {
+  setFieldsValue(newStore: Store, options?: FieldOptions): void {
     const newStoreTarget = {
       ...this.store,
       ...newStore,
+    }
+    for (const key in newStore) {
+      if (Object.prototype.hasOwnProperty.call(newStore, key)) {
+        set(
+          this.shouldValidateMap,
+          toArray(key),
+          options?.shouldValidate ?? true,
+        )
+      }
     }
     this.updateStore(newStoreTarget)
     this.handleChange()
@@ -236,6 +259,20 @@ class FormStore {
     } catch (error) {}
   }
 
+  private updateShouldValidate(
+    name: string | string[],
+    shouldValidate: boolean,
+  ): void {
+    this.shouldValidateMap[toArray(name)?.join()] = shouldValidate
+  }
+
+  private getFieldInfo(name: string | string[]): [any, boolean] {
+    return [
+      this.getFieldValue(name),
+      this.shouldValidateMap[toArray(name)?.join()] ?? true,
+    ]
+  }
+
   getForm(): FieldContext {
     return {
       removeFieldValue: this.removeFieldValue.bind(this),
@@ -249,6 +286,8 @@ class FormStore {
       registerFieldWatch: this.registerFieldWatch.bind(this),
       submit: this.submit.bind(this),
       reset: this.reset.bind(this),
+      updateShouldValidate: this.updateShouldValidate.bind(this),
+      getFieldInfo: this.getFieldInfo.bind(this),
     }
   }
 }
