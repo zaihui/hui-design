@@ -37,6 +37,10 @@ export interface FieldContext {
   submit: () => Promise<{ type: 'success' | 'fail'; data: any }>
   /** 重制表单 */
   reset: () => Promise<void>
+  /** 判断字段是否被触摸 */
+  isFieldTouched: (path: string[]) => boolean
+  /** 注册字段事件 */
+  registerFieldEvent: (path: string[], hasEvents: boolean) => void
 }
 
 const warningFunc = () => {}
@@ -53,6 +57,8 @@ const Context = React.createContext<FieldContext>({
   setCallbacks: warningFunc,
   submit: () => Promise.resolve().then(warningFunc as any),
   reset: () => Promise.resolve().then(warningFunc),
+  isFieldTouched: () => false,
+  registerFieldEvent: warningFunc,
 })
 
 export interface FormItemContextProps {
