@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { ViewProps } from '@tarojs/components/types/View'
-import { View, Input } from '@tarojs/components'
+import { View } from '@tarojs/components'
+import isNil from 'lodash/isNil'
 import {
   CommonEvent,
   CommonEventFunction,
@@ -9,6 +10,7 @@ import {
 } from '@tarojs/components/types/common'
 import { pxTransform } from '../../utils'
 import Icon from '../Icon/Icon'
+import HuiInput, { HuiInputProps } from '../Input'
 
 export interface InputError {
   type: 'OVER' | 'LOW' | 'DISABLED'
@@ -21,7 +23,7 @@ type ExtendEvent = {
   }
 }
 
-export interface HuiStepperProps extends ViewProps {
+export interface HuiStepperBaseProps extends ViewProps {
   /**
    * 输入框类型
    * @type {'number' | 'digit'}
@@ -73,11 +75,16 @@ export interface HuiStepperProps extends ViewProps {
    */
   disabledInput?: boolean
   /**
+   * 是否允许清空输入框
+   * @default false
+   */
+  allowEmpty?: boolean
+  /**
    * 输入框值改变时触发的事件
-   * @param {number} value 输入框当前值
+   * @param {number | null} value 输入框当前值，allowEmpty 为 true 时可能为 null
    * @description 开发者需要通过 onChange 事件来更新 value 值变化，onChange 函数必填
    */
-  onChange?: (value: number, e: CommonEvent) => void
+  // onChange?: (value: number | null, e: CommonEvent) => void
   /**
    * 输入框值失去焦点时触发的事件
    */
@@ -91,9 +98,43 @@ export interface HuiStepperProps extends ViewProps {
    * 初始化时是否隐藏minus按钮，只有value等于0的时候有效
    */
   hideMinus?: boolean
+  /**
+   * 透传给 Input 组件的属性
+   * @description 可以传入 HuiInput 组件支持的其他属性，如 placeholder、cursorSpacing、maxLength 等
+   */
+  inputProps?: Omit<
+    HuiInputProps,
+    | 'type'
+    | 'value'
+    | 'disabled'
+    | 'onInput'
+    | 'onBlur'
+    | 'divider'
+    | 'inputStyle'
+  >
   style?: React.CSSProperties
   className?: string
 }
+
+export type HuiStepperProps =
+  | (HuiStepperBaseProps & {
+      allowEmpty?: false
+      /**
+       * 输入框值改变时触发的事件
+       * @param {number | null} value 输入框当前值，allowEmpty
+       * @description 开发者需要通过 onChange 事件来更新 value 值变化，onChange 函数必填
+       */
+      onChange?: (value: number, e: CommonEvent) => void
+    })
+  | (HuiStepperBaseProps & {
+      allowEmpty: true
+      /**
+       * 输入框值改变时触发的事件
+       * @param {number | null} value 输入框当前值，allowEmpty 为 true 时可能为 null
+       * @description 开发者需要通过 onChange 事件来更新 value 值变化，onChange 函数必填
+       */
+      onChange?: (value: number | null, e: CommonEvent) => void
+    })
 
 function addNum(num1: number, num2: number): number {
   let sq1: number, sq2: number
@@ -123,6 +164,11 @@ function parseValue(num: string): string {
   return num.toString()
 }
 
+/** 判断值是否为空（null、undefined 或空字符串） */
+function isEmptyValue(val: string | number | null | undefined): boolean {
+  return isNil(val) || val === ''
+}
+
 const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
   const [scaleAnimation, setScaleAnimation] = useState({
     plus: false,
@@ -140,13 +186,16 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
     max = Infinity,
     hideMinus = false,
     step = 1,
+    allowEmpty = false,
+    inputProps,
     onChange = () => {},
     onBlur = () => {},
   } = props
 
   const handleClick = (clickType: 'minus' | 'plus', e: CommonEvent): void => {
-    const lowThanMin = clickType === 'minus' && value <= min
-    const overThanMax = clickType === 'plus' && value >= max
+    const currentValue = isEmptyValue(value) ? min : Number(value)
+    const lowThanMin = clickType === 'minus' && currentValue <= min
+    const overThanMax = clickType === 'plus' && currentValue >= max
     // 极值判断
     if (lowThanMin || overThanMax || disabled) {
       setScaleAnimation({
@@ -197,8 +246,11 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
     onChange(newValue, e)
   }
 
-  const handleValue = (val: string | number): string => {
-    let resultValue = val === '' ? min : val
+  const handleValue = (val: string | number | null): string | null => {
+    if (allowEmpty && isEmptyValue(val)) {
+      return null
+    }
+    let resultValue: number | string = isEmptyValue(val) ? min : Number(val)
     // 此处不能使用 Math.max，会是字符串变数字，并丢失 .
     if (resultValue > max) {
       resultValue = max
@@ -232,7 +284,11 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
     if (disabled) return
 
     const newValue = handleValue(val)
-    onChange(Number(newValue), e)
+    onChange(
+      // 避免影响老的数据类型
+      isNil(newValue) ? (null as unknown as number) : Number(newValue),
+      e,
+    )
   }
 
   const handleBlur = (event: ITouchEvent): void => onBlur && onBlur(event)
@@ -248,14 +304,24 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
     width: width ? `${pxTransform(width)}` : '',
   }
 
-  const inputValue = Number(handleValue(value))
+  const handledValue = handleValue(value)
+  const inputValue = handledValue === null ? '' : String(handledValue)
 
-  const minusBtnCls = `hui-stepper-btn minus ${
-    inputValue <= min || disabled ? 'hui-stepper-disabled' : ''
-  }`
-  const plusBtnCls = `hui-stepper-btn plus ${
-    inputValue >= max || disabled ? 'hui-stepper-disabled' : ''
-  }`
+  const { minusBtnCls, plusBtnCls } = useMemo(() => {
+    const numericValue = handledValue === null ? min : Number(handledValue)
+
+    const minusBtnClass = `hui-stepper-btn minus ${
+      numericValue <= min || disabled ? 'hui-stepper-disabled' : ''
+    }`
+    const plusBtnClass = `hui-stepper-btn plus ${
+      numericValue >= max || disabled ? 'hui-stepper-disabled' : ''
+    }`
+
+    return {
+      minusBtnCls: minusBtnClass,
+      plusBtnCls: plusBtnClass,
+    }
+  }, [handledValue, min, max, disabled])
 
   const initHideMinusAndInput = `${hideMinus && value === min ? 'hide' : ''}`
 
@@ -280,11 +346,13 @@ const Stepper: React.FC<HuiStepperProps> = (props: HuiStepperProps) => {
           />
         </View>
       </View>
-      <Input
-        className='hui-stepper-input'
-        style={inputStyle}
+      <HuiInput
+        {...inputProps}
+        inputClassName='hui-stepper-input'
+        className='hui-stepper-input-element'
+        inputStyle={inputStyle}
         type={type}
-        value={String(inputValue)}
+        value={inputValue}
         disabled={disableInputFormat || disabled}
         onInput={(e) => handleInput(e as CommonEvent & ExtendEvent)}
         onBlur={(e) => handleBlur(e as ITouchEvent)}
