@@ -40,14 +40,19 @@
     color: $hui-font-color-stepper-disabled;
   }
 
-  .hui-stepper-input {
-    width: px(28);
-    height: 100%;
-    margin: 0 px(6);
+  .hui-stepper-input.input {
     font-size: px(14);
     font-weight: $hui-font-weight-medium;
     color: $hui-font-color-base;
+  }
+
+  .hui-stepper-input-element .input-container {
+    width: px(28);
+    height: 100%;
+    padding: 0;
+    margin: 0 px(6);
     text-align: center;
+    background: none;
     border: none;
   }
 
