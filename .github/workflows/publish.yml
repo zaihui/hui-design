@@ -26,7 +26,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          token: ${{secrets.PUSH_TOKEN}}
+          token: ${{secrets.PUSH_TOKEN_616}}
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -82,4 +82,4 @@ jobs:
         run: |
           npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN_NEW}}
