@@ -33,8 +33,14 @@ import { useId } from '../../../utils/hooks'
  */
 const Item: React.FC<HuiFormItemProps> = (props) => {
   const context = useContext<FieldContext>(Context)
-  const { registerWatch, getFieldValue, setFieldValue, removeFieldValue } =
-    context
+  const {
+    registerWatch,
+    getFieldValue,
+    getFieldInfo,
+    setFieldValue,
+    removeFieldValue,
+    updateShouldValidate,
+  } = context
   const listContext = useContext<FormListContextProps>(FormListContext)
   const [renderType, setRenderType] = useState<keyof ItemType>('other')
   const [, update] = useState({})
@@ -118,7 +124,7 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
     </View>
   )
 
-  const localValue = getFieldValue(path)
+  const [localValue, shouldValidate] = getFieldInfo(path)
 
   const onChange = useCallback(
     (event) => {
@@ -174,15 +180,20 @@ const Item: React.FC<HuiFormItemProps> = (props) => {
           name: path,
         }
       } catch (error) {
-        throw new Error(error)
+        throw new Error(error as string)
+      } finally {
+        updateShouldValidate(path, true)
       }
     },
-    [getFieldValue, path, renderType, rule],
+    [getFieldValue, path, renderType, rule, updateShouldValidate],
   )
 
   useEffect(() => {
-    validatorRules(localValue)
-  }, [localValue])
+    // 如果shouldValidate为false，则不进行验证
+    if (shouldValidate) {
+      validatorRules(localValue)
+    }
+  }, [localValue, shouldValidate])
 
   // 组件卸载后移出字段
   useEffect(() => () => removeFieldValue(path), [path, removeFieldValue])

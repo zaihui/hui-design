@@ -11,6 +11,8 @@ import GroupSection from '@/demoComponents/GroupSection'
 import PageHeader from '@/demoComponents/PageHeader'
 import HuiRadio from '@/components/Radio'
 
+import ShouldValidateForm from './components/shouldValidateForm'
+
 import './Form.scss'
 
 const BooleanRadioGroup: React.FC<{
@@ -94,10 +96,6 @@ const InputPage: React.FC = () => {
     form.setFieldValue('gender', checkedVal)
     setOpen1(false)
   }
-
-  useEffect(() => {
-    form.setFieldsValue(localData)
-  }, [])
 
   const handleChange1 = useCallback((_cur, formData) => {
     setLocalData({ ...formData })
@@ -320,6 +318,8 @@ const InputPage: React.FC = () => {
             </HuiFormItem>
           </HuiForm>
         </GroupSection>
+
+        <ShouldValidateForm />
       </View>
     </View>
   )
