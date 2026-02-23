@@ -31,6 +31,10 @@ class FormStore {
 
   timer: number | undefined
 
+  touched: Set<string>
+
+  fieldEvents: Record<string, boolean> = {} // 记录字段是否有绑定事件处理器
+
   constructor() {
     this.store = {}
 
@@ -53,6 +57,8 @@ class FormStore {
     this.pendingUnset = []
 
     this.timer = undefined
+
+    this.touched = new Set()
   }
 
   registerWatch(id: string, field: registerWatchType): () => void {
@@ -115,6 +121,10 @@ class FormStore {
   setFieldValue<T>(name: string | string[], value: T): void {
     if (this.getFieldValue(name) !== value) {
       set(this.store, toArray(name), value)
+      // 如果是用户输入或者字段有绑定事件处理器，则标记为已触摸
+      if (this.fieldEvents[toArray(name)?.join()]) {
+        this.touched.add(toArray(name)?.join())
+      }
       this.handleChange({ name, value })
       this.notifywatchList(name)
     }
@@ -125,9 +135,20 @@ class FormStore {
       ...this.store,
       ...newStore,
     }
+    // 遍历新值，检查每个字段是否有绑定事件处理器
+    Object.keys(newStore).forEach((key) => {
+      const path = toArray(key)
+      if (this.fieldEvents[path?.join()]) {
+        this.touched.add(path?.join())
+      }
+    })
     this.updateStore(newStoreTarget)
     this.handleChange()
     this.notifywatchList()
+  }
+
+  isFieldTouched(path: string[]): boolean {
+    return this.touched.has(toArray(path)?.join()) ?? false
   }
 
   resetStore = (): void => {
@@ -174,7 +195,9 @@ class FormStore {
     const errorValiadtorArr: any[] = []
     const valiadtorPromiseArr: any[] = []
     this.watchList.forEach(({ validatorRules, name }) => {
-      valiadtorPromiseArr.push(validatorRules(this.getFieldValue(name) ?? ''))
+      valiadtorPromiseArr.push(
+        validatorRules(this.getFieldValue(name) ?? '', 'submit'),
+      )
     })
 
     const allRes = await Promise.all(valiadtorPromiseArr)
@@ -236,6 +259,10 @@ class FormStore {
     } catch (error) {}
   }
 
+  registerFieldEvent(path: string[], hasEvents: boolean): void {
+    this.fieldEvents[toArray(path)?.join()] = hasEvents
+  }
+
   getForm(): FieldContext {
     return {
       removeFieldValue: this.removeFieldValue.bind(this),
@@ -249,6 +276,8 @@ class FormStore {
       registerFieldWatch: this.registerFieldWatch.bind(this),
       submit: this.submit.bind(this),
       reset: this.reset.bind(this),
+      isFieldTouched: this.isFieldTouched.bind(this),
+      registerFieldEvent: this.registerFieldEvent.bind(this),
     }
   }
 }
